@@ -1,6 +1,7 @@
 # Build files
-client/dist
+client/dist/*
 client/.DS_Store
+client/node_modules
 
 # Logs
 logs
