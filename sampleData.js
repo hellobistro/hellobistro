@@ -1,40 +1,29 @@
-const restaurants = [
+const Restaurants = [
   { 
-    id: 1,
-    name: "Zum Stammtisch Restaurant",
-    contact: {
-      email: "zumstammtisch@gmail.com",
-      //formattedPhone: "(718) 386-3014",
-      phone: "7183863014",
-      //website?
-    },
-    location: {
-      addressOne: "6946 Myrtle Ave",
-      addressTwo: null,
-      city: "Glendale",
-      state: "NY",
-      zip: "11385"
-      //country: "United States",
-    },
-    description: "best german food, number 1 voted by new york times",
-    genre: "german",
-    type: "seafood",
-    paymentId: null
+  id: 1,
+  name: "Zum Stammtisch Restaurant",
+  email: "zumstammtisch@gmail.com",
+  phone: "7183863014",
+  addressOne: "6946 Myrtle Ave",
+  addressTwo: null,
+  city: "Glendale",
+  state: "NY",
+  zip: "11385",
+  description: "best german food, number 1 voted by new york times",
+  genre: "german",
+  type: "seafood",
+  paymentId: null
   },
   { 
     id: 2,
     name: "Koi Palace",
-    contact: {
-      email: "KoiPalace@hotmail.com",
-      phone: "9258339090",
-    },
-    location: {
-      addressOne: "4288 Dublin Blvd",
-      addressTwo: "suite #213",
-      city: "Dublin",
-      state: "CA",
-      zip: "94568"
-    },
+    email: "KoiPalace@hotmail.com",
+    phone: "9258339090",
+    addressOne: "4288 Dublin Blvd",
+    addressTwo: "suite #213",
+    city: "Dublin",
+    state: "CA",
+    zip: "94568",
     description: "chinese food, served in morning for dim sum, dinner menu aviable after 5pm",
     genre: "chinese",
     type: "dinner",
@@ -43,17 +32,13 @@ const restaurants = [
   { 
     id: 3,
     name: "Tasty Pot",
-    contact: {
-      email: "TastyPot@yahoo.com",
-      phone: "5108981202",
-    },
-    location: {
-      addressOne: "2115 Kittredge St",
-      addressTwo: null,
-      city: "Berkeley",
-      state: "CA",
-      zip: "94704"
-    },
+    email: "TastyPot@yahoo.com",
+    phone: "5108981202",
+    addressOne: "2115 Kittredge St",
+    addressTwo: null,
+    city: "Berkeley",
+    state: "CA",
+    zip: "94704",
     description: "hot pot served individually, bringing you happiness",
     genre: "Taiwanese",
     type: "hot pot",
@@ -62,17 +47,13 @@ const restaurants = [
   { 
     id: 4,
     name: "Mayflower Restaurant",
-    contact: {
-      email: "Mayflower12@gmail.com",
-      phone: "9255518088",
-    },
-    location: {
-      addressOne: "4086 Grafton St",
-      addressTwo: null,
-      city: "Dublin",
-      state: "CA",
-      zip: "94568"
-    },
+    email: "Mayflower12@gmail.com",
+    phone: "9255518088",
+    addressOne: "4086 Grafton St",
+    addressTwo: null,
+    city: "Dublin",
+    state: "CA",
+    zip: "94568",
     description: "Traditional chinese restaurant. Finest dishes ever.",
     genre: "Chinese",
     type: "Food",
@@ -81,17 +62,13 @@ const restaurants = [
   { 
     id: 5,
     name: "Sushi House",
-    contact: {
-      email: "juicyFish@gmail.com",
-      phone: "5108650999",
-    },
-    location: {
-      addressOne: "2375 Shore Line Dr",
-      addressTwo: "suite A",
-      city: "Alameda",
-      state: "CA",
-      zip: "94501"
-    },
+    email: "juicyFish@gmail.com",
+    phone: "5108650999",
+    addressOne: "2375 Shore Line Dr",
+    addressTwo: "suite A",
+    city: "Alameda",
+    state: "CA",
+    zip: "94501",
     description: "You can make reservations for our outdoor patio area. We have heaters to keep you warm. It wouldn't be a bad idea to bring a jacket if you plan on dining at the outdoor patio area. Please give us a call at (510)865-0999 for your reservation.",
     genre: "Japanese",
     type: "Sushi",
@@ -99,7 +76,7 @@ const restaurants = [
   }
 ]
 
-const restaurantUsers = [
+const RestaurantUsers = [
   { 
     id: 1,
     restaurantId: 5,
@@ -123,7 +100,7 @@ const restaurantUsers = [
   }
 ]
 
-const customers = [
+const Customers = [
   { 
     id: 1,
     userName: "eatEverything",
@@ -196,7 +173,7 @@ const customers = [
   }
 ]
 
-const menuSections = [
+const MenuSections = [
   {
     id: 1,
     name: "breakfast",
@@ -241,7 +218,7 @@ const menuSections = [
   }
 ]
 
-const menuItems = [
+const MenuItems = [
   {
     sectionId: 1,
     restaurantId: 2,
@@ -322,7 +299,7 @@ const menuItems = [
   }
 ]
 
-const customerRating = [
+const CustomerRating = [
   {
     customerId: 1,
     itemId: 1,
@@ -350,7 +327,7 @@ const customerRating = [
   }
 ]
 
-const orders = [
+const Orders = [
   {
     customerId: 5,
     status: "delivered",
@@ -373,7 +350,7 @@ const orders = [
   }
 ]
 
-const orderItems = [
+const OrderItems = [
   {
     orderId: 1,
     itemId: 5,
@@ -405,11 +382,11 @@ const orderItems = [
 ]
 
 
-module.exports.sampleRestaurants = restaurants;
-module.exports.sampleRestaurantUsers = restaurantUsers;
-module.exports.sampleCustomers = customers;
-module.exports.sampleMenuSections = menuSections;
-module.exports.sampleMenuItems = menuItems;
-module.exports.sampleCustomerRating = customerRating;
-module.exports.sampleOrders = orders;
-module.exports.sampleOrderItems = orderItems;
+module.exports.sampleRestaurants = Restaurants;
+module.exports.sampleRestaurantUsers = RestaurantUsers;
+module.exports.sampleCustomers = Customers;
+module.exports.sampleMenuSections = MenuSections;
+module.exports.sampleMenuItems = MenuItems;
+module.exports.sampleCustomerRating = CustomerRating;
+module.exports.sampleOrders = Orders;
+module.exports.sampleOrderItems = OrderItems;
