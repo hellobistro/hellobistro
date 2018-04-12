@@ -1,5 +1,5 @@
 # Build files
-client/dist
+client/dist/*
 client/.DS_Store
 
 # Logs
