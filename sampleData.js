@@ -370,4 +370,3 @@ module.exports.sampleMenuSections = menuSections;
 module.exports.sampleMenuItems = menuItems;
 module.exports.sampleCustomerRating = customerRating;
 module.exports.sampleOrders = orders;
-
