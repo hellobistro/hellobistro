@@ -10,7 +10,7 @@ const restaurants = [
     },
     location: {
       addressOne: "6946 Myrtle Ave",
-      addressTwo: null
+      addressTwo: null,
       city: "Glendale",
       state: "NY",
       zip: "11385"
@@ -30,7 +30,7 @@ const restaurants = [
     },
     location: {
       addressOne: "4288 Dublin Blvd",
-      addressTwo: "suite #213"
+      addressTwo: "suite #213",
       city: "Dublin",
       state: "CA",
       zip: "94568"
@@ -324,35 +324,35 @@ const menuItems = [
 
 const customerRating = [
   {
-    customerId: 1
-    itemId: 1
+    customerId: 1,
+    itemId: 1,
     total: 2
   },
   {
-    customerId: 2
-    itemId: 2
+    customerId: 2,
+    itemId: 2,
     total: null
   },
   {
-    customerId: 4
-    itemId: 2
+    customerId: 4,
+    itemId: 2,
     total: 1
   },
   {
-    customerId: 5
-    itemId: 6
+    customerId: 5,
+    itemId: 6,
     total: 5
   },
   {
-    customerId: 5
-    itemId: 3
+    customerId: 5,
+    itemId: 3,
     total: 3
   }
 ]
 
 const orders = [
   {
-    customerId: 5
+    customerId: 5,
     status: "delivered",
     total: 26.49,
     createdAt: "2018-04-10 22:59:52",
@@ -362,7 +362,7 @@ const orders = [
     table: 1
   },
   {
-    customerId: 2
+    customerId: 2,
     status: "paid",
     total: 18.98,
     createdAt: "2018-04-11 11:05:52",
