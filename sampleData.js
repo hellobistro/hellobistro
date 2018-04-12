@@ -352,13 +352,55 @@ const customerRating = [
 
 const orders = [
   {
-    status: "complete",
-    total: 10,
+    customerId: 5
+    status: "delivered",
+    total: 26.49,
     createdAt: "2018-04-10 22:59:52",
     completedAt: "2018-04-10 23:10:55",
-    transaction: null,
+    transaction: "credit card",
     restaurantId: 5,
     table: 1
+  },
+  {
+    customerId: 2
+    status: "paid",
+    total: 18.98,
+    createdAt: "2018-04-11 11:05:52",
+    completedAt: "2018-04-11 11:30:00",
+    transaction: "cash",
+    restaurantId: 3,
+    table: 3
+  }
+]
+
+const orderItems = [
+  {
+    orderId: 1,
+    itemId: 5,
+    request: "delivery",
+    price: 12.50,
+    promoId: null
+  },
+  {
+    orderId: 1,
+    itemId: 6,
+    request: "delivery",
+    price: 13.99,
+    promoId: null
+  },
+  {
+    orderId: 2,
+    itemId: 2,
+    request: null,
+    price: 9.99,
+    promoId: null
+  },
+  {
+    orderId: 2,
+    itemId: 3,
+    request: null,
+    price: 8.99,
+    promoId: null
   }
 ]
 
@@ -370,3 +412,4 @@ module.exports.sampleMenuSections = menuSections;
 module.exports.sampleMenuItems = menuItems;
 module.exports.sampleCustomerRating = customerRating;
 module.exports.sampleOrders = orders;
+module.exports.sampleOrderItems = orderItems;
