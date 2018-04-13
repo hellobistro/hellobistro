@@ -1,40 +1,29 @@
-const restaurants = [
+const Restaurants = [
   { 
-    id: 1,
-    name: "Zum Stammtisch Restaurant",
-    contact: {
-      email: "zumstammtisch@gmail.com",
-      //formattedPhone: "(718) 386-3014",
-      phone: "7183863014",
-      //website?
-    },
-    location: {
-      addressOne: "6946 Myrtle Ave",
-      addressTwo: null,
-      city: "Glendale",
-      state: "NY",
-      zip: "11385"
-      //country: "United States",
-    },
-    description: "best german food, number 1 voted by new york times",
-    genre: "german",
-    type: "seafood",
-    paymentId: null
+  id: 1,
+  name: "Zum Stammtisch Restaurant",
+  email: "zumstammtisch@gmail.com",
+  phone: "7183863014",
+  addressOne: "6946 Myrtle Ave",
+  addressTwo: null,
+  city: "Glendale",
+  state: "NY",
+  zip: "11385",
+  description: "best german food, number 1 voted by new york times",
+  genre: "german",
+  type: "seafood",
+  paymentId: null
   },
   { 
     id: 2,
     name: "Koi Palace",
-    contact: {
-      email: "KoiPalace@hotmail.com",
-      phone: "9258339090",
-    },
-    location: {
-      addressOne: "4288 Dublin Blvd",
-      addressTwo: "suite #213",
-      city: "Dublin",
-      state: "CA",
-      zip: "94568"
-    },
+    email: "KoiPalace@hotmail.com",
+    phone: "9258339090",
+    addressOne: "4288 Dublin Blvd",
+    addressTwo: "suite #213",
+    city: "Dublin",
+    state: "CA",
+    zip: "94568",
     description: "chinese food, served in morning for dim sum, dinner menu aviable after 5pm",
     genre: "chinese",
     type: "dinner",
@@ -43,17 +32,13 @@ const restaurants = [
   { 
     id: 3,
     name: "Tasty Pot",
-    contact: {
-      email: "TastyPot@yahoo.com",
-      phone: "5108981202",
-    },
-    location: {
-      addressOne: "2115 Kittredge St",
-      addressTwo: null,
-      city: "Berkeley",
-      state: "CA",
-      zip: "94704"
-    },
+    email: "TastyPot@yahoo.com",
+    phone: "5108981202",
+    addressOne: "2115 Kittredge St",
+    addressTwo: null,
+    city: "Berkeley",
+    state: "CA",
+    zip: "94704",
     description: "hot pot served individually, bringing you happiness",
     genre: "Taiwanese",
     type: "hot pot",
@@ -62,17 +47,13 @@ const restaurants = [
   { 
     id: 4,
     name: "Mayflower Restaurant",
-    contact: {
-      email: "Mayflower12@gmail.com",
-      phone: "9255518088",
-    },
-    location: {
-      addressOne: "4086 Grafton St",
-      addressTwo: null,
-      city: "Dublin",
-      state: "CA",
-      zip: "94568"
-    },
+    email: "Mayflower12@gmail.com",
+    phone: "9255518088",
+    addressOne: "4086 Grafton St",
+    addressTwo: null,
+    city: "Dublin",
+    state: "CA",
+    zip: "94568",
     description: "Traditional chinese restaurant. Finest dishes ever.",
     genre: "Chinese",
     type: "Food",
@@ -81,17 +62,13 @@ const restaurants = [
   { 
     id: 5,
     name: "Sushi House",
-    contact: {
-      email: "juicyFish@gmail.com",
-      phone: "5108650999",
-    },
-    location: {
-      addressOne: "2375 Shore Line Dr",
-      addressTwo: "suite A",
-      city: "Alameda",
-      state: "CA",
-      zip: "94501"
-    },
+    email: "juicyFish@gmail.com",
+    phone: "5108650999",
+    addressOne: "2375 Shore Line Dr",
+    addressTwo: "suite A",
+    city: "Alameda",
+    state: "CA",
+    zip: "94501",
     description: "You can make reservations for our outdoor patio area. We have heaters to keep you warm. It wouldn't be a bad idea to bring a jacket if you plan on dining at the outdoor patio area. Please give us a call at (510)865-0999 for your reservation.",
     genre: "Japanese",
     type: "Sushi",
@@ -99,31 +76,31 @@ const restaurants = [
   }
 ]
 
-const restaurantUsers = [
+const RestaurantUsers = [
   { 
     id: 1,
-    restaurantId: 5,
+    RestaurantId: 5,
     email: "bestChef@gmail.com",
     password: "123",
     phone: "5103660999"
   },
   { 
     id: 2,
-    restaurantId: 3,
+    RestaurantId: 3,
     email: "fireBenderNation@gmail.com",
     password: "123",
     phone: null
   },
   { 
     id: 3,
-    restaurantId: 2,
+    RestaurantId: 2,
     email: "fatfish@gmail.com",
     password: "123",
     phone: null
   }
 ]
 
-const customers = [
+const Customers = [
   { 
     id: 1,
     userName: "eatEverything",
@@ -134,7 +111,7 @@ const customers = [
     phone: null,
     email: "IeatRiceErryDay@gmail.com",
     availVotes: null,
-    paymentId: null,
+    paymentId: 1,
     vendor: null,
     apiKey: null
   },
@@ -148,7 +125,7 @@ const customers = [
     phone: null,
     email: "kamehamehaa@gmail.com",
     availVotes: 5,
-    paymentId: null,
+    paymentId: 1,
     vendor: null,
     apiKey: null
   },
@@ -162,7 +139,7 @@ const customers = [
     phone: null,
     email: "IamStrongerThanGoku@gmail.com",
     availVotes: 3,
-    paymentId: null,
+    paymentId: 1,
     vendor: null,
     apiKey: null
   },
@@ -176,7 +153,7 @@ const customers = [
     phone: null,
     email: "IeatMeat@gmail.com",
     availVotes: 0,
-    paymentId: null,
+    paymentId: 1,
     vendor: null,
     apiKey: null
   },
@@ -190,61 +167,61 @@ const customers = [
     phone: "5101239876",
     email: "foodCritic1@gmail.com",
     availVotes: 5,
-    paymentId: null,
+    paymentId: 1,
     vendor: null,
     apiKey: null
   }
 ]
 
-const menuSections = [
+const MenuSections = [
   {
     id: 1,
     name: "breakfast",
     description: null,
-    restaurantId: 2
+    RestaurantId: 2
   },
   {
     id: 2,
     name: "breakfast",
     description: null,
-    restaurantId: 2
+    RestaurantId: 2
   },
   {
     id: 3,
     name: "brunch",
     description: 'breakfast and lunch',
-    restaurantId: 2
+    RestaurantId: 2
   },
   {
     id: 4,
     name: "lunch",
     description: null,
-    restaurantId: 3
+    RestaurantId: 3
   },
   {
     id: 5,
     name: "dinner",
     description: null,
-    restaurantId: 2
+    RestaurantId: 2
   },
   {
     id: 6,
     name: "dinner",
     description: null,
-    restaurantId: 5
+    RestaurantId: 5
   },
   {
     id: 7,
     name: "lateNight",
     description: "after 11pm",
-    restaurantId: 3
+    RestaurantId: 3
   }
 ]
 
-const menuItems = [
+const MenuItems = [
   {
-    sectionId: 1,
-    restaurantId: 2,
+    MenuSectionId: 1,
+    RestaurantId: 2,
     name: "Siu Mai",
     price: 5.10,
     image: null,
@@ -256,8 +233,8 @@ const menuItems = [
     rating: 20
   },
   {
-    sectionId: 4,
-    restaurantId: 3,
+    MenuSectionId: 4,
+    RestaurantId: 3,
     name: "Beef Pot",
     price: 9.99,
     image: null,
@@ -269,8 +246,8 @@ const menuItems = [
     rating: 1
   },
   {
-    sectionId: 4,
-    restaurantId: 3,
+    MenuSectionId: 4,
+    RestaurantId: 3,
     name: "Vegetable Pot",
     price: 8.99,
     image: null,
@@ -282,8 +259,8 @@ const menuItems = [
     rating: 50
   },
   {
-    sectionId: 6,
-    restaurantId: 5,
+    MenuSectionId: 6,
+    RestaurantId: 5,
     name: "Dragon Roll",
     price: 12.99,
     image: null,
@@ -295,8 +272,8 @@ const menuItems = [
     rating: null
   },
   {
-    sectionId: 6,
-    restaurantId: 5,
+    MenuSectionId: 6,
+    RestaurantId: 5,
     name: "Spicy Spider Roll",
     price: 12.50,
     image: null,
@@ -308,8 +285,8 @@ const menuItems = [
     rating: 23
   },
   {
-    sectionId: 6,
-    restaurantId: 5,
+    MenuSectionId: 6,
+    RestaurantId: 5,
     name: "Fish Ball Udon Noodle",
     price: 13.99,
     image: null,
@@ -322,82 +299,82 @@ const menuItems = [
   }
 ]
 
-const customerRating = [
+const CustomerRating = [
   {
-    customerId: 1,
-    itemId: 1,
+    CustomerId: 1,
+    MenuItemId: 1,
     total: 2
   },
   {
-    customerId: 2,
-    itemId: 2,
+    CustomerId: 2,
+    MenuItemId: 2,
     total: null
   },
   {
-    customerId: 4,
-    itemId: 2,
+    CustomerId: 4,
+    MenuItemId: 2,
     total: 1
   },
   {
-    customerId: 5,
-    itemId: 6,
+    CustomerId: 5,
+    MenuItemId: 6,
     total: 5
   },
   {
-    customerId: 5,
-    itemId: 3,
+    CustomerId: 5,
+    MenuItemId: 3,
     total: 3
   }
 ]
 
-const orders = [
+const Orders = [
   {
-    customerId: 5,
+    CustomerId: 5,
     status: "delivered",
     total: 26.49,
     createdAt: "2018-04-10 22:59:52",
     completedAt: "2018-04-10 23:10:55",
     transaction: "credit card",
-    restaurantId: 5,
+    RestaurantId: 5,
     table: 1
   },
   {
-    customerId: 2,
+    CustomerId: 2,
     status: "paid",
     total: 18.98,
     createdAt: "2018-04-11 11:05:52",
     completedAt: "2018-04-11 11:30:00",
     transaction: "cash",
-    restaurantId: 3,
+    RestaurantId: 3,
     table: 3
   }
 ]
 
-const orderItems = [
+const OrderItems = [
   {
-    orderId: 1,
-    itemId: 5,
+    OrderId: 1,
+    MenuItemId: 5,
     request: "delivery",
     price: 12.50,
     promoId: null
   },
   {
-    orderId: 1,
-    itemId: 6,
+    OrderId: 1,
+    MenuItemId: 6,
     request: "delivery",
     price: 13.99,
     promoId: null
   },
   {
-    orderId: 2,
-    itemId: 2,
+    OrderId: 2,
+    MenuItemId: 2,
     request: null,
     price: 9.99,
     promoId: null
   },
   {
-    orderId: 2,
-    itemId: 3,
+    OrderId: 2,
+    MenuItemId: 3,
     request: null,
     price: 8.99,
     promoId: null
@@ -405,11 +382,11 @@ const orderItems = [
 ]
 
 
-module.exports.sampleRestaurants = restaurants;
-module.exports.sampleRestaurantUsers = restaurantUsers;
-module.exports.sampleCustomers = customers;
-module.exports.sampleMenuSections = menuSections;
-module.exports.sampleMenuItems = menuItems;
-module.exports.sampleCustomerRating = customerRating;
-module.exports.sampleOrders = orders;
-module.exports.sampleOrderItems = orderItems;
+module.exports.sampleRestaurants = Restaurants;
+module.exports.sampleRestaurantUsers = RestaurantUsers;
+module.exports.sampleCustomers = Customers;
+module.exports.sampleMenuSections = MenuSections;
+module.exports.sampleMenuItems = MenuItems;
+module.exports.sampleCustomerRating = CustomerRating;
+module.exports.sampleOrders = Orders;
+module.exports.sampleOrderItems = OrderItems;
