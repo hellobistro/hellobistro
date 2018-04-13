@@ -3,7 +3,7 @@ client/dist/*
 client/.DS_Store
 client/node_modules
 
-# Package-lock.json
+# Package lock
 package-lock.json
 client/package-lock.json
 
