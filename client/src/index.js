@@ -5,8 +5,6 @@ import {BrowserRouter, Route, Link} from 'react-router-dom';
 import Test1 from './components/Test1.js';
 import Test2 from './components/Test2.js';
 import Test3 from './components/Test3.js';
-import store, { history } from './store';
-import { Provider } from 'react-redux';
 
 // Create parent application
 class App extends React.Component {
@@ -25,8 +23,6 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter history={history}>
-      <App/>
-    </BrowserRouter>
-  </Provider>, document.getElementById('root'));
+  <BrowserRouter>
+    <App/>
+  </BrowserRouter>, document.getElementById('root'));
