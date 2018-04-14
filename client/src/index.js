@@ -7,9 +7,10 @@ import Test2 from './components/Test2.js';
 import Test3 from './components/Test3.js';
 import store, { history } from './store';
 import { Provider } from 'react-redux';
+import App from './components/App';
 
 // Create parent application
-class App extends React.Component {
+class Main extends React.Component {
   render() {
     return (
      <div>
@@ -30,3 +31,5 @@ ReactDOM.render(
       <App/>
     </BrowserRouter>
   </Provider>, document.getElementById('root'));
+
+export default Main;
