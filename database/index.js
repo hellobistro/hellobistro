@@ -1,13 +1,20 @@
 const Sequelize = require('sequelize');
-const { db_name, db_user, db_password, db_host } = require('./config.js');
+const {
+  database,
+  username,
+  password,
+  host,
+} = require('./config.js');
 
-const sequelize = new Sequelize(db_name, db_user, db_password, {
-  host: db_host,
+const seed = require('../sampleData');
+
+const sequelize = new Sequelize(database, username, password, {
+  host: host,
   dialect: 'mysql',
   operatorsAliases: false,
   logging: false,
 });
-  
+
 const Restaurant = sequelize.define('Restaurant', {
   name: {
     type: Sequelize.STRING,
@@ -36,8 +43,8 @@ const Restaurant = sequelize.define('Restaurant', {
     allowNull: false,
     validate: {
       notEmpty: true,
-      isEmail: true
-    }
+      isEmail: true,
+    },
   },
   phone: {
     type: Sequelize.STRING,
@@ -59,7 +66,7 @@ const MenuItem = sequelize.define('MenuItem', {
   },
   price: {
     type: Sequelize.INTEGER,
-    allowNull: false, 
+    allowNull: false,
   },
   vegan: Sequelize.BOOLEAN,
   vegetarian: Sequelize.BOOLEAN,
@@ -89,7 +96,7 @@ const Order = sequelize.define('Order', {
 const OrderItem = sequelize.define('OrderItem', {
   special: Sequelize.STRING,
   price: Sequelize.INTEGER,
-})
+});
 
 const RestaurantUser = sequelize.define('RestaurantUser', {
   email: {
@@ -98,8 +105,8 @@ const RestaurantUser = sequelize.define('RestaurantUser', {
     allowNull: false,
     validate: {
       notEmpty: true,
-      isEmail: true
-    }
+      isEmail: true,
+    },
   },
   password: {
     type: Sequelize.STRING,
@@ -125,8 +132,8 @@ const Customer = sequelize.define('Customer', {
     allowNull: false,
     validate: {
       notEmpty: true,
-      isEmail: true
-    }
+      isEmail: true,
+    },
   },
   phone: Sequelize.STRING,
   availVotes: Sequelize.INTEGER,
@@ -140,7 +147,7 @@ const Customer = sequelize.define('Customer', {
 
 const CustomerRating = sequelize.define('CustomerRating', {
   total: Sequelize.INTEGER,
-})
+});
 
 RestaurantUser.belongsTo(Restaurant);
 Restaurant.hasMany(RestaurantUser);
@@ -148,7 +155,7 @@ Restaurant.hasMany(RestaurantUser);
 MenuItem.belongsTo(Restaurant);
 Restaurant.hasMany(MenuItem);
 
-MenuItem.belongsTo(MenuSection); 
+MenuItem.belongsTo(MenuSection);
 MenuSection.hasMany(MenuItem);
 
 MenuSection.belongsTo(Restaurant);
@@ -160,22 +167,30 @@ Restaurant.hasMany(Order);
 Order.belongsTo(Customer);
 Customer.hasMany(Order);
 
-Order.belongsToMany(MenuItem, {through: 'OrderItem'});
-MenuItem.belongsToMany(Order, {through: 'OrderItem'});
+Order.belongsToMany(MenuItem, { through: 'OrderItem' });
+MenuItem.belongsToMany(Order, { through: 'OrderItem' });
 
-Customer.belongsToMany(MenuItem, {through: 'CustomerRating'});
-MenuItem.belongsToMany(Customer, {through: 'CustomerRating'});
+Customer.belongsToMany(MenuItem, { through: 'CustomerRating' });
+MenuItem.belongsToMany(Customer, { through: 'CustomerRating' });
 
 
-///// USE THIS TO SEED DB ///////
+// /// USE THIS TO SEED DB ///////
 
-sequelize.sync({ force: true }).then(async () => {
-  // await Restaurant.bulkCreate(seed.Restaurants);
-});
+sequelize.sync({ force: false }).then(async () => {
+  // await Restaurant.bulkCreate(seed.sampleRestaurants);
+  // await MenuSection.bulkCreate(seed.sampleMenuSections);
+  // await MenuItem.bulkCreate(seed.sampleMenuItems);
+  // await Order.bulkCreate(seed.sampleOrders);
+  // await OrderItem.bulkCreate(seed.sampleOrderItems);
+  // await RestaurantUser.bulkCreate(seed.sampleRestaurantUsers);
+  // await Customer.bulkCreate(seed.sampleCustomers);
+  // await CustomerRating.bulkCreate(seed.sampleCustomerRating);
+})
+.catch((error) => {
+  console.log("error in sequelize sync:", error);
+})
 
-///////////////////////////////
-
-const ratingsCountByCourseId = (courseId) => UserCourse.count({ where: { courseId } });
+// /////////////////////////////
 
 module.exports = {
   Restaurant,
@@ -186,4 +201,4 @@ module.exports = {
   OrderItem,
   Customer,
   CustomerRating,
-}
+};
