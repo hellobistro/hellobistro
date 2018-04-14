@@ -176,7 +176,7 @@ Customer.belongsToMany(MenuItem, { through: 'CustomerRating' });
 MenuItem.belongsToMany(Customer, { through: 'CustomerRating' });
 
 
-// /// USE THIS TO SEED DB ///////
+/// USE THIS TO SEED DB ///////
 
 // sequelize.sync({ force: true, logging: console.log }).then(async () => {
 //   await Restaurant.bulkCreate(seed.sampleRestaurants);
@@ -190,9 +190,9 @@ MenuItem.belongsToMany(Customer, { through: 'CustomerRating' });
 // })
 // .catch((error) => {
 //   console.log("error in sequelize sync:", error);
-// })
+// });
 
-// /////////////////////////////
+/////////////////////////////
 
 module.exports = {
   Restaurant,
