@@ -1,7 +1,7 @@
 import React from 'react';
 import '../jest.config';
 
-import RestaurantApp from '../src/components/RestaurantApp/RestaurantApp';
+import RestaurantApp from '../../src/components/RestaurantApp/RestaurantApp';
 
 describe('<RestaurantApp />', () => {
   it('', () => {

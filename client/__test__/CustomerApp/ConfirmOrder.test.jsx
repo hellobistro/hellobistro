@@ -1,7 +1,7 @@
 import React from 'react';
 import '../jest.config';
 
-import ConfirmOrder from '../src/components/CustomerApp/ConfirmOrder';
+import ConfirmOrder from '../../src/components/CustomerApp/ConfirmOrder';
 
 describe('<ConfirmOrder />', () => {
   it('should display a Welcome heading', () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../jest.config';
 
-import Order from '../src/components/CustomerApp/Order';
+import Order from '../../src/components/CustomerApp/Order';
 
 describe('<Order />', () => {
   it('', () => {
