@@ -2,6 +2,6 @@ module.exports = {
   database: 'hellobistro',
   username: 'hbroot',
   password: 'test',
-  host: 'hellodb.cbwzzgue2vgj.us-east-2.rds.amazonaws.com',
+  host: 'test',
   port: '3306',
 }
