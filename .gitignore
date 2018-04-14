@@ -3,6 +3,10 @@ client/dist/*
 client/.DS_Store
 client/node_modules
 
+# Database config file
+database/config.js
+config/*
+
 # Package lock
 package-lock.json
 client/package-lock.json
