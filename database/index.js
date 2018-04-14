@@ -178,19 +178,19 @@ MenuItem.belongsToMany(Customer, { through: 'CustomerRating' });
 
 // /// USE THIS TO SEED DB ///////
 
-sequelize.sync({ force: true, logging: console.log }).then(async () => {
-  // await Restaurant.bulkCreate(seed.sampleRestaurants);
-  // await RestaurantUser.bulkCreate(seed.sampleRestaurantUsers);
-  // await MenuSection.bulkCreate(seed.sampleMenuSections);
-  // await MenuItem.bulkCreate(seed.sampleMenuItems);
-  // await Customer.bulkCreate(seed.sampleCustomers);
-  // await Order.bulkCreate(seed.sampleOrders);
-  // await OrderItem.bulkCreate(seed.sampleOrderItems);
-  // await CustomerRating.bulkCreate(seed.sampleCustomerRating);
-})
-.catch((error) => {
-  console.log("error in sequelize sync:", error);
-})
+// sequelize.sync({ force: true, logging: console.log }).then(async () => {
+//   await Restaurant.bulkCreate(seed.sampleRestaurants);
+//   await RestaurantUser.bulkCreate(seed.sampleRestaurantUsers);
+//   await MenuSection.bulkCreate(seed.sampleMenuSections);
+//   await MenuItem.bulkCreate(seed.sampleMenuItems);
+//   await Customer.bulkCreate(seed.sampleCustomers);
+//   await Order.bulkCreate(seed.sampleOrders);
+//   await OrderItem.bulkCreate(seed.sampleOrderItems);
+//   await CustomerRating.bulkCreate(seed.sampleCustomerRating);
+// })
+// .catch((error) => {
+//   console.log("error in sequelize sync:", error);
+// })
 
 // /////////////////////////////
 
