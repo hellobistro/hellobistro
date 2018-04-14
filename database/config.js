@@ -1,6 +1,7 @@
 module.exports = {
-    database: 'hellobistro',
-    username: 'root',
-    password: '',
-    host: 'localhost'
-  }
+  database: 'hellobistro',
+  username: 'hbroot',
+  password: 'test',
+  host: 'test',
+  port: '3306',
+}
