@@ -3,6 +3,10 @@ client/dist/*
 client/.DS_Store
 client/node_modules
 
+# Package lock
+package-lock.json
+client/package-lock.json
+
 # Logs
 logs
 *.log

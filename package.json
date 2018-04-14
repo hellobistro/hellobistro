@@ -10,9 +10,8 @@
     "css-loader": "^0.28.11",
     "express": "^4.16.3",
     "mysql2": "^1.5.3",
+    "nodemon": "^1.17.3",
     "path": "^0.12.7",
-    "react-redux": "^5.0.7",
-    "redux": "^3.7.2",
     "sequelize": "^4.37.6",
     "style-loader": "^0.20.3"
   },
