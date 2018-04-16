@@ -37,3 +37,5 @@ app.use('/', routes);
 app.listen(port, () => {
   console.log(`Starting the server at port ${port}`);
 });
+
+module.exports = app;
