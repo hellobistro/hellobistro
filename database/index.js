@@ -15,6 +15,10 @@ const sequelize = new Sequelize(database, username, password, {
   dialect: 'mysql',
   operatorsAliases: false,
   logging: false,
+  pool: { maxConnections: 5, maxIdleTime: 15 },
+  dialectOptions: {
+    requestTimeout: 5000
+  }
 });
 
 const Restaurant = sequelize.define('Restaurant', {
