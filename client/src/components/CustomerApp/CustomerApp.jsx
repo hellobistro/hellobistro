@@ -19,9 +19,9 @@ class CustomerApp extends React.Component {
     return (
       <div className="CustomerApp DebugComponentRed">
         <p>This is the <strong>CustomerApp</strong> component</p>
-        <Route path="/" component={CustomerLogin} />
-        <Route path="/" component={FindRestaurants} />
-        <Route path="/" component={Orders} />
+        <Route path="/login" component={CustomerLogin} />
+        <Route path="/find" component={FindRestaurants} />
+        <Route path="/orders" component={Orders} />
         <p>Remaining components to implement under CustomerApp:</p>
         <ul>
           <li>Register</li>
