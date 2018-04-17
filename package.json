@@ -34,6 +34,8 @@
     "test jest": "jest",
     "test mocha": "mocha",
     "test-server": "mocha server/test --exit",
+    "jest": "jest",
+    "mocha": "mocha",
     "dev": "concurrently \"nodemon server/app.js\" \"cd client && npm run dev\""
   },
   "jest": {
