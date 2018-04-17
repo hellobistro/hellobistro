@@ -1,30 +1,39 @@
 language: node_js
 node_js:
-- '6'
+- '8'
+
+## Save modules so you don't have to reload them over multiple builds
 cache:
   directories:
     - node_modules
+
+## Zip up the project and put in a directory before saving to S3
+before_deploy:
+- zip -r latest *
+- mkdir -p hellobistro_upload
+- mv latest.zip hellobistro_upload/latest.zip
+
+## Deploy to S3 folder
 deploy:
 - provider: s3
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
-  local_dir: dpl_cd_upload
+  local_dir: hellobistro_upload
   skip_cleanup: true
   on: &2
     repo: hellobistro/hellobistro
   bucket: hellostorage
+  upload-dir: deploy
   region: us-west-2
 - provider: codedeploy
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
   bucket: hellostorage
-  key: latest.zip
+  key: deploy/latest.zip
   bundle_type: zip
   application: hellobistro
   deployment_group: hellodeploy
   region: us-west-2
   on: *2
-script:
-  - zip -r latest *
-  - mkdir -p dpl_cd_upload
-  - mv latest.zip dpl_cd_upload/latest.zip
+
+  
