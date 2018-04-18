@@ -13,7 +13,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './styles/master.css';
 import store, { history } from './store';
 import { Provider } from 'react-redux';
-import TestContainer from './components/TestContainer';
+import { AppContainer } from './components/Containers';
 
 
 
@@ -21,7 +21,7 @@ import TestContainer from './components/TestContainer';
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter history={history}>
-      <TestContainer />
+      <AppContainer />
     </BrowserRouter>
   </Provider>, document.getElementById('root'));
 
