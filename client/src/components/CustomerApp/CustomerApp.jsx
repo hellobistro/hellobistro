@@ -2,10 +2,11 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-
-import CustomerLogin from './CustomerLogin';
-import FindRestaurants from './FindRestaurants';
-import Orders from './Orders';
+import { CustomerLoginContainer } from '../Containers';
+import { FindRestaurantsContainer } from '../Containers';
+import { OrdersContainer } from '../Containers';
+import { CustomerRegisterContainer } from '../Containers';
+import { CustomerSettingsContainer } from '../Containers';
 
 
 // Create parent application
@@ -16,16 +17,17 @@ class CustomerApp extends React.Component {
   }
 
   render() {
+    console.log('the props in customer App~~~', this.props)
     return (
       <div className="CustomerApp DebugComponentRed">
         <p>This is the <strong>CustomerApp</strong> component</p>
-        <Route path="/login" component={CustomerLogin} />
-        <Route path="/find" component={FindRestaurants} />
-        <Route path="/orders" component={Orders} />
+        <Route path="/" component={CustomerLoginContainer} />
+        <Route path="/" component={FindRestaurantsContainer} />
+        <Route path="/" component={OrdersContainer} />
         <p>Remaining components to implement under CustomerApp:</p>
         <ul>
-          <li>Register</li>
-          <li>Settings</li>
+          <li><Route path="/" component={CustomerRegisterContainer} /></li>
+          <li><Route path="/" component={CustomerSettingsContainer} /></li>
         </ul>
       </div>
     );

@@ -5,10 +5,13 @@
   "main": "server/app.js",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
     "concurrently": "^3.5.1",
     "cors": "^2.8.4",
     "css-loader": "^0.28.11",
     "express": "^4.16.3",
+    "mocha": "^5.0.5",
     "mysql2": "^1.5.3",
     "nodemon": "^1.17.3",
     "path": "^0.12.7",
@@ -16,11 +19,9 @@
     "style-loader": "^0.20.3"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "jest": "^22.4.3",
-    "mocha": "^5.0.5",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -30,6 +31,9 @@
     "eslint-plugin-react": "^7.7.0"
   },
   "scripts": {
+    "test jest": "jest",
+    "test mocha": "mocha",
+    "test-server": "mocha server/test --exit",
     "jest": "jest",
     "mocha": "mocha",
     "dev": "concurrently \"nodemon server/app.js\" \"cd client && npm run dev\""
