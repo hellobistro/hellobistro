@@ -18,6 +18,7 @@ deploy:
     repo: hellobistro/hellobistro
     branch: travis
   bucket: hellostorage
+  wait-until-deployed: true
 - provider: codedeploy
   access_key_id: AKIAJCJAYVNNLSK32QWA
   secret_access_key: *1
@@ -26,4 +27,5 @@ deploy:
   bundle_type: zip
   application: hellobistro
   deployment_group: hellodeploy
+  wait-until-deployed: true
   on: *2
