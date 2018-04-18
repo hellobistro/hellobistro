@@ -8,7 +8,7 @@ cache:
 deploy: 
   - "echo deploy"
   on:
-    branch: travis
+    branch: travis_queue
 language: node_js
 node_js: 
   - "8"
