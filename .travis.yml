@@ -6,7 +6,9 @@ cache:
   directories: 
     - node_modules
 deploy: 
-  - "echo hello"
+  - "echo deploy"
+  on:
+    branch: travis
 language: node_js
 node_js: 
   - "8"
