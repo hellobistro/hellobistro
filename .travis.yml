@@ -24,7 +24,7 @@ deploy:
   access_key_id: AKIAJCJAYVNNLSK32QWA
   secret_access_key: *1
   bucket: hellostorage
-  key: test
+  key: latestTravis.zip
   bundle_type: zip
   application: hellobistro
   deployment_group: hellodeploy
