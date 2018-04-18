@@ -49,7 +49,7 @@ routes.get('/customers', (req, res) => {
 
 // Retrieve a single customer
 routes.get('/customers/:customer_id', (req, res) => {
-  // implement
+  customerController.getSingleCustomer(req, res);
 });
 
 // Retrieve all orders for a single customer
@@ -124,7 +124,7 @@ routes.get('/restaurants', (req, res) => {
 
 // Retrieve a single restaurant
 routes.get('/restaurants/:id', (req, res) => {
-  // implement
+  restaurantController.getSingleRestaurant(req, res);
 });
 
 // Retrieve menu for a single restaurant
