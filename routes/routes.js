@@ -122,10 +122,6 @@ routes.get('/restaurants', (req, res) => {
   restaurantController.getAllRestaurants(req, res);
 });
 
-// Retrieve a single restaurant
-routes.get('/restaurants/:id', (req, res) => {
-  restaurantController.getSingleRestaurant(req, res);
-});
 
 // Retrieve menu for a single restaurant
 routes.get('/restaurants/:id/menu', (req, res) => {
@@ -137,14 +133,24 @@ routes.get('/restaurants/:restaurant_id/openorders', (req, res) => {
   // implement
 });
 
-// Retrieve a specific open orders for a restaurant
+// Retrieve a specific open order for a restaurant
 routes.get('/restaurants/:restaurant_id/openorders/:order_id', (req, res) => {
   // implement
+});
+
+// Retrieve all historical orders for a restaurant
+routes.get('/restaurants/:restaurant_id/orders', (req, res) => {
+  restaurantController.getAllOrdersForRestaurant(req, res);
 });
 
 // Retrieve all ratings for a restaurant
 routes.get('/restaurants/:restaurant_id/ratings', (req, res) => {
   // implement
+});
+
+// Retrieve a single restaurant
+routes.get('/restaurants/:id', (req, res) => {
+  restaurantController.getSingleRestaurant(req, res);
 });
 
 /* Update */
