@@ -3,10 +3,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 // Import CustomerApp component and subcomponents
-import CustomerApp from './CustomerApp/CustomerApp';
+import { CustomerAppContainer } from './Containers';
 
 // Import RestaurantApp component and subcomponents
-import RestaurantApp from './RestaurantApp/RestaurantApp';
+import { RestaurantAppContainer } from './Containers';
 
 // Create parent application
 class App extends React.Component {
@@ -32,10 +32,11 @@ class App extends React.Component {
     }
   
     render() {
+      console.log('the props~~~ in App', this.props)
       return (
         <div>
           <h1>Welcome to HelloBistro</h1>
-  
+
           <h2>The below buttons are for testing only</h2>
           <button onClick={() => { this.toggleTestAsCustomer(); }}>
             Show customer components
@@ -47,8 +48,8 @@ class App extends React.Component {
             trigger
           </button>
   
-          { this.state.testAsCustomer ? <Route path="/" component={CustomerApp} /> : <div /> }
-          { this.state.testAsRestaurant ? <Route path="/" component={RestaurantApp} /> : <div /> }
+          { this.state.testAsCustomer ? <Route path="/" component={CustomerAppContainer} /> : <div /> }
+          { this.state.testAsRestaurant ? <Route path="/" component={RestaurantAppContainer} /> : <div /> }
   
         </div>
       );
