@@ -28,5 +28,6 @@ deploy:
   bundle_type: zip
   application: hellobistro
   deployment_group: hellodeploy
+  region: us-west-2
   wait-until-deployed: true
   on: *2
