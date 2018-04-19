@@ -15,8 +15,11 @@
     "mysql2": "^1.5.3",
     "nodemon": "^1.17.3",
     "path": "^0.12.7",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "sequelize": "^4.37.6",
-    "style-loader": "^0.20.3"
+    "style-loader": "^0.20.3",
+    "webpack": "^4.6.0"
   },
   "devDependencies": {
     "enzyme": "^3.3.0",
