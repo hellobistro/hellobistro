@@ -32,12 +32,12 @@ routes.post('/customers', (req, res) => {
 
 // Create a new order by a customer
 routes.post('/customers/:customer_id/orders', (req, res) => {
-  // implement
+  customerController.createOrder(req, res);
 });
 
 // Create a new rating by a customer
-routes.post('/customers/:customer_id/ratings', (req, res) => {
-  // implement
+routes.put('/customers/:customer_id/ratings/:menu_item_id', (req, res) => {
+  customerController.incrementRating(req, res);
 });
 
 /* Read */
@@ -47,15 +47,16 @@ routes.get('/customers', (req, res) => {
   customerController.getAllCustomers(req, res);
 });
 
+// Retrieve all orders for a single customer
+routes.get('/customers/:customer_id/orders', (req, res) => {
+  customerController.getAllOrdersForCustomer(req, res);
+});
+
 // Retrieve a single customer
 routes.get('/customers/:customer_id', (req, res) => {
   customerController.getSingleCustomer(req, res);
 });
 
-// Retrieve all orders for a single customer
-routes.get('/customers/:customer_id/orders', (req, res) => {
-  // implement
-});
 
 // Retrieve all orders for all customers
 routes.get('/customers/orders', (req, res) => {
@@ -125,7 +126,8 @@ routes.get('/restaurants', (req, res) => {
 
 // Retrieve menu for a single restaurant
 routes.get('/restaurants/:id/menu', (req, res) => {
-  // implement
+  // Consider whether needed or deprecate
+  // Currently, GET to /restaurant/:id returns whole menu
 });
 
 // Retrieve all open orders for a restaurant
@@ -145,7 +147,8 @@ routes.get('/restaurants/:restaurant_id/orders', (req, res) => {
 
 // Retrieve all ratings for a restaurant
 routes.get('/restaurants/:restaurant_id/ratings', (req, res) => {
-  // implement
+  // Consider whether needed or deprecate
+  // Currently, GET to /restaurant/:id returns whole menu w/ ratings
 });
 
 // Retrieve a single restaurant

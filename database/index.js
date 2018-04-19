@@ -148,7 +148,10 @@ const Customer = sequelize.define('Customer', {
 });
 
 const CustomerRating = sequelize.define('CustomerRating', {
-  total: Sequelize.INTEGER,
+  total: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1,
+  },
 });
 
 RestaurantUser.belongsTo(Restaurant);
