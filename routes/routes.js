@@ -26,8 +26,8 @@ routes.post('/customers/login', (req, res) => {
 /* Create */
 
 // Create a new customer
-routes.post('/customers/signup', (req, res) => {
-  // implement
+routes.post('/customers', (req, res) => {
+  customerController.createCustomer(req, res);
 });
 
 // Create a new order by a customer
@@ -84,8 +84,8 @@ routes.patch('/customers/:id/profile', (req, res) => {
 /* Destroy */
 
 // Delete customer account
-routes.delete('/customers/:id', (req, res) => {
-  // implement
+routes.delete('/customers/:customer_id', (req, res) => {
+  customerController.deleteCustomer(req, res);
 });
 
 /* ***************** */
@@ -101,8 +101,8 @@ routes.post('/restaurants/login', (req, res) => {
 
 /* Create */
 // Create a new restaurant
-routes.post('/restaurants/signup', (req, res) => {
-  // implement
+routes.post('/restaurants', (req, res) => {
+  restaurantController.createRestaurant(req, res);
 });
 
 // Create a new menu item for a restaurant
@@ -169,7 +169,7 @@ routes.patch('/restaurants/:restaurant_id/menu/:item_id', (req, res) => {
 
 // Delete a restaurant account
 routes.delete('/restaurants/:restaurant_id', (req, res) => {
-  // implement
+  restaurantController.deleteRestaurant(req, res);
 });
 
 // Delete an open order for a restaurant
