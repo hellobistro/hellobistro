@@ -40,25 +40,41 @@ const customerController = {
   },
 
   createOrder(req, res) {
-    console.log(req.body);
     const {
       status,
       total,
       completedAt,
-      transactionId,
+      transaction,
       table,
       CustomerId,
+      RestaurantId,
+      items,
     } = req.body;
 
     Order.create({
       status,
       total,
       completedAt,
-      transactionId,
+      transaction,
       table,
       CustomerId,
+      RestaurantId,
+    }).then(async (order) => {
+      let newOrder = null;
+      async function buildOrderItems() {
+        for (let item of items) {
+          await order.addMenuItem(item.id, { through: item.details });
+        }
+        newOrder = Order.findById(order.id, {
+          include: [MenuItem],
+          required: false,
+        });
+      };
+
+      await buildOrderItems();
+      
+      return newOrder;
     }).then((order) => {
-      console.log(order);
       res.json(order);
     }).catch((err) => {
       res.send(err);
