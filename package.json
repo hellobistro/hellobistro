@@ -37,7 +37,8 @@
     "test-server": "mocha server/test --exit",
     "jest": "jest",
     "mocha": "mocha",
-    "dev": "concurrently \"nodemon server/app.js\" \"cd client && npm run dev\""
+    "dev": "concurrently \"nodemon server/app.js\" \"cd client && npm run dev\"",
+    "prod": "node server/app.js"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>client/__test__/setupTests.js"

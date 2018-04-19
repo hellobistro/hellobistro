@@ -6,6 +6,7 @@
   "scripts": {
     "jest": "jest",
     "build": "webpack -w",
+    "prod": "webpack",
     "dev": "npm run build | nodemon server/app.js"
   },
   "author": "",
