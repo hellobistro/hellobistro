@@ -81,6 +81,11 @@ const customerController = {
     }).catch((err) => {
       res.send(err);
     });
+
+    MenuItem.findById(menu_item_id).then((menuItem) => {
+      menuItem.increment('rating');
+    });
+
   },
 
   getAllCustomers(req, res) {

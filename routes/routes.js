@@ -70,7 +70,7 @@ routes.get('/customers/:customer_id/ratings', (req, res) => {
 
 // Retrieve all restaurants for a specific customer
 // NOTE: Consider deprecating
-routes.get('/customers/:customer_idrestaurants', (req, res) => {
+routes.get('/customers/:customer_id/restaurants', (req, res) => {
   // implement
   // point to same controller for GET to restaurants
 });

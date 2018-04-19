@@ -76,7 +76,10 @@ const MenuItem = sequelize.define('MenuItem', {
   spicy: Sequelize.BOOLEAN,
   image: Sequelize.STRING,
   prepTime: Sequelize.INTEGER,
-  rating: Sequelize.INTEGER,
+  rating: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1,
+  },
 });
 
 const MenuSection = sequelize.define('MenuSection', {
