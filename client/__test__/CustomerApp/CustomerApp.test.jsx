@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router';
 import '../jest.config';
-import { CustomerApp } from '../../src/components/CustomerApp/CustomerApp';
+import CustomerApp from '../../src/components/CustomerApp/CustomerApp';
 
 describe('CustomerApp Component:', () => {
   it('should render CustomerApp component', () => {

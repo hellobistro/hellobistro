@@ -5,7 +5,7 @@ import FindRestaurants from '../../src/components/CustomerApp/FindRestaurants';
 
 describe('FindRestaurants Component:', () => {
   it('should render FindRestaurants component', () => {
-    const wrapper = global.shallow(<FindRestaurants />);
+    const wrapper = global.shallow(<FindRestaurantsContainer />);
     global.expect(wrapper.length).to.equal(1);
   });
 
