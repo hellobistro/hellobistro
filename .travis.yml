@@ -4,6 +4,7 @@ node_js:
 cache:
   directories:
   - node_modules
+  - client/node_modules
 before_deploy:
 - zip -r latestTravis * >/dev/null
 - mkdir -p s3_upload
