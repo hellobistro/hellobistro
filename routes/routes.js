@@ -70,16 +70,16 @@ routes.get('/customers/:customer_id/ratings', (req, res) => {
 
 // Retrieve all restaurants for a specific customer
 // NOTE: Consider deprecating
-routes.get('/customers/:customer_id/restaurants', (req, res) => {
-  // implement
-  // point to same controller for GET to restaurants
-});
+// routes.get('/customers/:customer_id/restaurants', (req, res) => {
+//   // implement
+//   // point to same controller for GET to restaurants
+// });
 
 /* Update */
 
 // Update a customer profile
 routes.patch('/customers/:id/profile', (req, res) => {
-  // implement
+  customerController.updateCustomer(req, res);
 });
 
 /* Destroy */
@@ -111,10 +111,11 @@ routes.post('/restaurants/:id/menu', (req, res) => {
   // implement
 });
 
-// Create a new open order for a restaurant
-routes.post('/restaurants/:restaurant_id/openorders/:order_id', (req, res) => {
-  // implement
-});
+// // Create a new open order for a restaurant
+// Consider deprecating
+// routes.post('/restaurants/:restaurant_id/openorders/:order_id', (req, res) => {
+//   // implement
+// });
 
 /* Read */
 
@@ -125,19 +126,15 @@ routes.get('/restaurants', (req, res) => {
 
 
 // Retrieve menu for a single restaurant
-routes.get('/restaurants/:id/menu', (req, res) => {
-  // Consider whether needed or deprecate
-  // Currently, GET to /restaurant/:id returns whole menu
-});
+// Currently, GET to /restaurant/:id returns whole menu
+// Consider deprecating
+// routes.get('/restaurants/:id/menu', (req, res) => {
+//   // Consider whether needed or deprecate
+// });
 
 // Retrieve all open orders for a restaurant
-routes.get('/restaurants/:restaurant_id/openorders', (req, res) => {
-  // implement
-});
-
-// Retrieve a specific open order for a restaurant
-routes.get('/restaurants/:restaurant_id/openorders/:order_id', (req, res) => {
-  // implement
+routes.get('/restaurants/:restaurant_id/orders/open', (req, res) => {
+  restaurantController.getAllOpenOrdersForRestaurant(req, res);
 });
 
 // Retrieve all historical orders for a restaurant

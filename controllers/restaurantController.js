@@ -89,6 +89,25 @@ const restaurantController = {
     });
   },
 
+  getAllOpenOrdersForRestaurant(req, res) {
+    const { restaurant_id } = req.params;
+    
+    Order.findAll({
+      where: {
+        RestaurantId: restaurant_id,
+        completedAt: null,
+      },
+      include: [{
+        model: MenuItem,
+        required: false,
+      }],
+    }).then((orders) => {
+      res.json(orders);
+    }).catch((err) => {
+      res.send(err);
+    });
+  },
+
   getAllRatingsForRestaurant(req, res) {
     const { restaurant_id } = req.params;
     Order.findAll({
