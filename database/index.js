@@ -80,7 +80,10 @@ const MenuItem = sequelize.define('MenuItem', {
   spicy: Sequelize.BOOLEAN,
   image: Sequelize.STRING,
   prepTime: Sequelize.INTEGER,
-  rating: Sequelize.INTEGER,
+  rating: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1,
+  },
 });
 
 const MenuSection = sequelize.define('MenuSection', {
@@ -152,7 +155,10 @@ const Customer = sequelize.define('Customer', {
 });
 
 const CustomerRating = sequelize.define('CustomerRating', {
-  total: Sequelize.INTEGER,
+  total: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1,
+  },
 });
 
 RestaurantUser.belongsTo(Restaurant);
