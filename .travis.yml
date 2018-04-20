@@ -18,7 +18,7 @@ deploy:
   skip_cleanup: true
   on: &2
     repo: hellobistro/hellobistro
-    branch: travis
+    branch: master
   bucket: hellostorage
   wait-until-deployed: true
 - provider: codedeploy
