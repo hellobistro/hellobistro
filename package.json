@@ -41,7 +41,7 @@
     "prod": "node server/app.js"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>client/__test__/setupTests.js"
+    "setupTestFrameworkScriptFile": "<rootDir>client/__test__/jest.config.jsx"
   },
   "repository": {
     "type": "git",
