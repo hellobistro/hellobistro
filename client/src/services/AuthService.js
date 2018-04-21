@@ -10,10 +10,17 @@ export default class AuthService {
 		this.getProfile = this.getProfile.bind(this)
 	}
 
-	customerRegister(username, firstName, lastName, password, zip, phone, email){
+	customerRegister(username, firstName, lastName, password, zip, phone, email) {
 		return this.fetch(`${this.domain}/customers`, {
 			method: 'POST',
 			body: JSON.stringify({ username, firstName, lastName, password, zip, phone, email })
+		})
+	}
+
+	restaurantUserRegister(email, password, phone) {
+		return this.fetch(`${this.domain}/restaurantUser`, {
+			method: 'POST',
+			body: JSON.stringify({ email, password, phone })
 		})
 	}
 
@@ -26,7 +33,20 @@ export default class AuthService {
 				password
 			})
 		}).then(res => {
-			console.log('the response after logging in ~~~~', res)
+			this.setToken(res) // Setting the token in localStorage
+			return Promise.resolve(res);
+		})
+	}
+
+	restaurantLogin(email, password) {
+		// Get a token from api server using the fetch api
+		return this.fetch(`${this.domain}/restaurants/login`, {
+			method: 'POST',
+			body: JSON.stringify({
+				email,
+				password
+			})
+		}).then(res => {
 			this.setToken(res) // Setting the token in localStorage
 			return Promise.resolve(res);
 		})

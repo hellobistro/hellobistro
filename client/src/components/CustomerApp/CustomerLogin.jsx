@@ -49,7 +49,7 @@ class CustomerLogin extends Component  {
         <button onClick={this.handleSubmit.bind(this)}>LOGIN</button>
         {
           this.state.error
-          ? <div>invalid credentials</div>
+          ? <div>Invalid credentials</div>
           : <div></div>
         }
       </div>

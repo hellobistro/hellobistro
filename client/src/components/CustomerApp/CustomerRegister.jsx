@@ -33,7 +33,6 @@ class CustomerRegister extends Component {
   }
   
   render(){
-    console.log('the state in customerregister', this.state)
     return(
       <div className="CustomerRegister"> 
         <h2>Customer Registration</h2>

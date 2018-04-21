@@ -94,9 +94,14 @@ routes.delete('/customers/:customer_id', (req, res) => {
 
 /* Authenticate */
 
+//Create restaurant User
+routes.post('/restaurantUser', (req, res) => {
+  restaurantController.createRestaurantUser(req, res);
+});
+
 // Login a restaurant
 routes.post('/restaurants/login', (req, res) => {
-  // implement
+  restaurantController.loginRestaurant(req, res);
 });
 
 /* Create */
