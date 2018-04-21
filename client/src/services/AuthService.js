@@ -7,6 +7,7 @@ export default class AuthService {
 		this.loggedIn = this.loggedIn.bind(this)
 		this.fetch = this.fetch.bind(this) // React binding stuff
 		this.login = this.login.bind(this)
+		this.restaurantLogin = this.restaurantLogin.bind(this)
 		this.getProfile = this.getProfile.bind(this)
 	}
 

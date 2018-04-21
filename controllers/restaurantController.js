@@ -30,22 +30,6 @@ const restaurantController = {
     });
   },
 
-  async loginRestaurant(req, res) {
-    const { email, password } = req.body;
-    const user = await RestaurantUser.findOne({ where: { email } });
-    if (!user){
-      res.sendStatus(400);
-    }
-
-    const authorized = await bcrypt.compare(password, user.password);
-    if (!authorized){
-      res.sendStatus(400);
-    }
-
-    const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: 129600 });
-    res.json(token);
-  },
-
   createRestaurant(req, res) {
     const {
       name,
@@ -216,7 +200,21 @@ const restaurantController = {
     });
   },
 
-  loginRestaurant() {},
+  async loginRestaurant(req, res){
+    const { email, password, } = req.body;
+    const user = await RestaurantUser.findOne({ where: { email } });
+    if (!user){
+      res.sendStatus(400);
+    }
+
+    const authorized = await bcrypt.compare(password, user.password);
+    if (!authorized){
+      res.sendStatus(400);
+    }
+
+    const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: 129600 });
+    res.json(token);
+  },
 
   deleteRestaurant(req, res) {
     const { restaurant_id } = req.params;
