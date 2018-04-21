@@ -165,7 +165,34 @@ const customerController = {
     });
   },
 
-  updateCustomer() {},
+  updateCustomer(req, res) {
+
+    const { customer_id } = req.params;
+    const {
+      firstName,
+      lastName,
+      zip,
+      phone,
+      email,
+    } = req.body;
+
+    Customer.update({
+      firstName,
+      lastName,
+      zip,
+      phone,
+      email,
+    }, {
+      where: {
+        id: customer_id,
+      },
+    }).then((customer) => {
+      res.json(customer);
+    }).catch((err) => {
+      console.log(err);
+      res.send(err);
+    });
+  },
 
   async loginCustomer(req, res) {
     const { email, password } = req.body;
