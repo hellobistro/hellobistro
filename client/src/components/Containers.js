@@ -24,14 +24,12 @@ import CustomerSettings from './CustomerApp/CustomerSettings';
 
 
 function mapStateToProps(state) {
-  console.log('the state>>>', state);
   return {
-    posts: state,
+    state
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  console.log('the dispatch>>>', dispatch);
   return bindActionCreators(actionCreators, dispatch);
 }
 

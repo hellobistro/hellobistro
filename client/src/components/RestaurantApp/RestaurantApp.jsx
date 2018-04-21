@@ -8,7 +8,7 @@ import { MenuManagerContainer } from '../Containers';
 import { PromosContainer } from '../Containers';
 import { RestaurantRegisterContainer } from '../Containers';
 import { RestaurantSettingsContainer } from '../Containers';
-
+import RestaurantUserRegister from './RestaurantUserRegister';
 // Create parent application
 class RestaurantApp extends React.Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class RestaurantApp extends React.Component {
         <Route path="/" component={RestaurantLoginContainer} />
         <p>Remaining components to implement under RestaurantApp:</p>
         <ul>
+          <li><Route path="/" component={RestaurantUserRegister} /></li>
           <li><Route path="/" component={RestaurantRegisterContainer} /></li>
           <li><Route path="/" component={DashBoardContainer} /></li>
           <li><Route path="/" component={MenuManagerContainer} /></li>

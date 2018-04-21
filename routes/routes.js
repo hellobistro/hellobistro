@@ -32,13 +32,13 @@ routes.get('/data/:restaurant_id/:method', (req, res) => {
 /* Authenticate */
 // Login a customer
 routes.post('/customers/login', (req, res) => {
-  // implement
+  customerController.loginCustomer(req, res);
 });
 
 /* Create */
 
 // Create a new customer
-routes.post('/customers', (req, res) => {
+routes.post('/customers', async (req, res) => {
   customerController.createCustomer(req, res);
 });
 
@@ -113,9 +113,14 @@ routes.delete('/customers/:customer_id', (req, res) => {
 
 /* Authenticate */
 
+//Create restaurant User
+routes.post('/restaurantUser', (req, res) => {
+  restaurantController.createRestaurantUser(req, res);
+});
+
 // Login a restaurant
 routes.post('/restaurants/login', (req, res) => {
-  // implement
+  restaurantController.loginRestaurant(req, res);
 });
 
 /* Create */

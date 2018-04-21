@@ -11,7 +11,6 @@ import { RestaurantAppContainer } from './Containers';
 // Create parent application
 class App extends React.Component {
     constructor(props) {
-      console.log(props)
       super(props);
       this.state = {
         testAsCustomer: true,

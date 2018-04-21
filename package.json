@@ -4,6 +4,7 @@
   "description": "",
   "main": "server/app.js",
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
@@ -11,24 +12,29 @@
     "cors": "^2.8.4",
     "css-loader": "^0.28.11",
     "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
     "mocha": "^5.0.5",
     "mysql2": "^1.5.3",
     "nodemon": "^1.17.3",
     "path": "^0.12.7",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "sequelize": "^4.37.6",
-    "style-loader": "^0.20.3"
+    "style-loader": "^0.20.3",
+    "webpack": "^4.6.0"
   },
   "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "jest": "^22.4.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-airbnb-standard": "^1.6.6",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0"
+    "eslint-plugin-react": "^7.7.0",
+    "jest": "^22.4.3"
   },
   "scripts": {
     "test jest": "jest",

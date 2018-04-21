@@ -1,5 +1,4 @@
 function posts(state = [{counter: 0}], action) {
-  console.log('state:', state, 'action:', action);
   switch(action.type) {
     case 'INCREMENT_LIKES' :
     return [
