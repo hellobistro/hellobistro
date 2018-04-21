@@ -81,6 +81,9 @@ const restaurantController = {
       include: [{
         model: MenuItem,
         required: false,
+      }, {
+        model: Customer,
+        required: false,
       }],
     }).then((orders) => {
       res.json(orders);
@@ -91,7 +94,7 @@ const restaurantController = {
 
   getAllOpenOrdersForRestaurant(req, res) {
     const { restaurant_id } = req.params;
-    
+
     Order.findAll({
       where: {
         RestaurantId: restaurant_id,
@@ -125,7 +128,49 @@ const restaurantController = {
     });
   },
 
-  updateRestaurant() {},
+  updateRestaurant(req, res) {
+
+    const { restaurant_id } = req.params;
+    const {
+      name,
+      email,
+      phone,
+      addressOne,
+      addressTwo,
+      city,
+      state,
+      zip,
+      description,
+      genre,
+      type,
+      paymentId,
+    } = req.body;
+
+
+    Restaurant.update({
+      name,
+      email,
+      phone,
+      addressOne,
+      addressTwo,
+      city,
+      state,
+      zip,
+      description,
+      genre,
+      type,
+      paymentId,
+    }, {
+      where: {
+        id: restaurant_id,
+      },
+    }).then((restaurant) => {
+      res.json(restaurant);
+    }).catch((err) => {
+      console.log(err);
+      res.send(err);
+    });
+  },
 
   loginRestaurant() {},
 

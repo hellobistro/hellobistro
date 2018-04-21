@@ -2,16 +2,28 @@
 const restaurantController = require('../controllers/restaurantController');
 const customerController = require('../controllers/customerController');
 
+// Reqyure analytics engine
+const analytics = require('../analytics');
+
+
 // Create a router object
 const routes = require('express').Router();
 
-/* *********** */
-/* TEST ROUTES */
-/* *********** */
+/* **************** */
+/* ANALYTICS ROUTES */
+/* **************** */
 
-routes.get('/test', (req, res) => {
-  res.send('The client made a successful request');
+routes.get('/data/:restaurant_id/:method', (req, res) => {
+  const { restaurant_id, method } = req.params;
+
+  analytics.loadData(restaurant_id)
+    .then(() => {
+      analytics[`${method}`](req, res);
+    }).catch((err) => {
+      res.send(err);
+    });
 });
+
 
 /* *************** */
 /* CUSTOMER ROUTES */
@@ -89,6 +101,12 @@ routes.delete('/customers/:customer_id', (req, res) => {
   customerController.deleteCustomer(req, res);
 });
 
+/* ********************** */
+/* RESTAURANT USER ROUTES */
+/* ********************** */
+
+// TO BE IMPLEMENTED
+
 /* ***************** */
 /* RESTAURANT ROUTES */
 /* ***************** */
@@ -111,26 +129,12 @@ routes.post('/restaurants/:id/menu', (req, res) => {
   // implement
 });
 
-// // Create a new open order for a restaurant
-// Consider deprecating
-// routes.post('/restaurants/:restaurant_id/openorders/:order_id', (req, res) => {
-//   // implement
-// });
-
 /* Read */
 
 // Retrieve all restaurants
 routes.get('/restaurants', (req, res) => {
   restaurantController.getAllRestaurants(req, res);
 });
-
-
-// Retrieve menu for a single restaurant
-// Currently, GET to /restaurant/:id returns whole menu
-// Consider deprecating
-// routes.get('/restaurants/:id/menu', (req, res) => {
-//   // Consider whether needed or deprecate
-// });
 
 // Retrieve all open orders for a restaurant
 routes.get('/restaurants/:restaurant_id/orders/open', (req, res) => {
@@ -157,7 +161,7 @@ routes.get('/restaurants/:id', (req, res) => {
 
 // Update a restaurant profile/settings
 routes.patch('/restaurants/:restaurant_id', (req, res) => {
-  // implement
+  restaurantController.updateRestaurant(req, res);
 });
 
 // Update a menu item for a restaurant

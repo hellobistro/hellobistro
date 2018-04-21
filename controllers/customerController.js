@@ -178,7 +178,7 @@ const customerController = {
     }).catch((err) => {
       console.log(err);
       res.send(err);
-    })
+    });
   },
 
   loginCustomer() {},
