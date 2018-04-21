@@ -19,7 +19,7 @@ class RestaurantApp extends React.Component {
   render() {
     return (
       <div className="RestaurantApp DebugComponentBlue">
-        <p>This is the <strong>RestaurantApp</strong> component</p>
+        <p>This is the RestaurantApp component</p>
         <Route path="/" component={RestaurantLoginContainer} />
         <p>Remaining components to implement under RestaurantApp:</p>
         <ul>
