@@ -45,7 +45,7 @@
     "dev": "concurrently \"nodemon server/app.js\" \"cd client && npm run dev\""
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>client/__test__/setupTests.js"
+    "setupTestFrameworkScriptFile": "<rootDir>client/__test__/jest.config.jsx"
   },
   "repository": {
     "type": "git",

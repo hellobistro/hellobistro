@@ -15,6 +15,10 @@ const sequelize = new Sequelize(database, username, password, {
   dialect: 'mysql',
   operatorsAliases: false,
   logging: false,
+  pool: { maxConnections: 5, maxIdleTime: 15 },
+  dialectOptions: {
+    requestTimeout: 5000
+  }
 });
 
 const Restaurant = sequelize.define('Restaurant', {
@@ -76,7 +80,10 @@ const MenuItem = sequelize.define('MenuItem', {
   spicy: Sequelize.BOOLEAN,
   image: Sequelize.STRING,
   prepTime: Sequelize.INTEGER,
-  rating: Sequelize.INTEGER,
+  rating: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1,
+  },
 });
 
 const MenuSection = sequelize.define('MenuSection', {
@@ -148,7 +155,10 @@ const Customer = sequelize.define('Customer', {
 });
 
 const CustomerRating = sequelize.define('CustomerRating', {
-  total: Sequelize.INTEGER,
+  total: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1,
+  },
 });
 
 RestaurantUser.belongsTo(Restaurant);

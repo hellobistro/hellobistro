@@ -1,12 +1,12 @@
 import React from 'react';
 import '../jest.config';
 
-import ConfirmOrder from '../src/components/CustomerApp/ConfirmOrder';
+import ConfirmOrder from '../../src/components/CustomerApp/ConfirmOrder';
 
-describe('<ConfirmOrder />', () => {
-  it('should display a Welcome heading', () => {
+describe('ConfirmOrder Component: ', () => {
+  it('should render ConfirmOrder component', () => {
     const wrapper = global.shallow(<ConfirmOrder />);
-    global.expect(wrapper.find('p').contains('ConfirmOrder')).to.equal(true);
+    global.expect(wrapper.length).to.equal(1);
   });
 
 });

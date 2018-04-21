@@ -30,22 +30,6 @@ const restaurantController = {
     });
   },
 
-  async loginRestaurant(req, res) {
-    const { email, password } = req.body;
-    const user = await RestaurantUser.findOne({ where: { email } });
-    if (!user){
-      res.sendStatus(400);
-    }
-
-    const authorized = await bcrypt.compare(password, user.password);
-    if (!authorized){
-      res.sendStatus(400);
-    }
-
-    const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: 129600 });
-    res.json(token);
-  },
-
   createRestaurant(req, res) {
     const {
       name,
@@ -118,22 +102,33 @@ const restaurantController = {
 
   getAllOrdersForRestaurant(req, res) {
     const { restaurant_id } = req.params;
-
-    Restaurant.find({
-      where: { id: restaurant_id },
+    Order.findAll({
+      where: {
+        RestaurantId: restaurant_id,
+      },
       include: [{
-        model: Order,
+        model: MenuItem,
         required: false,
-        include: [{
-          model: MenuItem,
-          required: false,
-        }, {
-          model: Customer,
-          required: false,
-        }],
       }],
-    }).then((restaurant) => {
-      res.send(restaurant);
+    }).then((orders) => {
+      res.json(orders);
+    }).catch((err) => {
+      res.send(err);
+    });
+  },
+
+  getAllRatingsForRestaurant(req, res) {
+    const { restaurant_id } = req.params;
+    Order.findAll({
+      where: {
+        RestaurantId: restaurant_id,
+      },
+      include: [{
+        model: MenuItem,
+        required: false,
+      }],
+    }).then((orders) => {
+      res.json(orders);
     }).catch((err) => {
       res.send(err);
     });
@@ -141,7 +136,21 @@ const restaurantController = {
 
   updateRestaurant() {},
 
-  loginRestaurant() {},
+  async loginRestaurant(req, res){
+    const { email, password, } = req.body;
+    const user = await RestaurantUser.findOne({ where: { email } });
+    if (!user){
+      res.sendStatus(400);
+    }
+
+    const authorized = await bcrypt.compare(password, user.password);
+    if (!authorized){
+      res.sendStatus(400);
+    }
+
+    const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: 129600 });
+    res.json(token);
+  },
 
   deleteRestaurant(req, res) {
     const { restaurant_id } = req.params;
