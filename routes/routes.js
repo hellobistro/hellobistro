@@ -72,12 +72,12 @@ routes.get('/customers/:customer_id', (req, res) => {
 
 // Retrieve all orders for all customers
 routes.get('/customers/orders', (req, res) => {
-  // implement
+  customerController.getAllOrders(req, res);
 });
 
 // Retrieve all ratings for a customer
 routes.get('/customers/:customer_id/ratings', (req, res) => {
-  // implement
+  customerController.getRatingsForCustomer(req, res);
 });
 
 // Retrieve all restaurants for a specific customer
@@ -131,7 +131,7 @@ routes.post('/restaurants', (req, res) => {
 
 // Create a new menu item for a restaurant
 routes.post('/restaurants/:id/menu', (req, res) => {
-  // implement
+  restaurantController.createMenuItem(req, res);
 });
 
 /* Read */
@@ -171,7 +171,7 @@ routes.patch('/restaurants/:restaurant_id', (req, res) => {
 
 // Update a menu item for a restaurant
 routes.patch('/restaurants/:restaurant_id/menu/:item_id', (req, res) => {
-  // implement
+  restaurantController.updateMenuItem(req, res);
 });
 
 /* Destroy */
@@ -183,7 +183,7 @@ routes.delete('/restaurants/:restaurant_id', (req, res) => {
 
 // Delete an open order for a restaurant
 routes.delete('/restaurants/:restaurant_id/openorders/:order_id', (req, res) => {
-  // implement
+  restaurantController.deleteOrder(req, res);
 });
 
 /* ********** */
@@ -206,24 +206,24 @@ routes.post('/api/signup', (req, res) => {
 
 // Create a new order to a restaurant
 routes.post('/api/restaurants/:restaurant_id/orders', (req, res) => {
-  // implement
+  restaurantController.createNewOrder(req, res);
 });
 
 /* Read */
 
 // Retrieve all restaurants
 routes.get('/api/restaurants', (req, res) => {
-  // implement
+  restaurantController.getAllRestaurants(req, res);
 });
 
 // Retrieve information for specific restaurant
 routes.get('/api/restaurants/:restaurant_id', (req, res) => {
-  // implement
+  restaurantController.getSingleRestaurant(req, res);
 });
 
 // Retrieve past orders from vendor for specific restaurant
 routes.get('/api/:user_id/restaurants/:restaurant_id/orders', (req, res) => {
-  // implement
+  restaurantController.getAllOrdersForRestaurant(req, res);
 });
 
 /* Update */
