@@ -20,13 +20,13 @@ routes.get('/test', (req, res) => {
 /* Authenticate */
 // Login a customer
 routes.post('/customers/login', (req, res) => {
-  // implement
+  customerController.loginCustomer(req, res);
 });
 
 /* Create */
 
 // Create a new customer
-routes.post('/customers', (req, res) => {
+routes.post('/customers', async (req, res) => {
   customerController.createCustomer(req, res);
 });
 

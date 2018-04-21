@@ -1,12 +1,13 @@
 // Import dependencies
 import React, { Component } from 'react';
-
+import AuthService from '../../services/AuthService'
 
 class CustomerRegister extends Component {
   constructor(){
     super();
+    this.Auth = new AuthService();
     this.state = {
-
+      error: false
     }
   }
 
@@ -14,6 +15,21 @@ class CustomerRegister extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  registerCustomer(e) {
+    e.preventDefault();
+    const { username, firstname, lastname, password, zip, phone, email} = this.state;
+    this.Auth.customerRegister(username, firstname, lastname, password, zip, phone, email)
+      .then(res => {
+        this.setState({error: false});
+        //this.props.history.replace('/')
+        console.log('successfully registered ~~', res)
+      })
+      .catch(err => {
+        this.setState({error: true});
+        console.error('error registering customer', err)
+      })
   }
   
   render(){
@@ -32,7 +48,7 @@ class CustomerRegister extends Component {
           <input name="lastname" placeholder="Last Name" type="text" onChange={this.handleChange.bind(this)}/> 
           <br />
           <div className="RegisterLabel">Password *</div> 
-          <input name="password" placeholder="Password" type="text"/>
+          <input name="password" placeholder="Password" type="text" onChange={this.handleChange.bind(this)}/>
           <br /> 
           <div className="RegisterLabel">Re-enter Password *</div> 
           <input name="verifypassword" placeholder="Re-enter Password" type="text"/>
@@ -47,7 +63,12 @@ class CustomerRegister extends Component {
           <input name="email" placeholder="Email Address" onChange={this.handleChange.bind(this)}/>
           <br />
           <br />
-          <button onClick={function(){this.props.addCustomer(this.state)}.bind(this)}>Register</button>
+          <button onClick={this.registerCustomer.bind(this)}>Register</button>
+          {
+            this.state.error
+            ? <div>Email already exists </div>
+            : <div></div>
+          }
       </div>
     )
   }

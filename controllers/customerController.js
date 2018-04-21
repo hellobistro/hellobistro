@@ -1,8 +1,11 @@
 const { Customer, MenuItem }  = require('../database/index.js');
 
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 const customerController = {
 
-  createCustomer(req, res) {
+  async createCustomer (req, res) {
     const {
       userName,
       firstName,
@@ -17,22 +20,32 @@ const customerController = {
       apiKey,
     } = req.body;
 
+    const user = await Customer.findOne({ where: { email }});
+    if(user) {
+      res.status(400);
+      res.send('email already exists');
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
     Customer.create({
       userName,
       firstName,
       lastName,
-      password,
+      password: hashedPassword,
       zip,
       phone,
       email,
-      availVotes,
-      paymentId,
+      availVotes: 5,
+      //paymenId can't be null?
+      paymentId: 1,
       vendor,
       apiKey,
     }).then((customer) => {
+      var user = customer;
+      console.log('the newly created user>>>>>', user)
       res.status(201).json(customer);
     }).catch((err) => {
-      console.log(err);
+      console.log('error created customerUser', err);
       res.send(err);
     });
   },
@@ -69,7 +82,21 @@ const customerController = {
 
   updateCustomer() {},
 
-  loginCustomer() {},
+  async loginCustomer(req, res) {
+    const { email, password } = req.body;
+    const user = await Customer.findOne({ where: { email } });
+    if (!user){
+      res.sendStatus(400);
+    }
+
+    const authorized = await bcrypt.compare(password, user.password);
+    if (!authorized){
+      res.sendStatus(400);
+    }
+
+    const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: 129600 });
+    res.json(token);
+  },
 
   deleteCustomer(req, res) {
     const { customer_id } = req.params;
