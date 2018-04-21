@@ -1,18 +1,20 @@
-const { Customer, Restaurant, RestaurantUser, MenuSection, MenuItem, Order, OrderItem } = require('../database/index.js');
+const {
+ Customer, Restaurant, RestaurantUser, MenuSection, MenuItem, Order, OrderItem 
+} = require('../database/index.js');
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const restaurantController = {
 
-  async createRestaurantUser(req, res){
+  async createRestaurantUser(req, res) {
     const {
       email,
       password,
       phone,
     } = req.body;
-    const user = await RestaurantUser.findOne({ where: { email }});
-    if(user) {
+    const user = await RestaurantUser.findOne({ where: { email } });
+    if (user) {
       res.status(400);
       res.send('email already exists');
     }
@@ -22,7 +24,7 @@ const restaurantController = {
       password: hashedPassword,
       phone,
     }).then((restaurantUser) => {
-      console.log('the newly created restaurant user>>>>>', restaurantUser)
+      console.log('the newly created restaurant user>>>>>', restaurantUser);
       res.status(201).json(restaurantUser);
     }).catch((err) => {
       console.log('error creating restaurantUser', err);
@@ -157,7 +159,6 @@ const restaurantController = {
   },
 
   updateRestaurant(req, res) {
-
     const { restaurant_id } = req.params;
     const {
       name,
@@ -200,15 +201,15 @@ const restaurantController = {
     });
   },
 
-  async loginRestaurant(req, res){
-    const { email, password, } = req.body;
+  async loginRestaurant(req, res) {
+    const { email, password } = req.body;
     const user = await RestaurantUser.findOne({ where: { email } });
-    if (!user){
+    if (!user) {
       res.sendStatus(400);
     }
 
     const authorized = await bcrypt.compare(password, user.password);
-    if (!authorized){
+    if (!authorized) {
       res.sendStatus(400);
     }
 
