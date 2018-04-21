@@ -118,22 +118,33 @@ const restaurantController = {
 
   getAllOrdersForRestaurant(req, res) {
     const { restaurant_id } = req.params;
-
-    Restaurant.find({
-      where: { id: restaurant_id },
+    Order.findAll({
+      where: {
+        RestaurantId: restaurant_id,
+      },
       include: [{
-        model: Order,
+        model: MenuItem,
         required: false,
-        include: [{
-          model: MenuItem,
-          required: false,
-        }, {
-          model: Customer,
-          required: false,
-        }],
       }],
-    }).then((restaurant) => {
-      res.send(restaurant);
+    }).then((orders) => {
+      res.json(orders);
+    }).catch((err) => {
+      res.send(err);
+    });
+  },
+
+  getAllRatingsForRestaurant(req, res) {
+    const { restaurant_id } = req.params;
+    Order.findAll({
+      where: {
+        RestaurantId: restaurant_id,
+      },
+      include: [{
+        model: MenuItem,
+        required: false,
+      }],
+    }).then((orders) => {
+      res.json(orders);
     }).catch((err) => {
       res.send(err);
     });
