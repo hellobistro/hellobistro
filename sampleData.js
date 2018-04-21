@@ -211,6 +211,7 @@ const MenuItems = [
     glutenFree: 0,
     spicy: null,
     rating: 20,
+    status: 'draft',
   },
   {
     MenuSectionId: 4,
@@ -224,6 +225,7 @@ const MenuItems = [
     glutenFree: 0,
     spicy: null,
     rating: 1,
+    status: 'published',
   },
   {
     MenuSectionId: 4,
@@ -237,6 +239,7 @@ const MenuItems = [
     glutenFree: null,
     spicy: 5,
     rating: 50,
+    status: 'published',
   },
   {
     MenuSectionId: 6,
@@ -250,6 +253,7 @@ const MenuItems = [
     glutenFree: null,
     spicy: null,
     rating: null,
+    status: 'published',
   },
   {
     MenuSectionId: 6,
@@ -263,6 +267,7 @@ const MenuItems = [
     glutenFree: 1,
     spicy: 9,
     rating: 23,
+    status: 'published',
   },
   {
     MenuSectionId: 6,
@@ -276,6 +281,7 @@ const MenuItems = [
     glutenFree: 1,
     spicy: 1,
     rating: 88,
+    status: 'published',
   },
 ];
 
