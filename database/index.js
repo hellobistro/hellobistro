@@ -71,7 +71,7 @@ const MenuItem = sequelize.define('MenuItem', {
     allowNull: false,
   },
   price: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.FLOAT,
     allowNull: false,
   },
   vegan: Sequelize.BOOLEAN,
@@ -96,7 +96,7 @@ const MenuSection = sequelize.define('MenuSection', {
 
 const Order = sequelize.define('Order', {
   status: Sequelize.STRING,
-  total: Sequelize.INTEGER,
+  total: Sequelize.FLOAT,
   completedAt: Sequelize.DATE,
   transactionId: Sequelize.STRING,
   table: Sequelize.STRING,
@@ -104,7 +104,7 @@ const Order = sequelize.define('Order', {
 
 const OrderItem = sequelize.define('OrderItem', {
   special: Sequelize.STRING,
-  price: Sequelize.INTEGER,
+  price: Sequelize.FLOAT,
 });
 
 const RestaurantUser = sequelize.define('RestaurantUser', {
