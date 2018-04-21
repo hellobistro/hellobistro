@@ -1,12 +1,22 @@
+// Import dependencies
+import { createMockStore } from 'redux-test-utils';
 import React from 'react';
+// Import jest config
 import '../jest.config';
+// Import test helpers
+import { shallowWithStore, testState } from '../testHelpers';
+// Import container/component
+import { RestaurantRegisterContainer } from '../../src/components/Containers';
 
-import RestaurantRegister from '../../src/components/RestaurantApp/RestaurantRegister';
+// Setup 
+const store = createMockStore(testState);
+const wrapper = shallowWithStore(<RestaurantRegisterContainer />, store);
 
-describe('RestaurantApp Component', () => {
+describe('RestaurantRegister Component', () => {
   it('should render RestaurantRegister component', () => {
-    const wrapper = global.shallow(<RestaurantRegister />);
     global.expect(wrapper.length).to.equal(1);
+    global.expect(wrapper.dive().exists()).to.equal(true);
+    global.expect(wrapper.dive()).to.be.a('object');
+    global.expect(wrapper.dive().text()).to.contain('Restaurant Registration');
   });
-
 });

@@ -1,12 +1,22 @@
+// Import dependencies
+import { createMockStore } from 'redux-test-utils';
 import React from 'react';
+// Import jest config
 import '../jest.config';
+// Import test helpers
+import { shallowWithStore, testState } from '../testHelpers';
+// Import container/component
+import { OrderContainer } from '../../src/components/Containers';
 
-import Order from '../../src/components/CustomerApp/Order';
+// Setup 
+const store = createMockStore(testState);
+const wrapper = shallowWithStore(<OrderContainer />, store);
 
 describe('Order Component', () => {
   it('should render Order component', () => {
-    const wrapper = global.shallow(<Order />);
     global.expect(wrapper.length).to.equal(1);
+    global.expect(wrapper.dive().exists()).to.equal(true);
+    global.expect(wrapper.dive()).to.be.a('object');
+    global.expect(wrapper.dive().text()).to.contain('This is the Order component');
   });
-
 });

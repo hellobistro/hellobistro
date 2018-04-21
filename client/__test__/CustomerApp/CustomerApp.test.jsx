@@ -1,13 +1,22 @@
+// Import dependencies
+import { createMockStore } from 'redux-test-utils';
 import React from 'react';
-import { MemoryRouter } from 'react-router';
+// Import jest config
 import '../jest.config';
-import CustomerApp from '../../src/components/CustomerApp/CustomerApp';
+// Import test helpers
+import { shallowWithStore, testState } from '../testHelpers';
+// Import container/component
+import { CustomerAppContainer } from '../../src/components/Containers';
 
-describe('CustomerApp Component:', () => {
+// Setup 
+const store = createMockStore(testState);
+const wrapper = shallowWithStore(<CustomerAppContainer />, store);
+
+describe('CustomerApp Component', () => {
   it('should render CustomerApp component', () => {
-    const wrapper = global.shallow(<CustomerApp />);
     global.expect(wrapper.length).to.equal(1);
+    global.expect(wrapper.dive().exists()).to.equal(true);
+    global.expect(wrapper.dive()).to.be.a('object');
+    global.expect(wrapper.dive().text()).to.contain('This is the CustomerApp component');
   });
-
-
 });
