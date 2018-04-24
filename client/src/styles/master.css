@@ -13,3 +13,15 @@
 .RegisterLabel {
   margin-top: 15px;
 }
+
+.menu-item {
+  border: 2px solid goldenrod;
+  padding: 10px;
+  margin: 5px;
+}
+
+.menu-section {
+  border: 2px solid green;
+  padding: 10px;
+  margin: 5px;
+}
