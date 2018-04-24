@@ -12,8 +12,13 @@ class MenuManager extends React.Component {
     };
   }
 
+  toggleEdit = () => {
+    this.setState({ editItem: !this.state.editItem });
+    console.log('toggled edit')
+  }
+
   render() {
-    const menuSections = this.state.data.MenuSections.map(section => <MenuSection data={section} />);
+    const menuSections = this.state.data.MenuSections.map(section => <MenuSection data={section} toggleEdit={this.toggleEdit}/>);
 
     return (
       <div className="MenuManager DebugComponentBlue">

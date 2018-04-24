@@ -1,8 +1,8 @@
 import React from 'react';
 
-const MenuItem = ({ data }) => {
+const MenuItem = ({ data, toggleEdit }) => {
   const options = {
-    published: <select><option selected disabled>Options...</option><option value="edit">Edit</option><option value="unavailable">Mark as unavailable</option><option value="hide">Remove from menu</option><option value="delete">Delete permanently</option></select>,
+    published: <select onChange={() => { toggleEdit(); }} ><option selected disabled>Options...</option><option value="edit">Edit</option><option value="unavailable">Mark as unavailable</option><option value="hide">Remove from menu</option><option value="delete">Delete permanently</option></select>,
     draft: <select><option selected disabled>Options...</option><option value="edit">Edit</option><option value="publish">Publish to menu</option><option value="delete">Delete permanently</option></select>,
     unvailable: <select><option selected disabled>Options...</option><option value="edit">Edit</option><option value="available">Mark as available</option><option value="hide">Remove from menu</option><option value="delete">Delete permanently</option></select>,
   };
@@ -11,7 +11,7 @@ const MenuItem = ({ data }) => {
 
   return (
     <div className="menu-item">
-      <p>This is a <strong>Menu Item</strong> component</p>
+      <p>This is a <strong>MENU Item</strong> component</p>
       <h3>{data.name} - ${data.price}</h3>
       <p>Status: {data.status}</p>
 
