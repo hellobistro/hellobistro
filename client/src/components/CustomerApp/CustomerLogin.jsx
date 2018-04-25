@@ -1,7 +1,10 @@
 // Import dependencies
 import React, { Component } from 'react';
 import AuthService from '../../services/AuthService';
-
+const jwt = require('jsonwebtoken');
+import decode from 'jwt-decode';
+//import { history } from '../../store';
+import { withRouter, Link } from "react-router-dom";
 // CustomerLogin component
 // Used by Customers to log into app
 class CustomerLogin extends Component  {
@@ -14,9 +17,6 @@ class CustomerLogin extends Component  {
   }
 
   componentWillMount(){
-    if(this.Auth.loggedIn()) {
-      //this.props.history.replace('/');
-    }
   }
 
   handleChange(e) {
@@ -27,10 +27,11 @@ class CustomerLogin extends Component  {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log('~~~~proops inside customerlogin', this.props)
     this.Auth.login(this.state.email, this.state.password)
-      .then(() => {
-        //this.props.history.replace('/')
+      .then((token) => {
         this.setState({error: false})
+        this.props.history.replace('/customer/home')
       })
       .catch( err => {
         this.setState({error: true});
@@ -52,8 +53,10 @@ class CustomerLogin extends Component  {
           ? <div>Invalid credentials</div>
           : <div></div>
         }
+        <Link to='/restaurant/login'>HelloBistro for Restaurants</Link>
+        {/* <Link to='/developer/login'>HelloBistro for Developers</Link>*/}
       </div>
     )}
 }
 
-export default CustomerLogin;
+export default withRouter(CustomerLogin);

@@ -4,7 +4,9 @@ export function increment() {
     }
   }
 
-  export function addCustomer(obj){
-    obj.type = 'ADD_CUSTOMER'
-    return obj;
-  }
+export function addCustomer(obj){
+  obj.type = 'ADD_CUSTOMER'
+  return obj;
+}
+
+
