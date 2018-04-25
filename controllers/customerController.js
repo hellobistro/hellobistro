@@ -206,7 +206,7 @@ const customerController = {
       res.sendStatus(400);
     }
 
-    const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: 129600 });
+    const token = jwt.sign({ id: user.id, userType: 'Customer' }, 'secret', { expiresIn: 129600 });
     res.json(token);
   },
 
