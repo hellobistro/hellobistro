@@ -2,9 +2,9 @@ import React from 'react';
 
 const MenuItem = ({ data, toggleEdit }) => {
   const options = {
-    published: <select onChange={() => { toggleEdit(); }} ><option selected disabled>Options...</option><option value="edit">Edit</option><option value="unavailable">Mark as unavailable</option><option value="hide">Remove from menu</option><option value="delete">Delete permanently</option></select>,
-    draft: <select><option selected disabled>Options...</option><option value="edit">Edit</option><option value="publish">Publish to menu</option><option value="delete">Delete permanently</option></select>,
-    unvailable: <select><option selected disabled>Options...</option><option value="edit">Edit</option><option value="available">Mark as available</option><option value="hide">Remove from menu</option><option value="delete">Delete permanently</option></select>,
+    published: <select onChange={() => { toggleEdit(data); }} ><option selected disabled>Options...</option><option value="edit">Edit</option><option value="unavailable">Mark as unavailable</option><option value="hide">Remove from menu</option><option value="delete">Delete permanently</option></select>,
+    draft: <select onChange={() => { toggleEdit(data); }}><option selected disabled>Options...</option><option value="edit">Edit</option><option value="publish">Publish to menu</option><option value="delete">Delete permanently</option></select>,
+    unavailable: <select onChange={() => { toggleEdit(data); }}><option selected disabled>Options...</option><option value="edit">Edit</option><option value="available">Mark as available</option><option value="hide">Remove from menu</option><option value="delete">Delete permanently</option></select>,
   };
 
   const img = data.image ? <img className="item-image" src={data.image} alt="food" /> : <div className="no-image">No image available</div>;

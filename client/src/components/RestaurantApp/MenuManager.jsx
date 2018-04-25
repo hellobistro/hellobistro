@@ -2,6 +2,7 @@
 import React from 'react';
 import MenuSection from './MenuSection';
 import { sampleRestaurantGet } from '../../../sampleData';
+import MenuEditItem from './MenuEditItem';
 
 class MenuManager extends React.Component {
   constructor() {
@@ -12,8 +13,11 @@ class MenuManager extends React.Component {
     };
   }
 
-  toggleEdit = () => {
-    this.setState({ editItem: !this.state.editItem });
+  toggleEdit = (editData) => {
+    this.setState({ 
+      editItem: !this.state.editItem,
+      editData,
+    });
     console.log('toggled edit')
   }
 
@@ -25,6 +29,7 @@ class MenuManager extends React.Component {
         <p>This is the <strong>Menu Manager</strong> component</p>
         {menuSections}
         <button>Add item</button><button>Publish all</button>
+        <MenuEditItem view={this.state.editItem} data={this.state.editData} toggleEdit={this.toggleEdit}/>
       </div>
     );
   }
