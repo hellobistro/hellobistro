@@ -84,6 +84,11 @@ const MenuItem = sequelize.define('MenuItem', {
     type: Sequelize.INTEGER,
     defaultValue: 1,
   },
+  status: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue: 'draft',
+  },
 });
 
 const MenuSection = sequelize.define('MenuSection', {

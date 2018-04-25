@@ -211,6 +211,7 @@ const MenuItems = [
     glutenFree: 0,
     spicy: null,
     rating: 20,
+    status: 'draft',
   },
   {
     MenuSectionId: 4,
@@ -224,6 +225,7 @@ const MenuItems = [
     glutenFree: 0,
     spicy: null,
     rating: 1,
+    status: 'published',
   },
   {
     MenuSectionId: 4,
@@ -237,6 +239,7 @@ const MenuItems = [
     glutenFree: null,
     spicy: 5,
     rating: 50,
+    status: 'published',
   },
   {
     MenuSectionId: 6,
@@ -250,6 +253,7 @@ const MenuItems = [
     glutenFree: null,
     spicy: null,
     rating: null,
+    status: 'published',
   },
   {
     MenuSectionId: 6,
@@ -263,6 +267,7 @@ const MenuItems = [
     glutenFree: 1,
     spicy: 9,
     rating: 23,
+    status: 'published',
   },
   {
     MenuSectionId: 6,
@@ -276,6 +281,7 @@ const MenuItems = [
     glutenFree: 1,
     spicy: 1,
     rating: 88,
+    status: 'published',
   },
 ];
 
@@ -361,6 +367,110 @@ const OrderItems = [
   },
 ];
 
+const RestaurantGet = {
+  id: 2,
+  name: 'Koi Palace',
+  addressOne: '4288 Dublin Blvd',
+  addressTwo: 'suite #213',
+  city: 'Dublin',
+  state: 'CA',
+  zip: '94568',
+  email: 'KoiPalace@hotmail.com',
+  phone: '9258339090',
+  description: 'chinese food, served in morning for dim sum, dinner menu aviable after 5pm',
+  genre: 'chinese',
+  type: 'dinner',
+  paymentId: '23',
+  createdAt: '2018-04-21T16:37:34.000Z',
+  updatedAt: '2018-04-21T16:37:34.000Z',
+  MenuSections: [{
+    id: 1,
+    name: 'breakfast',
+    description: null,
+    createdAt: '2018-04-21T16:37:34.000Z',
+    updatedAt: '2018-04-21T16:37:34.000Z',
+    RestaurantId: 2,
+    MenuItems: [{
+      id: 1,
+      name: 'Siu Mai',
+      price: 5.1,
+      vegan: false,
+      vegetarian: false,
+      glutenFree: false,
+      spicy: null,
+      image: null,
+      prepTime: 10,
+      rating: 20,
+      createdAt: '2018-04-21T16:37:34.000Z',
+      updatedAt: '2018-04-21T16:37:34.000Z',
+      RestaurantId: 2,
+      MenuSectionId: 1,
+    }],
+  }, {
+    id: 2,
+    name: 'lunch',
+    description: null,
+    createdAt: '2018-04-21T16:37:34.000Z',
+    updatedAt: '2018-04-21T16:37:34.000Z',
+    RestaurantId: 2,
+    MenuItems: [{
+      id: 2,
+      name: 'Yummy Mai',
+      price: 5.1,
+      vegan: false,
+      vegetarian: false,
+      glutenFree: false,
+      spicy: null,
+      image: null,
+      prepTime: 10,
+      rating: 5,
+      createdAt: '2018-04-21T16:37:34.000Z',
+      updatedAt: '2018-04-21T16:37:34.000Z',
+      RestaurantId: 2,
+      MenuSectionId: 2,
+    }],
+  }, {
+    id: 3,
+    name: 'brunch',
+    description: 'breakfast and lunch',
+    createdAt: '2018-04-21T16:37:34.000Z',
+    updatedAt: '2018-04-21T16:37:34.000Z',
+    RestaurantId: 2,
+    MenuItems: [{
+      id: 3,
+      name: 'Eggs Benedict Mai',
+      price: 15.1,
+      vegan: false,
+      vegetarian: false,
+      glutenFree: false,
+      spicy: null,
+      image: null,
+      prepTime: 10,
+      rating: 5,
+      createdAt: '2018-04-21T16:37:34.000Z',
+      updatedAt: '2018-04-21T16:37:34.000Z',
+      RestaurantId: 2,
+      MenuSectionId: 3,
+    },
+    {
+      id: 4,
+      name: 'Waffles Mai',
+      price: 10.1,
+      vegan: false,
+      vegetarian: false,
+      glutenFree: false,
+      spicy: null,
+      image: null,
+      prepTime: 10,
+      rating: 5,
+      createdAt: '2018-04-21T16:37:34.000Z',
+      updatedAt: '2018-04-21T16:37:34.000Z',
+      RestaurantId: 2,
+      MenuSectionId: 3,
+    }],
+  }],
+};
+
 
 module.exports.sampleRestaurants = Restaurants;
 module.exports.sampleRestaurantUsers = RestaurantUsers;
@@ -370,3 +480,4 @@ module.exports.sampleMenuItems = MenuItems;
 module.exports.sampleCustomerRating = CustomerRating;
 module.exports.sampleOrders = Orders;
 module.exports.sampleOrderItems = OrderItems;
+module.exports.sampleRestaurantGet = RestaurantGet;
