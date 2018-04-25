@@ -1,5 +1,5 @@
 const {
- Customer, CustomerRating, MenuItem, Order, OrderItem 
+ Customer, CustomerRating, MenuItem, Order, OrderItem
 } = require('../database/index.js');
 
 const bcrypt = require('bcrypt');
@@ -85,7 +85,7 @@ const customerController = {
       };
 
       await buildOrderItems();
-      
+
       return newOrder;
     }).then((order) => {
       res.json(order);
@@ -160,6 +160,29 @@ const customerController = {
       }],
     }).then((orders) => {
       res.json(orders);
+    }).catch((err) => {
+      res.send(err);
+    });
+  },
+
+  getAllOrdersForCustomers(req, res) {
+    Order.findAll()
+      .then((orders) => {
+        res.json(orders);
+      }).catch((err) => {
+        res.send(err);
+      });
+  },
+
+  getRatingsForCustomer(req, res) {
+    let { customer_id } = req.params;
+
+    CustomerRating.findAll({
+      where: {
+        CustomerId: customer_id
+      }
+    }).then((ratings) => {
+      res.json(ratings);
     }).catch((err) => {
       res.send(err);
     });

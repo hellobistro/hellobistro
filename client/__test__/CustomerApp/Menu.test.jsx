@@ -1,12 +1,22 @@
+// Import dependencies
+import { createMockStore } from 'redux-test-utils';
 import React from 'react';
+// Import jest config
 import '../jest.config';
+// Import test helpers
+import { shallowWithStore, testState } from '../testHelpers';
+// Import container/component
+import { MenuContainer } from '../../src/components/Containers';
 
-import Menu from '../../src/components/CustomerApp/Menu';
+// Setup 
+const store = createMockStore(testState);
+const wrapper = shallowWithStore(<MenuContainer />, store);
 
-describe('Menu Component:', () => {
+describe('Menu Component', () => {
   it('should render Menu component', () => {
-    const wrapper = global.shallow(<Menu />);
     global.expect(wrapper.length).to.equal(1);
+    global.expect(wrapper.dive().exists()).to.equal(true);
+    global.expect(wrapper.dive()).to.be.a('object');
+    global.expect(wrapper.dive().text()).to.contain('This is the Menu component');
   });
-
 });
