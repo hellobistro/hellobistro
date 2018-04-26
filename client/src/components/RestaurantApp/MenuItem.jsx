@@ -46,7 +46,6 @@ class MenuItem extends React.Component {
 
     return (
       <div className="menu-item">
-        <p>This is a <strong>Menu Item</strong> component</p>
         {render.name}
         {render.price}
         {render.status}
@@ -55,31 +54,5 @@ class MenuItem extends React.Component {
     );
   }
 }
-
-// const MenuItem = ({ data, toggleEdit }) => {
-//   const editView = {
-//     textInput: text => (<input type="text" value={text} />),
-//   };
-
-
-//   const options = {
-//     published: <select onChange={() => { toggleEdit(data); }} ><option selected disabled>Options...</option><option value="edit">Edit</option><option value="unavailable">Mark as unavailable</option><option value="hide">Remove from menu</option><option value="delete">Delete permanently</option></select>,
-//     draft: <select onChange={() => { toggleEdit(data); }}><option selected disabled>Options...</option><option value="edit">Edit</option><option value="publish">Publish to menu</option><option value="delete">Delete permanently</option></select>,
-//     unavailable: <select onChange={() => { toggleEdit(data); }}><option selected disabled>Options...</option><option value="edit">Edit</option><option value="available">Mark as available</option><option value="hide">Remove from menu</option><option value="delete">Delete permanently</option></select>,
-//   };
-
-//   const img = data.image ? <img className="item-image" src={data.image} alt="food" /> : <div className="no-image">No image available</div>;
-
-//   return (
-//     <div className="menu-item">
-//       <p>This is a <strong>MENU Item</strong> component</p>
-//       <h3>{data.name} - ${data.price}</h3>
-//       <p>Status: {data.status}</p>
-
-//       {options[data.status]}
-//       {img}
-//     </div>
-//   );
-// };
 
 export default MenuItem;
