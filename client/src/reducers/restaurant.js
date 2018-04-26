@@ -6,7 +6,7 @@ const initialState = {
 
 function restaurant(state = initialState, action) {
   switch (action.type) {
-    case 'GET_RESTAURANT_DATA':
+    case 'LOAD_RESTAURANT_DATA':
       return Object.assign({}, state, {
         data: action.data,
       });

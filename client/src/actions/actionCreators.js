@@ -9,9 +9,9 @@ export function addCustomer(obj) {
   return obj;
 }
 
-export function getRestaurantData(data) {
+export function loadRestaurantData(data) {
   return {
-    type: 'GET_RESTAURANT_DATA',
+    type: 'LOAD_RESTAURANT_DATA',
     data,
   };
 }
