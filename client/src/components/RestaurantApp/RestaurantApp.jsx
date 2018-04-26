@@ -2,13 +2,17 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import { RestaurantLoginContainer } from '../Containers';
-import { DashBoardContainer } from '../Containers';
-import { MenuManagerContainer } from '../Containers';
-import { PromosContainer } from '../Containers';
-import { RestaurantRegisterContainer } from '../Containers';
-import { RestaurantSettingsContainer } from '../Containers';
+import {
+  RestaurantLoginContainer,
+  DashBoardContainer,
+  MenuManagerContainer,
+  PromosContainer,
+  RestaurantRegisterContainer,
+  RestaurantSettingsContainer,
+} from '../Containers';
+
 import RestaurantUserRegister from './RestaurantUserRegister';
+
 // Create parent application
 class RestaurantApp extends React.Component {
   constructor(props) {
