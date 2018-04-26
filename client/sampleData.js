@@ -60,7 +60,7 @@ const RestaurantGet = {
       updatedAt: '2018-04-21T16:37:34.000Z',
       RestaurantId: 2,
       MenuSectionId: 2,
-      status: 'published',
+      status: 'draft',
     }],
   }, {
     id: 3,
