@@ -1,4 +1,5 @@
 import decode from 'jwt-decode';
+import jwt from "jsonwebtoken";
 
 export default class AuthService {
 	// Initializing important variables
@@ -35,7 +36,7 @@ export default class AuthService {
 			})
 		}).then(res => {
 			this.setToken(res) // Setting the token in localStorage
-			return Promise.resolve(res);
+			return res;
 		})
 	}
 
@@ -49,7 +50,7 @@ export default class AuthService {
 			})
 		}).then(res => {
 			this.setToken(res) // Setting the token in localStorage
-			return Promise.resolve(res);
+			return res;
 		})
 	}
 

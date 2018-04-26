@@ -21,6 +21,8 @@ import RestaurantRegister from './RestaurantApp/RestaurantRegister';
 import RestaurantSettings from './RestaurantApp/RestaurantSettings';
 import CustomerRegister from './CustomerApp/CustomerRegister';
 import CustomerSettings from './CustomerApp/CustomerSettings';
+import RestaurantUserRegister from './RestaurantApp/RestaurantUserRegister';
+import { withRouter } from 'react-router';
 
 
 function mapStateToProps(state) {
@@ -33,23 +35,24 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch);
 }
 
-export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
-export const CustomerAppContainer = connect(mapStateToProps, mapDispatchToProps)(CustomerApp);
-export const RestaurantAppContainer = connect(mapStateToProps, mapDispatchToProps)(RestaurantApp);
-export const RestaurantLoginContainer = connect(mapStateToProps, mapDispatchToProps)(RestaurantLogin);
-export const ConfirmOrderContainer = connect(mapStateToProps, mapDispatchToProps)(ConfirmOrder);
-export const CustomerLoginContainer = connect(mapStateToProps, mapDispatchToProps)(CustomerLogin);
-export const FindRestaurantsContainer = connect(mapStateToProps, mapDispatchToProps)(FindRestaurants);
-export const MenuContainer = connect(mapStateToProps, mapDispatchToProps)(Menu);
-export const OrderContainer = connect(mapStateToProps, mapDispatchToProps)(Order);
-export const OrdersContainer = connect(mapStateToProps, mapDispatchToProps)(Orders);
-export const OrderStatusContainer = connect(mapStateToProps, mapDispatchToProps)(OrderStatus);
-export const RestaurantContainer = connect(mapStateToProps, mapDispatchToProps)(Restaurant);
-export const RestaurantListContainer = connect(mapStateToProps, mapDispatchToProps)(RestaurantList);
-export const DashBoardContainer = connect(mapStateToProps, mapDispatchToProps)(DashBoard);
-export const MenuManagerContainer = connect(mapStateToProps, mapDispatchToProps)(MenuManager);
-export const PromosContainer = connect(mapStateToProps, mapDispatchToProps)(Promos);
-export const RestaurantRegisterContainer = connect(mapStateToProps, mapDispatchToProps)(RestaurantRegister);
-export const RestaurantSettingsContainer = connect(mapStateToProps, mapDispatchToProps)(RestaurantSettings);
-export const CustomerRegisterContainer = connect(mapStateToProps, mapDispatchToProps)(CustomerRegister);
-export const CustomerSettingsContainer = connect(mapStateToProps, mapDispatchToProps)(CustomerSettings);
+export const AppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export const CustomerAppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerApp));
+export const RestaurantAppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantApp));
+export const RestaurantLoginContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantLogin));
+export const ConfirmOrderContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ConfirmOrder));
+export const CustomerLoginContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerLogin));
+export const FindRestaurantsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FindRestaurants));
+export const MenuContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Menu));
+export const OrderContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Order));
+export const OrdersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Orders));
+export const OrderStatusContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderStatus));
+export const RestaurantContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Restaurant));
+export const RestaurantListContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantList));
+export const DashBoardContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(DashBoard));
+export const MenuManagerContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(MenuManager));
+export const PromosContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Promos));
+export const RestaurantRegisterContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantRegister));
+export const RestaurantSettingsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantSettings));
+export const CustomerRegisterContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerRegister));
+export const CustomerSettingsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerSettings));
+export const RestaurantUserRegisterContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantUserRegister));
