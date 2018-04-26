@@ -25,12 +25,12 @@ class RestaurantLogin extends Component  {
     });
   }
 
-  handleSubmit(e) {
+  handleLogin(e) {
     e.preventDefault();
     this.Auth.restaurantLogin(this.state.email, this.state.password)
       .then(() => {
-        //this.props.history.replace('/')
         this.setState({error: false})
+        this.props.history.replace('/restaurant/home')
       })
       .catch( err => {
         this.setState({error: true});
@@ -38,16 +38,20 @@ class RestaurantLogin extends Component  {
       })
   }
 
+  handleCreateAcc(e){
+    e.preventDefault();
+    this.props.history.replace('/restaurant/userRegister')
+  }
 
   render() {
-    console.log('the state in restaurant login', this.state)
     return (
       <div className="RestaurantLogin DebugComponentBlue">
         <p>This is the <strong>RestaurantLogin</strong> component</p>
         <p>Fix it so it is conditionally rendered at <code>/</code></p>
         <input placeholder="Email" name="email" type="text" onChange={this.handleChange.bind(this)}/>
         <input placeholder="Password" name="password" type="password" onChange={this.handleChange.bind(this)}/>
-        <button onClick={this.handleSubmit.bind(this)}>LOGIN</button>
+        <button onClick={this.handleLogin.bind(this)}>LOGIN</button>
+        <button onClick={this.handleCreateAcc.bind(this)}>Create Account</button>
         {
           this.state.error
           ? <div>Invalid credentials</div>

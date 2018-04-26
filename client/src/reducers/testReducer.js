@@ -1,11 +1,10 @@
-function posts(state = [{counter: 0}], action) {
+function posts(state = {counter: 0}, action) {
   switch(action.type) {
     case 'INCREMENT_LIKES' :
-    return [
+    return 
         {
-          counter: state[0].counter + 1
-        }
-    ]
+          counter: state.counter + 1
+        };
     default:
       return state;
   }
