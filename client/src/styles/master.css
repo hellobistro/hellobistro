@@ -17,13 +17,13 @@
 /* Menu Manager components */
 
 .menu-item {
-  border: 2px solid goldenrod;
   padding: 10px;
   margin: 5px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 1px 1px #333333;
 }
 
 .menu-section {
-  border: 2px solid green;
   padding: 10px;
   margin: 5px;
 }
