@@ -9,7 +9,6 @@ class MenuManager extends React.Component {
     super();
     this.state = {
       editItem: false,
-      data: sampleRestaurantGet,
     };
   }
 
@@ -22,7 +21,7 @@ class MenuManager extends React.Component {
   }
 
   render() {
-    const menuSections = this.state.data.MenuSections.map(section => <MenuSection data={section} toggleEdit={this.toggleEdit}/>);
+    const menuSections = this.props.state.restaurant.data.MenuSections.map(section => <MenuSection data={section} toggleEdit={this.toggleEdit}/>);
 
     return (
       <div className="MenuManager DebugComponentBlue">
