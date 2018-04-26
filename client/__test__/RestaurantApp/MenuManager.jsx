@@ -1,12 +1,22 @@
+// Import dependencies
+import { createMockStore } from 'redux-test-utils';
 import React from 'react';
+// Import jest config
 import '../jest.config';
+// Import test helpers
+import { shallowWithStore, testState } from '../testHelpers';
+// Import container/component
+import { MenuManagerContainer } from '../../src/components/Containers';
 
-import MenuManager from '../../src/components/RestaurantApp/MenuManager';
+// Setup 
+const store = createMockStore(testState);
+const wrapper = shallowWithStore(<MenuManagerContainer />, store);
 
-describe('RestaurantApp Component', () => {
+describe('MenuManager Component', () => {
   it('should render MenuManager component', () => {
-    const wrapper = global.shallow(<MenuManager />);
     global.expect(wrapper.length).to.equal(1);
+    global.expect(wrapper.dive().exists()).to.equal(true);
+    global.expect(wrapper.dive()).to.be.a('object');
+    global.expect(wrapper.dive().text()).to.contain('This is the MenuManager component');
   });
-
 });

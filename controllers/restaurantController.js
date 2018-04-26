@@ -22,10 +22,8 @@ const restaurantController = {
       password: hashedPassword,
       phone,
     }).then((restaurantUser) => {
-      console.log('the newly created restaurant user>>>>>', restaurantUser)
       res.status(201).json(restaurantUser);
     }).catch((err) => {
-      console.log('error creating restaurantUser', err);
       res.send(err);
     });
   },
@@ -95,7 +93,6 @@ const restaurantController = {
         res.status(200).json(restaurant);
       }
     }).catch((err) => {
-      console.log('err', err);
       res.send(err);
     });
   },
@@ -134,6 +131,94 @@ const restaurantController = {
       }],
     }).then((orders) => {
       res.json(orders);
+    }).catch((err) => {
+      res.send(err);
+    });
+  },
+
+  createNewOrder(req, res) {
+    const { restaurant_id } = req.params;
+    const { status,
+            total,
+            completedAt,
+            transactionId,
+            table } = req.body;
+
+    Order.create({
+      status,
+      total,
+      completedAt,
+      transactionId,
+      table,
+      RestaurantId: restaurant_id
+    }).then((order) => {
+      res.json(order);
+    }).catch((err) => {
+      res.send(err);
+    })
+  },
+
+  async createMenuItem(req, res) {
+    const { restaurant_id, menu } = req.params;
+    const { name,
+            price,
+            vegan,
+            vegetarian,
+            glutenFree,
+            spicy,
+            image,
+            prepTime,
+            rating } = req.body;
+
+    MenuItem.create({
+      name,
+      price,
+      vegan,
+      vegetarian,
+      glutenFree,
+      spicy,
+      image,
+      prepTime,
+      rating,
+      MenuSectionId: menu,
+      RestaurantId: restaurant_id
+    }).then((item) => {
+      res.json(item);
+    }).catch((err) => {
+      res.send(err);
+    });
+
+  },
+
+  updateMenuItem(req, res) {
+    const { restaurant_id, item_id } = req.params;
+    const { name,
+            price,
+            vegan,
+            vegetarian,
+            glutenFree,
+            spicy,
+            image,
+            prepTime,
+            rating } = req.body;
+
+    MenuItem.update({
+      name,
+      price,
+      vegan,
+      vegetarian,
+      glutenFree,
+      spicy,
+      image,
+      prepTime,
+      rating
+    }, {
+      where: {
+        id: item_id,
+        RestaurantId: restaurant_id
+      }
+    }).then((item) => {
+      res.json(item);
     }).catch((err) => {
       res.send(err);
     });
@@ -228,10 +313,28 @@ const restaurantController = {
         res.sendStatus(200);
       }
     }).catch((err) => {
-      console.log('err', err);
       res.send(err);
     });
   },
+
+  deleteOrder(req, res) {
+    const { restaurant_id, order_id } = req.params;
+
+    Order.destroy({
+      where: {
+        id: order_id,
+        RestaurantId: restaurant_id
+      }
+    }).then((deleted) => {
+      if (deleted < 1) {
+        res.sendStatus(400);
+      } else {
+        res.sendStatus(200);
+      }
+    }).catch((err) => {
+      res.send(err);
+    })
+  }
 
 };
 

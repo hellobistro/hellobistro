@@ -1,12 +1,22 @@
+// Import dependencies
+import { createMockStore } from 'redux-test-utils';
 import React from 'react';
+// Import jest config
 import '../jest.config';
+// Import test helpers
+import { shallowWithStore, testState } from '../testHelpers';
+// Import container/component
+import { DashboardContainer } from '../../src/components/Containers';
 
-import DashBoard from '../../src/components/RestaurantApp/DashBoard';
+// Setup 
+const store = createMockStore(testState);
+const wrapper = shallowWithStore(<DashboardContainer />, store);
 
-describe('RestaurantApp Component', () => {
-  it('should render DashBoard component', () => {
-    const wrapper = global.shallow(<DashBoard />);
+describe('Dashboard Component', () => {
+  it('should render Dashboard component', () => {
     global.expect(wrapper.length).to.equal(1);
+    global.expect(wrapper.dive().exists()).to.equal(true);
+    global.expect(wrapper.dive()).to.be.a('object');
+    global.expect(wrapper.dive().text()).to.contain('This is the Dashboard component');
   });
-
 });
