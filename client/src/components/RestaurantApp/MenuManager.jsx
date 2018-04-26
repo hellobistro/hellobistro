@@ -24,8 +24,7 @@ class MenuManager extends React.Component {
     const menuSections = this.props.state.restaurant.data.MenuSections.map(section => <MenuSection data={section} toggleEdit={this.toggleEdit}/>);
 
     return (
-      <div className="MenuManager DebugComponentBlue">
-        <p>This is the <strong>Menu Manager</strong> component</p>
+      <div className="MenuManager">
         {menuSections}
         <button>Add item</button><button>Publish all</button>
         <MenuEditItem view={this.state.editItem} data={this.state.editData} toggleEdit={this.toggleEdit}/>
