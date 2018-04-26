@@ -21,6 +21,7 @@ import RestaurantRegister from './RestaurantApp/RestaurantRegister';
 import RestaurantSettings from './RestaurantApp/RestaurantSettings';
 import CustomerRegister from './CustomerApp/CustomerRegister';
 import CustomerSettings from './CustomerApp/CustomerSettings';
+import RestaurantUserRegister from './RestaurantApp/RestaurantUserRegister';
 import { withRouter } from 'react-router';
 
 
@@ -54,3 +55,4 @@ export const RestaurantRegisterContainer = withRouter(connect(mapStateToProps, m
 export const RestaurantSettingsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantSettings));
 export const CustomerRegisterContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerRegister));
 export const CustomerSettingsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerSettings));
+export const RestaurantUserRegisterContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantUserRegister));

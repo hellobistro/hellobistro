@@ -17,6 +17,8 @@ import { CustomerAppContainer,
         MenuManagerContainer,
         RestaurantSettingsContainer,
         PromosContainer,
+        CustomerRegisterContainer,
+        RestaurantUserRegisterContainer,
 } from './Containers';
 
 import AuthService from '../services/AuthService';
@@ -102,7 +104,9 @@ class App extends React.Component {
           <Route path="/restaurant/dashboard" component={DashBoardContainer} />
           <Route path="/restaurant/menuManager" component={MenuManagerContainer} />
           <Route path="/restaurant/settings" component={RestaurantSettingsContainer} />
-          <Route path="/restaurant/promos" component={PromosContainer} />   
+          <Route path="/restaurant/promos" component={PromosContainer} /> 
+          <Route path="/customer/register" component={CustomerRegisterContainer} /> 
+          <Route path="/restaurant/userRegister" component={RestaurantUserRegisterContainer} />   
         {/* </Switch> */}
       </div>
     );

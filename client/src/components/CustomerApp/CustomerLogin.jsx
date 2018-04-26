@@ -25,9 +25,8 @@ class CustomerLogin extends Component  {
     });
   }
 
-  handleSubmit(e) {
+  handleLogin(e) {
     e.preventDefault();
-    console.log('~~~~proops inside customerlogin', this.props)
     this.Auth.login(this.state.email, this.state.password)
       .then((token) => {
         this.setState({error: false})
@@ -39,6 +38,11 @@ class CustomerLogin extends Component  {
       })
   }
 
+  handleCreate(e){
+    e.preventDefault();
+    this.props.history.replace('/customer/register')
+  }
+
 
   render() {
     return (
@@ -47,7 +51,8 @@ class CustomerLogin extends Component  {
         <p>Fix it so it is conditionally rendered at <code>/</code></p>
         <input placeholder="Email" name="email" type="text" onChange={this.handleChange.bind(this)}/>
         <input placeholder="Password" name="password" type="password" onChange={this.handleChange.bind(this)}/>
-        <button onClick={this.handleSubmit.bind(this)}>LOGIN</button>
+        <button onClick={this.handleLogin.bind(this)}>LOGIN</button>
+        <button onClick={this.handleCreate.bind(this)}>Create Account</button>
         {
           this.state.error
           ? <div>Invalid credentials</div>
