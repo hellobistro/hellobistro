@@ -1,5 +1,5 @@
 import decode from 'jwt-decode';
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 
 export default class AuthService {
 	// Initializing important variables
@@ -13,14 +13,14 @@ export default class AuthService {
 	}
 
 	customerRegister(username, firstName, lastName, password, zip, phone, email) {
-		return this.fetch(`${this.domain}/customers`, {
+		return this.fetch('/customers', {
 			method: 'POST',
 			body: JSON.stringify({ username, firstName, lastName, password, zip, phone, email })
 		})
 	}
 
 	restaurantUserRegister(email, password, phone) {
-		return this.fetch(`${this.domain}/restaurantUser`, {
+		return this.fetch(`/restaurantUser`, {
 			method: 'POST',
 			body: JSON.stringify({ email, password, phone })
 		})
@@ -28,7 +28,7 @@ export default class AuthService {
 
 	login(email, password) {
 		// Get a token from api server using the fetch api
-		return this.fetch(`${this.domain}/customers/login`, {
+		return this.fetch(`/customers/login`, {
 			method: 'POST',
 			body: JSON.stringify({
 				email,
@@ -42,7 +42,7 @@ export default class AuthService {
 
 	restaurantLogin(email, password) {
 		// Get a token from api server using the fetch api
-		return this.fetch(`${this.domain}/restaurants/login`, {
+		return this.fetch(`/restaurants/login`, {
 			method: 'POST',
 			body: JSON.stringify({
 				email,

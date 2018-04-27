@@ -15,3 +15,10 @@ export function loadRestaurantData(data) {
     data,
   };
 }
+
+export function loadRestaurantList(data) {
+  return {
+    type: 'LOAD_RESTAURANT_LIST',
+    data,
+  };
+}

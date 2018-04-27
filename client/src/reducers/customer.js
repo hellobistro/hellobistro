@@ -1,14 +1,12 @@
 function customer(state = [], action) {
   switch(action.type) {
-    case 'ADD_CUSTOMER' :
-    console.log('add customer happend and action is', action)
-    return [
-        action
-    ]
+    case 'LOAD_RESTAURANT_LIST':
+      return Object.assign({}, state, {
+        restaurants: action.data,
+      });
     default:
       return state;
   }
-  return state;
 }
 
 export default customer;
