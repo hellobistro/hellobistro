@@ -69,8 +69,6 @@ class App extends React.Component {
   }
   
   render() {
-    console.log('the history in app.jsx>>>>', history)
-    console.log('the state in app.jsx~~~', this.state)
     const CustomerPrivateRoute = ({ component: Component, ...rest }) => (
       <Route {...rest} render={(props) => {
         return this.checkUser() === 'Customer'
