@@ -33,17 +33,6 @@ class RestaurantApp extends React.Component {
   render() {
     return (
       <div className="RestaurantApp DebugComponentBlue">
-<<<<<<< HEAD
-        <p>This is the <strong>RestaurantApp</strong> component</p>
-        <button onClick={this.logout.bind(this)}>Logout</button>
-        <p>Remaining components to implement under RestaurantApp:</p>
-        <ul>
-          <li><Link to='/restaurant/dashboard'>Dashboard</Link></li>
-          <li><Link to='/restaurant/menuManager'>Menu Manager</Link></li>
-          <li><Link to='/restaurant/settings'>Settings</Link></li>
-          <li><Link to='/restaurant/promos'>Promos</Link></li>
-        </ul>
-=======
         <div className="sidebar-left">
           <Mast />
           <RestaurantNav />
@@ -60,7 +49,6 @@ class RestaurantApp extends React.Component {
           <Route path='/restaurant/home/settings' component={RestaurantSettingsContainer}/>
           </Switch>
         </main>
->>>>>>> develop
       </div>
     );
   }

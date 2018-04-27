@@ -19,10 +19,10 @@ export default class AuthService {
 		})
 	}
 
-	restaurantUserRegister(email, password, phone) {
-		return this.fetch('restaurantUser', {
+	restaurantRegister(email, password, phone, name, addressOne, addressTwo, city, steight, zip, description, genre, type) {
+		return this.fetch('/restaurants', {
 			method: 'POST',
-			body: JSON.stringify({ email, password, phone })
+			body: JSON.stringify({ email, password, phone, name, addressOne, addressTwo, city, steight, zip, description, genre, type })
 		})
 	}
 

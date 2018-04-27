@@ -46,24 +46,24 @@ class RestaurantRegister extends Component {
 
   async registerRestaurantUser(e) {
     e.preventDefault();
-    const { email, password, phone} = this.state;
+    const { email, password, phone, name, addressOne, addressTwo, city, steight, zip, description, genre, type } = this.state;
     var check = await this.validFields.call(this)
     if(check){
-      this.Auth.restaurantUserRegister(email, password, phone, addressone, addresstwo, city, state, zip, description, genre, type)
+      this.Auth.restaurantRegister(email, password, phone, name, addressOne, addressTwo, city, steight, zip, description, genre, type)
         .then(res => {
           this.setState({error: false});
           this.props.history.replace('/restaurant/login')
-          console.log('successfully registered restaurantUser ~~', res)
+          console.log('successfully registered restaurant ~~', res)
         })
         .catch(err => {
           this.setState({error: true});
-          console.error('error registering restaurantUser', err)
+          console.error('error registering restaurant', err)
         })
     }
   }
-  
+
   render(){
-    console.log('the state inside restaurantuseresisger', this.state)
+    console.log('the state inside restaurantRegister', this.state)
     return(
       <div className="RestaurantUserRegister"> 
         <h2>Restaurant User Registration</h2>
@@ -93,7 +93,7 @@ class RestaurantRegister extends Component {
           <input name="city" placeholder="City" type="text" onChange={this.handleChange.bind(this)}/>
           <br /> 
           <div className="RegisterLabel">State</div> 
-          <input name="state" placeholder="State" type="text"/>
+          <input name="steight" placeholder="State" type="text" onChange={this.handleChange.bind(this)}/>
           <br />
           <div className="RegisterLabel">Zip Code</div> 
           <input name="zip" placeholder="Zip Code" type="text" onChange={this.handleChange.bind(this)}/>
