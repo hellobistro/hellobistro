@@ -28,8 +28,10 @@ class RestaurantLogin extends Component  {
   handleLogin(e) {
     e.preventDefault();
     this.Auth.restaurantLogin(this.state.email, this.state.password)
-      .then(() => {
+      .then((res) => {
         this.setState({error: false})
+        console.log('the res after logging in', res)
+        this.props.addRestaurant(res.restaurantInfo)
         this.props.history.replace('/restaurant/home')
       })
       .catch( err => {

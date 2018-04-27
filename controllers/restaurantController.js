@@ -313,6 +313,7 @@ const {
    async loginRestaurant(req, res) {
      const { email, password } = req.body;
      const user = await RestaurantUser.findOne({ where: { email } });
+     const restaurantInfo = await Restaurant.findOne({where: {id: user.RestaurantId} })
      if (!user) {
        res.sendStatus(400);
      }
@@ -322,8 +323,9 @@ const {
        res.sendStatus(400);
      }
  
-     const token = jwt.sign({ id: user.id, userType: 'Restaurant' }, 'secret', { expiresIn: 129600 });
-     res.json(token);
+     const token = jwt.sign({ userType: 'Restaurant' }, 'secret', { expiresIn: 129600 });
+     const info = { token, userId: user.id, restaurantInfo };
+     res.json(info);
    },
  
    deleteRestaurant(req, res) {
