@@ -8,6 +8,7 @@ import { OrdersContainer } from '../Containers';
 import { CustomerRegisterContainer } from '../Containers';
 import { CustomerSettingsContainer } from '../Containers';
 import AuthService from '../../services/AuthService';
+import ApiService from '../../services/CustomerApiService';
 
 
 // Create parent application
@@ -18,13 +19,20 @@ class CustomerApp extends React.Component {
     this.state = {};
   }
 
-  logout(){
+  componentDidMount() {
+    if (typeof this.props.state.customer.restaurants === 'undefined') {
+      ApiService.findRestaurants().then((res) => {
+        this.props.loadRestaurantList(res);
+      });
+    }
+  }
+
+  logout() {
     this.Auth.logout();
     this.props.history.replace('/');
   }
 
   render() {
-    console.log('the props in customer App~~~', this.props)
     return (
       <div className="CustomerApp DebugComponentRed">
         <p>This is the <strong>CustomerApp</strong> component</p>
