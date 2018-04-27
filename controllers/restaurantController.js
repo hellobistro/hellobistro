@@ -5,30 +5,32 @@ const jwt = require('jsonwebtoken');
 
 const restaurantController = {
 
-  async createRestaurantUser(req, res){
-    const {
-      email,
-      password,
-      phone,
-    } = req.body;
-    const user = await RestaurantUser.findOne({ where: { email }});
-    if(user) {
-      res.status(400);
-      res.send('email already exists');
-    }
-    const hashedPassword = await bcrypt.hash(password, 10);
-    RestaurantUser.create({
-      email,
-      password: hashedPassword,
-      phone,
-    }).then((restaurantUser) => {
-      res.status(201).json(restaurantUser);
-    }).catch((err) => {
-      res.send(err);
-    });
-  },
+  // async createRestaurantUser(req, res){
+  //   const {
+  //     email,
+  //     password,
+  //     phone,
+  //   } = req.body;
+  //   const user = await RestaurantUser.findOne({ where: { email }});
+  //   if(user) {
+  //     res.status(400);
+  //     res.send('email already exists');
+  //   }
+  //   const hashedPassword = await bcrypt.hash(password, 10);
+  //   RestaurantUser.create({
+  //     email,
+  //     password: hashedPassword,
+  //     phone,
+  //   }).then((restaurantUser) => {
+  //     res.status(201).json(restaurantUser);
+  //   }).catch((err) => {
+  //     res.send(err);
+  //   });
+  // },
 
-  createRestaurant(req, res) {
+  async createRestaurant(req, res) {
+    let newRestaurant = null;
+
     const {
       name,
       addressOne,
@@ -42,7 +44,17 @@ const restaurantController = {
       genre,
       type,
       paymentId,
+      password,
     } = req.body;
+
+    const possibleUser = await RestaurantUser.findOne({ where: { email }});
+
+    if (possibleUser) {
+      res.status(400);
+      res.send('email already exists');
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     Restaurant.create({
       name,
@@ -58,7 +70,19 @@ const restaurantController = {
       type,
       paymentId,
     }).then((restaurant) => {
-      res.status(201).json(restaurant);
+      newRestaurant = restaurant;
+
+      return RestaurantUser.create({
+        RestaurantId: restaurant.id,
+        email,
+        password: hashedPassword,
+        phone,
+      });
+    }).then((user) => {
+      res.status(201).json({
+        user: user.id,
+        restaurant: newRestaurant,
+      });
     }).catch((err) => {
       console.log(err);
       res.send(err);

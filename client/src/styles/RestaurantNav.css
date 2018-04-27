@@ -1,0 +1,14 @@
+.RestaurantNav {
+
+}
+
+.RestaurantNav li {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.RestaurantNav a {
+  text-decoration: inherit;
+  color: black;
+}
