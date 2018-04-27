@@ -97,6 +97,7 @@ export default class AuthService {
 
 	fetch(url, options) {
 		// performs api calls sending the required authentication headers
+		console.log('Auth service is fetching', options, url);
 		const headers = {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
@@ -107,7 +108,7 @@ export default class AuthService {
 			headers['Authorization'] = 'Bearer ' + this.getToken()
 		}
 
-		return fetch(url, { headers, ...options })
+		return fetch(this.domain + url, { headers, ...options })
 			.then(this._checkStatus)
 			.then(response => response.json())
 	}
