@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.2",
     "babel-loader": "^7.1.4",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
@@ -35,8 +35,8 @@
     "jsonwebtoken": "^8.2.1",
     "jwt-decode": "^2.2.0",
     "path": "^0.12.7",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
@@ -44,7 +44,8 @@
     "redux": "^3.7.2",
     "redux-test-utils": "^0.2.2",
     "style-loader": "^0.20.3",
-    "webpack": "^4.5.0"
+    "web-dev-server": "^1.1.1",
+    "webpack": "^4.6.0"
   },
   "devDependencies": {
     "babel-jest": "^22.4.3",
@@ -57,7 +58,7 @@
     "ignore-styles": "^5.0.1",
     "jest": "^22.4.3",
     "sinon": "^4.5.0",
-    "webpack-cli": "^2.0.14",
+    "webpack-cli": "^2.0.15",
     "webpack-dev-server": "^3.1.3"
   }
 }
