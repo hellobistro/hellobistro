@@ -312,7 +312,13 @@ const restaurantController = {
 
   async loginRestaurant(req, res) {
     const { email, password } = req.body;
-    const user = await RestaurantUser.findOne({ where: { email } });
+    const user = await RestaurantUser.findOne({
+      where: { email },
+      include: [{
+        model: Restaurant,
+        required: false,
+      }],
+    });
     if (!user) {
       res.sendStatus(400);
     }
