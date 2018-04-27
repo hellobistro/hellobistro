@@ -16,6 +16,7 @@ import {
 import RestaurantUserRegister from './RestaurantUserRegister';
 
 import AuthService from '../../services/AuthService';
+import ApiService from '../../services/ApiService';
 
 import '../../styles/RestaurantApp.css';
 
@@ -26,7 +27,10 @@ class RestaurantApp extends React.Component {
     this.state = {};
   }
 
-  logout(){
+  componentDidMount() {
+  }
+
+  logout() {
     this.Auth.logout();
     this.props.history.replace('/');
   }

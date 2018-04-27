@@ -1,7 +1,7 @@
 .RestaurantApp {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .sidebar-left {
@@ -11,6 +11,7 @@
   background:white;
   box-shadow: 0 8px 10px rgba(0,0,0,0.24);
   z-index: 1;
+
 }
 
 main {
@@ -20,6 +21,8 @@ main {
   flex-wrap: wrap;
   justify-content: center; */
   padding-top: 20px;
+  min-height: 100vh;
+
 }
 
 
@@ -82,62 +85,6 @@ main {
   
 }
 
-.card-header-text {
-  flex: 1;
-  display: flex;
-  max-height: 50px;
-  padding: 10px;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Bitter', serif;
-  font-size: 20px;
-}
-
-.card-header-icon {
-  flex: 1;
-  display: flex;
-  max-width: 50px;
-  max-height: 50px;
-  padding: 10px;
-  border-radius: 2px;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-}
-
-.chart {
-  /* flex: 1 1 100%; */
-  width: 100%;
-  background: lightgrey;
-  padding: 10px;
-  margin-top: 20px;
-}
-
-.mat-color-orange {
-  background: #F4511E;
-  color: white;
-}
-
-.mat-color-purple {
-  background: #8E24AA;
-  color: white;
-}
-
-.mat-color-lightblue {
-  background: #1E88E5;
-  color: white;
-}
-
-.mat-color-teal {
-  background: #00897B;
-  color: white;
-}
-
-.mat-color-green {
-  background: #43A047;
-  color: white;
-}
-
 .sidebar-left .material-icons {
   padding: 0;
   margin: 0;
@@ -148,3 +95,13 @@ main {
   display: flex;
   align-content: center;
 }
+
+.page-header {
+  font-size: 24px;
+  font-family: 'Bitter', serif;
+  flex: 1 1 100%;
+  text-align: center;
+  margin-bottom: 10px;
+  background-color: red;
+}
+
