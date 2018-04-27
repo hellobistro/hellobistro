@@ -1,13 +1,24 @@
 // Import dependencies
 import React from 'react';
 
+// Import Widget Components
+import WidgetTotalCustomers from './Widgets/WidgetTotalCustomers';
+import WidgetTopCustomersOrders from './Widgets/WidgetTopCustomersOrders';
+import WidgetTotalRevenue from './Widgets/WidgetTotalRevenue';
+
+
+// Import CSS
 import '../../styles/DashBoard.css';
 
 
 const DashBoard = () => (
   <div className="DashBoard">
-      
 
+    <WidgetTotalRevenue />
+    <WidgetTotalCustomers />
+    <WidgetTopCustomersOrders />
+
+    
         <div className="card">
         <div className="card-header-icon mat-color-green">
           <i class="material-icons">attach_money</i>
