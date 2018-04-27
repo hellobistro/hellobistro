@@ -4,13 +4,17 @@ import { Route, Link, Switch } from 'react-router-dom';
 // Import components/containers
 import RestaurantNav from './RestaurantNav';
 import Mast from './Mast';
-import { RestaurantLoginContainer } from '../Containers';
-import { DashBoardContainer } from '../Containers';
-import { MenuManagerContainer } from '../Containers';
-import { PromosContainer } from '../Containers';
-import { RestaurantRegisterContainer } from '../Containers';
-import { RestaurantSettingsContainer } from '../Containers';
+import {
+  RestaurantLoginContainer,
+  DashBoardContainer,
+  MenuManagerContainer,
+  PromosContainer,
+  RestaurantRegisterContainer,
+  RestaurantSettingsContainer,
+} from '../Containers';
+
 import RestaurantUserRegister from './RestaurantUserRegister';
+
 import AuthService from '../../services/AuthService';
 
 import '../../styles/RestaurantApp.css';

@@ -1,4 +1,6 @@
-const { Customer, Restaurant, RestaurantUser, MenuSection, MenuItem, Order, OrderItem } = require('../database/index.js');
+const {
+ Customer, Restaurant, RestaurantUser, MenuSection, MenuItem, Order, OrderItem 
+} = require('../database/index.js');
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -266,7 +268,6 @@ const restaurantController = {
   },
 
   updateRestaurant(req, res) {
-
     const { restaurant_id } = req.params;
     const {
       name,
@@ -309,15 +310,15 @@ const restaurantController = {
     });
   },
 
-  async loginRestaurant(req, res){
-    const { email, password, } = req.body;
+  async loginRestaurant(req, res) {
+    const { email, password } = req.body;
     const user = await RestaurantUser.findOne({ where: { email } });
-    if (!user){
+    if (!user) {
       res.sendStatus(400);
     }
 
     const authorized = await bcrypt.compare(password, user.password);
-    if (!authorized){
+    if (!authorized) {
       res.sendStatus(400);
     }
 

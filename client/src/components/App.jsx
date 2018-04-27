@@ -2,29 +2,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
+import decode from 'jwt-decode';
+import jwt from "jsonwebtoken"
+// Import services
+import AuthService from '../services/AuthService';
+import ApiService from '../services/ApiService';
+
 // Import CustomerApp component and subcomponents
 
 // Import RestaurantApp component and subcomponents
-import { CustomerAppContainer,
-        RestaurantAppContainer,
-        RestaurantLoginContainer,
-        CustomerLoginContainer,
-        FindRestaurantsContainer,
-        OrdersContainer,
-        CustomerSettingsContainer,
-        RestaurantRegisterContainer,
-        DashBoardContainer,
-        MenuManagerContainer,
-        RestaurantSettingsContainer,
-        PromosContainer,
-        CustomerRegisterContainer,
-        RestaurantUserRegisterContainer,
+import {
+  CustomerAppContainer,
+  RestaurantAppContainer,
+  RestaurantLoginContainer,
+  CustomerLoginContainer,
+  FindRestaurantsContainer,
+  OrdersContainer,
+  CustomerSettingsContainer,
+  RestaurantRegisterContainer,
+  DashBoardContainer,
+  MenuManagerContainer,
+  RestaurantSettingsContainer,
+  PromosContainer,
+  CustomerRegisterContainer,
+  RestaurantUserRegisterContainer,
 } from './Containers';
 
-import AuthService from '../services/AuthService';
-import decode from 'jwt-decode';
-import jwt from "jsonwebtoken";
-
+// import {sampleRestaurantGet} from '../../sampleData';
 
 // Create parent application
 class App extends React.Component {
@@ -42,6 +46,14 @@ class App extends React.Component {
     } else if(this.checkUser() === 'Restaurant'){
       this.props.history.replace('/restaurant/home');
     }
+  }
+
+  componentDidMount() {
+    const restaurantId = 2;
+    ApiService.getRestaurantData(restaurantId).then((res) => {
+      console.log('Fetch resolved.', res);
+      this.props.loadRestaurantData(res);
+    });
   }
 
   checkUser(){
@@ -100,4 +112,3 @@ class App extends React.Component {
 }
   
   export default App;
-  

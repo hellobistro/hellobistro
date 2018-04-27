@@ -1,12 +1,17 @@
 export function increment() {
-    return {
-      type: 'INCREMENT_LIKES'
-    }
-  }
+  return {
+    type: 'INCREMENT_LIKES',
+  };
+}
 
-export function addCustomer(obj){
-  obj.type = 'ADD_CUSTOMER'
+export function addCustomer(obj) {
+  obj.type = 'ADD_CUSTOMER';
   return obj;
 }
 
-
+export function loadRestaurantData(data) {
+  return {
+    type: 'LOAD_RESTAURANT_DATA',
+    data,
+  };
+}
