@@ -92,31 +92,17 @@ class App extends React.Component {
       }} />
     )
 
-  const removeMe = ({ match }) => {
-    return <h1>Hello !</h1>
-  }
     return (
       <div>
-        <h1>Welcome to HelloBistro</h1>
-
-        <h2>The below buttons are for testing only</h2>
-        <button onClick={() => { this.props.increment(); }}>
-          trigger
-        </button>
         {/* <Switch> */}
           <CustomerPrivateRoute exact path="/customer/home" component={CustomerAppContainer} />
-          <RestaurantPrivateRoute exact path="/restaurant/home" component={RestaurantAppContainer} /> 
+          <RestaurantPrivateRoute path="/restaurant/home" component={RestaurantAppContainer} /> 
           <Route exact path="/" component={CustomerLoginContainer} />
           <Route exact path="/customer/login" component={CustomerLoginContainer} />
           <Route exact path="/restaurant/login" component={RestaurantLoginContainer} />
           <Route path="/customer/findRestaurants" component={FindRestaurantsContainer} />
           <Route path="/customer/orders" component={OrdersContainer} />
           <Route path="/customer/settings" component={CustomerSettingsContainer} />
-          <Route path="/restaurant/registerRestaurant" component={RestaurantRegisterContainer} />
-          <Route path="/restaurant/dashboard" component={DashBoardContainer} />
-          <Route path="/restaurant/menuManager" component={MenuManagerContainer} />
-          <Route path="/restaurant/settings" component={RestaurantSettingsContainer} />
-          <Route path="/restaurant/promos" component={PromosContainer} /> 
           <Route path="/customer/register" component={CustomerRegisterContainer} /> 
           <Route path="/restaurant/userRegister" component={RestaurantUserRegisterContainer} />   
         {/* </Switch> */}
