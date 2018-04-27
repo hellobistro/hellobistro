@@ -11,7 +11,6 @@ import {
   RestaurantSettingsContainer,
 } from '../Containers';
 
-import RestaurantUserRegister from './RestaurantUserRegister';
 
 import AuthService from '../../services/AuthService';
 
@@ -35,7 +34,6 @@ class RestaurantApp extends React.Component {
         <button onClick={this.logout.bind(this)}>Logout</button>
         <p>Remaining components to implement under RestaurantApp:</p>
         <ul>
-          <li><Link to='/restaurant/registerRestaurant'>Register a Restaurant</Link></li>
           <li><Link to='/restaurant/dashboard'>Dashboard</Link></li>
           <li><Link to='/restaurant/menuManager'>Menu Manager</Link></li>
           <li><Link to='/restaurant/settings'>Settings</Link></li>

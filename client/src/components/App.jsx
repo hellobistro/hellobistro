@@ -25,7 +25,6 @@ import {
   RestaurantSettingsContainer,
   PromosContainer,
   CustomerRegisterContainer,
-  RestaurantUserRegisterContainer,
 } from './Containers';
 
 // import {sampleRestaurantGet} from '../../sampleData';
@@ -112,13 +111,12 @@ class App extends React.Component {
           <Route path="/customer/findRestaurants" component={FindRestaurantsContainer} />
           <Route path="/customer/orders" component={OrdersContainer} />
           <Route path="/customer/settings" component={CustomerSettingsContainer} />
-          <Route path="/restaurant/registerRestaurant" component={RestaurantRegisterContainer} />
           <Route path="/restaurant/dashboard" component={DashBoardContainer} />
           <Route path="/restaurant/menuManager" component={MenuManagerContainer} />
           <Route path="/restaurant/settings" component={RestaurantSettingsContainer} />
           <Route path="/restaurant/promos" component={PromosContainer} /> 
           <Route path="/customer/register" component={CustomerRegisterContainer} /> 
-          <Route path="/restaurant/userRegister" component={RestaurantUserRegisterContainer} />   
+          <Route path="/restaurant/userRegister" component={RestaurantRegisterContainer} />   
         {/* </Switch> */}
       </div>
     );
