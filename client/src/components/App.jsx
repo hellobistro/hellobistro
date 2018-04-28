@@ -25,7 +25,6 @@ import {
   RestaurantSettingsContainer,
   PromosContainer,
   CustomerRegisterContainer,
-  RestaurantUserRegisterContainer,
   MenuContainer,
 } from './Containers';
 
@@ -103,8 +102,8 @@ class App extends React.Component {
           <Route path="/customer/orders" component={OrdersContainer} />
           <Route path="/customer/settings" component={CustomerSettingsContainer} />
           <Route path="/customer/register" component={CustomerRegisterContainer} /> 
-          <Route path="/restaurant/userRegister" component={RestaurantUserRegisterContainer} />
           <Route path="/customer/:id/menu" component={MenuContainer} />   
+          <Route path="/restaurant/userRegister" component={RestaurantRegisterContainer} />   
         {/* </Switch> */}
       </div>
     );

@@ -13,7 +13,6 @@ import {
   RestaurantSettingsContainer,
 } from '../Containers';
 
-import RestaurantUserRegister from './RestaurantUserRegister';
 
 import AuthService from '../../services/AuthService';
 import ApiService from '../../services/ApiService';
@@ -28,6 +27,7 @@ class RestaurantApp extends React.Component {
   }
 
   componentDidMount() {
+    ApiService.getAnalytics(this.props.state.restaurant.data.id);
   }
 
   logout() {

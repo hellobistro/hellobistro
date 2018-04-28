@@ -34,4 +34,8 @@ export function loadRestaurantData(data) {
   };
 }
 
+export function addRestaurant(obj) {
+  obj.type = 'ADD_RESTAURANT';
+  return obj;
+}
 
