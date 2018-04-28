@@ -51,7 +51,6 @@ class App extends React.Component {
   componentDidMount() {
     const restaurantId = 2;
     ApiService.getRestaurantData(restaurantId).then((res) => {
-      console.log('Fetch resolved.', res);
       this.props.loadRestaurantData(res);
     });
   }

@@ -11,11 +11,6 @@ import RestaurantContainer from '../Containers';
 const FindRestaurants = (props) => {
 
   const handleClick = (id) => {
-    console.log('clicked restaurant');
-    ApiService.getRestaurantData(id).then((res) => {
-      console.log('data returned', res);
-      props.loadSelectedRestaurant(res);
-    });
     props.history.replace(`/customer/${id}/Menu`);
   };
 
