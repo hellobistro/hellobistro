@@ -4,8 +4,8 @@ export function increment() {
   };
 }
 
-export function addCustomer(obj) {
-  obj.type = 'ADD_CUSTOMER';
+export function addRestaurant(obj) {
+  obj.type = 'ADD_RESTAURANT';
   return obj;
 }
 
