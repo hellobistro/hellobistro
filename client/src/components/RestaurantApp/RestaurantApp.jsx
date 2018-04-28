@@ -40,12 +40,12 @@ class RestaurantApp extends React.Component {
       <div className="RestaurantApp DebugComponentBlue">
         <div className="sidebar-left">
           <Mast />
-          <RestaurantNav />
+          <RestaurantNav {...this.props} />
         </div>
         <main>
           <div className="small-screen">
             <Mast />
-            <RestaurantNav />
+            <RestaurantNav {...this.props} />
           </div>
           <Switch>
           <Route path='/restaurant/home/register' component={RestaurantRegisterContainer}/>
