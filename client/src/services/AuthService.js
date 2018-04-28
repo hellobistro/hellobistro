@@ -13,22 +13,22 @@ export default class AuthService {
 	}
 
 	customerRegister(username, firstName, lastName, password, zip, phone, email) {
-		return this.fetch(`${this.domain}/customers`, {
+		return this.fetch('/customers', {
 			method: 'POST',
 			body: JSON.stringify({ username, firstName, lastName, password, zip, phone, email })
 		})
 	}
 
-	restaurantUserRegister(email, password, phone) {
-		return this.fetch(`${this.domain}/restaurantUser`, {
+	restaurantRegister(email, password, phone, name, addressOne, addressTwo, city, steight, zip, description, genre, type) {
+		return this.fetch('/restaurants', {
 			method: 'POST',
-			body: JSON.stringify({ email, password, phone })
+			body: JSON.stringify({ email, password, phone, name, addressOne, addressTwo, city, steight, zip, description, genre, type })
 		})
 	}
 
 	login(email, password) {
 		// Get a token from api server using the fetch api
-		return this.fetch(`${this.domain}/customers/login`, {
+		return this.fetch('/customers/login', {
 			method: 'POST',
 			body: JSON.stringify({
 				email,
@@ -42,14 +42,14 @@ export default class AuthService {
 
 	restaurantLogin(email, password) {
 		// Get a token from api server using the fetch api
-		return this.fetch(`${this.domain}/restaurants/login`, {
+		return this.fetch('/restaurants/login', {
 			method: 'POST',
 			body: JSON.stringify({
 				email,
 				password
 			})
 		}).then(res => {
-			this.setToken(res) // Setting the token in localStorage
+			this.setToken(res.token) // Setting the token in localStorage
 			return res;
 		})
 	}
