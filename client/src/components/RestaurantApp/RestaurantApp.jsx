@@ -13,7 +13,6 @@ import {
   RestaurantSettingsContainer,
 } from '../Containers';
 
-import RestaurantUserRegister from './RestaurantUserRegister';
 
 import AuthService from '../../services/AuthService';
 import ApiService from '../../services/ApiService';
