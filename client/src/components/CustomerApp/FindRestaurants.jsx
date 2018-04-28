@@ -1,6 +1,7 @@
 // Import dependencies
 import React from 'react';
 import { Route } from 'react-router-dom';
+import ApiService from '../../services/ApiService';
 
 import RestaurantListContainer from '../Containers';
 import RestaurantContainer from '../Containers';
@@ -8,9 +9,19 @@ import RestaurantContainer from '../Containers';
 // FindRestaurants component
 
 const FindRestaurants = (props) => {
+
+  const handleClick = (id) => {
+    console.log('clicked restaurant');
+    ApiService.getRestaurantData(id).then((res) => {
+      console.log('data returned', res);
+      props.loadSelectedRestaurant(res);
+    });
+    props.history.replace(`/customer/${id}/Menu`);
+  };
+
   const restaurantList = props.state.customer.restaurants.map(biz =>
     (
-      <div className="restaurant-snippet" key={biz.id}>
+      <div className="restaurant-snippet" key={biz.id} onClick={() => {handleClick(biz.id)}} >
         <h3>{biz.name}</h3>
         <p>{biz.genre} - {biz.type}</p>
         <p>Location: {biz.addressOne}, {biz.addressTwo}, {biz.city}, {biz.state}, {biz.zip}</p>

@@ -26,6 +26,7 @@ import {
   PromosContainer,
   CustomerRegisterContainer,
   RestaurantUserRegisterContainer,
+  MenuContainer,
 } from './Containers';
 
 // import {sampleRestaurantGet} from '../../sampleData';
@@ -102,7 +103,8 @@ class App extends React.Component {
           <Route path="/customer/orders" component={OrdersContainer} />
           <Route path="/customer/settings" component={CustomerSettingsContainer} />
           <Route path="/customer/register" component={CustomerRegisterContainer} /> 
-          <Route path="/restaurant/userRegister" component={RestaurantUserRegisterContainer} />   
+          <Route path="/restaurant/userRegister" component={RestaurantUserRegisterContainer} />
+          <Route path="/customer/:id/menu" component={MenuContainer} />   
         {/* </Switch> */}
       </div>
     );

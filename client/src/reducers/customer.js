@@ -4,6 +4,10 @@ function customer(state = [], action) {
       return Object.assign({}, state, {
         restaurants: action.data,
       });
+    case 'LOAD_SELECTED_RESTAURANT':
+      return Object.assign({}, state, {
+        currentRestaurant: action.data,
+      });
     default:
       return state;
   }

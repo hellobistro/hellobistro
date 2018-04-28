@@ -4,16 +4,11 @@ export function increment() {
   };
 }
 
+// CUSTOMER APP ACTIONS
+
 export function addCustomer(obj) {
   obj.type = 'ADD_CUSTOMER';
   return obj;
-}
-
-export function loadRestaurantData(data) {
-  return {
-    type: 'LOAD_RESTAURANT_DATA',
-    data,
-  };
 }
 
 export function loadRestaurantList(data) {
@@ -22,3 +17,21 @@ export function loadRestaurantList(data) {
     data,
   };
 }
+
+export function loadSelectedRestaurant(data) {
+  return {
+    type: 'LOAD_SELECTED_RESTAURANT',
+    data,
+  };
+}
+
+// RESTAURANT APP ACTIONS
+
+export function loadRestaurantData(data) {
+  return {
+    type: 'LOAD_RESTAURANT_DATA',
+    data,
+  };
+}
+
+

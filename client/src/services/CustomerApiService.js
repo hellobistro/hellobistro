@@ -13,6 +13,7 @@ const ApiService = {
     },
   }),
   findRestaurants: () => Auth.fetch('/restaurants', { method: 'GET' }),
+  
 };
 
 export default ApiService;
