@@ -27,7 +27,7 @@ class RestaurantApp extends React.Component {
   }
 
   componentDidMount() {
-    ApiService.getAnalytics(props.state.restaurant.data.id);
+    ApiService.getAnalytics(this.props.state.restaurant.data.id);
   }
 
   logout() {

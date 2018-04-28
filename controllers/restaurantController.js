@@ -37,9 +37,9 @@ const restaurantController = {
      name,
      addressOne,
      addressTwo,
-     city,
-     steight,
-     zip,
+     addressCity,
+     addressState,
+     addressZip,
      email,
      phone,
      description,
@@ -48,6 +48,8 @@ const restaurantController = {
      paymentId,
      password,
    } = req.body;
+
+   console.log(req.body, 'cats');
 
    const possibleUser = await RestaurantUser.findOne({ where: { email }});
 
@@ -62,9 +64,9 @@ const restaurantController = {
      name,
      addressOne,
      addressTwo,
-     city,
-     state: steight,
-     zip,
+     city: addressCity,
+     state: addressState,
+     zip: addressZip,
      email,
      phone,
      description,

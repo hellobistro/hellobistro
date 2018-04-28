@@ -19,10 +19,10 @@ export default class AuthService {
 		})
 	}
 
-	restaurantRegister(email, password, phone, name, addressOne, addressTwo, city, steight, zip, description, genre, type) {
+	restaurantRegister(email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type) {
 		return this.fetch('/restaurants', {
 			method: 'POST',
-			body: JSON.stringify({ email, password, phone, name, addressOne, addressTwo, city, steight, zip, description, genre, type })
+			body: JSON.stringify({ email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type })
 		})
 	}
 

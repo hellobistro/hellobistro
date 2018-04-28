@@ -46,10 +46,10 @@ class RestaurantRegister extends Component {
 
   async registerRestaurantUser(e) {
     e.preventDefault();
-    const { email, password, phone, name, addressOne, addressTwo, city, steight, zip, description, genre, type } = this.state;
+    const { email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type } = this.state;
     var check = await this.validFields.call(this)
     if(check){
-      this.Auth.restaurantRegister(email, password, phone, name, addressOne, addressTwo, city, steight, zip, description, genre, type)
+      this.Auth.restaurantRegister(email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type)
         .then(res => {
           this.setState({error: false});
           this.props.history.replace('/restaurant/login')
@@ -90,13 +90,13 @@ class RestaurantRegister extends Component {
           <input name="addressTwo" placeholder="Address two" type="text" onChange={this.handleChange.bind(this)}/> 
           <br />
           <div className="RegisterLabel">City</div> 
-          <input name="city" placeholder="City" type="text" onChange={this.handleChange.bind(this)}/>
+          <input name="addressCity" placeholder="City" type="text" onChange={this.handleChange.bind(this)}/>
           <br /> 
           <div className="RegisterLabel">State</div> 
-          <input name="steight" placeholder="State" type="text" onChange={this.handleChange.bind(this)}/>
+          <input name="addressState" placeholder="State" type="text" onChange={this.handleChange.bind(this)}/>
           <br />
           <div className="RegisterLabel">Zip Code</div> 
-          <input name="zip" placeholder="Zip Code" type="text" onChange={this.handleChange.bind(this)}/>
+          <input name="addressZip" placeholder="Zip Code" type="text" onChange={this.handleChange.bind(this)}/>
           <br />
           <div className="RegisterLabel">Descriptoin: </div> 
           <textarea name="description" placeholder="Description" onChange={this.handleChange.bind(this)}/>
