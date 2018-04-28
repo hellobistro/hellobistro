@@ -1,6 +1,6 @@
 // Require dependencies
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const config = {
@@ -12,10 +12,10 @@ const config = {
   },
   mode: 'development',
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'HelloBistro',
-      template: path.join(__dirname, 'src', 'template.html'),
-    }),
+    // new HtmlWebpackPlugin({
+    //   title: 'HelloBistro',
+    //   template: path.join(__dirname, 'src', 'template.html'),
+    // }),
     new BundleAnalyzerPlugin()
   ],
   module: {
