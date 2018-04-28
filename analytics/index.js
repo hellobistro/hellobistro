@@ -13,9 +13,20 @@ async function asyncForEach(array, cb) {
   }
 }
 
+let orders = null;
+
+const analyticsData = {
+  customers: null,
+  revenue: null,
+  orders: null,
+};
+
 const analytics = {
-  loadData(restaurant_id) {
-    return Order.findAll({
+
+  async buildAndSendData(req, res) {
+    const { restaurant_id } = req.params;
+
+    orders = await Order.findAll({
       where: {
         RestaurantId: restaurant_id,
       },
@@ -26,52 +37,49 @@ const analytics = {
         model: Customer,
         required: false,
       }],
-    }).then((orders) => {
-      workingData = orders;
-    }).catch((err) => {
-      console.log(err);
     });
+
+    analyticsData.customers = await analytics.build.buildCustomerData();
+    analyticsData.revenue = await analytics.build.buildRevenueData();
+    analyticsData.orders = orders.length;
+
+    res.json(analyticsData);
   },
 
-  // Retrieve total number of unique customers for restaurant
-  async allCustomers(req, res) {
-    const customerData = {
-      total: 0,
-      customers: {},
-    };
+  build: {
 
-    await asyncForEach(workingData, (order) => {
-      const currentCustomer = order.Customer.userName;
-      if (!customerData.customers[currentCustomer]) {
-        customerData.customers[currentCustomer] = 1;
-      } else {
-        customerData.customers[currentCustomer]++;
-      }
+    async buildCustomerData() {
+        const customerData = {
+          total: 0,
+          customers: {},
+        };
 
-      customerData.total++;
-    });
+        await asyncForEach(orders, (order) => {
+          const currentCustomer = order.Customer.userName;
+          if (!customerData.customers[currentCustomer]) {
+            customerData.customers[currentCustomer] = 1;
+          } else {
+            customerData.customers[currentCustomer]++;
+          }
+    
+          customerData.total++;
+        });
 
-    res.json(customerData);
-  },
+        return customerData;
+    },
 
-  // Retrieve total sum of order price totals for restaurant
-  async totalRevenue(req, res) {
-    const revenueData = {
-      total: 0.00,
-    };
-
-    await asyncForEach(workingData, (order) => {
-      const currentTotal = order.total;
-      revenueData.total += currentTotal;
-    });
-
-    res.json(revenueData);
-  },
-
-  orderCount(req, res) {
-    res.json({
-      totalOrders: workingData.length,
-    });
+    async buildRevenueData(req, res) {
+      const revenueData = {
+        total: 0.00,
+      };
+  
+      await asyncForEach(orders, (order) => {
+        const currentTotal = order.total;
+        revenueData.total += currentTotal;
+      });
+  
+      return revenueData;
+    },
   },
 
 };

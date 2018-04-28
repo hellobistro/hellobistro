@@ -13,15 +13,8 @@ const routes = require('express').Router();
 /* ANALYTICS ROUTES */
 /* **************** */
 
-routes.get('/data/:restaurant_id/:method', (req, res) => {
-  const { restaurant_id, method } = req.params;
-
-  analytics.loadData(restaurant_id)
-    .then(() => {
-      analytics[`${method}`](req, res);
-    }).catch((err) => {
-      res.send(err);
-    });
+routes.get('/data/:restaurant_id/', (req, res) => {
+  analytics.buildAndSendData(req, res);
 });
 
 
