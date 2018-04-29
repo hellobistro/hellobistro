@@ -1,0 +1,12 @@
+.Mast {
+  font-family: 'Bitter', serif;
+  font-size: 28px;
+  text-align: center;
+  padding: 50px;
+  background: #c75b39;
+  color: white;
+}
+
+.Mast span {
+  padding: 6px 10px;
+}

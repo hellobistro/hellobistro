@@ -4,25 +4,38 @@
   "description": "",
   "main": "server/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "jest": "jest",
     "build": "webpack -w",
+    "prod": "webpack",
     "dev": "npm run build | nodemon server/app.js"
   },
   "author": "",
   "license": "ISC",
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
   "dependencies": {
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.2",
     "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-runtime": "^6.26.0",
     "body-parser": "^1.18.2",
-    "cors": "^2.8.4",
+    "boom": "^7.2.0",
+    "chart.js": "^2.7.2",
+    "connected-react-router": "^4.3.0",
     "css-loader": "^0.28.11",
-    "express": "^4.16.3",
     "html-webpack-plugin": "^3.2.0",
+    "jsonwebtoken": "^8.2.1",
+    "jwt-decode": "^2.2.0",
     "path": "^0.12.7",
     "react": "^16.3.1",
+    "react-chartjs-2": "^2.7.0",
     "react-dom": "^16.3.1",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
@@ -33,7 +46,19 @@
     "webpack": "^4.5.0"
   },
   "devDependencies": {
-    "webpack-cli": "^2.0.14",
+    "babel-jest": "^22.4.3",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "chai": "^4.1.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "ignore-styles": "^5.0.1",
+    "jest": "^22.4.3",
+    "redux-test-utils": "^0.2.2",
+    "sinon": "^4.5.0",
+    "webpack-bundle-analyzer": "^2.11.1",
+    "webpack-cli": "^2.0.15",
     "webpack-dev-server": "^3.1.3"
   }
 }

@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Bitter:400,400i,700');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 
 .DebugComponentRed {
   padding: 10px;
   border: 2px solid tomato;
@@ -8,4 +22,29 @@
   padding: 10px;
   border: 2px solid dodgerblue;
   margin: 10px 0px;
+} */
+
+.RegisterLabel {
+  margin-top: 15px;
+}
+
+/* Menu Manager components */
+.menu-item {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 1px 1px #333333;
+}
+
+.menu-section {
+  padding: 10px;
+  margin: 5px;
+}
+
+.menu-item p:hover, h3:hover, select:hover {
+  box-shadow: 0px 0px 8px 2px rebeccapurple;
+}
+
+.menu-item input {
+  box-shadow: 0px 0px 8px 2px rebeccapurple;
 }
