@@ -41,11 +41,7 @@ class App extends React.Component {
   }
   
   componentWillMount(){
-    if(this.checkUser() === 'Customer'){
-      this.props.history.replace('/customer/home');
-    } else if(this.checkUser() === 'Restaurant'){
-      this.props.history.replace('/restaurant/home');
-    }
+    
   }
 
   componentDidMount() {
@@ -68,35 +64,19 @@ class App extends React.Component {
   }
   
   render() {
-    const CustomerPrivateRoute = ({ component: Component, ...rest }) => (
-      <Route {...rest} render={(props) => {
-        return this.checkUser() === 'Customer'
-          ? <Component {...props} /> 
-          : <Redirect to={{
-            pathname: '/restaurant/home',
-            state: { from: props.location }
-          }} />
-      }} />
-    )
-    const RestaurantPrivateRoute = ({ component: Component, ...rest }) => (
-      <Route {...rest} render={(props) => {
-        return this.checkUser() === 'Restaurant'
-          ? <Component {...props} />
-          : <Redirect to={{
-            pathname: '/',
-            state: { from: props.location }
-          }} />
-      }} />
-    )
-
     return (
       <div>
         {/* <Switch> */}
-          <CustomerPrivateRoute exact path="/customer/home" component={CustomerAppContainer} />
-          <RestaurantPrivateRoute path="/restaurant/home" component={RestaurantAppContainer} /> 
+        {
+        this.checkUser() === 'Customer'
+         ? <Route path="/customer/home" component={CustomerAppContainer} />
+         : this.checkUser() === 'Restaurant'
+         ? <Route path="/restaurant/home" component={RestaurantAppContainer} /> 
+         : ''
+        }
           <Route exact path="/" component={CustomerLoginContainer} />
-          <Route exact path="/customer/login" component={CustomerLoginContainer} />
-          <Route exact path="/restaurant/login" component={RestaurantLoginContainer} />
+          <Route path="/customer/login" component={CustomerLoginContainer} />
+          <Route path="/restaurant/login" component={RestaurantLoginContainer} />
           <Route path="/customer/findRestaurants" component={FindRestaurantsContainer} />
           <Route path="/customer/orders" component={OrdersContainer} />
           <Route path="/customer/settings" component={CustomerSettingsContainer} />

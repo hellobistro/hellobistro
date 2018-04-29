@@ -46,3 +46,13 @@ export function addRestaurant(obj) {
   return obj;
 }
 
+export function addUser(userId, userName) {
+  return {
+    type: 'ADD_USER',
+    user: {
+      userId,
+      userName,
+    },
+  };
+}
+
