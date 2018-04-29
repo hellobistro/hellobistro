@@ -16,6 +16,13 @@ export function loadRestaurantData(data) {
   };
 }
 
+export function updateRestaurantData(data) {
+  return {
+    type: 'UPDATE_RESTAURANT_DATA',
+    data,
+  };
+}
+
 export function addUser(userId, userName) {
   return {
     type: 'ADD_USER',

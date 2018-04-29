@@ -27,7 +27,34 @@ class RestaurantApp extends React.Component {
   }
 
   componentDidMount() {
-    ApiService.getAnalytics(this.props.state.restaurant.data.id);
+    // Update core restaurant information upon mount, only if different
+    try {
+      ApiService.getRestaurantData(this.props.state.restaurant.restaurantInfo.id).then((data) => {
+        if (!this.props.state.restaurant.restaurantInfo.updatedAt === data.updatedAt) {
+          this.props.updateRestaurantData();
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+    catch(error) {
+      console.error(error);
+    }
+
+    // Update analytics information upon mount, only if different
+    // NOTE: Below code is not yet working, needs to be refactored in tandem with analytics service
+    // try {
+    //   ApiService.getAnalytics(this.props.state.restaurant.restaurantInfo.id).then((data) => {
+    //     if (!this.props.state.restaurant.restaurantInfo.updatedAt === data.updatedAt) {
+    //       this.props.updateRestaurantData();
+    //     }
+    //   }).catch((err) => {
+    //     console.log(err);
+    //   });
+    // }
+    // catch(error) {
+    //   console.error(error);
+    // }
   }
 
   logout() {
