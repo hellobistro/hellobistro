@@ -15,3 +15,14 @@ export function loadRestaurantData(data) {
     data,
   };
 }
+
+export function addUser(userId, userName) {
+  return {
+    type: 'ADD_USER',
+    user: {
+      userId,
+      userName,
+    },
+  };
+}
+
