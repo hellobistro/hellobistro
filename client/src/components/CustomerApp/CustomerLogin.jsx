@@ -17,6 +17,15 @@ class CustomerLogin extends Component  {
   }
 
   componentWillMount(){
+    var token = this.Auth.getToken()
+    var decoded = jwt.decode(token, {complete: true});
+    if(token){
+      if(decoded.payload.userType === 'Customer'){
+        this.props.history.replace('/customer/home');
+      } else if(decoded.payload.userType === 'Restaurant'){
+        this.props.history.replace('/restaurant/home');
+      }
+    }
   }
 
   handleChange(e) {

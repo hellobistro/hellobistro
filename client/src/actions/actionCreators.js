@@ -22,3 +22,13 @@ export function loadRestaurantList(data) {
     data,
   };
 }
+export function addUser(userId, userName) {
+  return {
+    type: 'ADD_USER',
+    user: {
+      userId,
+      userName,
+    },
+  };
+}
+
