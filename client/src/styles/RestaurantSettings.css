@@ -11,7 +11,7 @@
   text-align: left;
 }
 
-input[type="text"].form-input {
+input[type="text"].form-input, input[type="password"].form-input {
   -webkit-appearance:none;
   -moz-appearance: none; 
   -ms-appearance: none;
