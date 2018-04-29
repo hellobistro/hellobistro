@@ -11,7 +11,7 @@ import RestaurantContainer from '../Containers';
 const FindRestaurants = (props) => {
 
   const handleClick = (id) => {
-    props.history.replace(`/customer/${id}/Menu`);
+    props.history.push(`/customer/${id}/Menu`);
   };
 
   const restaurantList = props.state.customer.restaurants.map(biz =>

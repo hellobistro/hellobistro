@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuItem from './MenuItem';
 
-const MenuSection = ({ data }) => {
+const MenuSection = ({ data, toggleModal }) => {
   if (!data.MenuItems || data.MenuItems.length === 0) {
     return (
     <div className="menu-section">
@@ -11,7 +11,7 @@ const MenuSection = ({ data }) => {
     );
   }
 
-  const items = data.MenuItems.map(item => <MenuItem data={item} />);
+  const items = data.MenuItems.map(item => <MenuItem data={item} key={item.id} toggleModal={toggleModal} />);
   return (
     <div className="menu-section">
       <h2>{data.name}</h2>

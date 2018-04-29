@@ -115,6 +115,7 @@ const restaurantController = {
        }],
      }],
    }).then((restaurant) => {
+     console.log('restuarnat get', restaurant)
      if (restaurant === null) {
        res.sendStatus(400);
      } else {

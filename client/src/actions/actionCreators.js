@@ -25,6 +25,13 @@ export function loadSelectedRestaurant(data) {
   };
 }
 
+export function addToCart(data) {
+  return {
+    type: 'ADD_TO_CART',
+    data,
+  };
+}
+
 // RESTAURANT APP ACTIONS
 
 export function loadRestaurantData(data) {
