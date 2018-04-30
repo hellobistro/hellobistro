@@ -3,6 +3,7 @@ import React from 'react';
 import ApiService from '../../services/ApiService';
 import MenuSection from './MenuSection';
 import OrderModal from './OrderModal';
+import OrderStatus from './OrderStatus';
 
 // Menu component
 // Populated with menu specific to a restaurant
@@ -19,25 +20,36 @@ class Menu extends React.Component {
     this.props.loadSelectedRestaurant({ MenuSections: [] });
     // Retrieve current restaurant data.
     ApiService.getRestaurantData(this.props.match.params.id).then((res) => {
-      console.log('Data returned from API', res)
       this.props.loadSelectedRestaurant(res);
     });
   }
 
-  toggleModal = (foodItem, confirmed) => {
+  toggleModal = (data, confirmed) => {
+    // If item is being added to cart
     if (confirmed) {
       this.props.addToCart(this.state.modalData)
     } 
+    // check if item is already in cart
+    if (data !== null && this.props.state.customer.cart[data.id]) {
+      data = this.props.state.customer.cart[data.id]
+    }
+    // Turn modal on by loading food data. Turn modal off by loading 'null'
     this.setState({
-      modalData: foodItem,
+      modalData: data,
     })
+  }
+  
+  handleModalChange = (key, value) => {
+    const modalData = Object.assign(this.state.modalData);
+    modalData[key] = value;
+    this.setState({modalData});
   }
 
   render() {
     const data = this.props.state.customer.currentRestaurant;
 
     // If there is no restaurant data on redux state.
-    if (data === { MenuSections: [] }) {
+    if (!data || data === { MenuSections: [] }) {
       return (<h1>Loading...</h1>);
     }
 
@@ -55,11 +67,14 @@ class Menu extends React.Component {
     const listSections = data.MenuSections.map(section =>
       <MenuSection key={section.id} data={section} toggleModal={this.toggleModal}/>);
 
+    const orderStatus = this.props.state.customer.cart && Object.keys(this.props.state.customer.cart).length === 0 ? null : <div>You have {Object.keys(this.props.state.customer.cart).length} item(s) in your cart</div>
+
     return (
       <div className="Menu DebugComponentRed">
         <h3>Name: {data.name}</h3>
+        {orderStatus}
         {listSections}
-        <OrderModal data={this.state.modalData} toggle={this.toggleModal}/>
+        <OrderModal data={this.state.modalData} toggle={this.toggleModal} edit={this.handleModalChange}/>
       </div>
     );
   }

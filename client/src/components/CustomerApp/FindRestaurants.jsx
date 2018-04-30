@@ -26,7 +26,8 @@ const FindRestaurants = (props) => {
 
   return (
     <div className="FindRestaurants DebugComponentRed">
-    <p>This is the <strong>FindRestaurants</strong> component</p>
+    <h2>What restaurant would you like to check in to?</h2>
+    <p>We've located the following restaurants in your area:</p>
     {restaurantList}
     <Route path="/" component={RestaurantListContainer} />
     <Route path="/" component={RestaurantContainer} />

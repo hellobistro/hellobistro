@@ -9,9 +9,8 @@ function customer(state = [], action) {
         currentRestaurant: action.data,
       });
     case 'ADD_TO_CART':
-    console.log('state', state)
       return Object.assign({}, state, {
-        cart: !state.cart ? [action.data] : [...state.cart, action.data],
+        cart: !state.cart ? { [action.data.id]: action.data } : { ...state.cart, [action.data.id]: action.data },
       });
     default:
       return state;
