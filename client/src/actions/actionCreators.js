@@ -23,6 +23,12 @@ export function updateRestaurantData(data) {
   };
 }
 
+export function updateAnalyticsData(data) {
+  return {
+    type: 'UPDATE_ANALYTICS_DATA',
+    data,
+  };
+}
 export function addUser(userId, userName) {
   return {
     type: 'ADD_USER',

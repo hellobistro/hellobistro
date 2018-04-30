@@ -158,7 +158,8 @@ routes.get('/restaurants/:id', (req, res) => {
 /* Update */
 
 // Update a restaurant profile/settings
-routes.patch('/restaurants/:restaurant_id', (req, res) => {
+routes.put('/restaurants/:restaurant_id', (req, res) => {
+  console.log(req.body);
   restaurantController.updateRestaurant(req, res);
 });
 

@@ -18,7 +18,10 @@ let orders = null;
 const analyticsData = {
   customers: null,
   revenue: null,
-  orders: null,
+  totalOrders: 122,
+  totalOrdersLastSixMonths: 12,
+  totalOrdersLastTwelveMonths: 42,
+  lastCompletedOrder: 1525057183697,
 };
 
 const analytics = {
@@ -41,7 +44,7 @@ const analytics = {
 
     analyticsData.customers = await analytics.build.buildCustomerData();
     analyticsData.revenue = await analytics.build.buildRevenueData();
-    analyticsData.orders = orders.length;
+    analyticsData.totalOrders = orders.length;
 
     res.json(analyticsData);
   },

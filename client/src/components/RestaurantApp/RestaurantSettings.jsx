@@ -11,21 +11,27 @@ class RestaurantSettings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.state.formValues = {};
   }
 
   handleChange = (e) => {
     console.log(e.target.name, e.target.value);
     this.setState({
-      formValues: {
-        [e.target.name]: e.target.value
-      }
+      formValues: Object.assign(this.state.formValues, {[e.target.name]: e.target.value})
     });
+
+    console.log('state', this.state);
   }
 
   handleSubmit = (e) => {
+    console.log('id', this.props.state.restaurant.restaurantInfo.id);
     e.preventDefault();
-    ApiService.updateRestaurant(this.props.state.restaurant.restaurantInfo.id, this.state.formValues)
-      .catch(err => console.error('err in submit changes', err));
+    ApiService.updateRestaurant(this.props.state.restaurant.restaurantInfo.id, this.state.formValues).then((resJson) => {
+      console.log('aa', resJson);
+      this.props.updateRestaurantData(resJson);
+    }).catch(err => {
+      // Do nothing with error at this time
+    });
   }
 
 
@@ -48,8 +54,9 @@ class RestaurantSettings extends React.Component {
               <input
                 className="form-input"
                 cid="restaurantName"
+                name="name"
                 type="text"
-                value={this.props.state.restaurant.restaurantInfo.name}
+                defaultValue={this.props.state.restaurant.restaurantInfo.name}
                 onChange={this.handleChange}
 
               />
@@ -59,6 +66,7 @@ class RestaurantSettings extends React.Component {
               <input
                 className="form-input"
                 cid="addressOne"
+                name="addressOne"
                 type="text"
                 value={this.props.state.restaurant.restaurantInfo.addressOne}
                 onChange={this.handleChange}
@@ -70,8 +78,9 @@ class RestaurantSettings extends React.Component {
               <input
                 className="form-input"
                 cid="addressTwo"
+                name="addressTwo"
                 type="text"
-                value={this.props.state.restaurant.restaurantInfo.addressTwo}
+                defaultValue={this.props.state.restaurant.restaurantInfo.addressTwo}
                 onChange={this.handleChange}
 
               />
@@ -81,8 +90,9 @@ class RestaurantSettings extends React.Component {
               <input
                 className="form-input"
                 cid="city"
+                name="city"
                 type="text"
-                value={this.props.state.restaurant.restaurantInfo.addressCity}
+                defaultValue={this.props.state.restaurant.restaurantInfo.city}
                 onChange={this.handleChange}
 
               />
@@ -92,8 +102,9 @@ class RestaurantSettings extends React.Component {
               <input
                 className="form-input"
                 cid="state"
+                name="state"
                 type="text"
-                value={this.props.state.restaurant.restaurantInfo.addressState}
+                defaultValue={this.props.state.restaurant.restaurantInfo.state}
                 onChange={this.handleChange}
 
               />
@@ -103,10 +114,10 @@ class RestaurantSettings extends React.Component {
               <input
                 className="form-input"
                 cid="zip"
+                name="zip"
                 type="text"
-                value={this.props.state.restaurant.restaurantInfo.addressZip}
+                defaultValue={this.props.state.restaurant.restaurantInfo.zip}
                 onChange={this.handleChange}
-
               />
             </div>
           </div>
@@ -119,6 +130,7 @@ class RestaurantSettings extends React.Component {
               <input
                 className="form-input"
                 cid="email"
+                name="email"
                 type="text"
                 defaultValue={this.props.state.restaurant.restaurantInfo.email}
                 onChange={this.handleChange}
@@ -129,6 +141,7 @@ class RestaurantSettings extends React.Component {
               <input
                 className="form-input"
                 cid="password"
+                name="password"
                 type="password"
                 onChange={this.handleChange}
               />

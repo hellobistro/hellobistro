@@ -22,7 +22,6 @@ const ApiService = {
   },
 
   getAnalytics(id) {
-
     return fetch(`${domain}/data/${id}`).then((res) => {
       return res.json();
     }).then((resJson) => {
@@ -32,10 +31,12 @@ const ApiService = {
   },
 
   updateRestaurant(id, formValues) {
-    console.log('patch with ', id, formValues);
     return fetch(`${domain}/restaurants/${id}`, {
-      method: 'PATCH',
+      method: 'PUT',
       body: JSON.stringify(formValues),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
     }).then((res) => {
       return res.json();
     }).then((resJson) => {

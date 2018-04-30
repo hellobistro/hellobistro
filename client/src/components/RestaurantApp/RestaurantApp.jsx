@@ -28,26 +28,13 @@ class RestaurantApp extends React.Component {
 
   componentDidMount() {
     // Update core restaurant information upon mount, only if different
-    try {
-      ApiService.getRestaurantData(this.props.state.restaurant.restaurantInfo.id).then((data) => {
-        if (!this.props.state.restaurant.restaurantInfo.updatedAt === data.updatedAt) {
-          this.props.updateRestaurantData();
-        }
-      }).catch((err) => {
-        console.log(err);
-      });
-    }
-    catch(error) {
-      console.error(error);
-    }
-
-    // Update analytics information upon mount, only if different
-    // NOTE: Below code is not yet working, needs to be refactored in tandem with analytics service
     // try {
-    //   ApiService.getAnalytics(this.props.state.restaurant.restaurantInfo.id).then((data) => {
-    //     if (!this.props.state.restaurant.restaurantInfo.updatedAt === data.updatedAt) {
-    //       this.props.updateRestaurantData();
+    //   ApiService.getRestaurantData(this.props.state.restaurant.restaurantInfo.id).then((data) => {
+    //     if (this.props.state.restaurant.restaurantInfo.updatedAt !== data.updatedAt) {
+          
+    //       this.props.updateRestaurantData(data);
     //     }
+    //     console.log(data);
     //   }).catch((err) => {
     //     console.log(err);
     //   });
@@ -55,6 +42,35 @@ class RestaurantApp extends React.Component {
     // catch(error) {
     //   console.error(error);
     // }
+
+    ApiService.getRestaurantData(this.props.state.restaurant.restaurantInfo.id).then((data) => {
+      
+      // Update restaurant information upon mount, only if different
+      if (this.props.state.restaurant.restaurantInfo.updatedAt !== data.updatedAt) {
+        this.props.updateRestaurantData(data);
+        console.log('zz');
+      }
+
+    }).catch((err) => {
+      console.log(err);
+    });
+  
+  ApiService.getAnalytics(this.props.state.restaurant.restaurantInfo.id).then((data) => {
+      
+      // If no analytics data loaded, fetch it
+      if (!this.props.state.restaurant.analytics) {
+        this.props.updateAnalyticsData(data);
+      }
+      
+      // Update analytics information upon mount, only if different
+      if (this.props.state.restaurant.analytics.totalOrders !== data.totalOrders || this.props.state.restaurant.analytics.lastCompletedOrder !== data.lastCompletedOrder) {
+        this.props.updateAnalyticsData(data);
+      }
+
+    }).catch((err) => {
+      console.log(err);
+    });
+
   }
 
   logout() {

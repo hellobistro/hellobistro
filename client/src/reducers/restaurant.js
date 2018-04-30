@@ -3,6 +3,7 @@ const initialState = {
     MenuSections: [],
   },
   restaurantInfo:{},
+  analytics: {},
 };
 
 function restaurant(state = initialState, action) {
@@ -19,6 +20,10 @@ function restaurant(state = initialState, action) {
       console.log('update rest reducer called with ', action.data);
       return Object.assign({}, state, {
         restaurantInfo: action.data,
+      });
+    case 'UPDATE_ANALYTICS_DATA':
+      return Object.assign({}, state, {
+        analytics: action.data,
       });
     default:
       return state;
