@@ -2,125 +2,126 @@ import decode from 'jwt-decode';
 // import jwt from "jsonwebtoken";
 
 export default class AuthService {
-	// Initializing important variables
-	constructor(domain) {
-		this.domain = domain || 'http://localhost:3000' // API server domain
-		this.loggedIn = this.loggedIn.bind(this)
-		this.fetch = this.fetch.bind(this) // React binding stuff
-		this.login = this.login.bind(this)
-		this.restaurantLogin = this.restaurantLogin.bind(this)
-		this.getProfile = this.getProfile.bind(this)
-	}
+  // Initializing important variables
+  constructor(domain) {
+    this.domain = domain || 'http://localhost:3000' // API server domain
+    this.loggedIn = this.loggedIn.bind(this)
+    this.fetch = this.fetch.bind(this) // React binding stuff
+    this.login = this.login.bind(this)
+    this.restaurantLogin = this.restaurantLogin.bind(this)
+    this.getProfile = this.getProfile.bind(this)
+  }
 
-	customerRegister(username, firstName, lastName, password, zip, phone, email) {
-		return this.fetch('/customers', {
-			method: 'POST',
-			body: JSON.stringify({ username, firstName, lastName, password, zip, phone, email })
-		})
-	}
+  customerRegister(username, firstName, lastName, password, zip, phone, email) {
+    return this.fetch('/customers', {
+      method: 'POST',
+      body: JSON.stringify({ username, firstName, lastName, password, zip, phone, email })
+    })
+  }
 
-	restaurantRegister(email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type) {
-		return this.fetch('/restaurants', {
-			method: 'POST',
-			body: JSON.stringify({ email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type })
-		})
-	}
+  restaurantRegister(email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type) {
+    return this.fetch('/restaurants', {
+      method: 'POST',
+      body: JSON.stringify({ email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type })
+    })
+  }
 
-	login(email, password) {
-		// Get a token from api server using the fetch api
-		return this.fetch('/customers/login', {
-			method: 'POST',
-			body: JSON.stringify({
-				email,
-				password
-			})
-		}).then(res => {
-			this.setToken(res) // Setting the token in localStorage
-			return res;
-		})
-	}
+  login(email, password) {
+    // Get a token from api server using the fetch api
+    return this.fetch('/customers/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    }).then((res) => {
+      console.log('TOKEN COMING BACK', res);
+      this.setToken(res.token); // Setting the token in localStorage
+      return res;
+    });
+  }
 
-	restaurantLogin(email, password) {
-		// Get a token from api server using the fetch api
-		return this.fetch('/restaurants/login', {
-			method: 'POST',
-			body: JSON.stringify({
-				email,
-				password
-			})
-		}).then(res => {
-			this.setToken(res.token) // Setting the token in localStorage
-			return res;
-		})
-	}
+  restaurantLogin(email, password) {
+    // Get a token from api server using the fetch api
+    return this.fetch('/restaurants/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password
+      })
+    }).then(res => {
+      this.setToken(res.token) // Setting the token in localStorage
+      return res;
+    })
+  }
 
-	loggedIn() {
-		// Checks if there is a saved token and it's still valid
-		const token = this.getToken() // GEtting token from localstorage
-		return !!token && !this.isTokenExpired(token) // handwaiving here
-	}
+  loggedIn() {
+    // Checks if there is a saved token and it's still valid
+    const token = this.getToken() // GEtting token from localstorage
+    return !!token && !this.isTokenExpired(token) // handwaiving here
+  }
 
-	isTokenExpired(token) {
-		try {
-			const decoded = decode(token);
-			if (decoded.exp < Date.now() / 1000) { // Checking if token is expired. N
-				return true;
-			}
-			else
-				return false;
-		}
-		catch (err) {
-			return false;
-		}
-	}
+  isTokenExpired(token) {
+    try {
+      const decoded = decode(token);
+      if (decoded.exp < Date.now() / 1000) { // Checking if token is expired. N
+        return true;
+      }
+      else
+        return false;
+    }
+    catch (err) {
+      return false;
+    }
+  }
 
-	setToken(idToken) {
-		// Saves user token to localStorage
-		localStorage.setItem('id_token', idToken)
-	}
+  setToken(idToken) {
+    // Saves user token to localStorage
+    localStorage.setItem('id_token', idToken)
+  }
 
-	getToken() {
-		// Retrieves the user token from localStorage
-		return localStorage.getItem('id_token')
-	}
+  getToken() {
+    // Retrieves the user token from localStorage
+    return localStorage.getItem('id_token')
+  }
 
-	logout() {
-		// Clear user token and profile data from localStorage
-		localStorage.removeItem('id_token');
-	}
+  logout() {
+    // Clear user token and profile data from localStorage
+    localStorage.removeItem('id_token');
+  }
 
-	getProfile() {
-		// Using jwt-decode npm package to decode the token
-		return decode(this.getToken());
-	}
+  getProfile() {
+    // Using jwt-decode npm package to decode the token
+    return decode(this.getToken());
+  }
 
 
-	fetch(url, options) {
-		// performs api calls sending the required authentication headers
-		console.log('Auth service is fetching', options, url);
-		const headers = {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		}
-		// Setting Authorization header
-		// Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
-		if (this.loggedIn()) {
-			headers['Authorization'] = 'Bearer ' + this.getToken()
-		}
+  fetch(url, options) {
+    // performs api calls sending the required authentication headers
+    console.log('Auth service is fetching', options, url);
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+    // Setting Authorization header
+    // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
+    if (this.loggedIn()) {
+      headers['Authorization'] = 'Bearer ' + this.getToken()
+    }
 
-		return fetch(this.domain + url, { headers, ...options })
-			.then(this._checkStatus)
-			.then(response => response.json())
-	}
+    return fetch(this.domain + url, { headers, ...options })
+      .then(this._checkStatus)
+      .then(response => response.json())
+  }
 
-	_checkStatus(response) {
-		// raises an error in case response status is not a success
-		if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
-			return response
-		} else {
-			var error = new Error(response.statusText)
-			error.response = response
-			throw error
-		}
-	}
+  _checkStatus(response) {
+    // raises an error in case response status is not a success
+    if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
+      return response
+    } else {
+      var error = new Error(response.statusText)
+      error.response = response
+      throw error
+    }
+  }
 }
