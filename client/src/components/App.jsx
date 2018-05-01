@@ -17,7 +17,8 @@ import {
   RestaurantLoginContainer,
   CustomerLoginContainer,
   FindRestaurantsContainer,
-  OrdersContainer,
+  OrderHistoryContainer,
+  CustomerOrderContainer,
   CustomerSettingsContainer,
   RestaurantRegisterContainer,
   DashBoardContainer,
@@ -26,6 +27,7 @@ import {
   PromosContainer,
   CustomerRegisterContainer,
   MenuContainer,
+  ConfirmOrderContainer,
 } from './Containers';
 
 // import {sampleRestaurantGet} from '../../sampleData';
@@ -74,15 +76,17 @@ class App extends React.Component {
          ? <Route path="/restaurant/home" component={RestaurantAppContainer} /> 
          : ''
         }
-          <Route exact path="/" component={CustomerLoginContainer} />
-          <Route path="/customer/login" component={CustomerLoginContainer} />
-          <Route path="/restaurant/login" component={RestaurantLoginContainer} />
-          <Route path="/customer/findRestaurants" component={FindRestaurantsContainer} />
-          <Route path="/customer/orders" component={OrdersContainer} />
-          <Route path="/customer/settings" component={CustomerSettingsContainer} />
-          <Route path="/customer/register" component={CustomerRegisterContainer} /> 
-          <Route path="/customer/:id/menu" component={MenuContainer} />   
-          <Route path="/restaurant/userRegister" component={RestaurantRegisterContainer} />   
+        <Route exact path="/" component={CustomerLoginContainer} />
+        <Route path="/customer/login" component={CustomerLoginContainer} />
+        <Route path="/restaurant/login" component={RestaurantLoginContainer} />
+        <Route path="/customer/findRestaurants" component={FindRestaurantsContainer} />
+        <Route path="/customer/history" component={OrderHistoryContainer} />
+        <Route path="/customer/order" component={CustomerOrderContainer} />
+        <Route path="/customer/settings" component={CustomerSettingsContainer} />
+        <Route path="/customer/register" component={CustomerRegisterContainer} /> 
+        <Route path="/customer/:id/menu" component={MenuContainer} />   
+        <Route path="/restaurant/userRegister" component={RestaurantRegisterContainer} />
+        <Route path="/customer/confirm-order" component={ConfirmOrderContainer} />   
         {/* </Switch> */}
       </div>
     );

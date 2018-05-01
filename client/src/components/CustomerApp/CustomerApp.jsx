@@ -5,6 +5,7 @@ import { Route, Link } from 'react-router-dom';
 import { CustomerLoginContainer } from '../Containers';
 import { FindRestaurantsContainer } from '../Containers';
 import { OrdersContainer } from '../Containers';
+import { CustomerOrder } from '../Containers';
 import { CustomerRegisterContainer } from '../Containers';
 import { CustomerSettingsContainer } from '../Containers';
 import AuthService from '../../services/AuthService';
@@ -40,7 +41,8 @@ class CustomerApp extends React.Component {
         <p>Remaining components to implement under CustomerApp:</p>
         <ul>
           <li><Link to='/customer/findRestaurants'>Find Restaurants</Link></li>
-          <li><Link to='/customer/orders'>Your Orders</Link></li>
+          <li><Link to='/customer/order'>Your Current Order</Link></li>
+          <li><Link to='/customer/history'>Your Past Orders</Link></li>
           <li><Link to='/customer/settings'>Settings</Link></li>
         </ul>
       </div>
