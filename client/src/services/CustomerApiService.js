@@ -2,7 +2,7 @@ import AuthService from './AuthService';
 const Auth = new AuthService();
 
 const ApiService = {
-  createOrder: (customerId, restaurantId, table, transactionId, total, orderItems) => Auth.fetch(`/customers/${customerId}/orders`, { 
+  submitOrder: (customerId, restaurantId, table, transactionId, total, orderItems) => Auth.fetch(`/customers/${customerId}/orders`, { 
     method: 'POST',
     body: {
       restaurantId,
