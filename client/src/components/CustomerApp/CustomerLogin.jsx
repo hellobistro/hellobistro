@@ -38,6 +38,8 @@ class CustomerLogin extends Component  {
     e.preventDefault();
     this.Auth.login(this.state.email, this.state.password)
       .then((token) => {
+        const decoded = jwt.decode(token, {complete: true});
+        this.props.addUser(decoded.payload.id);
         this.setState({error: false})
         this.props.history.replace('/customer/home')
       })
