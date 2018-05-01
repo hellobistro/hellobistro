@@ -12,6 +12,10 @@ function customer(state = [], action) {
       return Object.assign({}, state, {
         cart: !state.cart ? { [action.data.id]: action.data } : { ...state.cart, [action.data.id]: action.data },
       });
+    case 'CLEAR_CART':
+      return Object.assign({}, state, {
+        cart: {},
+      });
     default:
       return state;
   }

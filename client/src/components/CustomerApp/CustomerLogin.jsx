@@ -37,9 +37,10 @@ class CustomerLogin extends Component  {
   handleLogin(e) {
     e.preventDefault();
     this.Auth.login(this.state.email, this.state.password)
-      .then((token) => {
-        const decoded = jwt.decode(token, {complete: true});
-        this.props.addUser(decoded.payload.id);
+      .then((res) => {
+        delete res['token'];
+        console.log('New res', res)
+        this.props.loadCustomerUser(res);
         this.setState({error: false})
         this.props.history.replace('/customer/home')
       })
