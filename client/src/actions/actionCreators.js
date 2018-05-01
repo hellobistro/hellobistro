@@ -38,6 +38,14 @@ export function clearCart() {
   };
 }
 
+export function loadCustomerUser(data) {
+  console.log('loading customer user', data)
+  return {
+    type: 'LOAD_CUSTOMER',
+    data,
+  };
+}
+
 // RESTAURANT APP ACTIONS
 
 export function loadRestaurantData(data) {
@@ -55,7 +63,7 @@ export function addRestaurant(obj) {
 export function addUser(userId, userName) {
   return {
     type: 'ADD_USER',
-    user: {
+    data: {
       userId,
       userName,
     },

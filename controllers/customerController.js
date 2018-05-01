@@ -220,17 +220,19 @@ const customerController = {
   async loginCustomer(req, res) {
     const { email, password } = req.body;
     const user = await Customer.findOne({ where: { email } });
-    if (!user){
+    if (!user) {
       res.sendStatus(400);
     }
 
     const authorized = await bcrypt.compare(password, user.password);
-    if (!authorized){
+    if (!authorized) {
       res.sendStatus(400);
     }
 
     const token = jwt.sign({ id: user.id, userType: 'Customer' }, 'secret', { expiresIn: 129600 });
-    res.json(token);
+    const info = { token, userId: user.id, userName: user.userName, firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, votes: user.availVotes, paymentId: user.paymentId };
+    console.log('Sending back token and info', info)
+    res.json(info);
   },
 
   deleteCustomer(req, res) {
