@@ -32,6 +32,12 @@ export function addToCart(data) {
   };
 }
 
+export function clearCart() {
+  return {
+    type: 'CLEAR_CART',
+  };
+}
+
 // RESTAURANT APP ACTIONS
 
 export function loadRestaurantData(data) {
