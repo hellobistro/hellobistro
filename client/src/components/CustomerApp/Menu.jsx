@@ -31,7 +31,7 @@ class Menu extends React.Component {
       this.props.addToCart(this.state.modalData)
     } 
     // check if item is already in cart
-    if (data !== null && this.props.state.customer.cart[data.id]) {
+    if (data !== null && this.props.state.customer.cart && this.props.state.customer.cart[data.id]) {
       data = this.props.state.customer.cart[data.id]
     }
     // Turn modal on by loading food data. Turn modal off by loading 'null'
@@ -65,7 +65,7 @@ class Menu extends React.Component {
     const listSections = data.MenuSections.map(section =>
       <MenuSection key={section.id} data={section} toggleModal={this.toggleModal}/>);
 
-    const orderStatus = this.props.state.customer.cart && Object.keys(this.props.state.customer.cart).length === 0 ? null : <div>You have {Object.keys(this.props.state.customer.cart).length} item(s) in your cart.</div>
+    const orderStatus = !this.props.state.customer.cart || Object.keys(this.props.state.customer.cart).length === 0 ? null : <div>You have {Object.keys(this.props.state.customer.cart).length} item(s) in your cart.</div>
 
     return (
       <div className="Menu DebugComponentRed">
