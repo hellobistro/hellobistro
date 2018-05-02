@@ -56,7 +56,6 @@ const customerController = {
     const {
       status,
       total,
-      completedAt,
       transaction,
       table,
       CustomerId,
@@ -67,7 +66,6 @@ const customerController = {
     Order.create({
       status,
       total,
-      completedAt,
       transaction,
       table,
       CustomerId,

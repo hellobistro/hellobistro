@@ -1,5 +1,5 @@
 function customer(state = [], action) {
-  switch(action.type) {
+  switch (action.type) {
     case 'LOAD_RESTAURANT_LIST':
       return Object.assign({}, state, {
         restaurants: action.data,
@@ -15,6 +15,10 @@ function customer(state = [], action) {
     case 'CLEAR_CART':
       return Object.assign({}, state, {
         cart: {},
+      });
+    case 'SET_RESTAURANT':
+      return Object.assign({}, state, {
+        restaurantId: action.id,
       });
     default:
       return state;

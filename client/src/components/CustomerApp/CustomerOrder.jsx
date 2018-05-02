@@ -37,6 +37,7 @@ class CustomerOrder extends React.Component {
 
   cancelOrder = () => {
     this.props.clearCart();
+    this.props.setRestaurant('undefined');
   }
 
 

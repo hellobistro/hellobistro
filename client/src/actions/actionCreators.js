@@ -39,10 +39,16 @@ export function clearCart() {
 }
 
 export function loadCustomerUser(data) {
-  console.log('loading customer user', data)
   return {
     type: 'LOAD_CUSTOMER',
     data,
+  };
+}
+
+export function setRestaurant(id) {
+  return {
+    type: 'SET_RESTAURANT',
+    id,
   };
 }
 

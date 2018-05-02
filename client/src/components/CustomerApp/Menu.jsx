@@ -18,26 +18,30 @@ class Menu extends React.Component {
 
   componentDidMount() {
     // Clear prior restaurant data.
-    this.props.loadSelectedRestaurant({ MenuSections: [] });
+    this.props.loadSelectedRestaurant({ MenuSections: ['loading'] });
     // Retrieve current restaurant data.
     ApiService.getRestaurantData(this.props.match.params.id).then((res) => {
       this.props.loadSelectedRestaurant(res);
     });
   }
 
-  toggleModal = (data, confirmed) => {
+  toggleModal = (data, editOrder) => {
     // If item is being added to cart
-    if (confirmed) {
-      this.props.addToCart(this.state.modalData)
+    if (editOrder) {
+      console.log('editing', this.state.modalData.RestaurantId)
+      this.props.setRestaurant(this.state.modalData.RestaurantId);
+      this.props.addToCart(this.state.modalData);
     } 
     // check if item is already in cart
     if (data !== null && this.props.state.customer.cart && this.props.state.customer.cart[data.id]) {
       data = this.props.state.customer.cart[data.id]
     }
-    // Turn modal on by loading food data. Turn modal off by loading 'null'
-    this.setState({
-      modalData: data,
-    })
+    // Turn modal on by loading food data (if from correct restaurant). Turn modal off by loading 'null'
+    if ( this.props.state.customer.restaurantId === 'undefined' || data === null || data.RestaurantId === this.props.state.customer.restaurantId) {
+      this.setState({
+        modalData: data,
+      })
+    }
   }
   
   handleModalChange = (key, value) => {
@@ -49,7 +53,7 @@ class Menu extends React.Component {
   render() {
     const data = this.props.state.customer.currentRestaurant;
     // If there is no restaurant data on redux state.
-    if (!data || data === { MenuSections: [] }) {
+    if (!data || data === { MenuSections: ['loading'] }) {
       return (<h1>Loading...</h1>);
     }
     // If there are no menu sections    
