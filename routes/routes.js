@@ -123,8 +123,13 @@ routes.post('/restaurants', (req, res) => {
 });
 
 // Create a new menu item for a restaurant
-routes.post('/restaurants/:id/menu', (req, res) => {
+routes.post('/restaurants/menu/:restaurant_id', (req, res) => {
   restaurantController.createMenuItem(req, res);
+});
+
+// Create a new menu section for a restaurant
+routes.post('/restaurants/section/:restaurant_id', (req, res) => {
+  restaurantController.createMenuSection(req, res);
 });
 
 /* Read */
@@ -177,6 +182,11 @@ routes.delete('/restaurants/:restaurant_id', (req, res) => {
 // Delete an open order for a restaurant
 routes.delete('/restaurants/:restaurant_id/openorders/:order_id', (req, res) => {
   restaurantController.deleteOrder(req, res);
+});
+
+// Delete all menuSections and menuItems for a restaurant
+routes.delete('/restaurants/sections/items/:restaurant_id', (req, res) => {
+  restaurantController.deleteAllMenuSectionsAndItems(req, res);
 });
 
 /* ********** */

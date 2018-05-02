@@ -41,7 +41,7 @@ const RestaurantGet = {
   }, {
     id: 2,
     name: 'lunch',
-    description: null,
+    description: 'lunchy munchyyyy',
     createdAt: '2018-04-21T16:37:34.000Z',
     updatedAt: '2018-04-21T16:37:34.000Z',
     RestaurantId: 2,
@@ -65,7 +65,7 @@ const RestaurantGet = {
   }, {
     id: 3,
     name: 'brunch',
-    description: 'breakfast and lunch',
+    description: 'breakfast AND lunch',
     createdAt: '2018-04-21T16:37:34.000Z',
     updatedAt: '2018-04-21T16:37:34.000Z',
     RestaurantId: 2,

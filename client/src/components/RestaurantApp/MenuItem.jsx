@@ -7,7 +7,11 @@ class MenuItem extends React.Component {
   
     };
   }
-  
+
+  shouldComponentUpdate(nextProps) {
+    return (this.props !== nextProps);
+  }
+
   render() {
     const others = ["vegan", "vegetarian", "glutenFree", "spicy" ]
     const { sectionIndex, itemIndex, inputChange, data } = this.props
@@ -20,7 +24,6 @@ class MenuItem extends React.Component {
                 type="text"
                 defaultValue={data.name}
                 onChange={(e)=>{
-                  //this.handleChange();
                   inputChange(sectionIndex, itemIndex, e)}} />
             </div>,
       price: <div>
@@ -30,7 +33,6 @@ class MenuItem extends React.Component {
                 type="text"
                 defaultValue={data.price}
                 onChange={(e)=>{
-                  //this.handleChange();
                   inputChange(sectionIndex, itemIndex, e)}} />
              </div>,
       prepTime: <div>
@@ -40,7 +42,6 @@ class MenuItem extends React.Component {
                     type="text"
                     defaultValue={data.prepTime}
                     onChange={(e)=>{
-                      //this.handleChange();
                       inputChange(sectionIndex, itemIndex, e)}} />
                 </div>,
       nutriFacts: others.map((attr, i) => {
