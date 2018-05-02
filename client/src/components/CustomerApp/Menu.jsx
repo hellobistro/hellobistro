@@ -16,13 +16,17 @@ class Menu extends React.Component {
     };
   }
 
-  componentDidMount() {
-    // Clear prior restaurant data.
-    this.props.loadSelectedRestaurant({ MenuSections: ['loading'] });
-    // Retrieve current restaurant data.
-    ApiService.getRestaurantData(this.props.match.params.id).then((res) => {
-      this.props.loadSelectedRestaurant(res);
-    });
+  componentWillMount() {
+    if (JSON.stringify(this.props.state.customer.currentRestaurant.id) !== this.props.match.params.id) {
+      // If new restaurant, clear prior restaurant data.
+      this.props.loadSelectedRestaurant({ MenuSections: ['loading'] });
+      console.log('loading set to restaurant menu section')
+      // Retrieve current restaurant data.
+      ApiService.getRestaurantData(this.props.match.params.id).then((res) => {
+        console.log('New restaurant data received', res)
+        this.props.loadSelectedRestaurant(res);
+      });
+    } 
   }
 
   toggleModal = (data, editOrder) => {
@@ -53,11 +57,12 @@ class Menu extends React.Component {
   render() {
     const data = this.props.state.customer.currentRestaurant;
     // If there is no restaurant data on redux state.
-    if (!data || data === { MenuSections: ['loading'] }) {
-      return (<h1>Loading...</h1>);
+    if (!data || data.MenuSections[0] === "loading") {
+      console.log('loading loader')
+      return (<div className="loader"></div>);
     }
     // If there are no menu sections    
-    if (!data || data.MenuSections.length === 0) {
+    if (data.MenuSections.length === 0) {
       return (
         <div>
           <h3>Name: {data.name}</h3>
@@ -70,7 +75,7 @@ class Menu extends React.Component {
       <MenuSection key={section.id} data={section} toggleModal={this.toggleModal}/>);
 
     const orderStatus = !this.props.state.customer.cart || Object.keys(this.props.state.customer.cart).length === 0 ? null : <div>You have {Object.keys(this.props.state.customer.cart).length} item(s) in your cart.</div>
-
+ 
     return (
       <div className="Menu DebugComponentRed">
         <h3>Name: {data.name}</h3>
