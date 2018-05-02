@@ -29,7 +29,7 @@ body {
 }
 
 /* Menu Manager components */
-.menu-item {
+/* .menu-item {
   padding: 10px;
   margin: 5px;
   border-radius: 3px;
@@ -47,4 +47,21 @@ body {
 
 .menu-item input {
   box-shadow: 0px 0px 8px 2px rebeccapurple;
+} */
+
+.nutri-fact{
+  display: inline-block;
+  width: 160px;
+  height: 100px;
+}
+
+.no-image{
+  /* width: 50px;
+  height: 50px; */
+  margin: 50px 50px 50px 50px
+}
+
+.menu-section{
+  border:1px solid black;
+  padding: 20px
 }
