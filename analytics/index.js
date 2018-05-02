@@ -8,7 +8,7 @@ const {
   OrderItem
 } = require("../database/index.js");
 
-const customerDirectory = {};
+let customerDirectory = {};
 
 const analyticsData = {
   allCustomers: [],
@@ -105,6 +105,8 @@ const buildCustomerDirectory = order => {
 };
 
 const buildAllCustomers = () => {
+  analyticsData.allCustomers.length = 0;
+  console.log('zz', customerDirectory);
   for (var key in customerDirectory) {
     let customer = Object.assign({}, customerDirectory[key], { userName: key });
     analyticsData.allCustomers.push(customer);
@@ -177,6 +179,8 @@ const analytics = {
         }
       ]
     });
+
+    customerDirectory = {};
 
     await orders.forEach(order => {
       // If order is not completed, push it to openOrders
