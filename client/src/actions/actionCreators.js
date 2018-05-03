@@ -61,6 +61,20 @@ export function loadRestaurantData(data) {
   };
 }
 
+export function updateRestaurantData(data) {
+  return {
+    type: 'UPDATE_RESTAURANT_DATA',
+    data,
+  };
+}
+
+export function updateAnalyticsData(data) {
+  return {
+    type: 'UPDATE_ANALYTICS_DATA',
+    data,
+  };
+}
+
 export function addRestaurant(obj) {
   obj.type = 'ADD_RESTAURANT';
   return obj;

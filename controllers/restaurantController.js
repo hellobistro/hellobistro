@@ -271,45 +271,18 @@ const restaurantController = {
 
  updateRestaurant(req, res) {
    const { restaurant_id } = req.params;
-   const {
-     name,
-     email,
-     phone,
-     addressOne,
-     addressTwo,
-     city,
-     state,
-     zip,
-     description,
-     genre,
-     type,
-     paymentId,
-   } = req.body;
+   const updatedValues = req.body;
 
-
-   Restaurant.update({
-     name,
-     email,
-     phone,
-     addressOne,
-     addressTwo,
-     city,
-     state,
-     zip,
-     description,
-     genre,
-     type,
-     paymentId,
-   }, {
-     where: {
-       id: restaurant_id,
-     },
-   }).then((restaurant) => {
-     res.json(restaurant);
+   Restaurant.findOne({where: {id: restaurant_id} }).then((restaurant) => {
+     return restaurant.update(updatedValues);
+   }).then((updatedRestaurant) => {
+     res.json(updatedRestaurant);
    }).catch((err) => {
-     console.log(err);
-     res.send(err);
-   });
+    console.log(err);
+    res.json({
+      message: 'An error was encountered updating the restaurant'
+    });
+  });
  },
 
  async loginRestaurant(req, res) {
