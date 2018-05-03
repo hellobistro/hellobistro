@@ -34,11 +34,6 @@ class CustomerApp extends React.Component {
     }
   }
 
-  // logout() {
-  //   this.Auth.logout();
-  //   this.props.history.replace('/');
-  // }
-
   render() {
     return (
       <div className="CustomerApp DebugComponentRed">
