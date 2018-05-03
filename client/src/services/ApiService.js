@@ -34,17 +34,23 @@ const ApiService = {
   addNewMenuSection: (id, name, description) => {
     return fetch(`${domain}/restaurants/section/${id}`, {
       method: 'POST',
-      body: {
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
         name,
         description
-      }
+      })
     })
   },
 
   addNewMenuItem: (id, name, price, vegan, vegetarian, glutenFree, spicy, image, prepTime, rating, menuSectionId) => {
     return fetch(`${domain}/restaurants/menu/${id}`, {
       method: 'POST',
-      body:{
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
         name,
         price,
         vegan,
@@ -55,7 +61,7 @@ const ApiService = {
         prepTime,
         rating,
         menuSectionId
-      }
+      })
     })
   }
 };
