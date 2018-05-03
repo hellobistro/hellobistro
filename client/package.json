@@ -43,7 +43,8 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
     "style-loader": "^0.20.3",
-    "webpack": "^4.5.0"
+    "web-dev-server": "^1.1.1",
+    "webpack": "^4.6.0"
   },
   "devDependencies": {
     "babel-jest": "^22.4.3",

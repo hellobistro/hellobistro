@@ -41,10 +41,62 @@ body {
   margin: 5px;
 }
 
-.menu-item p:hover, h3:hover, select:hover {
+.menu-item p:hover, .menu-item h3:hover, .menu-item select:hover {
   box-shadow: 0px 0px 8px 2px rebeccapurple;
 }
 
 .menu-item input {
   box-shadow: 0px 0px 8px 2px rebeccapurple;
 }
+
+.restaurant-snippet {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 1px 1px #333333;
+}
+.restaurant-snippet:hover {
+  box-shadow: 0px 0px 8px 2px goldenrod;
+}
+
+.customer-menu-item {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 1px 1px #333333;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.3);
+  padding: 50px;
+}
+
+
+.order-modal {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  border-radius: 5px;
+  max-width: 400px;
+  min-height: 100px;
+  margin: auto;
+  padding: 30px;
+}
+
+.order-item {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 1px 1px #333333;
+}
+
+.order-item:hover {
+  box-shadow: 0px 0px 8px 2px goldenrod;
+}
+

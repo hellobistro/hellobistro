@@ -9,8 +9,8 @@ import ConfirmOrder from './CustomerApp/ConfirmOrder';
 import CustomerLogin from './CustomerApp/CustomerLogin';
 import FindRestaurants from './CustomerApp/FindRestaurants';
 import Menu from './CustomerApp/Menu';
-import Order from './CustomerApp/Order';
-import Orders from './CustomerApp/Orders';
+import CustomerOrder from './CustomerApp/CustomerOrder';
+import OrderHistory from './CustomerApp/OrderHistory';
 import OrderStatus from './CustomerApp/OrderStatus';
 import Restaurant from './CustomerApp/Restaurant';
 import RestaurantList from './CustomerApp/RestaurantList';
@@ -42,8 +42,8 @@ export const ConfirmOrderContainer = withRouter(connect(mapStateToProps, mapDisp
 export const CustomerLoginContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerLogin));
 export const FindRestaurantsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FindRestaurants));
 export const MenuContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Menu));
-export const OrderContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Order));
-export const OrdersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Orders));
+export const CustomerOrderContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerOrder));
+export const OrderHistoryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderHistory));
 export const OrderStatusContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderStatus));
 export const RestaurantContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Restaurant));
 export const RestaurantListContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantList));
@@ -54,3 +54,4 @@ export const RestaurantRegisterContainer = withRouter(connect(mapStateToProps, m
 export const RestaurantSettingsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantSettings));
 export const CustomerRegisterContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerRegister));
 export const CustomerSettingsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerSettings));
+
