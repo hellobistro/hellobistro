@@ -4,6 +4,7 @@ const path = require('path');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const config = {
+  mode: 'development',
   entry: path.join(__dirname, 'src', 'index.jsx'),
   output: {
     filename: 'bundle.js',

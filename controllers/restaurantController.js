@@ -320,7 +320,7 @@ const restaurantController = {
    }
 
    const token = jwt.sign({ userType: 'Restaurant' }, 'secret', { expiresIn: 129600 });
-   const info = { token, userId: user.id, restaurantInfo };
+   const info = { token, userId: user.id, userName: user.userName, restaurantInfo };
    res.json(info);
  },
 
