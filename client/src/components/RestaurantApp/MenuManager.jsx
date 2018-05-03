@@ -135,7 +135,7 @@ class MenuManager extends React.Component {
       </div>
     );
    } else {
-     return <p>nothingg</p>
+     return <p>loading ...</p>
    }
   }
 }
