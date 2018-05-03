@@ -7,29 +7,6 @@ const jwt = require('jsonwebtoken');
 
 const restaurantController = {
 
- // async createRestaurantUser(req, res){
- //   const {
- //     email,
- //     password,
- //     phone,
- //   } = req.body;
- //   const user = await RestaurantUser.findOne({ where: { email }});
- //   if(user) {
- //     res.status(400);
- //     res.send('email already exists');
- //   }
- //   const hashedPassword = await bcrypt.hash(password, 10);
- //   RestaurantUser.create({
- //     email,
- //     password: hashedPassword,
- //     phone,
- //   }).then((restaurantUser) => {
- //     res.status(201).json(restaurantUser);
- //   }).catch((err) => {
- //     res.send(err);
- //   });
- // },
-
  async createRestaurant(req, res) {
    let newRestaurant = null;
 
@@ -186,8 +163,25 @@ const restaurantController = {
    })
  },
 
+ createMenuSection(req, res){
+   const { restaurant_id } = req.params;
+   const { name,
+           description,
+   } = req.body;
+   MenuSection.create({
+     name,
+     description,
+     RestaurantId: restaurant_id
+   }).then((item) => {
+    res.json(item);
+  }).catch((err) => {
+    res.send(err);
+  });
+
+ },
+
  async createMenuItem(req, res) {
-   const { restaurant_id, menu } = req.params;
+   const { restaurant_id } = req.params;
    const { name,
            price,
            vegan,
@@ -196,7 +190,8 @@ const restaurantController = {
            spicy,
            image,
            prepTime,
-           rating } = req.body;
+           rating,
+           menuSectionId } = req.body;
 
    MenuItem.create({
      name,
@@ -208,14 +203,13 @@ const restaurantController = {
      image,
      prepTime,
      rating,
-     MenuSectionId: menu,
+     MenuSectionId: menuSectionId,
      RestaurantId: restaurant_id
    }).then((item) => {
      res.json(item);
    }).catch((err) => {
      res.send(err);
    });
-
  },
 
  updateMenuItem(req, res) {
@@ -318,6 +312,24 @@ const restaurantController = {
      res.send(err);
    });
  },
+
+ deleteAllMenuSectionsAndItems(req, res) {
+   const { restaurant_id } = req.params;
+
+   MenuItem.destroy({
+     where: { RestaurantId: restaurant_id }
+   }).then(() => {
+     MenuSection.destroy({
+       where: { RestaurantId: restaurant_id }
+     }).then(() => {
+       res.sendStatus(200);
+     })
+   }).catch((err) => {
+     res.send(err);
+   })
+ },
+
+
 
  deleteOrder(req, res) {
    const { restaurant_id, order_id } = req.params;
