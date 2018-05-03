@@ -10,10 +10,12 @@ class MenuManager extends React.Component {
     this.state = {};
   }
 
-  componentWillMount() {
-    //api call
-    //sampleRestaurantGet//obj
-    this.setState({ ...sampleRestaurantGet })
+  componentDidMount() {
+    let restaurantId = JSON.parse(window.localStorage.state).restaurant.data.id
+    ApiService.getRestaurantDataByUser(restaurantId).then((info) => {
+      console.log('the info:   ', {...info})
+        this.setState({ ...info })
+      })
   }
 
   deleteMenuSection = (index) => {
@@ -118,6 +120,7 @@ class MenuManager extends React.Component {
 
   render() {
     console.log('the state inside menuManager#####', this.state)
+    if(this.state.MenuSections){
     const menuSections = this.state.MenuSections.map((section, i) => 
     <MenuSection key={i} sectionIndex={i} data={section} 
       inputChange={this.inputChange} 
@@ -131,6 +134,9 @@ class MenuManager extends React.Component {
         <button onClick={this.clickSave}>Save Changes</button>
       </div>
     );
+   } else {
+     return <p>nothingg</p>
+   }
   }
 }
 
