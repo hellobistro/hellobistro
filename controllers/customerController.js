@@ -1,7 +1,7 @@
 const {
- Customer, CustomerRating, MenuItem, Order, OrderItem
+ Customer, CustomerRating, MenuItem, Order, OrderItem, Restaurant,
 } = require('../database/index.js');
-
+const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -156,12 +156,18 @@ const customerController = {
         CustomerId: customer_id,
       },
       include: [{
+        model: Restaurant,
+        attributes: ['name'],
+      },
+      {
         model: MenuItem,
         required: false,
       }],
     }).then((orders) => {
+      console.log('Orders coming')
       res.json(orders);
     }).catch((err) => {
+      console.log('Orders error')
       res.send(err);
     });
   },
