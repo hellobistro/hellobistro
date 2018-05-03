@@ -168,13 +168,11 @@ const restaurantController = {
    const { name,
            description,
    } = req.body;
-   console.log('the req.body in createMenusection controller:   ', req.body)
    MenuSection.create({
      name,
      description,
      RestaurantId: restaurant_id
    }).then((item) => {
-     console.log('created new menusection>>>', item)
     res.json(item);
   }).catch((err) => {
     res.send(err);
