@@ -81,14 +81,17 @@ class MenuManager extends React.Component {
   
   clickSave = () => {
     let menuSections = this.state.MenuSections
-    //remove menuItems to be deleted
+    //remove menuItems to be deleted and drafts to published
     for(let i = 0; i < menuSections.length; i++) {
       for(let j = 0; j < menuSections[i].MenuItems.length; j++){
         if(menuSections[i].MenuItems[j].status === 'delete'){
           menuSections[i].MenuItems.splice(j, 1);
+        } else if(menuSections[i].MenuItems[j].status === 'draft'){
+          menuSections[i].MenuItems[j].status = 'published';
         }
       }
     }
+
     ApiService.removeOldMenu(this.state.id)
       .then(() => {
         Promise.all(menuSections.map((section) => {
@@ -104,6 +107,7 @@ class MenuManager extends React.Component {
         }))
         .then(()=>{
           console.log(' succesfully added menu sectionnnnnnss')
+          this.props.history.replace('/restaurant/home/dashboard');
         }).catch(err =>{
           console.log('error adding new menu', err)
         })
