@@ -41,8 +41,8 @@ class CustomerApp extends React.Component {
         <p>Remaining components to implement under CustomerApp:</p>
         <ul>
           <li><Link to='/customer/findRestaurants'>Find Restaurants</Link></li>
-          <li><Link to='/customer/order'>Your Current Order</Link></li>
-          <li><Link to='/customer/history'>Your Past Orders</Link></li>
+          <li><Link to='/customer/order'>Your Cart</Link></li>
+          <li><Link to='/customer/history'>Your Orders</Link></li>
           <li><Link to='/customer/settings'>Settings</Link></li>
         </ul>
       </div>
