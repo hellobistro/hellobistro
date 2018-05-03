@@ -43,6 +43,46 @@ const ApiService = {
       return resJson;
     });
 
+  },
+
+  removeOldMenu: (id) => {
+    return fetch(`${domain}/restaurants/sections/items/${id}`, {
+      method: 'DELETE',
+    })
+  },
+
+  addNewMenuSection: (id, name, description) => {
+    return fetch(`${domain}/restaurants/section/${id}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        description
+      })
+    })
+  },
+
+  addNewMenuItem: (id, name, price, vegan, vegetarian, glutenFree, spicy, image, prepTime, rating, menuSectionId) => {
+    return fetch(`${domain}/restaurants/menu/${id}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        price,
+        vegan,
+        vegetarian,
+        glutenFree,
+        spicy,
+        image,
+        prepTime,
+        rating,
+        menuSectionId
+      })
+    })
   }
 };
 
