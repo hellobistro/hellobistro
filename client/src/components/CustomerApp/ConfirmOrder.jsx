@@ -18,7 +18,7 @@ const ConfirmOrder = (props) => {
         .then((response) => {
           props.clearCart();
           props.setRestaurant('undefined');
-          props.history.push('/customer/history');
+          props.history.push('/customer/home/history');
         });
     });
   };

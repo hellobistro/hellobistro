@@ -12,7 +12,7 @@ import { RestaurantContainer, RestaurantListContainer } from '../Containers';
 const FindRestaurants = (props) => {
 
   const handleClick = (id) => {
-    props.history.push(`/customer/${id}/Menu`);
+    props.history.push(`/customer/home/${id}/Menu`);
   };
 
   const restaurantList = props.state.customer.restaurants.map(biz =>
@@ -30,8 +30,6 @@ const FindRestaurants = (props) => {
       <h2>What restaurant would you like to check in to?</h2>
       <p>We&#39;ve located the following restaurants in your area:</p>
       {restaurantList}
-      <Route path="/" component={RestaurantListContainer} />
-      <Route path="/" component={RestaurantContainer} />
     </div>
   );
 };

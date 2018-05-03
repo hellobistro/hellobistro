@@ -10,3 +10,12 @@
 .Mast span {
   padding: 6px 10px;
 }
+
+.customer-mast {
+  font-family: 'Bitter', serif;
+  font-size: 28px;
+  text-align: center;
+  padding: 50px;
+  background: #4CAF50;
+  color: white;
+}

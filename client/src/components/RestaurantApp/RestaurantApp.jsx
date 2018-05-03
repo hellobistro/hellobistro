@@ -22,7 +22,7 @@ import '../../styles/RestaurantApp.css';
 class RestaurantApp extends React.Component {
   constructor(props) {
     super(props);
-    this.Auth = new AuthService(); 
+    this.Auth = new AuthService();
     this.state = {};
   }
 
@@ -31,7 +31,7 @@ class RestaurantApp extends React.Component {
     // try {
     //   ApiService.getRestaurantData(this.props.state.restaurant.restaurantInfo.id).then((data) => {
     //     if (this.props.state.restaurant.restaurantInfo.updatedAt !== data.updatedAt) {
-          
+
     //       this.props.updateRestaurantData(data);
     //     }
     //     console.log(data);
@@ -44,33 +44,28 @@ class RestaurantApp extends React.Component {
     // }
 
     ApiService.getRestaurantData(this.props.state.restaurant.restaurantInfo.id).then((data) => {
-      
       // Update restaurant information upon mount, only if different
       if (this.props.state.restaurant.restaurantInfo.updatedAt !== data.updatedAt) {
         this.props.updateRestaurantData(data);
         console.log('zz');
       }
-
     }).catch((err) => {
       console.log(err);
     });
-  
-  ApiService.getAnalytics(this.props.state.restaurant.restaurantInfo.id).then((data) => {
-      
+
+    ApiService.getAnalytics(this.props.state.restaurant.restaurantInfo.id).then((data) => {
       // If no analytics data loaded, fetch it
       if (!this.props.state.restaurant.analytics) {
         this.props.updateAnalyticsData(data);
       }
-      
+
       // Update analytics information upon mount, only if different
       if (this.props.state.restaurant.analytics.totalOrders !== data.totalOrders || this.props.state.restaurant.analytics.lastCompletedOrder !== data.lastCompletedOrder) {
         this.props.updateAnalyticsData(data);
       }
-
     }).catch((err) => {
       console.log(err);
     });
-
   }
 
   logout() {
@@ -91,10 +86,10 @@ class RestaurantApp extends React.Component {
             <RestaurantNav {...this.props} />
           </div>
           <Switch>
-          <Route path='/restaurant/home/register' component={RestaurantRegisterContainer}/>
-          <Route path='/restaurant/home/dashboard' component={DashBoardContainer}/>
-          <Route path='/restaurant/home/menuManager' component={MenuManagerContainer}/>
-          <Route path='/restaurant/home/settings' component={RestaurantSettingsContainer}/>
+            <Route path="/restaurant/home/register" component={RestaurantRegisterContainer} />
+            <Route path="/restaurant/home/dashboard" component={DashBoardContainer} />
+            <Route path="/restaurant/home/menuManager" component={MenuManagerContainer} />
+            <Route path="/restaurant/home/settings" component={RestaurantSettingsContainer} />
           </Switch>
         </main>
       </div>

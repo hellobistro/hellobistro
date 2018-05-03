@@ -57,7 +57,7 @@ class CustomerOrder extends React.Component {
     if (items.length === 0) {
       return (
         <div className="order">
-          <h4>Your Current Order:</h4>
+          <h4>Your Cart:</h4>
           <p>Your cart is currently empty.</p>
         </div>
       );
@@ -72,10 +72,10 @@ class CustomerOrder extends React.Component {
 
     return (
       <div className="Order DebugComponentRed">
-        <h4>Your Current Order:</h4>
+        <h4>Your Cart:</h4>
         {orderItems}
         <p><strong>Bill total:</strong> ${billTotal.toFixed(2)}</p>
-        <Link to='/customer/confirm-order/'><button>Place order</button></Link><button onClick={this.cancelOrder}>Cancel order</button>
+        <Link to='/customer/home/confirm-order/'><button>Place order</button></Link><button onClick={this.cancelOrder}>Cancel order</button>
         <OrderModal data={this.state.modalData} toggle={this.toggleModal} edit={this.handleModalChange}/>
       </div>
     );
