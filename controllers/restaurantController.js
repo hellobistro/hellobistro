@@ -168,20 +168,22 @@ const restaurantController = {
    const { name,
            description,
    } = req.body;
-
+   console.log('the req.body in createMenusection controller:   ', req.body)
    MenuSection.create({
      name,
      description,
      RestaurantId: restaurant_id
    }).then((item) => {
+     console.log('created new menusection>>>', item)
     res.json(item);
   }).catch((err) => {
     res.send(err);
   });
+
  },
 
  async createMenuItem(req, res) {
-   const { restaurant_id, menu } = req.params;
+   const { restaurant_id } = req.params;
    const { name,
            price,
            vegan,
@@ -190,7 +192,8 @@ const restaurantController = {
            spicy,
            image,
            prepTime,
-           rating } = req.body;
+           rating,
+           menuSectionId } = req.body;
 
    MenuItem.create({
      name,
@@ -202,14 +205,13 @@ const restaurantController = {
      image,
      prepTime,
      rating,
-     MenuSectionId: menu,
+     MenuSectionId: menuSectionId,
      RestaurantId: restaurant_id
    }).then((item) => {
      res.json(item);
    }).catch((err) => {
      res.send(err);
    });
-
  },
 
  updateMenuItem(req, res) {

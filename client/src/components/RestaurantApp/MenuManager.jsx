@@ -89,26 +89,24 @@ class MenuManager extends React.Component {
         }
       }
     }
+    // console.log('the menuSections after deletions', menuSections)
     //remove all old menu
     ApiService.removeOldMenu(this.state.id)
       .then(() => {
-        //add menu section
-        this.state.MenuSections.map((section) => {
-          return ApiService.addNewMenuSection(this.state.id, section.name, section.description);
+        Promise.all(menuSections.map((section) => {
+          return (ApiService.addNewMenuSection(this.state.id, section.name, section.description)
+            .then((newSection) => {
+              Promise.all(section.MenuItems.map((item)=>{
+                ApiService.addNewMenuItem(this.state.id, item.name, item.price, item.vegan, item.vegetarian, 
+                  item.glutenFree, item.spicy, item.image, item.prepTime, item.rating, newSection.id)
+              }))
+            }))
+        }))
+        .then(()=>{
+          console.log(' succesfully added menu sectionnnnnnss')
+        }).catch(err =>{
+          console.log('error adding new menu', err)
         })
-      }).then(() => {
-        //add menu items
-        let menuSections = this.state.MenuSections;
-        for(let i = 0; i < menuSections.length; i++) {
-          for(let j = 0; j < menuSections[i].MenuItems.length; j++){
-            let { name, price, vegan, vegetarian, glutenFree, spicy, image, prepTime, rating } = menuSections[i].MenuItems[j]
-            ApiService.addNewMenuItem(this.state.id, name, price, vegan, vegetarian, glutenFree, spicy, image, prepTime, rating)
-          }
-        }
-      }).then(() => {
-        console.log('successfully added new menu')
-      }).catch(err => {
-        console.log('error saving new menu', err)
       })
   }
 

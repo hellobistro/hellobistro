@@ -32,25 +32,30 @@ const ApiService = {
   },
 
   addNewMenuSection: (id, name, description) => {
-    return fetch(`${domain}'/restaurants/section/${id}`, {
+    return fetch(`${domain}/restaurants/section/${id}`, {
       method: 'POST',
-      name,
-      description,
+      body: {
+        name,
+        description
+      }
     })
   },
 
-  addNewMenuItem: (id, name, price, vegan, vegetarian, glutenFree, spicy, image, prepTime, rating) => {
-    return fetch(`${domain}'/restaurants/menu/${id}`, {
+  addNewMenuItem: (id, name, price, vegan, vegetarian, glutenFree, spicy, image, prepTime, rating, menuSectionId) => {
+    return fetch(`${domain}/restaurants/menu/${id}`, {
       method: 'POST',
-      name,
-      price,
-      vegan,
-      vegetarian,
-      glutenFree,
-      spicy,
-      image,
-      prepTime,
-      rating,
+      body:{
+        name,
+        price,
+        vegan,
+        vegetarian,
+        glutenFree,
+        spicy,
+        image,
+        prepTime,
+        rating,
+        menuSectionId
+      }
     })
   }
 };
