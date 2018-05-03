@@ -6,8 +6,8 @@ import OrderContainer from '../Containers';
 // Order component
 const Orders = () => (
   <div className="Orders DebugComponentRed">
-    <p>This is the <strong>Orders</strong> component</p>
-    <p>Fix it so it is rendered at <code>/orders</code></p>
+    <p>This is the <strong>Order History</strong> component</p>
+   
   </div>
 );
 

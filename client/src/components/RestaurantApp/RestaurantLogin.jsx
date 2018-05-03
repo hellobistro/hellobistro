@@ -2,22 +2,15 @@
 import React, { Component } from 'react';
 import AuthService from '../../services/AuthService';
 
-// CustomerLogin component
-// Used by Restaurants to log into app
-class RestaurantLogin extends Component  {
-  constructor(){
+// Used by Restaurant Users to log into app
+class RestaurantLogin extends Component {
+  constructor() {
     super();
     this.Auth = new AuthService();
     this.state = {
       error: false
-    }
+    };
   }
-
-  // componentWillMount(){
-  //   if(this.Auth.loggedIn()) {
-  //     //this.props.history.replace('/');
-  //   }
-  // }
 
   handleChange(e) {
     this.setState({
@@ -30,8 +23,10 @@ class RestaurantLogin extends Component  {
     this.Auth.restaurantLogin(this.state.email, this.state.password)
       .then((res) => {
         this.setState({error: false})
-        console.log('the res after logging in', res)
-        this.props.addRestaurant(res.restaurantInfo)
+        console.log('the res after logging in', res);
+        const { userId, userName, restaurantInfo } = res;
+        this.props.addUser(userId, userName);
+        this.props.addRestaurant(restaurantInfo);
         this.props.history.replace('/restaurant/home')
       })
       .catch( err => {
@@ -40,7 +35,7 @@ class RestaurantLogin extends Component  {
       })
   }
 
-  handleCreateAcc(e){
+  handleCreateAcc(e) {
     e.preventDefault();
     this.props.history.replace('/restaurant/userRegister')
   }
@@ -60,8 +55,8 @@ class RestaurantLogin extends Component  {
           : <div></div>
         }
       </div>
-    )}
+    );
+  }
 }
 
 export default RestaurantLogin;
-
