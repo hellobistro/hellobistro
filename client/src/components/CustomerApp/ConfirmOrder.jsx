@@ -16,8 +16,8 @@ const ConfirmOrder = (props) => {
     ApiService.stripeProcessing(paymentId).then((res) => {
       ApiService.submitOrder('queued', billTotal, JSON.stringify(res.transactionId), 1, JSON.stringify(userId), JSON.stringify(restaurantId), items)
         .then((response) => {
-          console.log('Order posted', response);
           props.clearCart();
+          props.setRestaurant('undefined');
           props.history.push('/customer/history');
         });
     });

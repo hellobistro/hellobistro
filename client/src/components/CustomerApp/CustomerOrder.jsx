@@ -17,12 +17,19 @@ class CustomerOrder extends React.Component {
   toggleModal = (data, confirmed) => {
       // If item is being added to cart
       if (confirmed) {
+        
         this.props.addToCart(this.state.modalData)
       } 
       // check if item is already in cart
       if (data !== null && this.props.state.customer.cart[data.id]) {
         data = this.props.state.customer.cart[data.id]
       }
+
+      // make sure item has quantity attribute
+      if (data !== null && !data.quantity) {
+        data.quantity = 1;
+      }
+
       // Turn modal on by loading food data. Turn modal off by loading 'null'
       this.setState({
         modalData: data,

@@ -56,17 +56,19 @@ const customerController = {
     const {
       status,
       total,
-      transaction,
+      transactionId,
       table,
       CustomerId,
       RestaurantId,
       items,
     } = req.body;
 
+    console.log('Order placed by', CustomerId, typeof CustomerId);
+
     Order.create({
       status,
       total,
-      transaction,
+      transactionId,
       table,
       CustomerId,
       RestaurantId,
@@ -147,6 +149,7 @@ const customerController = {
 
   getAllOrdersForCustomer(req, res) {
     const { customer_id } = req.params;
+    console.log('Customer Id for order request', customer_id);
 
     Order.findAll({
       where: {

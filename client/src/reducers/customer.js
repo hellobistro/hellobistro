@@ -20,6 +20,10 @@ function customer(state = [], action) {
       return Object.assign({}, state, {
         restaurantId: action.id,
       });
+    case 'LOAD_ORDERS':
+      return Object.assign({}, state, {
+        orders: action.data,
+      });
     default:
       return state;
   }

@@ -32,7 +32,6 @@ class Menu extends React.Component {
   toggleModal = (data, editOrder) => {
     // If item is being added to cart
     if (editOrder) {
-      console.log('editing', this.state.modalData.RestaurantId)
       this.props.setRestaurant(this.state.modalData.RestaurantId);
       this.props.addToCart(this.state.modalData);
     } 
@@ -40,6 +39,12 @@ class Menu extends React.Component {
     if (data !== null && this.props.state.customer.cart && this.props.state.customer.cart[data.id]) {
       data = this.props.state.customer.cart[data.id]
     }
+
+    // make sure item has quantity attribute
+    if (data !== null && !data.quantity) {
+      data.quantity = 1;
+    }
+
     // Turn modal on by loading food data (if from correct restaurant). Turn modal off by loading 'null'
     if ( this.props.state.customer.restaurantId === 'undefined' || data === null || data.RestaurantId === this.props.state.customer.restaurantId) {
       this.setState({
