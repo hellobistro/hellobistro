@@ -6,8 +6,6 @@ import MenuSection from './MenuSection';
 import OrderModal from './OrderModal';
 import OrderStatus from './OrderStatus';
 
-// Menu component
-// Populated with menu specific to a restaurant
 class Menu extends React.Component {
   constructor(props) {
     super(props);
@@ -17,13 +15,13 @@ class Menu extends React.Component {
   }
 
   componentWillMount() {
+    // Load restaurant data.
     if (JSON.stringify(this.props.state.customer.currentRestaurant.id) !== this.props.match.params.id) {
-      // If new restaurant, clear prior restaurant data.
+      // If new restaurant doesn't match prior restaurant, clear prior restaurant data.
       this.props.loadSelectedRestaurant({ MenuSections: ['loading'] });
-      console.log('loading set to restaurant menu section')
-      // Retrieve current restaurant data.
+      // Retrieve new restaurant data.
       ApiService.getRestaurantData(this.props.match.params.id).then((res) => {
-        console.log('New restaurant data received', res)
+        // Load new restaurant data into redux store.
         this.props.loadSelectedRestaurant(res);
       });
     } 
