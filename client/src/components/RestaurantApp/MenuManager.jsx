@@ -97,7 +97,7 @@ class MenuManager extends React.Component {
           return (ApiService.addNewMenuSection(this.state.id, section.name, section.description)
             .then((newSection) => {
               Promise.all(section.MenuItems.map((item)=>{
-                ApiService.addNewMenuItem(this.state.id, item.name, item.price, item.vegan, item.vegetarian, 
+                return ApiService.addNewMenuItem(this.state.id, item.name, item.price, item.vegan, item.vegetarian, 
                   item.glutenFree, item.spicy, item.image, item.prepTime, item.rating, newSection.id)
               }))
             }))
@@ -107,6 +107,8 @@ class MenuManager extends React.Component {
         }).catch(err =>{
           console.log('error adding new menu', err)
         })
+      }). catch(err => {
+        console.log('failled to delete old menu', err)
       })
   }
 
