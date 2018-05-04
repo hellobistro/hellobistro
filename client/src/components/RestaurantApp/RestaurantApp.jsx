@@ -48,22 +48,22 @@ class RestaurantApp extends React.Component {
       // Update restaurant information upon mount, only if different
       if (this.props.state.restaurant.restaurantInfo.updatedAt !== data.updatedAt) {
         this.props.updateRestaurantData(data);
-        console.log('zz');
       }
 
     }).catch((err) => {
       console.log(err);
     });
   
-  ApiService.getAnalytics(this.props.state.restaurant.restaurantInfo.id).then((data) => {
+    // ApiService.getAnalytics(this.props.state.restaurant.restaurantInfo.id).then((data) => {
+    ApiService.getAnalytics(5).then((data) => {
       
       // If no analytics data loaded, fetch it
-      if (!this.props.state.restaurant.analytics) {
+      if (!this.props.state.restaurant.analytics.totalRevenue) {
         this.props.updateAnalyticsData(data);
       }
       
       // Update analytics information upon mount, only if different
-      if (this.props.state.restaurant.analytics.totalOrders !== data.totalOrders || this.props.state.restaurant.analytics.lastCompletedOrder !== data.lastCompletedOrder) {
+      if (this.props.state.restaurant.analytics.totalOrders !== data.totalOrders || this.props.state.restaurant.analytics.totalRevenue !== data.totalRevenue) {
         this.props.updateAnalyticsData(data);
       }
 
