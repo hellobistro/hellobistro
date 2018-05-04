@@ -5,8 +5,6 @@ import React from 'react';
 import '../../../styles/Widgets.css';
 
 const WidgetTopCustomersOrders = (props) => {
-  console.log('zz', props);
-
   let topFiveCustomersByOrders = props.state.restaurant.analytics.topFiveCustomersByOrders;
 
   return (
