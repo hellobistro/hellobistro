@@ -15,8 +15,7 @@ import ApiService from '../../services/CustomerApiService';
 // Create parent application
 class CustomerApp extends React.Component {
   constructor(props) {
-    super(props);
-    this.Auth = new AuthService();    
+    super(props);   
     this.state = {};
   }
 
@@ -29,7 +28,7 @@ class CustomerApp extends React.Component {
   }
 
   logout() {
-    this.Auth.logout();
+    AuthService.logout();
     this.props.history.replace('/');
   }
 

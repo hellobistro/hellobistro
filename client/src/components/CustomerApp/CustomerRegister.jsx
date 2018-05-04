@@ -6,7 +6,6 @@ require('babel-polyfill');
 class CustomerRegister extends Component {
   constructor(){
     super();
-    this.Auth = new AuthService();
     this.state = {
       error: false,
       passwordMatch: true,
@@ -55,7 +54,7 @@ class CustomerRegister extends Component {
     const { username, firstname, lastname, password, verifypassword, zip, phone, email} = this.state;
     var check = await this.validFields.call(this)
     if(check){
-      this.Auth.customerRegister(username, firstname, lastname, password, zip, phone, email)
+      AuthService.customerRegister(username, firstname, lastname, password, zip, phone, email)
         .then(res => {
           this.setState({error: false});
           this.props.history.replace('/')

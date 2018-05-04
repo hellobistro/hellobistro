@@ -2,7 +2,7 @@
 import AuthService from './AuthService';
 
 // Declare variables
-const Auth = new AuthService();
+
 const domain = 'http://localhost:3000';
 
 // Create ApiService object

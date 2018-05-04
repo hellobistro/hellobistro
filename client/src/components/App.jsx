@@ -36,8 +36,6 @@ import {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.Auth = new AuthService();
-    this.checkUser = this.checkUser.bind(this);
     this.state = {
     };
   }
@@ -53,8 +51,8 @@ class App extends React.Component {
     });
   }
 
-  checkUser(){
-    var token = this.Auth.getToken()
+  checkUser = () => {
+    var token = AuthService.getToken()
     var decoded = jwt.decode(token, {complete: true});
     if(token){
       if(decoded.payload.userType === 'Customer'){
