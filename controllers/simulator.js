@@ -8,21 +8,39 @@ const {
   RestaurantUser,
   MenuSection,
 } = require('../database/index.js');
-const Sequelize = require('sequelize');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
 const data = {};
 
-async function getUsers() {
-  data.users = await Customer.findAll({})
-  console.log(data.users[1].dataValues);
-}
+const getUsers = async () => {
+  data.users = await Customer.findAll({});
+  console.log(data.users.length);
+};
 
-async function getRestaurants() {
-  data.restaurants = await Restaurant.findAll({})
-  console.log(data.restaurants[0].dataValues)
-}
+const getRestaurants = async () => {
+  data.restaurants = await Restaurant.findAll({ include: [{ model: MenuItem }] });
+  console.log(data.restaurants.length);
+};
 
-getUsers();
-getRestaurants();
+const getRandomUserId = () => {
+  const min = 0;
+  const max = data.users.length + 2;
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+const getRandomRestaurantId = () => {
+  const min = 0;
+  const max = data.restaurants.length + 2;
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+const placeRandomOrder = () => {
+};
+
+const startSimulation = async () => {
+  await getUsers();
+  await getRestaurants();
+  await console.log('Random UserId: ', getRandomUserId());
+
+};
+
+startSimulation();

@@ -1,9 +1,9 @@
 import AuthService from './AuthService';
 
 const ApiService = {
-  submitOrder: (status, total, transaction, table, customerId, restaurantId, items) => AuthService.fetch(`/customers/${customerId}/orders`, {
+  submitOrder: (status, total, transactionId, table, CustomerId, RestaurantId, items) => AuthService.fetch(`/customers/${CustomerId}/orders`, {
     method: 'POST',
-    body: JSON.stringify({
+    body: {
       status,
       total,
       transactionId,
@@ -11,7 +11,7 @@ const ApiService = {
       CustomerId,
       RestaurantId,
       items,
-    }),
+    },
   }),
   findRestaurants: () => AuthService.fetch('/restaurants', { method: 'GET' }),
   stripeProcessing: paymentId => new Promise(resolve => resolve({
@@ -19,7 +19,7 @@ const ApiService = {
     transactionId: 12345,
     paymentId,
   })),
-  retrieveOrders: id => Auth.fetch(`/customers/${id}/orders`, { method: 'GET' }),
+  retrieveOrders: id => AuthService.fetch(`/customers/${id}/orders`, { method: 'GET' }),
 };
 
 export default ApiService;
