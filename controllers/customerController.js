@@ -187,7 +187,6 @@ const customerController = {
   },
 
   updateCustomer(req, res) {
-
     const { customer_id } = req.params;
     const {
       firstName,
@@ -250,6 +249,32 @@ const customerController = {
     });
   },
 
+  async updateCustomerProfile(req, res) {
+    const { customer_id } = req.params;
+    const  { userName, firstName, lastName, password, email, originalEmail, phone } = req.body
+    if(originalEmail !== email){
+      const existingEmail = await Customer.findOne({ where: { email } })
+      if (existingEmail) {
+        res.sendStatus(400);
+      }
+    }
+    if(password){
+      const hashedPassword = await bcrypt.hash(password, 10);
+      await Customer.update({ password: hashedPassword }, {where: { id: customer_id }})
+    }
+    Customer.update({
+      userName,
+      firstName,
+      lastName,
+      email,
+      phone
+    }, {where: { id: customer_id }})
+      .then((updatedUser) => {
+        console.log('the udpatedUser', updatedUser)
+        res.json(updatedUser)
+      })
+    
+  }
 };
 
 module.exports = customerController;

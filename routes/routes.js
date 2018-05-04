@@ -83,8 +83,8 @@ routes.get('/customers/:customer_id/ratings', (req, res) => {
 /* Update */
 
 // Update a customer profile
-routes.patch('/customers/:id/profile', (req, res) => {
-  customerController.updateCustomer(req, res);
+routes.patch('/customers/:customer_id/profile', (req, res) => {
+  customerController.updateCustomerProfile(req, res);
 });
 
 /* Destroy */
