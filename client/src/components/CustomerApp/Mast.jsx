@@ -5,8 +5,9 @@ import React from 'react';
 import '../../styles/Mast.css';
 
 const Mast = () => (
-  <div className="Mast">
+  <div className="customer-mast">
     <span>HelloBistro</span>
-  </div>);
+  </div>
+);
 
 export default Mast;

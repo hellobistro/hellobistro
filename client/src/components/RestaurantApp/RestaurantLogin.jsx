@@ -6,7 +6,6 @@ import AuthService from '../../services/AuthService';
 class RestaurantLogin extends Component {
   constructor() {
     super();
-    this.Auth = new AuthService();
     this.state = {
       error: false
     };
@@ -20,7 +19,7 @@ class RestaurantLogin extends Component {
 
   handleLogin(e) {
     e.preventDefault();
-    this.Auth.restaurantLogin(this.state.email, this.state.password)
+    AuthService.restaurantLogin(this.state.email, this.state.password)
       .then((res) => {
         this.setState({error: false})
         console.log('the res after logging in', res);
