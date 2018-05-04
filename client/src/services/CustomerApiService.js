@@ -6,10 +6,10 @@ const ApiService = {
     body: JSON.stringify({
       status,
       total,
-      transaction,
+      transactionId,
       table,
-      customerId,
-      restaurantId,
+      CustomerId,
+      RestaurantId,
       items,
     }),
   }),
@@ -42,7 +42,9 @@ const ApiService = {
         password,
         originalEmail
       }
-    })
+    }),
+    
+  retrieveOrders: id => Auth.fetch(`/customers/${id}/orders`, { method: 'GET' }),
 };
 
 export default ApiService;

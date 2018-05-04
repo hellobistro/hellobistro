@@ -1,7 +1,7 @@
 const {
- Customer, CustomerRating, MenuItem, Order, OrderItem
+ Customer, CustomerRating, MenuItem, Order, OrderItem, Restaurant,
 } = require('../database/index.js');
-
+const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -56,17 +56,19 @@ const customerController = {
     const {
       status,
       total,
-      transaction,
+      transactionId,
       table,
       CustomerId,
       RestaurantId,
       items,
     } = req.body;
 
+    console.log('Order placed by', CustomerId, typeof CustomerId);
+
     Order.create({
       status,
       total,
-      transaction,
+      transactionId,
       table,
       CustomerId,
       RestaurantId,
@@ -147,18 +149,25 @@ const customerController = {
 
   getAllOrdersForCustomer(req, res) {
     const { customer_id } = req.params;
+    console.log('Customer Id for order request', customer_id);
 
     Order.findAll({
       where: {
         CustomerId: customer_id,
       },
       include: [{
+        model: Restaurant,
+        attributes: ['name'],
+      },
+      {
         model: MenuItem,
         required: false,
       }],
     }).then((orders) => {
+      console.log('Orders coming')
       res.json(orders);
     }).catch((err) => {
+      console.log('Orders error')
       res.send(err);
     });
   },

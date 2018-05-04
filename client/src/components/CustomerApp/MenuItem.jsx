@@ -7,7 +7,7 @@ const MenuItem = ({ data, toggleModal }) => {
       <h3>- {data.name}</h3>
       <p>${price}</p>
       <p>Description: {data.description}</p>
-      <button onClick={() => { toggleModal(data, false); }}>Order</button>
+      <button onClick={() => { toggleModal(data, false); }}>Add to cart</button>
     </div>
   );
 };
