@@ -10,37 +10,53 @@ const {
 
 let customerDirectory = {};
 
-const analyticsData = {
-  allCustomers: [],
-  topTenCustomersByRevenue: [],
-  topTenCustomersByOrders: [],
-  totalRevenue: 0,
-  totalRevenueLast30Days: 0,
-  totalRevenueLast60Days: 0,
-  totalRevenueByDayOfWeek: {
-    Monday: 0,
-    Tuesday: 0,
-    Wednesday: 0,
-    Thursday: 0,
-    Friday: 0,
-    Saturday: 0,
-    Sunday: 0
-  },
-  totalRevenueByMonth: {
-    Jan: 0,
-    Feb: 0,
-    Mar: 0,
-    Apr: 0,
-    May: 0,
-    Jun: 0,
-    Jul: 0,
-    Aug: 0,
-    Sep: 0,
-    Oct: 0,
-    Nov: 0,
-    Dec: 0
-  },
-  openOrders: []
+let analyticsData = null;
+
+const generateAnalyticsObject = () => {
+
+  let defaultAnalyticsObject = {
+    allCustomers: [],
+    totalCustomers: 0,
+    totalCustomersLast30Days: 0,
+    totalCustomersLast60Days: 0,
+    totalCustomersLast90Days: 0,
+    topFiveCustomersByRevenue: null,
+    topFiveCustomersByOrders: null,
+    totalRevenue: 0,
+    totalRevenueLast30Days: 0,
+    totalRevenueLast60Days: 0,
+    totalRevenueByDayOfWeek: {
+      Monday: 0,
+      Tuesday: 0,
+      Wednesday: 0,
+      Thursday: 0,
+      Friday: 0,
+      Saturday: 0,
+      Sunday: 0
+    },
+    totalRevenueByMonth: {
+      Jan: 0,
+      Feb: 0,
+      Mar: 0,
+      Apr: 0,
+      May: 0,
+      Jun: 0,
+      Jul: 0,
+      Aug: 0,
+      Sep: 0,
+      Oct: 0,
+      Nov: 0,
+      Dec: 0
+    },
+    itemOrderTotals: {},
+    openOrders: []
+  };
+
+  return defaultAnalyticsObject;
+};
+
+const buildTotalCustomers = () => {
+  analyticsData.totalCustomers = customerDirectory.length;
 };
 
 const buildTotalRevenue = order => {
@@ -106,11 +122,34 @@ const buildCustomerDirectory = order => {
 
 const buildAllCustomers = () => {
   analyticsData.allCustomers.length = 0;
-  console.log('zz', customerDirectory);
+
+  // analyticsData.totalCustomers = customerDirectory.length;
+
   for (var key in customerDirectory) {
+    let completed = moment(customerDirectory[key].lastOrderDate);
+    let now = moment(Date.now());
+
+    let diffInDays = now.diff(completed, "days");
+
+    analyticsData.totalCustomers++;
+
+    if (diffInDays <= 30) {
+      analyticsData.totalCustomersLast30Days++;
+    }
+
+    if (diffInDays <= 60) {
+      analyticsData.totalCustomersLast60Days++;
+    }
+
+    if (diffInDays <= 90) {
+      analyticsData.totalCustomersLast90Days++;
+    }
+
     let customer = Object.assign({}, customerDirectory[key], { userName: key });
     analyticsData.allCustomers.push(customer);
   }
+
+
 
   analyticsData.allCustomers.sort((a, b) => {
     var nameA = a.userName.toLowerCase();
@@ -125,11 +164,10 @@ const buildAllCustomers = () => {
     // names must be equal
     return 0;
   });
-  console.log(analyticsData.allCustomers);
 };
 
-const buildTopTenCustomersByOrders = () => {
-  analyticsData.topTenCustomersByOrders = analyticsData.allCustomers
+const buildTopFiveCustomersByOrders = () => {
+  analyticsData.topFiveCustomersByOrders = analyticsData.allCustomers
     .slice()
     .sort((a, b) => {
       if (a.orders < b.orders) {
@@ -144,8 +182,8 @@ const buildTopTenCustomersByOrders = () => {
     });
 };
 
-const buildTopTenCustomersByRevenue = () => {
-  analyticsData.topTenCustomersByRevenue = analyticsData.allCustomers
+const buildTopFiveCustomersByRevenue = () => {
+  analyticsData.topFiveCustomersByRevenue = analyticsData.allCustomers
     .slice()
     .sort((a, b) => {
       if (a.totalRevenue < b.totalRevenue) {
@@ -160,8 +198,23 @@ const buildTopTenCustomersByRevenue = () => {
     });
 };
 
+const buildItemOrderTotals = (order) => {
+  order.MenuItems.forEach((item) => {
+    
+    if (!analyticsData.itemOrderTotals[item.name]) {
+      analyticsData.itemOrderTotals[item.name] = 1;
+    } else {
+      analyticsData.itemOrderTotals[item.name]++;
+    }
+  });
+
+
+
+};
+
 const analytics = {
   async buildAndSendData(req, res) {
+    analyticsData = generateAnalyticsObject();
     const { restaurant_id } = req.params;
 
     orders = await Order.findAll({
@@ -180,6 +233,7 @@ const analytics = {
       ]
     });
 
+
     customerDirectory = {};
 
     await orders.forEach(order => {
@@ -196,9 +250,9 @@ const analytics = {
       }
     });
 
-    buildAllCustomers();
-    buildTopTenCustomersByRevenue();
-    buildTopTenCustomersByOrders();
+    await buildAllCustomers();
+    await buildTopFiveCustomersByRevenue();
+    await buildTopFiveCustomersByOrders();
 
     res.json(analyticsData);
   }
