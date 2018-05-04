@@ -22,7 +22,6 @@ import '../../styles/RestaurantApp.css';
 class RestaurantApp extends React.Component {
   constructor(props) {
     super(props);
-    this.Auth = new AuthService();
     this.state = {};
   }
 
@@ -69,7 +68,7 @@ class RestaurantApp extends React.Component {
   }
 
   logout() {
-    this.Auth.logout();
+    AuthService.logout();
     this.props.history.replace('/');
   }
 

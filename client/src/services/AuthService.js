@@ -1,67 +1,64 @@
 import decode from 'jwt-decode';
-// import jwt from "jsonwebtoken";
 
-export default class AuthService {
+const AuthService = {
   // Initializing important variables
-  constructor(domain) {
-    this.domain = domain || 'http://localhost:3000' // API server domain
-    this.loggedIn = this.loggedIn.bind(this)
-    this.fetch = this.fetch.bind(this) // React binding stuff
-    this.login = this.login.bind(this)
-    this.restaurantLogin = this.restaurantLogin.bind(this)
-    this.getProfile = this.getProfile.bind(this)
-  }
+    domain: 'http://localhost:3000', // API server domain
+    // this.loggedIn = this.loggedIn.bind(this)
+    // this.fetch = this.fetch.bind(this) // React binding stuff
+    // this.login = this.login.bind(this)
+    // this.restaurantLogin = this.restaurantLogin.bind(this)
+    // this.getProfile = this.getProfile.bind(this)
 
-  customerRegister(username, firstName, lastName, password, zip, phone, email) {
-    return this.fetch('/customers', {
+  customerRegister: (username, firstName, lastName, password, zip, phone, email) => {
+    return AuthService.fetch('/customers', {
       method: 'POST',
       body: JSON.stringify({ username, firstName, lastName, password, zip, phone, email })
     })
-  }
+  },
 
-  restaurantRegister(email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type) {
-    return this.fetch('/restaurants', {
+  restaurantRegister: (email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type) => {
+    return AuthService.fetch('/restaurants', {
       method: 'POST',
       body: JSON.stringify({ email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type })
     })
-  }
+  },
 
-  login(email, password) {
+  login: (email, password) => {
     // Get a token from api server using the fetch api
-    return this.fetch('/customers/login', {
+    return AuthService.fetch('/customers/login', {
       method: 'POST',
-      body: JSON.stringify({
+      body: {
         email,
         password,
-      }),
+      },
     }).then((res) => {
       console.log('TOKEN COMING BACK', res);
-      this.setToken(res.token); // Setting the token in localStorage
+      AuthService.setToken(res.token); // Setting the token in localStorage
       return res;
     });
-  }
+  },
 
-  restaurantLogin(email, password) {
+  restaurantLogin: (email, password) => {
     // Get a token from api server using the fetch api
-    return this.fetch('/restaurants/login', {
+    return AuthService.fetch('/restaurants/login', {
       method: 'POST',
       body: JSON.stringify({
         email,
         password
       })
     }).then(res => {
-      this.setToken(res.token) // Setting the token in localStorage
+      AuthService.setToken(res.token) // Setting the token in localStorage
       return res;
     })
-  }
+  },
 
-  loggedIn() {
+  loggedIn: () => {
     // Checks if there is a saved token and it's still valid
-    const token = this.getToken() // GEtting token from localstorage
-    return !!token && !this.isTokenExpired(token) // handwaiving here
-  }
+    const token = AuthService.getToken() // GEtting token from localstorage
+    return !!token && !AuthService.isTokenExpired(token) // handwaiving here
+  },
 
-  isTokenExpired(token) {
+  isTokenExpired: (token) => {
     try {
       const decoded = decode(token);
       if (decoded.exp < Date.now() / 1000) { // Checking if token is expired. N
@@ -73,48 +70,49 @@ export default class AuthService {
     catch (err) {
       return false;
     }
-  }
+  },
 
-  setToken(idToken) {
+  setToken: (idToken) => {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken)
-  }
+  },
 
-  getToken() {
+  getToken: () => {
     // Retrieves the user token from localStorage
     return localStorage.getItem('id_token')
-  }
+  },
 
-  logout() {
+  logout: () => {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
-  }
+  },
 
-  getProfile() {
+  getProfile: () => {
     // Using jwt-decode npm package to decode the token
-    return decode(this.getToken());
-  }
+    return decode(AuthService.getToken());
+  },
 
 
-  fetch(url, options) {
+  fetch: (url, options) => {
     // performs api calls sending the required authentication headers
     console.log('Auth service is fetching', options, url);
+    options.body = JSON.stringify(options.body);
     const headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
     // Setting Authorization header
     // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
-    if (this.loggedIn()) {
-      headers['Authorization'] = 'Bearer ' + this.getToken()
+    if (AuthService.loggedIn()) {
+      headers['Authorization'] = 'Bearer ' + AuthService.getToken()
     }
 
-    return fetch(this.domain + url, { headers, ...options })
-      .then(this._checkStatus)
+    return fetch(AuthService.domain + url, { headers, ...options })
+      .then(AuthService._checkStatus)
       .then(response => response.json())
-  }
+  },
 
-  _checkStatus(response) {
+  _checkStatus: (response) => {
     // raises an error in case response status is not a success
     if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
       return response
@@ -125,3 +123,5 @@ export default class AuthService {
     }
   }
 }
+
+export default AuthService;

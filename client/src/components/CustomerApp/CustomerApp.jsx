@@ -21,8 +21,7 @@ import '../../styles/CustomerApp.css';
 // Create parent application
 class CustomerApp extends React.Component {
   constructor(props) {
-    super(props);
-    this.Auth = new AuthService();
+    super(props);   
     this.state = {};
   }
 
@@ -32,6 +31,11 @@ class CustomerApp extends React.Component {
         this.props.loadRestaurantList(res);
       });
     }
+  }
+
+  logout() {
+    AuthService.logout();
+    this.props.history.replace('/');
   }
 
   render() {
