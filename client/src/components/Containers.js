@@ -24,6 +24,9 @@ import CustomerSettings from './CustomerApp/CustomerSettings';
 import WidgetTotalRevenue from './RestaurantApp/Widgets/WidgetTotalRevenue';
 import WidgetTotalCustomers from './RestaurantApp/Widgets/WidgetTotalCustomers';
 import WidgetTopCustomersOrders from './RestaurantApp/Widgets/WidgetTopCustomersOrders';
+import WidgetItemOrderTotals from './RestaurantApp/Widgets/WidgetItemOrderTotals';
+import WidgetTotalRevenueByMonth from './RestaurantApp/Widgets/WidgetTotalRevenueByMonth';
+import WidgetTotalRevenueByDay from './RestaurantApp/Widgets/WidgetTotalRevenueByDay';
 import { withRouter } from 'react-router';
 
 
@@ -60,3 +63,6 @@ export const CustomerSettingsContainer = withRouter(connect(mapStateToProps, map
 export const WidgetTotalRevenueContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalRevenue));
 export const WidgetTotalCustomersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalCustomers));
 export const WidgetTopCustomersOrdersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTopCustomersOrders));
+export const WidgetItemOrderTotalsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetItemOrderTotals));
+export const WidgetTotalRevenueByMonthContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalRevenueByMonth));
+export const WidgetTotalRevenueByDayContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalRevenueByDay));

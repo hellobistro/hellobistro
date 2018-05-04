@@ -63,7 +63,7 @@ class RestaurantApp extends React.Component {
       }
       
       // Update analytics information upon mount, only if different
-      if (this.props.state.restaurant.analytics.totalOrders !== data.totalOrders || this.props.state.restaurant.analytics.totalRevenue !== data.totalRevenue) {
+      if (JSON.stringify(this.props.state.restaurant.analytics) !== JSON.stringify(data)) {
         this.props.updateAnalyticsData(data);
       }
 
