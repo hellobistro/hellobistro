@@ -1,0 +1,11 @@
+.CustomerNav li {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.CustomerNav a {
+  text-decoration: inherit;
+  color: black;
+}

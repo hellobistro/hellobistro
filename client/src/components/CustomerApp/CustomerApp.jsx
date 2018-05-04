@@ -1,22 +1,28 @@
 // Import dependencies
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
-
-import { CustomerLoginContainer } from '../Containers';
-import { FindRestaurantsContainer } from '../Containers';
-import { OrdersContainer } from '../Containers';
-import { CustomerOrder } from '../Containers';
-import { CustomerRegisterContainer } from '../Containers';
-import { CustomerSettingsContainer } from '../Containers';
+import { Route, Link, Switch } from 'react-router-dom';
+// Import components
+import Mast from './Mast';
+import CustomerNav from './CustomerNav';
+import {
+  FindRestaurantsContainer,
+  OrderHistoryContainer,
+  CustomerOrderContainer,
+  CustomerSettingsContainer,
+  MenuContainer,
+  ConfirmOrderContainer,
+} from '../Containers';
+// Import Services
 import AuthService from '../../services/AuthService';
 import ApiService from '../../services/CustomerApiService';
-
+// Import CSS
+import '../../styles/CustomerApp.css';
 
 // Create parent application
 class CustomerApp extends React.Component {
   constructor(props) {
     super(props);
-    this.Auth = new AuthService();    
+    this.Auth = new AuthService();
     this.state = {};
   }
 
@@ -28,23 +34,27 @@ class CustomerApp extends React.Component {
     }
   }
 
-  logout() {
-    this.Auth.logout();
-    this.props.history.replace('/');
-  }
-
   render() {
     return (
       <div className="CustomerApp DebugComponentRed">
-        <p>This is the <strong>CustomerApp</strong> component</p>
-        <button onClick={this.logout.bind(this)}>Logout</button>
-        <p>Remaining components to implement under CustomerApp:</p>
-        <ul>
-          <li><Link to='/customer/findRestaurants'>Find Restaurants</Link></li>
-          <li><Link to='/customer/order'>Your Current Order</Link></li>
-          <li><Link to='/customer/history'>Your Past Orders</Link></li>
-          <li><Link to='/customer/settings'>Settings</Link></li>
-        </ul>
+        <div className="sidebar-left">
+          <Mast />
+          <CustomerNav {...this.props} />
+        </div>
+        <main>
+          <div className="small-screen">
+            <Mast />
+            <CustomerNav {...this.props} />
+          </div>
+          <Switch>
+            <Route path="/customer/home/findRestaurants" component={FindRestaurantsContainer} />
+            <Route path="/customer/home/history" component={OrderHistoryContainer} />
+            <Route path="/customer/home/order" component={CustomerOrderContainer} />
+            <Route path="/customer/home/settings" component={CustomerSettingsContainer} />
+            <Route path="/customer/home/:id/menu" component={MenuContainer} />
+            <Route path="/customer/home/confirm-order" component={ConfirmOrderContainer} />
+          </Switch>
+        </main>
       </div>
     );
   }

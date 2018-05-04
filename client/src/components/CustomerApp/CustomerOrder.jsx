@@ -17,12 +17,19 @@ class CustomerOrder extends React.Component {
   toggleModal = (data, confirmed) => {
       // If item is being added to cart
       if (confirmed) {
+        
         this.props.addToCart(this.state.modalData)
       } 
       // check if item is already in cart
       if (data !== null && this.props.state.customer.cart[data.id]) {
         data = this.props.state.customer.cart[data.id]
       }
+
+      // make sure item has quantity attribute
+      if (data !== null && !data.quantity) {
+        data.quantity = 1;
+      }
+
       // Turn modal on by loading food data. Turn modal off by loading 'null'
       this.setState({
         modalData: data,
@@ -50,7 +57,7 @@ class CustomerOrder extends React.Component {
     if (items.length === 0) {
       return (
         <div className="order">
-          <h4>Your Current Order:</h4>
+          <h4>Your Cart:</h4>
           <p>Your cart is currently empty.</p>
         </div>
       );
@@ -65,10 +72,10 @@ class CustomerOrder extends React.Component {
 
     return (
       <div className="Order DebugComponentRed">
-        <h4>Your Current Order:</h4>
+        <h4>Your Cart:</h4>
         {orderItems}
         <p><strong>Bill total:</strong> ${billTotal.toFixed(2)}</p>
-        <Link to='/customer/confirm-order/'><button>Place order</button></Link><button onClick={this.cancelOrder}>Cancel order</button>
+        <Link to='/customer/home/confirm-order/'><button>Place order</button></Link><button onClick={this.cancelOrder}>Cancel order</button>
         <OrderModal data={this.state.modalData} toggle={this.toggleModal} edit={this.handleModalChange}/>
       </div>
     );

@@ -52,6 +52,13 @@ export function setRestaurant(id) {
   };
 }
 
+export function loadOrders(data) {
+  return {
+    type: 'LOAD_ORDERS',
+    data,
+  };
+}
+
 // RESTAURANT APP ACTIONS
 
 export function loadRestaurantData(data) {
