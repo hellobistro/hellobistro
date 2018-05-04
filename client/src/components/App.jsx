@@ -17,7 +17,8 @@ import {
   RestaurantLoginContainer,
   CustomerLoginContainer,
   FindRestaurantsContainer,
-  OrdersContainer,
+  OrderHistoryContainer,
+  CustomerOrderContainer,
   CustomerSettingsContainer,
   RestaurantRegisterContainer,
   DashBoardContainer,
@@ -25,6 +26,8 @@ import {
   RestaurantSettingsContainer,
   PromosContainer,
   CustomerRegisterContainer,
+  MenuContainer,
+  ConfirmOrderContainer,
 } from './Containers';
 
 // import {sampleRestaurantGet} from '../../sampleData';
@@ -33,26 +36,19 @@ import {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.Auth = new AuthService();
-    this.checkUser = this.checkUser.bind(this);
     this.state = {
     };
-  }
-  
-  componentWillMount(){
-    
   }
 
   componentDidMount() {
     const restaurantId = 2;
     ApiService.getRestaurantData(restaurantId).then((res) => {
-      console.log('Fetch resolved.', res);
       this.props.loadRestaurantData(res);
     });
   }
 
-  checkUser(){
-    var token = this.Auth.getToken()
+  checkUser = () => {
+    var token = AuthService.getToken()
     var decoded = jwt.decode(token, {complete: true});
     if(token){
       if(decoded.payload.userType === 'Customer'){
@@ -74,18 +70,15 @@ class App extends React.Component {
          ? <Route path="/restaurant/home" component={RestaurantAppContainer} /> 
          : ''
         }
-          <Route exact path="/" component={CustomerLoginContainer} />
-          <Route path="/customer/login" component={CustomerLoginContainer} />
-          <Route path="/restaurant/login" component={RestaurantLoginContainer} />
-          <Route path="/customer/findRestaurants" component={FindRestaurantsContainer} />
-          <Route path="/customer/orders" component={OrdersContainer} />
-          <Route path="/customer/settings" component={CustomerSettingsContainer} />
-          <Route path="/customer/register" component={CustomerRegisterContainer} /> 
-          <Route path="/restaurant/userRegister" component={RestaurantRegisterContainer} />   
+        <Route exact path="/" component={CustomerLoginContainer} />
+        <Route path="/customer/login" component={CustomerLoginContainer} />
+        <Route path="/restaurant/login" component={RestaurantLoginContainer} />
+        <Route path="/customer/register" component={CustomerRegisterContainer} />
+        <Route path="/restaurant/userRegister" component={RestaurantRegisterContainer} />
         {/* </Switch> */}
       </div>
     );
   }
 }
-  
-  export default App;
+
+export default App;

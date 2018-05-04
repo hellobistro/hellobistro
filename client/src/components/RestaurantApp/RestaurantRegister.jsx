@@ -1,12 +1,11 @@
 // Import dependencies
 import React, { Component } from 'react';
 import AuthService from '../../services/AuthService';
-require('babel-polyfill');
+import "babel-polyfill";
 
 class RestaurantRegister extends Component {
   constructor(){
     super();
-    this.Auth = new AuthService();
     this.state = {
       error: false,
       passwordMatch: true,
@@ -49,7 +48,7 @@ class RestaurantRegister extends Component {
     const { email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type } = this.state;
     var check = await this.validFields.call(this)
     if(check){
-      this.Auth.restaurantRegister(email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type)
+      AuthService.restaurantRegister(email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type)
         .then(res => {
           this.setState({error: false});
           this.props.history.replace('/restaurant/login')

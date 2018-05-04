@@ -10,14 +10,13 @@ import { withRouter, Link } from "react-router-dom";
 class CustomerLogin extends Component  {
   constructor(){
     super();
-    this.Auth = new AuthService();
     this.state = {
       error: false
     }
   }
 
   componentWillMount(){
-    var token = this.Auth.getToken()
+    var token = AuthService.getToken()
     var decoded = jwt.decode(token, {complete: true});
     if(token){
       if(decoded.payload.userType === 'Customer'){
@@ -36,8 +35,11 @@ class CustomerLogin extends Component  {
 
   handleLogin(e) {
     e.preventDefault();
-    this.Auth.login(this.state.email, this.state.password)
-      .then((token) => {
+    AuthService.login(this.state.email, this.state.password)
+      .then((res) => {
+        delete res['token'];
+        console.log('New res', res)
+        this.props.loadCustomerUser(res);
         this.setState({error: false})
         this.props.history.replace('/customer/home')
       })
