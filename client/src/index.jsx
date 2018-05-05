@@ -16,8 +16,6 @@ import { Provider } from 'react-redux';
 import { AppContainer } from './components/Containers';
 import { ConnectedRouter } from 'react-router-redux';
 
-
-
 // Note: Ignoring ESLint suggestions for below React conventions.
 ReactDOM.render(
   <Provider store={store}>

@@ -1,6 +1,8 @@
 // Import dependencies
 import React, { Component } from 'react';
 import AuthService from '../../services/AuthService';
+import Mast from "./Mast";
+
 import "babel-polyfill";
 
 class RestaurantRegister extends Component {
@@ -59,47 +61,173 @@ class RestaurantRegister extends Component {
     console.log('the state inside restaurantRegister', this.state)
     return(
       <div className="RestaurantUserRegister"> 
-        <h2>Restaurant User Registration</h2>
-          <p> * fields are required </p>
-          <div>Email *</div> 
-          <input name="email" placeholder="Email" type="text" onChange={this.handleChange.bind(this)}/>
-          <br />
-          <div className="RegisterLabel">Password *</div> 
-          <input name="password" placeholder="Password" type="text" onChange={this.handleChange.bind(this)}/>
-          <br />
-          <div className="RegisterLabel">Re-enter Password *</div> 
-          <input name="confirmpassword" placeholder="Re-enter Password" type="text" onChange={this.handleChange.bind(this)}/>
-          <br />
-          <div className="RegisterLabel">Phone</div> 
-          <input name="phone" placeholder="Phone" type="text" onChange={this.handleChange.bind(this)}/> 
-          <br />
-          <div>Name *</div> 
-          <input name="name" placeholder="Restaurant Name" type="text" onChange={this.handleChange.bind(this)}/>
-          <br />
-          <div className="RegisterLabel">Address one</div> 
-          <input name="addressOne" placeholder="Address one" type="text" onChange={this.handleChange.bind(this)}/>
-          <br />
-          <div className="RegisterLabel">Address two</div> 
-          <input name="addressTwo" placeholder="Address two" type="text" onChange={this.handleChange.bind(this)}/> 
-          <br />
-          <div className="RegisterLabel">City</div> 
-          <input name="addressCity" placeholder="City" type="text" onChange={this.handleChange.bind(this)}/>
-          <br /> 
-          <div className="RegisterLabel">State</div> 
-          <input name="addressState" placeholder="State" type="text" onChange={this.handleChange.bind(this)}/>
-          <br />
-          <div className="RegisterLabel">Zip Code</div> 
-          <input name="addressZip" placeholder="Zip Code" type="text" onChange={this.handleChange.bind(this)}/>
-          <br />
-          <div className="RegisterLabel">Descriptoin: </div> 
-          <textarea name="description" placeholder="Description" onChange={this.handleChange.bind(this)}/>
-          <br />
-          <div className="RegisterLabel">Genre</div> 
-          <input name="genre" placeholder="Genre" onChange={this.handleChange.bind(this)}/>
-          <br />
-          <div className="RegisterLabel">Type</div> 
-          <input name="type" placeholder="Type" onChange={this.handleChange.bind(this)}/>
-          <br />
+
+
+
+
+
+
+      <Mast primaryText={'HelloBistro for Restaurants'}/>
+
+<div className="mock-form">
+  <div className="form-section">
+    <div className="form-section-header">
+      Register your restaurant (* fields are required)
+    </div>
+    
+    <div className="form-group">
+              <label htmlFor="email">Email*</label>
+              <input
+                className="form-input"
+                name="email"
+                placeholder="Email Address"
+                type="text"
+
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+
+
+
+            <div className="form-group">
+              <label htmlFor="username">Password *</label>
+              <input
+                className="form-input"
+                name="password"
+                placeholder="Password"
+                type="password"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+
+
+
+
+            <div className="form-group">
+              <label htmlFor="username">Re-enter Password *</label>
+              <input
+                className="form-input"
+                name="confirmpassword"
+                placeholder="Re-enter Password"
+                type="password"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+
+
+          <div className="form-group">
+              <label htmlFor="username">Phone*</label>
+              <input
+                className="form-input"
+                name="phone"
+                placeholder="Phone"
+                type="text"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+
+
+          <div className="form-group">
+              <label htmlFor="name">Name *</label>
+              <input
+                className="form-input"
+                name="name"
+                placeholder="Restaurant Name"
+                type="text"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+
+
+          <div className="form-group">
+              <label htmlFor="name">Address (1) *</label>
+              <input
+                className="form-input"
+                name="addressOne"
+                placeholder="Address (line 1)"
+                type="text"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+
+
+
+          <div className="form-group">
+              <label htmlFor="name">Address (2) *</label>
+              <input
+                className="form-input"
+                name="addressTwo"
+                placeholder="Address (line 2)"
+                type="text"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+
+
+                      <div className="form-group">
+              <label htmlFor="name">City *</label>
+              <input
+                className="form-input"
+                name="addressCity"
+                placeholder="City"
+                type="text"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+
+                      <div className="form-group">
+              <label htmlFor="name">State *</label>
+              <input
+                className="form-input"
+                name="addressState"
+                placeholder="State"
+                type="text"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+
+                      <div className="form-group">
+              <label htmlFor="name">Zip Code*</label>
+              <input
+                className="form-input"
+                name="addressZip"
+                placeholder="Zip Code"
+                type="text"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+
+
+                      <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <textarea className="form-input" name="description" placeholder="Description" onChange={this.handleChange.bind(this)}/>
+
+            </div>
+
+
+                <div className="form-group">
+              <label htmlFor="name">Genre *</label>
+              <input
+                className="form-input"
+                name="genre"
+                placeholder="Genre (e.g., Mexican, New American...)"
+                type="text"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+
+
+                            <div className="form-group">
+              <label htmlFor="name">Type *</label>
+              <input
+                className="form-input"
+                name="type"
+                placeholder="Type (e.g., Bar, Restaurant)"
+                type="text"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+
           <button onClick={this.registerRestaurantUser.bind(this)}>Register</button>
           {
             this.state.error
@@ -116,7 +244,7 @@ class RestaurantRegister extends Component {
             ? <div>Not a valid email </div>
             : <div></div>
           }
-      </div>
+      </div></div></div>
     )
   }
 }

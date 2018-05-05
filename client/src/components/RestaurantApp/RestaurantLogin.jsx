@@ -5,6 +5,7 @@ import AuthService from "../../services/AuthService";
 // Import CSS
 import "../../styles/RestaurantLogin.css";
 import Mast from "./Mast";
+import { withRouter, Link } from "react-router-dom";
 
 // Used by Restaurant Users to log into app
 class RestaurantLogin extends Component {
@@ -79,6 +80,15 @@ class RestaurantLogin extends Component {
           </div>
           {this.state.error ? <div>Invalid credentials</div> : <div />}
         </div>
+
+                  <div className="switch-customer">
+        <Link to="/customer/login">
+          <i class="material-icons">people</i>HelloBistro for Hungry People
+        </Link>
+    
+          </div>
+
+
       </div>
     );
   }

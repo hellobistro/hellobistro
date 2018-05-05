@@ -56,7 +56,7 @@ class RestaurantApp extends React.Component {
         console.log(err);
       });
 
-    // ApiService.getAnalytics(5)
+    // ApiService.getAnalytics(this.props.state.restaurant.restaurantInfo.id).then((data) => {
     ApiService.getAnalytics(this.props.state.restaurant.restaurantInfo.id)
       .then((data) => {
         // If no analytics data loaded, fetch it
