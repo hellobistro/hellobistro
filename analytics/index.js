@@ -253,7 +253,7 @@ const buildTopFiveCustomersByRevenue = () => {
 
       // names must be equal
       return 0;
-    })
+    });
 };
 
 const buildItemOrderTotals = order => {
