@@ -17,18 +17,11 @@ const RestaurantNav = (props) => {
   return (
     <div className="RestaurantNav">
       <ul>
-<<<<<<< HEAD
         <li><Link to="/restaurant/home/dashboard"><i className="material-icons">dashboard</i>Dashboard</Link></li>
         <li><Link to="/restaurant/home/menuManager"><i className="material-icons">restaurant_menu</i>Menu Manager</Link></li>
         <li><Link to="/restaurant/home/orderManager">Orders Manager</Link></li>
         <li><Link to="/restaurant/home/settings"><i className="material-icons">settings</i>Settings</Link></li>
         <li><Link to="/restaurant/home/promos"><i className="material-icons">event</i>Promos</Link></li>
-=======
-        <li><Link to='/restaurant/home/dashboard'><i className="material-icons">dashboard</i>Dashboard</Link></li>
-        <li><Link to='/restaurant/home/menuManager'><i className="material-icons">restaurant_menu</i>Menu Manager</Link></li>
-        <li><Link to='/restaurant/home/settings'><i className="material-icons">settings</i>Settings</Link></li>
-        <li><Link to='/restaurant/home/promos'><i className="material-icons">event</i>Promos</Link></li>
->>>>>>> develop
         <li onClick={logout}><i className="material-icons">exit_to_app</i>Logout</li>
       </ul>
     </div>
