@@ -27,21 +27,11 @@ class CustomerRegister extends Component {
 
   checkFields(){
     const {password, verifypassword, email, username} = this.state
-    if(password.length > 0 && password === verifypassword){
-      this.setState({passwordMatch: true})
-    } else {
-      this.setState({passwordMatch: false})
-    }
-    if(this.validateEmail(email)){
-      this.setState({validEmail: true})
-    } else {
-      this.setState({validEmail: false})
-    }
-    if(username){
-      this.setState({validUsername: true})
-    } else {
-      this.setState({validUsername: false})
-    }
+    this.setState({
+      passwordMatch: password.length > 0 && password === verifypassword,
+      validEmail: this.validateEmail(email),
+      validUsername: username ? true : false
+    })
   }
 
   async validFields(){

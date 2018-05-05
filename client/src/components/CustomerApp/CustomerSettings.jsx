@@ -37,21 +37,11 @@ class CustomerSettings extends React.Component {
 
   checkFields = () => {
     const { email, newPW1, newPW2, originalEmail, userName } = this.state
-    if(newPW1 === newPW2){
-      this.setState({passwordMatch: true})
-    } else {
-      this.setState({passwordMatch: false})
-    }
-    if(this.validateEmail(email)){
-      this.setState({validEmail: true})
-    } else {
-      this.setState({validEmail: false})
-    }
-    if(userName){
-      this.setState({validUsername: true})
-    } else {
-      this.setState({validUsername: false})
-    }
+    this.setState({
+      passwordMatch: newPW1 === newPW2,
+      validEmail: this.validateEmail(email),
+      validUsername: userName ? true : false
+    })
   }
 
   validFields = async () => {
