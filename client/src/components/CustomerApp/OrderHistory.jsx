@@ -15,6 +15,7 @@ class OrderHistory extends React.Component {
   }
 
   render() {
+    console.log('Redux state',this.props.state)
     const { orders } = this.props.state.customer;
 
     if (!orders || !Array.isArray(orders)) {
@@ -23,7 +24,7 @@ class OrderHistory extends React.Component {
       );
     }
 
-    const openOrders = orders.filter(order => order.status === 'queued' || order.statusorder.status === 'prepping')
+    const openOrders = orders.filter(order => order.status === 'queued');
     const openRender = openOrders.map(order => <OrderHistoryItem key={order.id} data={order} />);
     const closedOrders = orders.filter(order => order.status === 'complete').map(order => <OrderHistoryItem data={order} key={order.id} />);
 

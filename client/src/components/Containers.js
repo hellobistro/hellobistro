@@ -10,7 +10,7 @@ import CustomerLogin from './CustomerApp/CustomerLogin';
 import FindRestaurants from './CustomerApp/FindRestaurants';
 import Menu from './CustomerApp/Menu';
 import Order from './CustomerApp/Order';
-import Orders from './CustomerApp/Orders';
+import OrderHistory from './CustomerApp/OrderHistory';
 import OrderStatus from './CustomerApp/OrderStatus';
 import Restaurant from './CustomerApp/Restaurant';
 import RestaurantList from './CustomerApp/RestaurantList';
@@ -50,7 +50,7 @@ export const CustomerLoginContainer = withRouter(connect(mapStateToProps, mapDis
 export const FindRestaurantsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FindRestaurants));
 export const MenuContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Menu));
 export const OrderContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Order));
-export const OrdersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Orders));
+export const OrderHistoryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderHistory));
 export const OrderStatusContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderStatus));
 export const RestaurantContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Restaurant));
 export const RestaurantListContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantList));
