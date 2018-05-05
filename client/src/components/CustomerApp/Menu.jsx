@@ -16,7 +16,7 @@ class Menu extends React.Component {
 
   componentWillMount() {
     // Load restaurant data.
-    if (JSON.stringify(this.props.state.customer.currentRestaurant.id) !== this.props.match.params.id) {
+    if (!this.props.state.customer.currentRestaurant || JSON.stringify(this.props.state.customer.currentRestaurant.id) !== this.props.match.params.id) {
       // If new restaurant doesn't match prior restaurant, clear prior restaurant data.
       this.props.loadSelectedRestaurant({ MenuSections: ['loading'] });
       // Retrieve new restaurant data.
