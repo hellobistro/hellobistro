@@ -9,8 +9,8 @@ import ConfirmOrder from './CustomerApp/ConfirmOrder';
 import CustomerLogin from './CustomerApp/CustomerLogin';
 import FindRestaurants from './CustomerApp/FindRestaurants';
 import Menu from './CustomerApp/Menu';
-import CustomerOrder from './CustomerApp/CustomerOrder';
-import OrderHistory from './CustomerApp/OrderHistory';
+import Order from './CustomerApp/Order';
+import Orders from './CustomerApp/Orders';
 import OrderStatus from './CustomerApp/OrderStatus';
 import Restaurant from './CustomerApp/Restaurant';
 import RestaurantList from './CustomerApp/RestaurantList';
@@ -24,6 +24,9 @@ import CustomerSettings from './CustomerApp/CustomerSettings';
 import WidgetTotalRevenue from './RestaurantApp/Widgets/WidgetTotalRevenue';
 import WidgetTotalCustomers from './RestaurantApp/Widgets/WidgetTotalCustomers';
 import WidgetTopCustomersOrders from './RestaurantApp/Widgets/WidgetTopCustomersOrders';
+import WidgetItemOrderTotals from './RestaurantApp/Widgets/WidgetItemOrderTotals';
+import WidgetTotalRevenueByMonth from './RestaurantApp/Widgets/WidgetTotalRevenueByMonth';
+import WidgetTotalRevenueByDay from './RestaurantApp/Widgets/WidgetTotalRevenueByDay';
 import { withRouter } from 'react-router';
 
 
@@ -45,8 +48,8 @@ export const ConfirmOrderContainer = withRouter(connect(mapStateToProps, mapDisp
 export const CustomerLoginContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerLogin));
 export const FindRestaurantsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FindRestaurants));
 export const MenuContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Menu));
-export const CustomerOrderContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerOrder));
-export const OrderHistoryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderHistory));
+export const OrderContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Order));
+export const OrdersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Orders));
 export const OrderStatusContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderStatus));
 export const RestaurantContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Restaurant));
 export const RestaurantListContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantList));
@@ -60,4 +63,6 @@ export const CustomerSettingsContainer = withRouter(connect(mapStateToProps, map
 export const WidgetTotalRevenueContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalRevenue));
 export const WidgetTotalCustomersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalCustomers));
 export const WidgetTopCustomersOrdersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTopCustomersOrders));
-
+export const WidgetItemOrderTotalsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetItemOrderTotals));
+export const WidgetTotalRevenueByMonthContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalRevenueByMonth));
+export const WidgetTotalRevenueByDayContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalRevenueByDay));

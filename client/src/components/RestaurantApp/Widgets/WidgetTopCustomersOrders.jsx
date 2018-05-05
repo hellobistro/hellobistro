@@ -5,17 +5,15 @@ import React from 'react';
 import '../../../styles/Widgets.css';
 
 const WidgetTopCustomersOrders = (props) => {
-  console.log('zz', props);
-
   let topFiveCustomersByOrders = props.state.restaurant.analytics.topFiveCustomersByOrders;
 
   return (
     <div className="WidgetTotalCustomers widget widget-small">
-      <div className="widget-header-icon mat-color-orange"><i class="material-icons">people</i></div>
+      <div className="widget-header-icon mat-color-orange"><i className="material-icons">people</i></div>
       <div className="widget-header-text">Top 5 Customers (Orders)</div>
-      { topFiveCustomersByOrders.map((customer) => {
+      { topFiveCustomersByOrders.map((customer, index) => {
         return (
-          <div className="section info">
+          <div className="section info" key={index}>
             <span className="info-detail">{customer.orders}</span>
             <span className="info-label">{customer.userName}</span>
           </div>
