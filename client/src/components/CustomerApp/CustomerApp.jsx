@@ -7,7 +7,7 @@ import CustomerNav from './CustomerNav';
 import {
   FindRestaurantsContainer,
   OrderHistoryContainer,
-  CustomerOrderContainer,
+  OrderContainer,
   CustomerSettingsContainer,
   MenuContainer,
   ConfirmOrderContainer,
@@ -52,7 +52,7 @@ class CustomerApp extends React.Component {
           <Switch>
             <Route path="/customer/home/findRestaurants" component={FindRestaurantsContainer} />
             <Route path="/customer/home/history" component={OrderHistoryContainer} />
-            <Route path="/customer/home/order" component={CustomerOrderContainer} />
+            <Route path="/customer/home/order" component={OrderContainer} />
             <Route path="/customer/home/settings" component={CustomerSettingsContainer} />
             <Route path="/customer/home/:id/menu" component={MenuContainer} />
             <Route path="/customer/home/confirm-order" component={ConfirmOrderContainer} />
