@@ -44,7 +44,7 @@ input[type="text"].form-input, input[type="password"].form-input {
 }
 
 
-.big-link {
+.switch-restaurant {
   padding: 8px;
   width: 100%;
   display: flex;
@@ -57,13 +57,13 @@ input[type="text"].form-input, input[type="password"].form-input {
 }
 
 
-.big-link a {
+.switch-restaurant a {
   text-decoration: inherit;
   color: #c75b39;
   display: flex;
   align-items: center;
 }
 
-.big-link i {
+.switch-restaurant i {
   margin-right: 10px;
 }

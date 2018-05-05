@@ -41,3 +41,26 @@ input[type="text"].form-input, input[type="password"].form-input {
   font-weight: 800;
   font-size: 18px;
 }
+
+.switch-customer {
+  padding: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  color: #4CAF50;
+  font-family: 'Bitter', serif;
+  /* font-size: 10px; */
+  text-align: center;
+}
+
+.switch-customer a {
+  text-decoration: inherit;
+  color: #4CAF50;
+  display: flex;
+  align-items: center;
+}
+
+.switch-customer i {
+  margin-right: 10px;
+}
