@@ -173,6 +173,7 @@ const buildCustomerDirectory = order => {
     customerDirectory[currentCustomer].averageRevenue =
       customerDirectory[currentCustomer].totalRevenue /
       customerDirectory[currentCustomer].orders;
+
     if (customerDirectory[currentCustomer.lastOrderDate < order.completedAt]) {
       customerDirectory[currentCustomer].lastOrderDate = order.completedAt;
     }
@@ -236,7 +237,7 @@ const buildTopFiveCustomersByOrders = () => {
 
       // names must be equal
       return 0;
-    });
+    }).slice(5);
 };
 
 const buildTopFiveCustomersByRevenue = () => {
@@ -252,7 +253,7 @@ const buildTopFiveCustomersByRevenue = () => {
 
       // names must be equal
       return 0;
-    });
+    }).slice(5);
 };
 
 const buildItemOrderTotals = order => {
@@ -264,8 +265,8 @@ const buildItemOrderTotals = order => {
         totalRevenue: item.price
       };
     } else {
-      analyticsData.itemOrderTotals.data[item.name].orders++;
-      analyticsData.itemOrderTotals.data[item.name].totalRevnue += item.price;
+      analyticsData.itemOrderTotals.data[item.id].orders++;
+      analyticsData.itemOrderTotals.data[item.id].totalRevnue += item.price;
     }
   });
 };

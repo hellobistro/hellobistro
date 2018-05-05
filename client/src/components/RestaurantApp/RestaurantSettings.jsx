@@ -29,6 +29,8 @@ class RestaurantSettings extends React.Component {
     ApiService.updateRestaurant(this.props.state.restaurant.restaurantInfo.id, this.state.formValues).then((resJson) => {
       console.log('aa', resJson);
       this.props.updateRestaurantData(resJson);
+    }).then(() => {
+      this.props.history.push('/restaurant/home/dashboard');
     }).catch(err => {
       // Do nothing with error at this time
     });
@@ -68,7 +70,7 @@ class RestaurantSettings extends React.Component {
                 cid="addressOne"
                 name="addressOne"
                 type="text"
-                value={this.props.state.restaurant.restaurantInfo.addressOne}
+                defaultValue={this.props.state.restaurant.restaurantInfo.addressOne}
                 onChange={this.handleChange}
 
               />
