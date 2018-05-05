@@ -13,8 +13,9 @@ class OrderManager extends React.Component {
     ApiService.getOpenOrdersForRestaurant(restaurantId)
       .then((res) => {
         return res.json();
-      }).then((res) => {
-        console.log('the ressss', res)
+      }).then((openOrders) => {
+        console.log('the ressss', openOrders)
+        this.setState({ openOrders })
       })
       .catch(err => {
         console.log('error getting orders>>  ', err)
@@ -22,13 +23,16 @@ class OrderManager extends React.Component {
   }
 
 
-
   render() {
     console.log('the state inside ordermManager', this.state)
     return (
       this.state.openOrders
       ? (<div className="">
-        Here are your open orders:
+      {
+        this.state.openOrders.map((order) => {
+          return <div>Item name: {order.name}</div>
+        })
+      }
       </div>)
       : <div>you have no open orders</div>
     );
