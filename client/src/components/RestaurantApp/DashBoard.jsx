@@ -6,6 +6,9 @@ import {
   WidgetTotalRevenueContainer,
   WidgetTotalCustomersContainer,
   WidgetTopCustomersOrdersContainer,
+  WidgetItemOrderTotalsContainer,
+  WidgetTotalRevenueByMonthContainer,
+  WidgetTotalRevenueByDayContainer,
 } from '../Containers';
 
 // Import CSS
@@ -23,6 +26,9 @@ const DashBoard = props => (
     <WidgetTotalRevenueContainer />
     <WidgetTopCustomersOrdersContainer />
     <WidgetTotalCustomersContainer />
+    <WidgetItemOrderTotalsContainer />
+    <WidgetTotalRevenueByMonthContainer />
+    <WidgetTotalRevenueByDayContainer />
   </div>
 );
 

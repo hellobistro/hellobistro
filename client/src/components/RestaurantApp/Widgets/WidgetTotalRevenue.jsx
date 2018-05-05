@@ -8,7 +8,7 @@ const WidgetTotalRevenue = props => {
   return (
     <div className="WidgetTotalRevenue widget widget-small">
       <div className="widget-header-icon mat-color-green">
-        <i class="material-icons">attach_money</i>
+        <i className="material-icons">attach_money</i>
       </div>
       <div className="widget-header-text">Total Revenue</div>
       <div className="section info">
