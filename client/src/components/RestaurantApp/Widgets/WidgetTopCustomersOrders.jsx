@@ -9,7 +9,7 @@ const WidgetTopCustomersOrders = (props) => {
 
   return (
     <div className="WidgetTotalCustomers widget widget-small">
-      <div className="widget-header-icon mat-color-orange"><i className="material-icons">people</i></div>
+      <div className="widget-header-icon mat-color-purple"><i className="material-icons">people</i></div>
       <div className="widget-header-text">Top 5 Customers (Orders)</div>
       { topFiveCustomersByOrders.map((customer, index) => {
         if (index < 5) {

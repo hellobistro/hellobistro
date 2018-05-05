@@ -7,7 +7,7 @@ import '../../../styles/Widgets.css';
 const WidgetTotalCustomers = (props) => {
   return (
     <div className="WidgetTotalCustomers widget widget-small">
-      <div className="widget-header-icon mat-color-orange"><i className="material-icons">people</i></div>
+      <div className="widget-header-icon mat-color-purple"><i className="material-icons">people</i></div>
       <div className="widget-header-text">Total Customers</div>
 
       <div className="section info">
