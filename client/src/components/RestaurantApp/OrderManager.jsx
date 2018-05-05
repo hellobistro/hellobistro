@@ -7,7 +7,7 @@ class OrderManager extends React.Component {
   constructor() {
     super();
     this.state = {
-      change: false
+      apple: false
     };
   }
 
@@ -18,7 +18,7 @@ class OrderManager extends React.Component {
       .then((res) => {
         return res.json()
       }).then((res) => {
-        this.setState({change: true})
+        this.setState({apple: true})
       }).catch(err => {
         console.log('error completing order', err)
       })
@@ -60,7 +60,7 @@ class OrderManager extends React.Component {
         ))
       }
       </div>)
-      : <div>Loading...</div>
+      : <div>No open orders</div>
     );
    }
 }
