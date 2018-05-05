@@ -1,6 +1,7 @@
 // Import dependencies
 import React from 'react';
 import ApiService from '../../services/ApiService';
+const moment = require("moment");
 
 class OrderManager extends React.Component {
   constructor() {
@@ -8,13 +9,25 @@ class OrderManager extends React.Component {
     this.state = {};
   }
 
-  componentWillMount(){
+  closeOrder = (id) => {
+    let now = moment(Date.now());
+    console.log(now)
+    ApiService.completeOpenOrder(id, now)
+      .then((res) => {
+        return res.json()
+      }).then((res) => {
+        this.props.history.replace('/restaurant/home/orderManager');
+      }).catch(err => {
+        console.log('error completing order', err)
+      })
+  }
+
+  componentDidMount(){
     let restaurantId = JSON.parse(window.localStorage.state).restaurant.restaurantInfo.id
     ApiService.getOpenOrdersForRestaurant(restaurantId)
       .then((res) => {
         return res.json();
       }).then((openOrders) => {
-        console.log('the ressss', openOrders)
         this.setState({ openOrders })
       })
       .catch(err => {
@@ -24,17 +37,28 @@ class OrderManager extends React.Component {
 
 
   render() {
-    console.log('the state inside ordermManager', this.state)
+    console.log('the state inside ordermManager', this.state.openOrders)
     return (
       this.state.openOrders
       ? (<div className="">
+      <h3>Current Open Orders:</h3>
       {
-        this.state.openOrders.map((order) => {
-          return <div>Item name: {order.name}</div>
-        })
+        this.state.openOrders.map((order) => (
+          <div className="open-order">
+            <p>Order Number: {order.id}</p>
+            <button className="complete-open-order" onClick={() => this.closeOrder(order.id)}>Complete Order</button>
+            <p>Quantity: {order.MenuItems.length}</p>
+          {order.MenuItems.map((item) => 
+            <div className="open-order-item">
+            <div>Item name: {item.name}</div>
+            <div>Special Request: {item.OrderItem.special}</div>
+            </div>
+          )}
+          </div>
+        ))
       }
       </div>)
-      : <div>you have no open orders</div>
+      : <div>Loading...</div>
     );
    }
 }
