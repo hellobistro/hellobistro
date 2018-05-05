@@ -26,11 +26,10 @@ class CustomerApp extends React.Component {
   }
 
   componentDidMount() {
-    if (typeof this.props.state.customer.restaurants === 'undefined') {
-      ApiService.findRestaurants().then((res) => {
-        this.props.loadRestaurantList(res);
-      });
-    }
+    ApiService.findRestaurants().then((res) => {
+      console.log('updating restaurant list');
+      this.props.loadRestaurantList(res);
+    });
   }
 
   logout() {
