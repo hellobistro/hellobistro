@@ -10,8 +10,9 @@ import {
   MenuManagerContainer,
   PromosContainer,
   RestaurantRegisterContainer,
-  RestaurantSettingsContainer
-} from "../Containers";
+  RestaurantSettingsContainer,
+  OrderManagerContainer,
+} from '../Containers';
 
 import AuthService from "../../services/AuthService";
 import ApiService from "../../services/ApiService";
@@ -94,22 +95,11 @@ class RestaurantApp extends React.Component {
             <RestaurantNav {...this.props} />
           </div>
           <Switch>
-            <Route
-              path="/restaurant/home/register"
-              component={RestaurantRegisterContainer}
-            />
-            <Route
-              path="/restaurant/home/dashboard"
-              component={DashBoardContainer}
-            />
-            <Route
-              path="/restaurant/home/menuManager"
-              component={MenuManagerContainer}
-            />
-            <Route
-              path="/restaurant/home/settings"
-              component={RestaurantSettingsContainer}
-            />
+            <Route path="/restaurant/home/register" component={RestaurantRegisterContainer} />
+            <Route path="/restaurant/home/dashboard" component={DashBoardContainer} />
+            <Route path="/restaurant/home/menuManager" component={MenuManagerContainer} />
+            <Route path="/restaurant/home/orderManager" component={OrderManagerContainer} />
+            <Route path="/restaurant/home/settings" component={RestaurantSettingsContainer} />
           </Switch>
         </main>
       </div>

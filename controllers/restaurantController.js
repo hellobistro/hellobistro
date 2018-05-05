@@ -214,6 +214,7 @@ const restaurantController = {
       image,
       prepTime,
       rating,
+      status,
       menuSectionId
     } = req.body;
 
@@ -227,6 +228,7 @@ const restaurantController = {
       image,
       prepTime,
       rating,
+      status,
       MenuSectionId: menuSectionId,
       RestaurantId: restaurant_id
     })

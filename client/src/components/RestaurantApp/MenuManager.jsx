@@ -1,7 +1,6 @@
 // Import dependencies
 import React from 'react';
 import MenuSection from './MenuSection';
-import { sampleRestaurantGet } from '../../../sampleData';
 import ApiService from '../../services/ApiService';
 
 class MenuManager extends React.Component {
@@ -21,7 +20,6 @@ class MenuManager extends React.Component {
   deleteMenuSection = (index) => {
     let newMenuSections = this.state.MenuSections;
     newMenuSections.splice(index, 1);
-    console.log("the menusection after splice", newMenuSections)
     this.setState({MenuSections: newMenuSections});
   }
 
@@ -88,6 +86,7 @@ class MenuManager extends React.Component {
       for(let j = 0; j < menuSections[i].MenuItems.length; j++){
         if(menuSections[i].MenuItems[j].status === 'delete'){
           menuSections[i].MenuItems.splice(j, 1);
+          j--;
         } else if(menuSections[i].MenuItems[j].status === 'draft'){
           menuSections[i].MenuItems[j].status = 'published';
         }
@@ -103,7 +102,7 @@ class MenuManager extends React.Component {
               console.log('the newly created section', newSection)
               Promise.all(section.MenuItems.map((item)=>{
                 return ApiService.addNewMenuItem(this.state.id, item.name, item.price, item.vegan, item.vegetarian, 
-                  item.glutenFree, item.spicy, item.image, item.prepTime, item.rating, newSection.id)
+                  item.glutenFree, item.spicy, item.image, item.prepTime, item.rating, item.status, newSection.id)
               }))
             }))
         }))
