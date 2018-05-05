@@ -10,37 +10,112 @@ const {
 
 let customerDirectory = {};
 
-const analyticsData = {
-  allCustomers: [],
-  topTenCustomersByRevenue: [],
-  topTenCustomersByOrders: [],
-  totalRevenue: 0,
-  totalRevenueLast30Days: 0,
-  totalRevenueLast60Days: 0,
-  totalRevenueByDayOfWeek: {
-    Monday: 0,
-    Tuesday: 0,
-    Wednesday: 0,
-    Thursday: 0,
-    Friday: 0,
-    Saturday: 0,
-    Sunday: 0
-  },
-  totalRevenueByMonth: {
-    Jan: 0,
-    Feb: 0,
-    Mar: 0,
-    Apr: 0,
-    May: 0,
-    Jun: 0,
-    Jul: 0,
-    Aug: 0,
-    Sep: 0,
-    Oct: 0,
-    Nov: 0,
-    Dec: 0
-  },
-  openOrders: []
+let colors = [
+  "#EF5350",
+  "#FF7043",
+  "#FFEE58",
+  "#66BB6A",
+  "#29B6F6",
+  "#5C6BC0",
+  "#AB47BC",
+  "#EF5350",
+  "#FF7043",
+  "#FFEE58",
+  "#66BB6A",
+  "#29B6F6",
+  "#5C6BC0",
+  "#AB47BC",
+  "#EF5350",
+  "#FF7043",
+  "#FFEE58",
+  "#66BB6A",
+  "#29B6F6",
+  "#5C6BC0",
+  "#AB47BC"
+];
+
+let analyticsData = null;
+
+const generateAnalyticsObject = () => {
+  const defaultAnalyticsObject = {
+    allCustomers: [],
+    totalCustomers: 0,
+    totalCustomersLast30Days: 0,
+    totalCustomersLast60Days: 0,
+    totalCustomersLast90Days: 0,
+    topFiveCustomersByRevenue: null,
+    topFiveCustomersByOrders: null,
+    totalRevenue: 0,
+    totalRevenueLast30Days: 0,
+    totalRevenueLast60Days: 0,
+    totalRevenueByDayOfWeek: {
+      data: {
+        Monday: 0,
+        Tuesday: 0,
+        Wednesday: 0,
+        Thursday: 0,
+        Friday: 0,
+        Saturday: 0,
+        Sunday: 0,
+      },
+      widgetData: {
+        datasets: [
+          {
+            label: null,
+            data: [],
+            backgroundColor: colors,
+          },
+        ],
+        labels: [],
+      },
+      Monday: 0,
+    },
+    totalRevenueByMonth: {
+      data: {
+        Jan: 0,
+        Feb: 0,
+        Mar: 0,
+        Apr: 0,
+        May: 0,
+        Jun: 0,
+        Jul: 0,
+        Aug: 0,
+        Sep: 0,
+        Oct: 0,
+        Nov: 0,
+        Dec: 0,
+      },
+      widgetData: {
+        datasets: [
+          {
+            label: null,
+            data: [],
+            backgroundColor: colors,
+          }
+        ],
+        labels: []
+      }
+    },
+    itemOrderTotals: {
+      data: {},
+      widgetData: {
+        datasets: [
+          {
+            data: [],
+            backgroundColor: colors
+          }
+        ],
+        labels: []
+      }
+    },
+    openOrders: []
+  };
+
+  return defaultAnalyticsObject;
+};
+
+const buildTotalCustomers = () => {
+  analyticsData.totalCustomers = customerDirectory.length;
 };
 
 const buildTotalRevenue = order => {
@@ -74,12 +149,12 @@ const buildTotalRevenueLast60Days = order => {
 
 const buildTotalRevenueByDayOfWeek = order => {
   let day = moment(order.completedAt).format("dddd");
-  analyticsData.totalRevenueByDayOfWeek[day] += order.total;
+  analyticsData.totalRevenueByDayOfWeek.data[day] += order.total;
 };
 
 const buildTotalRevenueByMonth = order => {
   let month = moment(order.completedAt).format("MMM");
-  analyticsData.totalRevenueByMonth[month] += order.total;
+  analyticsData.totalRevenueByMonth.data[month] += order.total;
 };
 
 const buildCustomerDirectory = order => {
@@ -106,8 +181,29 @@ const buildCustomerDirectory = order => {
 
 const buildAllCustomers = () => {
   analyticsData.allCustomers.length = 0;
-  console.log('zz', customerDirectory);
+
+  // analyticsData.totalCustomers = customerDirectory.length;
+
   for (var key in customerDirectory) {
+    let completed = moment(customerDirectory[key].lastOrderDate);
+    let now = moment(Date.now());
+
+    let diffInDays = now.diff(completed, "days");
+
+    analyticsData.totalCustomers++;
+
+    if (diffInDays <= 30) {
+      analyticsData.totalCustomersLast30Days++;
+    }
+
+    if (diffInDays <= 60) {
+      analyticsData.totalCustomersLast60Days++;
+    }
+
+    if (diffInDays <= 90) {
+      analyticsData.totalCustomersLast90Days++;
+    }
+
     let customer = Object.assign({}, customerDirectory[key], { userName: key });
     analyticsData.allCustomers.push(customer);
   }
@@ -125,11 +221,10 @@ const buildAllCustomers = () => {
     // names must be equal
     return 0;
   });
-  console.log(analyticsData.allCustomers);
 };
 
-const buildTopTenCustomersByOrders = () => {
-  analyticsData.topTenCustomersByOrders = analyticsData.allCustomers
+const buildTopFiveCustomersByOrders = () => {
+  analyticsData.topFiveCustomersByOrders = analyticsData.allCustomers
     .slice()
     .sort((a, b) => {
       if (a.orders < b.orders) {
@@ -144,8 +239,8 @@ const buildTopTenCustomersByOrders = () => {
     });
 };
 
-const buildTopTenCustomersByRevenue = () => {
-  analyticsData.topTenCustomersByRevenue = analyticsData.allCustomers
+const buildTopFiveCustomersByRevenue = () => {
+  analyticsData.topFiveCustomersByRevenue = analyticsData.allCustomers
     .slice()
     .sort((a, b) => {
       if (a.totalRevenue < b.totalRevenue) {
@@ -160,8 +255,24 @@ const buildTopTenCustomersByRevenue = () => {
     });
 };
 
+const buildItemOrderTotals = order => {
+  order.MenuItems.forEach(item => {
+    if (!analyticsData.itemOrderTotals.data[item.id]) {
+      analyticsData.itemOrderTotals.data[item.id] = {
+        name: item.name,
+        orders: 1,
+        totalRevenue: item.price
+      };
+    } else {
+      analyticsData.itemOrderTotals.data[item.name].orders++;
+      analyticsData.itemOrderTotals.data[item.name].totalRevnue += item.price;
+    }
+  });
+};
+
 const analytics = {
   async buildAndSendData(req, res) {
+    analyticsData = generateAnalyticsObject();
     const { restaurant_id } = req.params;
 
     orders = await Order.findAll({
@@ -193,12 +304,35 @@ const analytics = {
         buildTotalRevenueByDayOfWeek(order);
         buildTotalRevenueByMonth(order);
         buildCustomerDirectory(order);
+        buildItemOrderTotals(order);
       }
     });
 
-    buildAllCustomers();
-    buildTopTenCustomersByRevenue();
-    buildTopTenCustomersByOrders();
+    await buildAllCustomers();
+    await buildTopFiveCustomersByRevenue();
+    await buildTopFiveCustomersByOrders();
+
+    for (var key in analyticsData.itemOrderTotals.data) {
+      let item = analyticsData.itemOrderTotals.data[key];
+      analyticsData.itemOrderTotals.widgetData.datasets[0].data.push(
+        item.orders
+      );
+      analyticsData.itemOrderTotals.widgetData.labels.push(item.name);
+    }
+
+    for (var key in analyticsData.totalRevenueByMonth.data) {
+      let month = analyticsData.totalRevenueByMonth.data[key];
+      analyticsData.totalRevenueByMonth.widgetData.datasets[0].data.push(month);
+      analyticsData.totalRevenueByMonth.widgetData.labels.push(key);
+    }
+
+    for (var key in analyticsData.totalRevenueByDayOfWeek.data) {
+      let day = analyticsData.totalRevenueByDayOfWeek.data[key];
+      analyticsData.totalRevenueByDayOfWeek.widgetData.datasets[0].data.push(
+        day
+      );
+      analyticsData.totalRevenueByDayOfWeek.widgetData.labels.push(key);
+    }
 
     res.json(analyticsData);
   }

@@ -2,9 +2,14 @@
 import React from 'react';
 
 // Import Widget Components
-import WidgetTotalCustomers from './Widgets/WidgetTotalCustomers';
-import WidgetTopCustomersOrders from './Widgets/WidgetTopCustomersOrders';
-import WidgetTotalRevenue from './Widgets/WidgetTotalRevenue';
+import {
+  WidgetTotalRevenueContainer,
+  WidgetTotalCustomersContainer,
+  WidgetTopCustomersOrdersContainer,
+  WidgetItemOrderTotalsContainer,
+  WidgetTotalRevenueByMonthContainer,
+  WidgetTotalRevenueByDayContainer,
+} from '../Containers';
 
 // Import CSS
 import '../../styles/DashBoard.css';
@@ -13,25 +18,17 @@ const DashBoard = props => (
   <div className="DashBoard">
     <div className="page-header">
       <p>
-        Hello, <strong>username</strong>.
-      </p>
-      <p>
-        Here is how <strong>{props.state.restaurant.data.name}</strong> is doing
+        Here is how <strong>{props.state.restaurant.restaurantInfo.name}</strong> is doing
         at-a-glance:
       </p>
     </div>
 
-    <WidgetTotalRevenue />
-    <WidgetTotalCustomers />
-    <WidgetTopCustomersOrders />
-
-    <WidgetTotalRevenue />
-    <WidgetTotalCustomers />
-    <WidgetTopCustomersOrders />
-
-    <WidgetTotalRevenue />
-    <WidgetTotalCustomers />
-    <WidgetTopCustomersOrders />
+    <WidgetTotalRevenueContainer />
+    <WidgetTopCustomersOrdersContainer />
+    <WidgetTotalCustomersContainer />
+    <WidgetItemOrderTotalsContainer />
+    <WidgetTotalRevenueByMonthContainer />
+    <WidgetTotalRevenueByDayContainer />
   </div>
 );
 

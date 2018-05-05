@@ -1,9 +1,9 @@
 import AuthService from './AuthService';
 
 const ApiService = {
-  submitOrder: (status, total, transaction, table, customerId, restaurantId, items) => AuthService.fetch(`/customers/${customerId}/orders`, {
+  submitOrder: (status, total, transactionId, table, CustomerId, RestaurantId, items) => AuthService.fetch(`/customers/${CustomerId}/orders`, {
     method: 'POST',
-    body: JSON.stringify({
+    body: {
       status,
       total,
       transactionId,
@@ -11,7 +11,7 @@ const ApiService = {
       CustomerId,
       RestaurantId,
       items,
-    }),
+    },
   }),
   findRestaurants: () => AuthService.fetch('/restaurants', { method: 'GET' }),
   stripeProcessing: paymentId => new Promise(resolve => resolve({
@@ -20,13 +20,13 @@ const ApiService = {
     paymentId,
   })),
 
-  getCustomerProfile: (id) => (
+  getCustomerProfile: id => (
     AuthService.fetch(`/customers/${id}`, {
       method: 'GET',
     })
   ),
 
-  updateCustomerProfile: (id, userName, email, firstName, lastName, phone, originalEmail, password) => 
+  updateCustomerProfile: (id, userName, email, firstName, lastName, phone, originalEmail, password) =>
     AuthService.fetch(`/customers/${id}/profile`, {
       method: 'PATCH',
       body: {
@@ -36,11 +36,11 @@ const ApiService = {
         lastName,
         phone,
         password,
-        originalEmail
+        originalEmail,
       }
     }),
 
-  retrieveOrders: id => Auth.fetch(`/customers/${id}/orders`, { method: 'GET' }),
+  retrieveOrders: id => AuthService.fetch(`/customers/${id}/orders`, { method: 'GET' }),
 };
 
 export default ApiService;
