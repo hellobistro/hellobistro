@@ -13,10 +13,13 @@ const WidgetTotalRevenueByMonth = (props) => {
     responsive: true
 };
   return (
-    <div className="WidgetTotalRevenueByMonth widget widget-small">
+    <div className="WidgetTotalRevenueByMonth widget widget-medium">
       <div className="widget-header-icon mat-color-green"><i className="material-icons">attach_money</i></div>
       <div className="widget-header-text">Total Revenue Per Month (lifetime)</div>
-      <Bar data={props.state.restaurant.analytics.totalRevenueByMonth.widgetData} options={myOptions} />
+      <div className="section-chart">
+      <Bar data={props.state.restaurant.analytics.totalRevenueByMonth.widgetData} options={{responsive: true}} legend={{display: false}} />
+      
+      </div>
     </div>
   );
 };

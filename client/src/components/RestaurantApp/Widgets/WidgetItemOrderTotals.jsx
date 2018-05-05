@@ -10,7 +10,10 @@ const WidgetItemOrderTotals = (props) => {
     <div className="WidgetTotalCustomers widget widget-small">
       <div className="widget-header-icon mat-color-orange"><i className="material-icons">people</i></div>
       <div className="widget-header-text">Menu Item Orders</div>
-      <Doughnut data={props.state.restaurant.analytics.itemOrderTotals.widgetData} />
+      <div className="section-chart">
+      <Doughnut data={props.state.restaurant.analytics.itemOrderTotals.widgetData} width={300} height={300} options={{responsive: false}} legend={{position: 'bottom'}} />
+      </div>
+
     </div>
   );
 };

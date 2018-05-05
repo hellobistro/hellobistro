@@ -24,10 +24,10 @@ const DashBoard = props => (
     </div>
 
     <WidgetTotalRevenueContainer />
+    <WidgetTotalRevenueByMonthContainer />
     <WidgetTopCustomersOrdersContainer />
     <WidgetTotalCustomersContainer />
     <WidgetItemOrderTotalsContainer />
-    <WidgetTotalRevenueByMonthContainer />
     <WidgetTotalRevenueByDayContainer />
   </div>
 );

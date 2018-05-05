@@ -21,6 +21,7 @@ import RestaurantRegister from './RestaurantApp/RestaurantRegister';
 import RestaurantSettings from './RestaurantApp/RestaurantSettings';
 import CustomerRegister from './CustomerApp/CustomerRegister';
 import CustomerSettings from './CustomerApp/CustomerSettings';
+import OrderManager from './RestaurantApp/OrderManager';
 import WidgetTotalRevenue from './RestaurantApp/Widgets/WidgetTotalRevenue';
 import WidgetTotalCustomers from './RestaurantApp/Widgets/WidgetTotalCustomers';
 import WidgetTopCustomersOrders from './RestaurantApp/Widgets/WidgetTopCustomersOrders';
@@ -60,6 +61,7 @@ export const RestaurantRegisterContainer = withRouter(connect(mapStateToProps, m
 export const RestaurantSettingsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantSettings));
 export const CustomerRegisterContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerRegister));
 export const CustomerSettingsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerSettings));
+export const OrderManagerContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderManager));
 export const WidgetTotalRevenueContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalRevenue));
 export const WidgetTotalCustomersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalCustomers));
 export const WidgetTopCustomersOrdersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTopCustomersOrders));
