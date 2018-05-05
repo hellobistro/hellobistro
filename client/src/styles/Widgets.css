@@ -68,6 +68,17 @@
   align-items: center;
   border-bottom: 2px solid lightgrey;
   width: 100%;
+  padding: 20px 0px;
+
+}
+
+.section-chart {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0px;
 }
 
 .info-label {

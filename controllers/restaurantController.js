@@ -302,12 +302,35 @@ const restaurantController = {
       });
   },
 
-  updateRestaurant(req, res) {
+  async updateRestaurant(req, res) {
     const { restaurant_id } = req.params;
     const updatedValues = req.body;
+    console.log(updatedValues);
 
-    Restaurant.findOne({ where: { id: restaurant_id } })
-      .then(restaurant => {
+    Restaurant.findOne({ where: { id: restaurant_id }, include: [{model: RestaurantUser, required: false}] })
+      .then(async (restaurant) => {
+        let user = restaurant.RestaurantUsers[0];
+        let hashedPassword = null;
+        if (updatedValues.password) {
+          hashedPassword = await bcrypt.hash(updatedValues.password, 10);
+          updatedValues.password = hashedPassword;
+        }
+
+        if (updatedValues.password && updatedValues.email) {
+          await user.update({
+            email: updatedValues.email,
+            password: updatedValues.password,
+          });        
+        } else if (updatedValues.password) {
+          await user.update({
+            password: updatedValues.password,
+          });        
+        } else if (updatedValues.email) {
+          await user.update({
+            email: updatedValues.email,
+          });        
+        }
+
         return restaurant.update(updatedValues);
       })
       .then(updatedRestaurant => {
