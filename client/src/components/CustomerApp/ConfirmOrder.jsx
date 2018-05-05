@@ -15,7 +15,7 @@ const ConfirmOrder = (props) => {
     const { userId, paymentId } = props.state.user;
     const { restaurantId } = props.state.customer;
     ApiService.stripeProcessing(paymentId).then((res) => {
-      ApiService.submitOrder('queued', billTotal, JSON.stringify(res.transactionId), 1, JSON.stringify(userId), JSON.stringify(restaurantId), JSON.stringify(items))
+      ApiService.submitOrder('queued', billTotal, res.transactionId, 1, userId, restaurantId, items)
         .then((response) => {
           props.clearCart();
           props.setRestaurant('undefined');
