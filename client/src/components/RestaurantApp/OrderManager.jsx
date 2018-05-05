@@ -11,8 +11,13 @@ class OrderManager extends React.Component {
   componentWillMount(){
     let restaurantId = JSON.parse(window.localStorage.state).restaurant.restaurantInfo.id
     ApiService.getOpenOrdersForRestaurant(restaurantId)
-      .then((openOrders) => {
-        this.setState({openOrders: openOrders})
+      .then((res) => {
+        return res.json();
+      }).then((res) => {
+        console.log('the ressss', res)
+      })
+      .catch(err => {
+        console.log('error getting orders>>  ', err)
       })
   }
 
@@ -21,9 +26,11 @@ class OrderManager extends React.Component {
   render() {
     console.log('the state inside ordermManager', this.state)
     return (
-      <div className="">
-        hi
-      </div>
+      this.state.openOrders
+      ? (<div className="">
+        Here are your open orders:
+      </div>)
+      : <div>you have no open orders</div>
     );
    }
 }
