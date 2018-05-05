@@ -19,7 +19,29 @@ const ApiService = {
     transactionId: 12345,
     paymentId,
   })),
+
+  getCustomerProfile: (id) => (
+    AuthService.fetch(`/customers/${id}`, {
+      method: 'GET',
+    })
+  ),
+
+  updateCustomerProfile: (id, userName, email, firstName, lastName, phone, originalEmail, password) => 
+    AuthService.fetch(`/customers/${id}/profile`, {
+      method: 'PATCH',
+      body: {
+        email,
+        userName,
+        firstName,
+        lastName,
+        phone,
+        password,
+        originalEmail
+      }
+    }),
+
   retrieveOrders: id => Auth.fetch(`/customers/${id}/orders`, { method: 'GET' }),
 };
 
 export default ApiService;
+

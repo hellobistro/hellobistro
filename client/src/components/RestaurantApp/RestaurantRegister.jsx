@@ -26,16 +26,10 @@ class RestaurantRegister extends Component {
 
   checkFields(){
     const {password, confirmpassword, email, username} = this.state
-    if(password.length > 0 && password === confirmpassword){
-      this.setState({passwordMatch: true})
-    } else {
-      this.setState({passwordMatch: false})
-    }
-    if(this.validateEmail(email)){
-      this.setState({validEmail: true})
-    } else {
-      this.setState({validEmail: false})
-    }
+    this.setState({
+      passwordMatch: password.length > 0 && password === confirmpassword,
+      validEmail: this.validateEmail(email)
+    })
   }
 
   async validFields(){
