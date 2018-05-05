@@ -6,7 +6,9 @@ const moment = require("moment");
 class OrderManager extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      change: false
+    };
   }
 
   closeOrder = (id) => {
@@ -16,7 +18,7 @@ class OrderManager extends React.Component {
       .then((res) => {
         return res.json()
       }).then((res) => {
-        this.props.history.replace('/restaurant/home/orderManager');
+        this.setState({change: true})
       }).catch(err => {
         console.log('error completing order', err)
       })
