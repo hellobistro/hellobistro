@@ -30,12 +30,20 @@ class RestaurantSettings extends React.Component {
       console.log('aa', resJson);
       this.props.updateRestaurantData(resJson);
     }).then(() => {
-      this.props.history.push('/restaurant/home/dashboard');
+      this.setState({confirmation: true});
+      window.scrollTo(0,0);
     }).catch(err => {
       // Do nothing with error at this time
     });
   }
 
+  renderConfirmation = () => {
+    return (
+      <p className="success">
+        Restaurant/account information updated
+      </p>
+    );
+  }
 
   render() {
     return(
@@ -45,6 +53,7 @@ class RestaurantSettings extends React.Component {
             Information/Settings for{' '}
             <strong>{this.props.state.restaurant.restaurantInfo.name}</strong>
           </p>
+          { this.state.confirmation ? this.renderConfirmation() : <div></div>}
         </div>
 
         <form className="form">

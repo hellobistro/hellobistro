@@ -3,6 +3,7 @@
   width: 80%;
   max-width: 800px;
   text-align: center;
+  min-height: 50vh;
 }
 
 .form-section {
@@ -40,4 +41,29 @@ input[type="text"].form-input, input[type="password"].form-input {
   padding: 10px 0px;
   font-weight: 800;
   font-size: 18px;
+}
+
+
+.big-link {
+  padding: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  color: #c75b39;
+  font-family: 'Bitter', serif;
+  /* font-size: 10px; */
+  text-align: center;
+}
+
+
+.big-link a {
+  text-decoration: inherit;
+  color: #c75b39;
+  display: flex;
+  align-items: center;
+}
+
+.big-link i {
+  margin-right: 10px;
 }
