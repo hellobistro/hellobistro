@@ -8,7 +8,7 @@ import '../../../styles/Widgets.css';
 const WidgetItemOrderTotals = (props) => {
   return (
     <div className="WidgetTotalCustomers widget widget-small">
-      <div className="widget-header-icon mat-color-orange"><i className="material-icons">people</i></div>
+      <div className="widget-header-icon mat-color-lightblue"><i className="material-icons">restaurant</i></div>
       <div className="widget-header-text">Menu Item Orders</div>
       <div className="section-chart">
       <Doughnut data={props.state.restaurant.analytics.itemOrderTotals.widgetData} width={300} height={300} options={{responsive: false}} legend={{position: 'bottom'}} />

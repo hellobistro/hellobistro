@@ -7,6 +7,7 @@ import ApiService from '../../services/CustomerApiService';
 const ConfirmOrder = (props) => {
   const { cart } = props.state.customer;
   const items = Object.values(cart);
+  console.log('Items from cart', items)
   const billTotal = items.reduce((a, b) =>
     a + (b.price * b.quantity), 0);
 
@@ -14,7 +15,7 @@ const ConfirmOrder = (props) => {
     const { userId, paymentId } = props.state.user;
     const { restaurantId } = props.state.customer;
     ApiService.stripeProcessing(paymentId).then((res) => {
-      ApiService.submitOrder('queued', billTotal, JSON.stringify(res.transactionId), 1, JSON.stringify(userId), JSON.stringify(restaurantId), items)
+      ApiService.submitOrder('queued', billTotal, res.transactionId, 1, userId, restaurantId, items)
         .then((response) => {
           props.clearCart();
           props.setRestaurant('undefined');

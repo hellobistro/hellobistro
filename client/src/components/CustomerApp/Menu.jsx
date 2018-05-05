@@ -16,7 +16,7 @@ class Menu extends React.Component {
 
   componentWillMount() {
     // Load restaurant data.
-    if (JSON.stringify(this.props.state.customer.currentRestaurant.id) !== this.props.match.params.id) {
+    if (!this.props.state.customer.currentRestaurant || JSON.stringify(this.props.state.customer.currentRestaurant.id) !== this.props.match.params.id) {
       // If new restaurant doesn't match prior restaurant, clear prior restaurant data.
       this.props.loadSelectedRestaurant({ MenuSections: ['loading'] });
       // Retrieve new restaurant data.
@@ -28,6 +28,7 @@ class Menu extends React.Component {
   }
 
   toggleModal = (data, editOrder) => {
+    console.log('toggle modal', data, editOrder)
     // If item is being added to cart
     if (editOrder) {
       this.props.setRestaurant(this.state.modalData.RestaurantId);
@@ -44,7 +45,7 @@ class Menu extends React.Component {
     }
 
     // Turn modal on by loading food data (if from correct restaurant). Turn modal off by loading 'null'
-    if ( this.props.state.customer.restaurantId === 'undefined' || data === null || data.RestaurantId === this.props.state.customer.restaurantId) {
+    if ( !this.props.state.customer.restaurantId || this.props.state.customer.restaurantId === 'undefined' || data === null || data.RestaurantId === this.props.state.customer.restaurantId) {
       this.setState({
         modalData: data,
       })

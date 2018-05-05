@@ -229,15 +229,15 @@ const buildTopFiveCustomersByOrders = () => {
     .slice()
     .sort((a, b) => {
       if (a.orders < b.orders) {
-        return -1;
+        return 1;
       }
       if (a.orders > b.orders) {
-        return 1;
+        return -1;
       }
 
       // names must be equal
       return 0;
-    }).slice(5);
+    });
 };
 
 const buildTopFiveCustomersByRevenue = () => {
@@ -245,15 +245,15 @@ const buildTopFiveCustomersByRevenue = () => {
     .slice()
     .sort((a, b) => {
       if (a.totalRevenue < b.totalRevenue) {
-        return -1;
+        return 1;
       }
       if (a.totalRevenue > b.totalRevenue) {
-        return 1;
+        return -1;
       }
 
       // names must be equal
       return 0;
-    }).slice(5);
+    });
 };
 
 const buildItemOrderTotals = order => {
