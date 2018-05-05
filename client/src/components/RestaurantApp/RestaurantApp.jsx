@@ -43,7 +43,7 @@ class RestaurantApp extends React.Component {
     // }
 
     ApiService.getRestaurantData(this.props.state.restaurant.restaurantInfo.id)
-      .then(data => {
+      .then((data) => {
         // Update restaurant information upon mount, only if different
         if (
           this.props.state.restaurant.restaurantInfo.updatedAt !==
@@ -52,13 +52,13 @@ class RestaurantApp extends React.Component {
           this.props.updateRestaurantData(data);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
 
-    // ApiService.getAnalytics(this.props.state.restaurant.restaurantInfo.id).then((data) => {
-    ApiService.getAnalytics(5)
-      .then(data => {
+    // ApiService.getAnalytics(5)
+    ApiService.getAnalytics(this.props.state.restaurant.restaurantInfo.id)
+      .then((data) => {
         // If no analytics data loaded, fetch it
         if (!this.props.state.restaurant.analytics.totalRevenue) {
           this.props.updateAnalyticsData(data);
