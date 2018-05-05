@@ -1,3 +1,4 @@
+const sequelize = require('sequelize');
 const {
   Customer,
   CustomerRating,
@@ -115,9 +116,9 @@ const getRandomTimeInterval = () => {
 const startSimulation = async () => {
   await getUsers();
   await getRestaurants();
-  generateOrder({ restaurantId: 24, status: 'completed', createdAt: '2018-04-01 12:53:58', completedAt: '2018-01-01 14:03:58' });
-  generateOrder({ restaurantId: 24, status: 'completed', createdAt: '2018-05-03 17:53:58', completedAt: '2018-02-03 18:03:58' });
-  generateOrder({ restaurantId: 24, status: 'completed', createdAt: '2018-05-04 13:53:58', completedAt: '2018-03-05 14:03:58' });
+  generateOrder({ restaurantId: 24 });
+  generateOrder({ restaurantId: 24 });
+  generateOrder({ restaurantId: 24 });
   // setInterval(generateOrder, 30000);
   // await toggleOrderStatus([{ id: 1, completedAt: '2018-04-11 06:10:52', status: 'completed' }, { id: 16, completedAt: '2018-05-02 22:34:37', status: 'completed' }]);
 };
