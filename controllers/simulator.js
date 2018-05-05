@@ -9,6 +9,8 @@ const {
   MenuSection,
 } = require('../database/index.js');
 
+// LOAD DATA
+
 const data = {};
 
 const getUsers = async () => {
@@ -22,6 +24,8 @@ const getRestaurants = async () => {
   data.restaurants = data.restaurants.filter(biz => (biz.MenuItems ? biz.MenuItems.length > 0 : 1 + 1 === 3));
   console.log(data.restaurants, ' restaurants loaded.');
 };
+
+// HELPER FUNCTIONS
 
 const getRandomUserId = () => {
   const min = 1;
@@ -41,6 +45,15 @@ const getRandomQuantity = () => {
   const min = 1;
   const max = 5;
   return Math.floor(Math.random() * (max - min)) + min;
+};
+
+// SIMULATOR ACTIONS
+
+const toggleOrderStatus = (ordersArray) => {
+  ordersArray.forEach((order) => {
+    console.log('Order id', order.id);
+    Order.findOne({ where: { id: order.id } }).then(result => result.update({ completedAt: order.completedAt, status: order.status }));
+  });
 };
 
 const generateOrder = (restaurant, customer, itemQuantity) => {
@@ -85,13 +98,20 @@ const generateOrder = (restaurant, customer, itemQuantity) => {
   });
 };
 
+// Simulator
+const getRandomTimeInterval = () => {
+  const intervals = [30000, 60000];
+  const min = 0;
+  const max = intervals.length;
+  const i = Math.floor(Math.random() * (max - min)) + min;
+  return intervals[i];
+};
 
 const startSimulation = async () => {
   await getUsers();
   await getRestaurants();
-  await generateOrder();
-  await generateOrder();
-  await generateOrder();
+  setInterval(generateOrder, 30000);
+  // await toggleOrderStatus([{ id: 1, completedAt: '2018-04-11 06:10:52', status: 'completed' }, { id: 16, completedAt: '2018-05-02 22:34:37', status: 'completed' }]);
 };
 
 startSimulation();
