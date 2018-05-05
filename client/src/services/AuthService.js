@@ -1,25 +1,19 @@
 import decode from 'jwt-decode';
 
 const AuthService = {
-  // Initializing important variables
-    domain: 'http://localhost:3000', // API server domain
-    // this.loggedIn = this.loggedIn.bind(this)
-    // this.fetch = this.fetch.bind(this) // React binding stuff
-    // this.login = this.login.bind(this)
-    // this.restaurantLogin = this.restaurantLogin.bind(this)
-    // this.getProfile = this.getProfile.bind(this)
+  domain: 'http://localhost:3000', 
 
-  customerRegister: (username, firstName, lastName, password, zip, phone, email) => {
+  customerRegister: (userName, firstName, lastName, password, zip, phone, email) => {
     return AuthService.fetch('/customers', {
       method: 'POST',
-      body: JSON.stringify({ username, firstName, lastName, password, zip, phone, email })
+      body: { userName, firstName, lastName, password, zip, phone, email }
     })
   },
 
   restaurantRegister: (email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type) => {
     return AuthService.fetch('/restaurants', {
       method: 'POST',
-      body: JSON.stringify({ email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type })
+      body: { email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type }
     })
   },
 
@@ -42,10 +36,10 @@ const AuthService = {
     // Get a token from api server using the fetch api
     return AuthService.fetch('/restaurants/login', {
       method: 'POST',
-      body: JSON.stringify({
+      body: {
         email,
         password
-      })
+      }
     }).then(res => {
       AuthService.setToken(res.token) // Setting the token in localStorage
       return res;
@@ -95,8 +89,8 @@ const AuthService = {
 
   fetch: (url, options) => {
     // performs api calls sending the required authentication headers
-    console.log('Auth service is fetching', options, url);
     options.body = JSON.stringify(options.body);
+    console.log('Auth service is fetching', options, url);
     const headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
