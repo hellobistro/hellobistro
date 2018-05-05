@@ -40,7 +40,7 @@ const ApiService = {
       }
     }),
 
-  retrieveOrders: id => Auth.fetch(`/customers/${id}/orders`, { method: 'GET' }),
+  retrieveOrders: id => AuthService.fetch(`/customers/${id}/orders`, { method: 'GET' }),
 };
 
 export default ApiService;
