@@ -100,7 +100,7 @@ class CustomerLogin extends Component {
         {/* <Link to='/developer/login'>HelloBistro for Developers</Link>*/}
           <div className="switch-restaurant">
         <Link to="/restaurant/login">
-          <i class="material-icons">store</i>HelloBistro for Restaurants
+          <i className="material-icons">store</i>HelloBistro for Restaurants
         </Link>
     
           </div>

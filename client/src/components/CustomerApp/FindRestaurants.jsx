@@ -20,7 +20,7 @@ const FindRestaurants = (props) => {
       <div className="restaurant-snippet" key={biz.id} onClick={() => {handleClick(biz.id)}} >
         <h3>{biz.name}</h3>
         <p>{biz.genre} - {biz.type}</p>
-        <p>Location: {biz.addressOne}, {biz.addressTwo}, {biz.city}, {biz.state}, {biz.zip}</p>
+        <p>Location: {biz.addressOne}, {biz.addressTwo ? `${biz.addressTwo}, ` : null}{biz.city}, {biz.state}, {biz.zip}</p>
         <p>Contact: {biz.phone}</p>
       </div>
     ));

@@ -63,7 +63,7 @@ const customerController = {
       items,
     } = req.body;
 
-    console.log('Order placed by', CustomerId, typeof CustomerId);
+    console.log('Order placed by', CustomerId, 'items: ', items);
 
     Order.create({
       status,
@@ -75,16 +75,17 @@ const customerController = {
     }).then(async (order) => {
       let newOrder = null;
       async function buildOrderItems() {
-        for (let item of items) {
-          await order.addMenuItem(item.id, { through: item.details });
-        }
+        items.forEach((item) => {
+          order.addMenuItem(item.id, { through: { special: item.special, price: item.price } });
+        });
         newOrder = Order.findById(order.id, {
           include: [MenuItem],
           required: false,
         });
-      };
+      }
 
       await buildOrderItems();
+      console.log('new order built and stored', newOrder);
 
       return newOrder;
     }).then((order) => {
@@ -237,7 +238,6 @@ const customerController = {
 
     const token = jwt.sign({ id: user.id, userType: 'Customer' }, 'secret', { expiresIn: 129600 });
     const info = { token, userId: user.id, userName: user.userName, firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, votes: user.availVotes, paymentId: user.paymentId };
-    console.log('Sending back token and info', info)
     res.json(info);
   },
 
