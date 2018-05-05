@@ -4,9 +4,9 @@ import React from 'react';
 // Import CSS
 import '../../styles/Mast.css';
 
-const Mast = () => (
+const Mast = (props) => (
   <div className="customer-mast">
-    <span>HelloBistro</span>
+    <span>{props.primaryText || 'HelloBistro'}</span>
   </div>
 );
 

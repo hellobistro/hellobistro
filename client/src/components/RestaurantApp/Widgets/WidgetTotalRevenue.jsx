@@ -14,7 +14,7 @@ const WidgetTotalRevenue = props => {
       <div className="section info">
         <span className="info-detail">
           $<span>
-            {props.state.restaurant.analytics.totalRevenueLast30Days}
+            {(props.state.restaurant.analytics.totalRevenueLast30Days).toFixed(2)}
           </span>
         </span>{" "}
         <span className="info-label">Last 30 Days</span>
@@ -22,19 +22,20 @@ const WidgetTotalRevenue = props => {
       <div className="section info">
         <span className="info-detail">
           $<span>
-            {props.state.restaurant.analytics.totalRevenueLast60Days}
+            {(props.state.restaurant.analytics.totalRevenueLast60Days).toFixed(2)}
           </span>
         </span>
         <span className="info-label">Last 60 Days</span>
       </div>
       <div className="section info">
         <span className="info-detail">
-          $<span>{props.state.restaurant.analytics.totalRevenue}</span>
+          $<span>{(props.state.restaurant.analytics.totalRevenue).toFixed(2)}</span>
         </span>
         <span className="info-label">Lifetime</span>
       </div>
     </div>
   );
+
 };
 
 export default WidgetTotalRevenue;
