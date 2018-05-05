@@ -12,7 +12,7 @@ const WidgetTopCustomersOrders = (props) => {
       <div className="widget-header-icon mat-color-orange"><i className="material-icons">people</i></div>
       <div className="widget-header-text">Top 5 Customers (Orders)</div>
       { topFiveCustomersByOrders.map((customer, index) => {
-        if (index > 4) {
+        if (index < 5) {
           return (
             <div className="section info" key={index}>
               <span className="info-detail">{customer.orders}</span>
