@@ -191,6 +191,7 @@ const restaurantController = {
            image,
            prepTime,
            rating,
+           status,
            menuSectionId } = req.body;
 
    MenuItem.create({
@@ -203,6 +204,7 @@ const restaurantController = {
      image,
      prepTime,
      rating,
+     status,
      MenuSectionId: menuSectionId,
      RestaurantId: restaurant_id
    }).then((item) => {

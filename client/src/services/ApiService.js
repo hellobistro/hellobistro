@@ -64,7 +64,7 @@ const ApiService = {
     })
   },
 
-  addNewMenuItem: (id, name, price, vegan, vegetarian, glutenFree, spicy, image, prepTime, rating, menuSectionId) => {
+  addNewMenuItem: (id, name, price, vegan, vegetarian, glutenFree, spicy, image, prepTime, rating, status, menuSectionId) => {
     return fetch(`${domain}/restaurants/menu/${id}`, {
       method: 'POST',
       headers: {
@@ -80,8 +80,18 @@ const ApiService = {
         image,
         prepTime,
         rating,
+        status,
         menuSectionId
       })
+    })
+  },
+
+  getOpenOrdersForRestaurant: (id) => {
+    return fetch(`${domain}/restaurants/${id}/orders/open`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json'
+      },
     })
   }
 };
