@@ -11,7 +11,7 @@ class MenuManager extends React.Component {
   }
 
   componentDidMount() {
-    let restaurantId = JSON.parse(window.localStorage.state).restaurant.data.id
+    let restaurantId = JSON.parse(window.localStorage.state).restaurant.restaurantInfo.id
     ApiService.getRestaurantData(restaurantId).then((info) => {
       console.log('the info:   ', {...info})
         this.setState({ ...info })
