@@ -117,35 +117,14 @@ const getRandomTimeInterval = () => {
 const startSimulation = async () => {
   await getUsers();
   await getRestaurants();
-  generateOrder({ restaurantId: 24 });
-  generateOrder({ restaurantId: 24 });
-  generateOrder({ restaurantId: 24 });
-  generateOrder({ restaurantId: 24 });
-  generateOrder({ restaurantId: 24 });
-  generateOrder({ restaurantId: 24 });
-  generateOrder({ restaurantId: 24 });
-  generateOrder({ restaurantId: 24 });
-  generateOrder({ restaurantId: 24 });
-  generateOrder({ restaurantId: 24 });
-  generateOrder({ restaurantId: 24 });
+  /** GENERATE A RANDOM ORDER (COPY FUNCTION TO GENERATE MULTIPLE) */
+  // generateOrder({ restaurantId: 24 });
+  /** GENERATE ORDERS FOR A SPECIFIED DATE / TIME */
   // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-01-02 07:10:52', completedAt: '2018-01-02 07:20:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-02-01 02:10:52', completedAt: '2018-02-01 02:21:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-03-12 22:10:52', completedAt: '2018-03-12 22:15:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-04-13 09:10:52', completedAt: '2018-04-13 09:23:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-05-03 10:09:52', completedAt: '2018-05-03 10:20:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-01-12 06:10:52', completedAt: '2018-01-12 06:20:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-02-10 06:10:52', completedAt: '2018-02-10 06:20:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-03-12 06:10:52', completedAt: '2018-03-12 06:20:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-04-15 06:10:52', completedAt: '2018-04-15 06:20:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-05-12 06:10:52', completedAt: '2018-05-12 06:20:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-01-14 16:10:52', completedAt: '2018-01-14 16:20:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-02-25 16:10:52', completedAt: '2018-02-25 16:21:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-03-21 15:08:52', completedAt: '2018-03-21 15:20:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-04-15 20:10:52', completedAt: '2018-04-15 20:18:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-05-12 23:10:52', completedAt: '2018-05-12 23:29:52' });
-  // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-03-21 11:10:52', completedAt: '2018-03-21 11:20:52' });
+  /** GENERATE ONE RANDOM ORDER EVERY 30 SECONDS */
   // setInterval(generateOrder, 30000);
-  // await toggleOrderStatus([{ id: 1, completedAt: '2018-04-11 06:10:52', status: 'completed' }, { id: 16, completedAt: '2018-05-02 22:34:37', status: 'completed' }]);
+  /** MODIFY AN ORDER */
+  toggleOrderStatus([{ id: 15, completedAt: '2018-05-02 22:16:42', status: 'completed' }, { id: 17, completedAt: '2018-05-03 05:13:49', status: 'completed' }, { id: 18, completedAt: '2018-05-03 22:43:13', status: 'completed' }, { id: 19, completedAt: '2018-05-03 22:48:05', status: 'completed' }, { id: 20, completedAt: '2018-05-04 01:24:25', status: 'completed' }, { id: 21, completedAt: '2018-05-04 05:35:26', status: 'completed' }, { id: 22, completedAt: '2018-05-04 05:40:32', status: 'completed' }, { id: 23, completedAt: '2018-05-05 04:36:07', status: 'completed' }, { id: 56, completedAt: '2018-05-04 04:59:09', status: 'completed' }]);
 };
 
 startSimulation();
