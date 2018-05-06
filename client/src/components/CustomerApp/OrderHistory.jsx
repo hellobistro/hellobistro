@@ -20,7 +20,7 @@ class OrderHistory extends React.Component {
 
     if (!orders || !Array.isArray(orders)) {
       return (
-        <div className="loader" />
+        <div className="customer-loader" />
       );
     }
 
