@@ -5,28 +5,6 @@
   text-align: center;
 }
 
-.form-section {
-  font-size: 18px;
-  margin: 10px 0px 30px 0px;
-  text-align: left;
-}
-
-input[type="text"].form-input {
-  -webkit-appearance:none;
-  -moz-appearance: none; 
-  -ms-appearance: none;
-  padding: 10px 0px;
-  margin: 0px 0px 10px 0px;
-  border: 0;
-  outline: none;
-  background: transparent;
-  border-bottom: 2px solid darkslategray;
-  color: darkslategray;
-  font-weight: 400;
-  font-size: 18px;
-  width: 100%;
-}
-
 .form-group label {
   font-size: 14px;
   padding: 5px 0px;
@@ -34,10 +12,114 @@ input[type="text"].form-input {
   display: block;
 }
 
+.item-input-div {
+  -webkit-appearance:none;
+  -moz-appearance: none; 
+  -ms-appearance: none;
+  margin: 0px 0px 15px 0px;
+  border: 0;
+  outline: none;
+  white-space: nowrap;
+  background: transparent;
+  border-bottom: 1px solid darkslategray;
+  color: darkslategray;
+  font-weight: 400;
+  font-size: 18px;
+  width: 90%;
+  display: block;
+}
 
-.form-section-header {
+.item-input-div.status {
+  border-bottom: 0px;
+}
+
+.item-input-div:hover .manager-icons {
+  color: #f96335;
+}
+
+.item-input-div:hover {
+  border-color: #f96335;
+}
+
+.item-input {
+  -webkit-appearance:none;
+  -moz-appearance: none; 
+  -ms-appearance: none;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: darkslategray;
+  font-weight: 400;
+  font-size: 18px;
+  width: 100%;
+  display: inline-block;
+}
+.manager-icons {
+  color: #c75b39;
+  display: inline-block;
+  font-size: 18px;
+  padding-right: 10px;
+  vertical-align: -9%;
+}
+
+
+
+/* .form-section-header {
   color: darkslategray;
   padding: 10px 0px;
   font-weight: 800;
   font-size: 18px;
+} */
+
+.form-section {
+  font-size: 18px;
+  margin: 10px 0px 30px 0px;
+  text-align: left;
 }
+
+.section-name {
+  font-size: 20px;
+  margin: 0px 0px 0px 0px !important;
+  border-bottom: 0 !important;
+}
+
+.section-description {
+  font-style: italic;
+  font-size: 14px !important;
+  padding-top: 1px !important;
+}
+
+.menu-manager-item {
+  /* flex: 0 0 24%; */
+  margin: 10px;
+  padding: 20px;
+  background: #FFFFFF;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24);
+  /* display: flex;
+  flex-wrap: wrap; */
+}
+
+.item-specs {
+  flex: 0 0 24%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nutri-facts {
+  margin-right: 20px;
+  margin-bottom: 2px;
+}
+
+.nutri-facts p {
+  font-size: 12px;
+}
+
+.option-name {
+  display: inline-block;
+  margin-right: 10px
+}
+
+.option-select {
+  display: inline-block;
+}
+
