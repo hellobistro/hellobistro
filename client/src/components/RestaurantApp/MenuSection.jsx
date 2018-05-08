@@ -37,7 +37,7 @@ class MenuSection extends React.Component {
         />
         {/* <button onClick={()=>deleteMenuSection(sectionIndex)}>Delete Menu Section</button> */}
         {items}
-        <button onClick={() => addItem(sectionIndex)}>Add item</button>
+        <button className="item-button" onClick={() => addItem(sectionIndex)}><i className="material-icons manager-icons">add_box</i>Add {data.name} item</button>
       </div>
     );
   }

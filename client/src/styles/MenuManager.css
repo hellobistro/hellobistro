@@ -3,6 +3,7 @@
   width: 80%;
   max-width: 800px;
   text-align: center;
+  padding-bottom: 40px;
 }
 
 .form-group label {
@@ -62,15 +63,6 @@
   vertical-align: -9%;
 }
 
-
-
-/* .form-section-header {
-  color: darkslategray;
-  padding: 10px 0px;
-  font-weight: 800;
-  font-size: 18px;
-} */
-
 .form-section {
   font-size: 18px;
   margin: 10px 0px 30px 0px;
@@ -122,4 +114,93 @@
 .option-select {
   display: inline-block;
 }
+.item-header {
+  flex: 0;
+  display: flex;
+  width: 90%;
+}
+
+.item-button {
+  background-color: #c75b39;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(244,67,54,.4);
+  color: #fff;
+  margin: auto;
+  text-transform: capitalize;
+  font-size: 13px;
+  padding: 10px 15px;
+  border-radius: 3px;
+  display: block;
+  cursor: pointer;
+}
+
+.item-button .manager-icons {
+  color: #fff;
+  vertical-align: -18%;
+}
+
+.item-button:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24);
+}
+
+.save-button {
+  background-color: #4CAF50;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(244,67,54,.4);
+  color: #fff;
+  margin: auto;
+  text-transform: capitalize;
+  font-size: 13px;
+  padding: 10px 15px;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.section-button {
+  background-color: #c75b39;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(244,67,54,.4);
+  color: #fff;
+  margin: auto;
+  text-transform: capitalize;
+  font-size: 13px;
+  padding: 10px 15px;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.status {
+  display: inline-block;
+}
+
+.item-image {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24);
+  float: right;
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+}
+
+.no-image {
+  display: inline-block;
+  float: right;
+  margin-bottom: 10px;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24);
+  font-size: 12px;
+}
+
+.no-image:hover {
+  box-shadow: 2px 2px 3px 3px rgba(0,0,0,0.24);
+}
+
+.no-image span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+
 

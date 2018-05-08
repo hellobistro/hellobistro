@@ -133,8 +133,8 @@ class MenuManager extends React.Component {
           </p>
         </div>
         {menuSections}
-        <button onClick={this.addSection}>Add a menu section</button>
-        <button onClick={this.clickSave}>Save Changes</button>
+        <button className="section-button" onClick={this.addSection}>Add a menu section</button>
+        <button className="save-button" onClick={this.clickSave}>Save Changes</button>
       </div>
     );
    } else {
