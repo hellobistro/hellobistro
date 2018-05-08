@@ -13,10 +13,14 @@ class MenuItem extends React.Component {
     return (this.props !== nextProps);
   }
 
+  imageUpload = (e) => {
+    this.refs.imageUploader.click();
+  }
+
   render() {
     const others = ['vegan', 'vegetarian', 'glutenFree', 'spicy'];
     const { sectionIndex, itemIndex, inputChange, data } = this.props;
-    const img = data.image ? <img className="item-image" src={data.image} alt="food" /> : <div className="no-image"><span>Upload image.</span></div>;
+    const img = data.image ? <img className="item-image" src={data.image} alt="food" /> : <div className="no-image" onClick={this.imageUpload}><span>Upload image.</span><input type="file" accept="image/*" ref="imageUploader" style={{display: "none"}}/></div>;
     const render = {
       name: <div className="item-input-div name"><input
         className="item-input"

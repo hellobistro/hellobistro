@@ -82,13 +82,10 @@
 }
 
 .menu-manager-item {
-  /* flex: 0 0 24%; */
   margin: 10px;
   padding: 20px;
   background: #FFFFFF;
   box-shadow: 0 4px 6px rgba(0,0,0,0.24);
-  /* display: flex;
-  flex-wrap: wrap; */
 }
 
 .item-specs {
@@ -144,7 +141,7 @@
 
 .save-button {
   background-color: #4CAF50;
-  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(244,67,54,.4);
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(54, 244, 162, .4);
   color: #fff;
   margin: auto;
   text-transform: capitalize;
@@ -153,6 +150,10 @@
   border-radius: 3px;
   display: inline-block;
   cursor: pointer;
+}
+
+.save-button:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24);
 }
 
 .section-button {
@@ -168,9 +169,25 @@
   cursor: pointer;
 }
 
-.status {
+.section-button:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24);
+}
+
+select.status {
+  background-color: #ECEFF1;
+  color: #333;
+  font-size: 13px;
+  padding: .5em;
+  padding-right: 2.5em; 
+  border: 1px;
+  border-radius: 0;
+  margin: 0;
+  text-indent: 0.01px;
+  text-overflow: '';
   display: inline-block;
 }
+
+
 
 .item-image {
   box-shadow: 0 4px 6px rgba(0,0,0,0.24);
