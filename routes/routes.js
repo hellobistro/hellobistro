@@ -173,6 +173,10 @@ routes.patch('/restaurants/:restaurant_id/menu/:item_id', (req, res) => {
   restaurantController.updateMenuItem(req, res);
 });
 
+routes.patch('/restaurants/openorder/:order_id', (req, res) => {
+  restaurantController.completeOpenOrder(req, res);
+});
+
 /* Destroy */
 
 // Delete a restaurant account

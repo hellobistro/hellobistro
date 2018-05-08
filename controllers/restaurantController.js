@@ -426,6 +426,22 @@ const restaurantController = {
       .catch(err => {
         res.send(err);
       });
+  },
+
+  completeOpenOrder(req, res) {
+    const { order_id } = req.params;
+    const { now } = req.body
+    Order.update({
+        status: "completed",
+        completedAt: now
+      },
+      {
+        where: {id: order_id}
+      }).then((res) => {
+        res.json(res)
+      }).catch(err => {
+        res.send(err);
+      })
   }
 };
 
