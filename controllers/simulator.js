@@ -117,23 +117,6 @@ const getRandomTimeInterval = () => {
 const startSimulation = async () => {
   await getUsers();
   await getRestaurants();
-  // generateOrder({ restaurantId: 24 });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-01-01 07:10:52', completedAt: '2018-01-01 07:20:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-02-11 02:10:52', completedAt: '2018-02-11 02:21:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-03-11 22:10:52', completedAt: '2018-03-11 22:15:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-04-11 09:10:52', completedAt: '2018-04-11 09:23:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-05-01 10:09:52', completedAt: '2018-05-01 10:20:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-01-16 06:10:52', completedAt: '2018-01-16 06:20:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-02-11 06:10:52', completedAt: '2018-02-11 06:20:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-03-11 06:10:52', completedAt: '2018-03-11 06:20:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-04-11 06:10:52', completedAt: '2018-04-11 06:20:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-05-02 06:10:52', completedAt: '2018-05-02 06:20:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-01-04 16:10:52', completedAt: '2018-01-04 16:20:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-02-05 16:10:52', completedAt: '2018-02-05 16:21:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-03-11 15:08:52', completedAt: '2018-03-11 15:20:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-04-11 20:10:52', completedAt: '2018-04-11 20:18:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-05-11 23:10:52', completedAt: '2018-05-11 23:29:52' });
-  generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-03-11 11:10:52', completedAt: '2018-03-11 11:20:52' });
   // setInterval(generateOrder, 30000);
   // await toggleOrderStatus([{ id: 1, completedAt: '2018-04-11 06:10:52', status: 'completed' }, { id: 16, completedAt: '2018-05-02 22:34:37', status: 'completed' }]);
 };
