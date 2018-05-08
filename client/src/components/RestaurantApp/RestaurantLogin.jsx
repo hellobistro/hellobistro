@@ -63,7 +63,7 @@ class RestaurantLogin extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="restaurantName">Email</label>
+              <label htmlFor="restaurantName">Password</label>
 
               <input
                 className="form-input"
