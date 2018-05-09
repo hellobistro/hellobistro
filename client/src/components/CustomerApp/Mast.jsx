@@ -6,7 +6,7 @@ import '../../styles/Mast.css';
 
 const Mast = (props) => (
   <div className="customer-mast">
-    <span>{'Test'}</span>
+    <span>{props.primaryText || 'HelloBistro'}</span>
   </div>
 );
 
