@@ -11,7 +11,7 @@ const RestaurantNav = (props) => {
   const logout = () => {
     
     localStorage.clear();
-    props.history.push('/');
+    props.history.push('/restaurant/login');
   }
   
   return (

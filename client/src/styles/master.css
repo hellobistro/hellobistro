@@ -29,44 +29,6 @@ body {
   margin-top: 15px;
 }
 
-/* Menu Manager components */
-/* .menu-item {
-  padding: 10px;
-  margin: 5px;
-  border-radius: 3px;
-  box-shadow: 0px 0px 1px 1px #333333;
-}
-
-.menu-section {
-  padding: 10px;
-  margin: 5px;
-}
-
-.menu-item p:hover, .menu-item h3:hover, .menu-item select:hover {
-  box-shadow: 0px 0px 8px 2px rebeccapurple;
-}
-
-.menu-item input {
-  box-shadow: 0px 0px 8px 2px rebeccapurple;
-} */
-
-.nutri-fact{
-  display: inline-block;
-  width: 160px;
-  height: 100px;
-}
-
-.no-image{
-  /* width: 50px;
-  height: 50px; */
-  margin: 50px 50px 50px 50px
-}
-
-.menu-section{
-  border:1px solid black;
-  padding: 20px
-}
-
 .restaurant-snippet {
   padding: 10px;
   margin: 5px;
@@ -125,13 +87,26 @@ body {
   box-shadow: 0px 0px 1px 1px #333333;
 }
 
-.loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+.restaurant-loader {
+  border: 16px solid #ffffff; 
+  border-top: 16px solid #c75b39; 
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 80px;
+  height: 80px;
   animation: spin 2s linear infinite;
+  margin: auto;
+  margin-top: 30vh;
+}
+
+.customer-loader {
+  border: 16px solid #ffffff; 
+  border-top: 16px solid #4CAF50; 
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+  margin-top: 30vh;
 }
 
 .open-order {
@@ -170,3 +145,4 @@ textarea.form-input {
   width: 100%;
 
 }
+

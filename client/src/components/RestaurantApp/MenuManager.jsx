@@ -118,7 +118,6 @@ class MenuManager extends React.Component {
   }
 
   render() {
-    console.log('the state inside menuManager#####', this.state)
     if(this.state.MenuSections){
     const menuSections = this.state.MenuSections.map((section, i) => 
     <MenuSection key={i} sectionIndex={i} data={section} 
@@ -128,13 +127,18 @@ class MenuManager extends React.Component {
       sectionChange={this.sectionChange} />);
     return (
       <div className="MenuManager form">
+        <div className="page-header">
+          <p>
+        Manage the menu for <strong>{this.props.state.restaurant.restaurantInfo.name}</strong>:
+          </p>
+        </div>
         {menuSections}
-        <button onClick={this.addSection}>Add a menu section</button>
-        <button onClick={this.clickSave}>Save Changes</button>
+        <button className="section-button" onClick={this.addSection}>Add a menu section</button>
+        <button className="save-button" onClick={this.clickSave}>Save Changes</button>
       </div>
     );
    } else {
-     return <p>loading ...</p>
+     return <div className='restaurant-loader'></div>
    }
   }
 }
