@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /home/ubuntu/hellobistro
-npm install
+sudo npm install
 cd /home/ubuntu/hellobistro/client
-npm install
-npm prod
+sudo npm install
+npm run prod
 echo "install complete"
