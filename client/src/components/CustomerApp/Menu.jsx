@@ -63,7 +63,7 @@ class Menu extends React.Component {
     // If there is no restaurant data on redux state.
     if (!data || data.MenuSections[0] === "loading") {
       console.log('loading loader')
-      return (<div className="loader"></div>);
+      return (<div className="customer-loader"></div>);
     }
     // If there are no menu sections    
     if (data.MenuSections.length === 0) {

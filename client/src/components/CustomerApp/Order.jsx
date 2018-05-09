@@ -50,7 +50,8 @@ class CustomerOrder extends React.Component {
 
 
   render() {
-    const { cart } = this.props.state.customer;
+    const cart = this.props.state.customer.cart || {};
+    console.log('the cart', cart)
     const items = Object.values(cart);
 
     // If cart is empty:
