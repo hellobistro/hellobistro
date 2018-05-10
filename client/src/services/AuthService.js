@@ -4,14 +4,14 @@ const AuthService = {
   domain: 'http://localhost:3000', 
 
   customerRegister: (userName, firstName, lastName, password, zip, phone, email) => {
-    return AuthService.fetch('/customers', {
+    return AuthService.fetch('/register/customers', {
       method: 'POST',
       body: { userName, firstName, lastName, password, zip, phone, email }
     })
   },
 
   restaurantRegister: (email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type) => {
-    return AuthService.fetch('/restaurants', {
+    return AuthService.fetch('/register/restaurants', {
       method: 'POST',
       body: { email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type }
     })
@@ -19,7 +19,7 @@ const AuthService = {
 
   login: (email, password) => {
     // Get a token from api server using the fetch api
-    return AuthService.fetch('/customers/login', {
+    return AuthService.fetch('/login/customers', {
       method: 'POST',
       body: {
         email,
@@ -34,7 +34,7 @@ const AuthService = {
 
   restaurantLogin: (email, password) => {
     // Get a token from api server using the fetch api
-    return AuthService.fetch('/restaurants/login', {
+    return AuthService.fetch('/login/restaurants', {
       method: 'POST',
       body: {
         email,
@@ -87,7 +87,7 @@ const AuthService = {
   },
 
 
-  fetch: (url, options) => {
+  fetch: (url, options = {}) => {
     // performs api calls sending the required authentication headers
     options.body = JSON.stringify(options.body);
     console.log('Auth service is fetching', options, url);
@@ -103,7 +103,7 @@ const AuthService = {
 
     return fetch(AuthService.domain + url, { headers, ...options })
       .then(AuthService._checkStatus)
-      .then(response => response.json())
+      .then(response => response.json());
   },
 
   _checkStatus: (response) => {

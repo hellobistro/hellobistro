@@ -24,7 +24,7 @@ class CustomerLogin extends Component {
     var decoded = jwt.decode(token, { complete: true });
     if (token) {
       if (decoded.payload.userType === "Customer") {
-        this.props.history.replace("/customer/home");
+        this.props.history.replace("/customer/home/findRestaurants");
       } else if (decoded.payload.userType === "Restaurant") {
         this.props.history.replace("/restaurant/home");
       }
@@ -45,7 +45,7 @@ class CustomerLogin extends Component {
         console.log("New res", res);
         this.props.loadCustomerUser(res);
         this.setState({ error: false });
-        this.props.history.replace("/customer/home");
+        this.props.history.replace("/customer/home/findRestaurants");
       })
       .catch(err => {
         this.setState({ error: true });
