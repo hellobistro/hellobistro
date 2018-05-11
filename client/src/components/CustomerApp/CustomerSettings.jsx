@@ -1,6 +1,6 @@
 // Import dependencies
 import React from 'react';
-import ApiService from '../../services/CustomerApiService';
+import ApiService from '../../services/ApiService';
 
 class CustomerSettings extends React.Component {
   constructor(props) {

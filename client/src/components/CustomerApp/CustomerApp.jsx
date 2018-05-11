@@ -14,7 +14,7 @@ import {
 } from '../Containers';
 // Import Services
 import AuthService from '../../services/AuthService';
-import ApiService from '../../services/CustomerApiService';
+import ApiService from '../../services/ApiService';
 // Import CSS
 import '../../styles/CustomerApp.css';
 

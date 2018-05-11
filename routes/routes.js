@@ -24,14 +24,14 @@ routes.get('/data/:restaurant_id/', (req, res) => {
 
 /* Authenticate */
 // Login a customer
-routes.post('/customers/login', (req, res) => {
+routes.post('/login/customers', (req, res) => {
   customerController.loginCustomer(req, res);
 });
 
 /* Create */
 
 // Create a new customer
-routes.post('/customers', async (req, res) => {
+routes.post('/register/customers', async (req, res) => {
   customerController.createCustomer(req, res);
 });
 
@@ -112,13 +112,13 @@ routes.delete('/customers/:customer_id', (req, res) => {
 // });
 
 // Login a restaurant
-routes.post('/restaurants/login', (req, res) => {
+routes.post('/login/restaurants', (req, res) => {
   restaurantController.loginRestaurant(req, res);
 });
 
 /* Create */
 // Create a new restaurant and user
-routes.post('/restaurants', (req, res) => {
+routes.post('/register/restaurants', (req, res) => {
   restaurantController.createRestaurant(req, res);
 });
 
