@@ -1,0 +1,16 @@
+#header{
+  margin: 10px;
+}
+
+#sub-header{
+  margin: 10px;
+}
+.restaurant-snippet {
+  padding: 20px;
+  background: #FFFFFF;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24);
+  margin: 0 10px 20px 10px;
+}
+.restaurant-snippet:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24), 0px 0px 1px 1px #4CAF50;
+}

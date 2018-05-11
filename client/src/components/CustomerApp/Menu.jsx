@@ -70,8 +70,8 @@ class Menu extends React.Component {
     if (data.MenuSections.length === 0) {
       return (
         <div>
-          <h3>Name: {data.name}</h3>
-          <p>Sorry, this menu is unavailable</p>
+          <h2 id="menu-rest-name">{data.name}</h2>
+          <h4 id="menu-section-subheader">Sorry, this menu is unavailable.</h4>
         </div>
       );
     }
