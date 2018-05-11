@@ -9,6 +9,7 @@ import ConfirmOrder from './CustomerApp/ConfirmOrder';
 import CustomerLogin from './CustomerApp/CustomerLogin';
 import FindRestaurants from './CustomerApp/FindRestaurants';
 import Menu from './CustomerApp/Menu';
+import MenuItem from './CustomerApp/MenuItem';
 import Order from './CustomerApp/Order';
 import OrderHistory from './CustomerApp/OrderHistory';
 import OrderStatus from './CustomerApp/OrderStatus';
@@ -49,6 +50,7 @@ export const ConfirmOrderContainer = withRouter(connect(mapStateToProps, mapDisp
 export const CustomerLoginContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerLogin));
 export const FindRestaurantsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FindRestaurants));
 export const MenuContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Menu));
+export const MenuItemContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(MenuItem));
 export const OrderContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Order));
 export const OrderHistoryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderHistory));
 export const OrderStatusContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderStatus));

@@ -5,6 +5,8 @@ import ApiService from '../../services/ApiService';
 import MenuSection from './MenuSection';
 import OrderModal from './OrderModal';
 import OrderStatus from './OrderStatus';
+// Import styles.
+import '../../styles/CustomerMenu.css';
 
 class Menu extends React.Component {
   constructor(props) {
@@ -45,7 +47,7 @@ class Menu extends React.Component {
     }
 
     // Turn modal on by loading food data (if from correct restaurant). Turn modal off by loading 'null'
-    if ( !this.props.state.customer.restaurantId || this.props.state.customer.restaurantId === 'undefined' || data === null || data.RestaurantId === this.props.state.customer.restaurantId) {
+    if ( !this.props.state.customer.cart.restaurantId || data === null || data.RestaurantId === this.props.state.customer.cart.restaurantId) {
       this.setState({
         modalData: data,
       })
@@ -62,7 +64,6 @@ class Menu extends React.Component {
     const data = this.props.state.customer.currentRestaurant;
     // If there is no restaurant data on redux state.
     if (!data || data.MenuSections[0] === "loading") {
-      console.log('loading loader')
       return (<div className="customer-loader"></div>);
     }
     // If there are no menu sections    
@@ -78,11 +79,11 @@ class Menu extends React.Component {
     const listSections = data.MenuSections.map(section =>
       <MenuSection key={section.id} data={section} toggleModal={this.toggleModal}/>);
 
-    const orderStatus = !this.props.state.customer.cart || Object.keys(this.props.state.customer.cart).length === 0 ? null : <div>You have {Object.keys(this.props.state.customer.cart).length} item(s) in your cart.</div>
+    const orderStatus = !this.props.state.customer.cart || Object.keys(this.props.state.customer.cart.items).length === 0 ? null : <div>You have {Object.keys(this.props.state.customer.cart.items).length} item(s) in your cart.</div>
  
     return (
       <div className="Menu DebugComponentRed">
-        <h3>Name: {data.name}</h3>
+        <h1 id="menu-rest-name">{data.name}</h1>
         <Link to='../order'>{orderStatus}</Link>
         {listSections}
         <OrderModal data={this.state.modalData} toggle={this.toggleModal} edit={this.handleModalChange}/>

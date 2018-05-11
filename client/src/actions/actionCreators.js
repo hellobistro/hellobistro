@@ -26,6 +26,7 @@ export function loadSelectedRestaurant(data) {
 }
 
 export function addToCart(data) {
+  console.log('adding to cart');
   return {
     type: 'ADD_TO_CART',
     data,
@@ -94,6 +95,13 @@ export function addUser(userId, userName) {
       userId,
       userName,
     },
+  };
+}
+
+export function updateTable(tableNumber) {
+  return {
+    type: 'UPDATE_TABLE',
+    tableNumber,
   };
 }
 

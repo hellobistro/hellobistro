@@ -50,12 +50,8 @@ class CustomerOrder extends React.Component {
 
 
   render() {
-    const cart = this.props.state.customer.cart || {};
-    console.log('the cart', cart)
-    const items = Object.values(cart);
-
     // If cart is empty:
-    if (items.length === 0) {
+    if (!this.props.state.customer.cart || !this.props.state.customer.cart.items) {
       return (
         <div className="order">
           <h4>Your Cart:</h4>
@@ -65,16 +61,15 @@ class CustomerOrder extends React.Component {
     }
 
     // If cart has items in it: 
+    const items = Object.values(this.props.state.customer.cart.items);
     const billTotal = items.reduce((a, b) =>
     a + (b.price * b.quantity), 0)
-    console.log(billTotal, 'BILL TOTAL')
-
-    const orderItems = items.map(item => <OrderItem key={item.id} data={item} toggle={this.toggleModal}/>);
+    const renderItems = items.map(item => <OrderItem key={item.id} data={item} toggle={this.toggleModal}/>);
 
     return (
       <div className="Order DebugComponentRed">
         <h4>Your Cart:</h4>
-        {orderItems}
+        {renderItems}
         <p><strong>Bill total:</strong> ${billTotal.toFixed(2)}</p>
         <Link to='/customer/home/confirm-order/'><button>Place order</button></Link><button onClick={this.cancelOrder}>Cancel order</button>
         <OrderModal data={this.state.modalData} toggle={this.toggleModal} edit={this.handleModalChange}/>

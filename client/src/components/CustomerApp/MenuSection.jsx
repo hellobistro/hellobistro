@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuItem from './MenuItem';
+import { MenuItemContainer } from '../Containers';
 
 const MenuSection = ({ data, toggleModal }) => {
   if (!data.MenuItems || data.MenuItems.length === 0) {
@@ -11,10 +11,10 @@ const MenuSection = ({ data, toggleModal }) => {
     );
   }
 
-  const items = data.MenuItems.map(item => <MenuItem data={item} key={item.id} toggleModal={toggleModal} />);
+  const items = data.MenuItems.map(item => <MenuItemContainer key={item.id} data={item} />);
   return (
     <div className="menu-section">
-      <h2>{data.name}</h2>
+      <h2 className="menu-section-name">{data.name}</h2>
       {items}
     </div>
   );
