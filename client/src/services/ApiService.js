@@ -22,21 +22,18 @@ const ApiService = {
   },
 
   removeOldMenu: id => {
-    return fetch(`${domain}/restaurants/sections/items/${id}`, {
+    return AuthService.fetch(`/restaurants/sections/items/${id}`, {
       method: "DELETE"
     });
   },
 
   addNewMenuSection: (id, name, description) => {
-    return fetch(`${domain}/restaurants/section/${id}`, {
+    return AuthService.fetch(`/restaurants/section/${id}`, {
       method: "POST",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify({
+      body: {
         name,
         description
-      })
+      }
     });
   },
 
@@ -54,12 +51,9 @@ const ApiService = {
     status,
     menuSectionId
   ) => {
-    return fetch(`${domain}/restaurants/menu/${id}`, {
+    return AuthService.fetch(`/restaurants/menu/${id}`, {
       method: "POST",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify({
+      body: {
         name,
         price,
         vegan,
@@ -71,28 +65,23 @@ const ApiService = {
         rating,
         status,
         menuSectionId
-      })
-    });
-  },
-
-  getOpenOrdersForRestaurant: id => {
-    return fetch(`${domain}/restaurants/${id}/orders/open`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json"
       }
     });
   },
 
+  getOpenOrdersForRestaurant: id => {
+    return AuthService.fetch(`/restaurants/${id}/orders/open`, {
+      method: "GET",
+
+    });
+  },
+
   completeOpenOrder: (id, now) => {
-    return fetch(`${domain}/restaurants/openorder/${id}`, {
+    return AuthService.fetch(`/restaurants/openorder/${id}`, {
       method: "PATCH",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify({
+      body: {
         now
-      })
+      }
     });
   },
 
