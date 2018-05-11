@@ -22,13 +22,13 @@ const DashBoard = props => (
         at-a-glance:
       </p>
     </div>
+     <WidgetTotalRevenueContainer />
+     <WidgetTotalCustomersContainer />
+     <WidgetTotalRevenueByMonthContainer />
+     <WidgetTopCustomersOrdersContainer />
+     <WidgetItemOrderTotalsContainer />
+     <WidgetTotalRevenueByDayContainer />
 
-    <WidgetTotalRevenueContainer />
-    <WidgetTotalRevenueByMonthContainer />
-    <WidgetTopCustomersOrdersContainer />
-    <WidgetTotalCustomersContainer />
-    <WidgetItemOrderTotalsContainer />
-    <WidgetTotalRevenueByDayContainer />
   </div>
 );
 
