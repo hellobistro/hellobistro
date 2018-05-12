@@ -52,7 +52,6 @@ const getRandomQuantity = () => {
 
 const toggleOrderStatus = (ordersArray) => {
   ordersArray.forEach((order) => {
-    console.log('Order id', order.id);
     Order.findOne({ where: { id: order.id } }).then(result => result.update({ completedAt: order.completedAt, status: order.status }));
   });
 };
@@ -118,13 +117,13 @@ const startSimulation = async () => {
   await getUsers();
   await getRestaurants();
   /** GENERATE A RANDOM ORDER (COPY FUNCTION TO GENERATE MULTIPLE) */
-  // generateOrder({ restaurantId: 24 });
+  generateOrder({RestaurantId: 24});
   /** GENERATE ORDERS FOR A SPECIFIED DATE / TIME */
   // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-01-02 07:10:52', completedAt: '2018-01-02 07:20:52' });
   /** GENERATE ONE RANDOM ORDER EVERY 30 SECONDS */
   // setInterval(generateOrder, 30000);
   /** MODIFY AN ORDER */
-  toggleOrderStatus([{ id: 15, completedAt: '2018-05-02 22:16:42', status: 'completed' }, { id: 17, completedAt: '2018-05-03 05:13:49', status: 'completed' }, { id: 18, completedAt: '2018-05-03 22:43:13', status: 'completed' }, { id: 19, completedAt: '2018-05-03 22:48:05', status: 'completed' }, { id: 20, completedAt: '2018-05-04 01:24:25', status: 'completed' }, { id: 21, completedAt: '2018-05-04 05:35:26', status: 'completed' }, { id: 22, completedAt: '2018-05-04 05:40:32', status: 'completed' }, { id: 23, completedAt: '2018-05-05 04:36:07', status: 'completed' }, { id: 56, completedAt: '2018-05-04 04:59:09', status: 'completed' }]);
+  // toggleOrderStatus([{ id: 15, completedAt: '2018-05-02 22:16:42', status: 'completed' }, { id: 17, completedAt: '2018-05-03 05:13:49', status: 'completed' }, { id: 18, completedAt: '2018-05-03 22:43:13', status: 'completed' }, { id: 19, completedAt: '2018-05-03 22:48:05', status: 'completed' }, { id: 20, completedAt: '2018-05-04 01:24:25', status: 'completed' }, { id: 21, completedAt: '2018-05-04 05:35:26', status: 'completed' }, { id: 22, completedAt: '2018-05-04 05:40:32', status: 'completed' }, { id: 23, completedAt: '2018-05-05 04:36:07', status: 'completed' }, { id: 56, completedAt: '2018-05-04 04:59:09', status: 'completed' }]);
 };
 
 startSimulation();

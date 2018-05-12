@@ -2,20 +2,19 @@
 import React from 'react';
 import ApiService from '../../services/ApiService';
 import OrderHistoryItem from './OrderHistoryItem';
+// Import style
+import '../../styles/CustomerOrderHistory.css';
 
 // Order component
 class OrderHistory extends React.Component {
   componentDidMount(props) {
-    console.log('mounting component')
     ApiService.retrieveOrders(this.props.state.user.userId)
       .then((res) => {
-        console.log('Order list recieved', res);
         this.props.loadOrders(res);
       });
   }
 
   render() {
-    console.log('Redux state',this.props.state)
     const { orders } = this.props.state.customer;
 
     if (!orders || !Array.isArray(orders)) {
@@ -31,13 +30,13 @@ class OrderHistory extends React.Component {
 
     return (
       <div className="order-history">
-        <div>
-          <h2>Your orders.</h2>
-          <h4>Currently open:</h4>
+        <div className="open">
+          <h2 className="header">Your orders.</h2>
+          <h3 className="sub-header">Currently open:</h3>
           {openRender}
         </div>
-        <div>
-          <h4>Completed orders:</h4>
+        <div className="completed">
+          <h3 className="sub-header">Completed orders:</h3>
           {closedRender}
         </div>
       </div>

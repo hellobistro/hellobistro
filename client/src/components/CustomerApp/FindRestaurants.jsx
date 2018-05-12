@@ -1,21 +1,22 @@
 // Import dependencies
-
-import React from "react";
-import { Route } from "react-router-dom";
+import React from 'react';
+import { Route } from 'react-router-dom';
 
 // Import components
+import { RestaurantContainer, RestaurantListContainer } from '../Containers';
 
-import { RestaurantContainer, RestaurantListContainer } from "../Containers";
+// Import styles.
+import '../../styles/CustomerFindRestaurants.css';
 
 // FindRestaurants component
 
-const FindRestaurants = props => {
-  const handleClick = id => {
+const FindRestaurants = (props) => {
+  const handleClick = (id) => {
     props.history.push(`/customer/home/${id}/Menu`);
   };
 
   const renderRestaurantList = () => {
-    let restaurantList = props.state.customer.restaurants.map(biz => (
+    const restaurantList = props.state.customer.restaurants.map(biz => (
       <div
         className="restaurant-snippet"
         key={biz.id}
@@ -42,9 +43,9 @@ const FindRestaurants = props => {
 
   return (
     <div className="FindRestaurants DebugComponentRed">
-      <h2>What restaurant would you like to check in to?</h2>
-      <p>We&#39;ve located the following restaurants in your area:</p>
-      {!props.state.customer.restaurants ? "no" : renderRestaurantList()}
+      <h2 id="header">What restaurant would you like to check in to?</h2>
+      <p id="sub-header">We&#39;ve located the following restaurants in your area:</p>
+      {!props.state.customer.restaurants ? <div className="customer-loader" /> : renderRestaurantList()}
     </div>
   );
 };

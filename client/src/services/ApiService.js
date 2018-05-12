@@ -10,6 +10,10 @@ const ApiService = {
     return AuthService.fetch(`/restaurants/${id}`);
   },
 
+  getMenuData(id) {
+    return AuthService.fetch(`/customers/view/${id}`);
+  },
+
   getAnalytics(id) {
     return AuthService.fetch(`/data/${id}`);
   },
@@ -107,7 +111,7 @@ const ApiService = {
         items
       }
     }),
-  findRestaurants: () => AuthService.fetch("/restaurants", { method: "GET" }),
+  findRestaurants: () => AuthService.fetch('/customers/view', { method: "GET" }),
   stripeProcessing: paymentId =>
     new Promise(resolve =>
       resolve({

@@ -47,6 +47,16 @@ routes.put('/customers/:customer_id/ratings/:menu_item_id', (req, res) => {
 
 /* Read */
 
+// Retrieve nearby restaurants
+routes.get('/customers/view', (req, res) => {
+  customerController.getAllRestaurants(req, res);
+});
+
+// Retrieve a single restaurant
+routes.get('/customers/view/:id', (req, res) => {
+  customerController.getSingleRestaurant(req, res);
+});
+
 // Retrieve all customers
 routes.get('/customers', (req, res) => {
   customerController.getAllCustomers(req, res);

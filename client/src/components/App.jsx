@@ -40,13 +40,6 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const restaurantId = 2;
-    ApiService.getRestaurantData(restaurantId).then((res) => {
-      this.props.loadRestaurantData(res);
-    });
-  }
-
   checkUser = () => {
     var token = AuthService.getToken()
     var decoded = jwt.decode(token, {complete: true});

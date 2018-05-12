@@ -1,0 +1,63 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.3);
+  padding: 50px;
+}
+
+.order-modal {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ECEFF1;
+  border-radius: 5px;
+  max-width: 400px;
+  min-height: 100px;
+  margin: auto;
+  padding: 30px;
+}
+
+input[type=number] {
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  padding: 0 8px;
+  margin: 10px 10px 10px 0px;
+}
+input[type=number]::-webkit-inner-spin-button { 
+  -webkit-appearance: none;
+  cursor:pointer;
+  display:block;
+  width:8px;
+  color: #333;
+  text-align:center;
+  position:relative;
+}
+
+input[type=number]:hover::-webkit-inner-spin-button { 
+  background: #eee url('http://i.stack.imgur.com/YYySO.png') no-repeat 50% 50%;  
+  width: 14px;
+  height: 14px;
+  padding: 4px;
+  position: relative;
+  right: 4px;
+  border-radius: 28px;
+}
+
+input[type="text"], textarea {
+  -webkit-appearance:none;
+  -moz-appearance: none; 
+  -ms-appearance: none;
+  padding: 10px 0px;
+  margin: 10px 10px 10px 0px;
+  border: 0;
+  outline: none;
+  background: #fff;
+  color: darkslategray;
+  font-weight: 400;
+  font-size: 18px;
+  width: 100%;
+}

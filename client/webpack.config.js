@@ -25,8 +25,9 @@ const config = {
         use: {
           loader: 'babel-loader',
           query: {
-            presets:[ 'es2015', 'react', 'stage-2' ]
-          }
+            compact: false,
+            presets: ['es2015', 'react', 'stage-2' ],
+          },
         },
       },
       {
