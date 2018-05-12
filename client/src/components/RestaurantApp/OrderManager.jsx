@@ -1,30 +1,24 @@
 // Import dependencies
 import React from 'react';
 import ApiService from '../../services/ApiService';
-const moment = require("moment");
+import OrderTimer from './OrderTimer'
+import moment from "moment";
 
 class OrderManager extends React.Component {
   constructor() {
     super();
-    this.state = {
-      apple: false
-    };
   }
 
   closeOrder = (id) => {
-    let now = moment(Date.now());
-    console.log(now)
-    ApiService.completeOpenOrder(id, now)
+    ApiService.completeOpenOrder(id)
       .then((res) => {
-        return res.json()
-      }).then((res) => {
-        this.setState({apple: true})
+        this.getOpenOrders();
       }).catch(err => {
         console.log('error completing order', err)
       })
   }
 
-  componentDidMount(){
+  getOpenOrders = () => {
     let restaurantId = JSON.parse(window.localStorage.state).restaurant.restaurantInfo.id
     ApiService.getOpenOrdersForRestaurant(restaurantId)
       .then((res) => {
@@ -37,30 +31,33 @@ class OrderManager extends React.Component {
       })
   }
 
+  componentDidMount(){
+    this.getOpenOrders();
+  }
 
   render() {
-    console.log('the state inside ordermManager', this.state.openOrders)
     return (
-      this.state.openOrders
+      this.state
       ? (<div className="">
-      <h3>Current Open Orders:</h3>
+      <div className="page-header"><strong>Open Orders:</strong></div>
       {
-        this.state.openOrders.map((order) => (
-          <div className="open-order">
+        this.state.openOrders.map((order) => {
+          return <div className="menu-manager-item item-input">
             <p>Order Number: {order.id}</p>
+            <OrderTimer order={order}/>
             <button className="complete-open-order" onClick={() => this.closeOrder(order.id)}>Complete Order</button>
             <p>Quantity: {order.MenuItems.length}</p>
           {order.MenuItems.map((item) => 
             <div className="open-order-item">
             <div>Item name: {item.name}</div>
-            <div>Special Request: {item.OrderItem.special}</div>
+            <div>Special Request: <i>{item.OrderItem.special}</i></div>
             </div>
           )}
           </div>
-        ))
+        })
       }
       </div>)
-      : <div>No open orders</div>
+      : <div className='restaurant-loader'></div>
     );
    }
 }
