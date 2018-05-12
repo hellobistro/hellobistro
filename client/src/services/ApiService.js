@@ -95,16 +95,13 @@ const ApiService = {
     })
   },
 
-  completeOpenOrder: (id, now) => {
+  completeOpenOrder: (id) => {
     //'/restaurants/:order_id'
     return fetch(`${domain}/restaurants/openorder/${id}`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        now
-      })
+      }
     })
   }
 };
