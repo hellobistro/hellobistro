@@ -80,13 +80,14 @@ const ApiService = {
     });
   },
 
-  completeOpenOrder: (id, now) => {
-    return AuthService.fetch(`/restaurants/openorder/${id}`, {
-      method: "PATCH",
-      body: {
-        now
+  completeOpenOrder: (id) => {
+    //'/restaurants/:order_id'
+    return fetch(`${domain}/restaurants/openorder/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json'
       }
-    });
+    })
   },
 
   submitOrder: (

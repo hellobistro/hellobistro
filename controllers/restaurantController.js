@@ -11,6 +11,8 @@ const {
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const moment = require("moment");
+
 const restaurantController = {
   async createRestaurant(req, res) {
     let newRestaurant = null;
@@ -430,10 +432,9 @@ const restaurantController = {
 
   completeOpenOrder(req, res) {
     const { order_id } = req.params;
-    const { now } = req.body
     Order.update({
         status: "completed",
-        completedAt: now
+        completedAt: moment()
       },
       {
         where: {id: order_id}
