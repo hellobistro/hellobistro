@@ -1,5 +1,5 @@
 const {
- Customer, CustomerRating, MenuItem, Order, OrderItem, Restaurant,
+ Customer, CustomerRating, MenuItem, MenuSection, Order, OrderItem, Restaurant,
 } = require('../database/index.js');
 const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');
@@ -52,6 +52,45 @@ const customerController = {
     });
   },
 
+  getAllRestaurants(req, res) {
+    Restaurant.findAll({})
+      .then((restaurants) => {
+        res.send(restaurants);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  },
+
+  getSingleRestaurant(req, res) {
+    const { id } = req.params;
+    Restaurant.find({
+      where: { id },
+      include: [
+        {
+          model: MenuSection,
+          required: false,
+          include: [
+            {
+              model: MenuItem,
+              required: false,
+            },
+          ],
+        },
+      ],
+    })
+      .then((restaurant) => {
+        if (restaurant === null) {
+          res.sendStatus(400);
+        } else {
+          res.status(200).json(restaurant);
+        }
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  },
+
   createOrder(req, res) {
     const {
       status,
@@ -63,7 +102,7 @@ const customerController = {
       items,
     } = req.body;
 
-    console.log('Order placed by', CustomerId, 'items: ', items);
+    console.log('Order placed by', CustomerId, 'RestaurantId', RestaurantId, 'items: ', items);
 
     Order.create({
       status,
@@ -226,13 +265,16 @@ const customerController = {
 
   async loginCustomer(req, res) {
     const { email, password } = req.body;
+    console.log('login email', email, 'login password', password)
     const user = await Customer.findOne({ where: { email } });
     if (!user) {
+      console.log('no user')
       res.sendStatus(400);
     }
 
     const authorized = await bcrypt.compare(password, user.password);
     if (!authorized) {
+      console.log('not authorized')
       res.sendStatus(400);
     }
 
