@@ -6,6 +6,7 @@ import {HorizontalBar} from 'react-chartjs-2';
 import '../../../styles/Widgets.css';
 
 const WidgetTotalRevenueByDay = (props) => {
+  const { totalRevenueByDayOfWeek } = props.state.restaurant.analytics;
   const myOptions = {
     legend: {
         display: false,
@@ -16,7 +17,11 @@ const WidgetTotalRevenueByDay = (props) => {
       <div className="widget-header-icon mat-color-green"><i className="material-icons">attach_money</i></div>
       <div className="widget-header-text">Total Revenue Per Day (lifetime)</div>
       <div className="section-chart">
-      <HorizontalBar data={props.state.restaurant.analytics.totalRevenueByDayOfWeek.widgetData} options={myOptions} />
+      {
+        !totalRevenueByDayOfWeek ? <div className="loading-spinner" />
+        :
+      <HorizontalBar data={totalRevenueByDayOfWeek.widgetData} options={myOptions} />
+      }
       
       </div>
     </div>

@@ -26,9 +26,8 @@ class RestaurantSettings extends React.Component {
   handleSubmit = (e) => {
     console.log('id', this.props.state.restaurant.restaurantInfo.id);
     e.preventDefault();
-    ApiService.updateRestaurant(this.props.state.restaurant.restaurantInfo.id, this.state.formValues).then((resJson) => {
-      console.log('aa', resJson);
-      this.props.updateRestaurantData(resJson);
+    ApiService.updateRestaurant(this.props.state.restaurant.restaurantInfo.id, this.state.formValues).then((data) => {
+      this.props.updateRestaurantData(data);
     }).then(() => {
       this.setState({confirmation: true});
       window.scrollTo(0,0);

@@ -31,7 +31,9 @@ class RestaurantLogin extends Component {
         const { userId, userName, restaurantInfo } = res;
         this.props.addUser(userId, userName);
         this.props.addRestaurant(restaurantInfo);
-        this.props.history.replace("/restaurant/home");
+      })
+      .then(() => {
+        this.props.history.replace("/restaurant/home/dashboard");
       })
       .catch(err => {
         this.setState({ error: true });
