@@ -82,11 +82,8 @@ const ApiService = {
 
   completeOpenOrder: (id) => {
     //'/restaurants/:order_id'
-    return fetch(`${domain}/restaurants/openorder/${id}`, {
+    return AuthService.fetch(`/restaurants/openorder/${id}`, {
       method: 'PATCH',
-      headers: {
-        'content-type': 'application/json'
-      }
     })
   },
 
