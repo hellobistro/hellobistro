@@ -33,6 +33,23 @@ export function addToCart(data) {
   };
 }
 
+export function editCartItem(id, key, value) {
+  return {
+    type: 'EDIT_CART_ITEM',
+    id, 
+    key, 
+    value,
+  };
+}
+
+export function deleteCartItem(id) {
+  console.log('deleting item', id);
+  return {
+    type: 'DELETE_CART_ITEM',
+    id,
+  };
+}
+
 export function clearCart() {
   return {
     type: 'CLEAR_CART',
@@ -46,9 +63,9 @@ export function loadCustomerUser(data) {
   };
 }
 
-export function setRestaurant(id) {
+export function setCartRestaurant(id) {
   return {
-    type: 'SET_RESTAURANT',
+    type: 'SET_CART_RESTAURANT',
     id,
   };
 }
@@ -104,4 +121,20 @@ export function updateTable(tableNumber) {
     tableNumber,
   };
 }
+
+export function modalOn(id, data) {
+  return {
+    type: 'MODAL_ON',
+    id,
+    data,
+  };
+}
+
+export function modalOff() {
+  return {
+    type: 'MODAL_OFF',
+  };
+}
+
+
 

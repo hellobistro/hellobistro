@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreators';
 import App from './App';
 import CustomerApp from './CustomerApp/CustomerApp';
+import CustomerModals from './CustomerApp/CustomerModals';
+import OrderModal from './Modals/OrderModal';
 import RestaurantApp from './RestaurantApp/RestaurantApp';
 import RestaurantLogin from './RestaurantApp/RestaurantLogin';
 import ConfirmOrder from './CustomerApp/ConfirmOrder';
@@ -11,6 +13,7 @@ import FindRestaurants from './CustomerApp/FindRestaurants';
 import Menu from './CustomerApp/Menu';
 import MenuItem from './CustomerApp/MenuItem';
 import Order from './CustomerApp/Order';
+import OrderItem from './CustomerApp/OrderItem';
 import OrderHistory from './CustomerApp/OrderHistory';
 import OrderStatus from './CustomerApp/OrderStatus';
 import Restaurant from './CustomerApp/Restaurant';
@@ -44,6 +47,8 @@ function mapDispatchToProps(dispatch) {
 
 export const AppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 export const CustomerAppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerApp));
+export const CustomerModalsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerModals));
+export const OrderModalContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderModal));
 export const RestaurantAppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantApp));
 export const RestaurantLoginContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantLogin));
 export const ConfirmOrderContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ConfirmOrder));
@@ -52,6 +57,7 @@ export const FindRestaurantsContainer = withRouter(connect(mapStateToProps, mapD
 export const MenuContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Menu));
 export const MenuItemContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(MenuItem));
 export const OrderContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Order));
+export const OrderItemContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderItem));
 export const OrderHistoryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderHistory));
 export const OrderStatusContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderStatus));
 export const RestaurantContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Restaurant));

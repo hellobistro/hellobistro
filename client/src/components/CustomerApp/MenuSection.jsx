@@ -1,7 +1,7 @@
 import React from 'react';
 import { MenuItemContainer } from '../Containers';
 
-const MenuSection = ({ data, toggleModal }) => {
+const MenuSection = ({ data }) => {
   if (!data.MenuItems || data.MenuItems.length === 0) {
     return (
     <div className="menu-section">

@@ -1,9 +1,8 @@
 // Import dependencies
 import React from 'react';
 import { Link } from 'react-router-dom';
-import OrderItem from './OrderItem';
-import OrderModal from './OrderModal';
-
+import { OrderItemContainer } from '../Containers';
+import '../../styles/CustomerOrder.css';
 
 // Order component
 class CustomerOrder extends React.Component {
@@ -14,48 +13,13 @@ class CustomerOrder extends React.Component {
     };
   }
 
-  toggleModal = (data, confirmed) => {
-      // If item is being added to cart
-      if (confirmed) {
-        
-        this.props.addToCart(this.state.modalData)
-      } 
-      // check if item is already in cart
-      if (data !== null && this.props.state.customer.cart[data.id]) {
-        data = this.props.state.customer.cart[data.id]
-      }
-
-      // make sure item has quantity attribute
-      if (data !== null && !data.quantity) {
-        data.quantity = 1;
-      }
-
-      // Turn modal on by loading food data. Turn modal off by loading 'null'
-      this.setState({
-        modalData: data,
-      })
-  }
-
-  handleModalChange = (key, value) => {
-    const modalData = Object.assign(this.state.modalData);
-    modalData[key] = value;
-    this.setState({modalData});
-  }
-
-  cancelOrder = () => {
-    this.props.clearCart();
-    this.props.setRestaurant('undefined');
-  }
-
-
-
   render() {
     // If cart is empty:
-    if (!this.props.state.customer.cart || !this.props.state.customer.cart.items) {
+    if (Object.values(this.props.state.customer.cart.items).length < 1) {
       return (
         <div className="order">
-          <h4>Your Cart:</h4>
-          <p>Your cart is currently empty.</p>
+          <h2 id="header">Your Cart:</h2>
+          <h4 id="sub-header">Your cart is currently empty.</h4>
         </div>
       );
     }
@@ -63,16 +27,15 @@ class CustomerOrder extends React.Component {
     // If cart has items in it: 
     const items = Object.values(this.props.state.customer.cart.items);
     const billTotal = items.reduce((a, b) =>
-    a + (b.price * b.quantity), 0)
-    const renderItems = items.map(item => <OrderItem key={item.id} data={item} toggle={this.toggleModal}/>);
+      a + (b.price * b.quantity), 0);
+    const renderItems = items.map(item => <OrderItemContainer key={item.id} data={item} toggle={this.toggleModal} />);
 
     return (
-      <div className="Order DebugComponentRed">
-        <h4>Your Cart:</h4>
+      <div className="order DebugComponentRed">
+        <h2 id="header">Your Cart:</h2>
         {renderItems}
-        <p><strong>Bill total:</strong> ${billTotal.toFixed(2)}</p>
-        <Link to='/customer/home/confirm-order/'><button>Place order</button></Link><button onClick={this.cancelOrder}>Cancel order</button>
-        <OrderModal data={this.state.modalData} toggle={this.toggleModal} edit={this.handleModalChange}/>
+        <p id="total"><strong>Bill total:</strong> ${billTotal.toFixed(2)}</p>
+        <Link to='/customer/home/confirm-order/'><button className="place-order">Place order</button></Link><button className="clear-cart" onClick={this.props.clearCart}>Cancel order</button>
       </div>
     );
   }

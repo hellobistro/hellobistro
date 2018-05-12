@@ -1,4 +1,4 @@
-function customer(state = { cart: { restaurant: { id: null, name: null }, items: {}, table: null } }, action) {
+function customer(state = { currentRestaurant: { MenuSections: ['loading'] }, cart: { restaurantId: null, items: {}, table: null } }, action) {
   switch (action.type) {
     case 'LOAD_RESTAURANT_LIST':
       return Object.assign({}, state, {
@@ -14,11 +14,30 @@ function customer(state = { cart: { restaurant: { id: null, name: null }, items:
           items: !state.cart || !state.cart.items ? { [action.data.id]: action.data } : { ...state.cart.items, [action.data.id]: action.data },
         },
       });
+    case 'EDIT_CART_ITEM':
+      return Object.assign({}, state, {
+        cart: {
+          restaurant: state.cart.restaurant,
+          table: state.cart.table,
+          items: {
+            ...state.cart.items,
+            [action.id]: {
+              ...state.cart.items[action.id],
+              [action.key]: action.value,
+            },
+          },
+        },
+      });
+    case 'DELETE_CART_ITEM': {
+      const oldState = Object.assign({}, state);
+      delete oldState.cart.items[action.id];
+      return oldState;
+    }
     case 'CLEAR_CART':
       return Object.assign({}, state, {
-        cart: { restaurant: { id: null, name: null }, items: {}, table: null },
+        cart: { restaurantId: null, items: {}, table: null },
       });
-    case 'SET_RESTAURANT':
+    case 'SET_CART_RESTAURANT':
       return Object.assign({}, state, {
         cart: { ...state.cart, restaurantId: action.id },
       });
