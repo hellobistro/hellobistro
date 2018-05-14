@@ -21,9 +21,7 @@ class OrderManager extends React.Component {
   getOpenOrders = () => {
     let restaurantId = JSON.parse(window.localStorage.state).restaurant.restaurantInfo.id
     ApiService.getOpenOrdersForRestaurant(restaurantId)
-      .then((res) => {
-        return res.json();
-      }).then((openOrders) => {
+      .then((openOrders) => {
         this.setState({ openOrders })
       })
       .catch(err => {

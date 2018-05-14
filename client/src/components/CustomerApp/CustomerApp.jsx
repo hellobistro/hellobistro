@@ -12,6 +12,7 @@ import {
   MenuContainer,
   ConfirmOrderContainer,
   CustomerModalsContainer,
+  PaymentMethodsContainer,
 } from '../Containers';
 // Import Services
 import AuthService from '../../services/AuthService';
@@ -58,6 +59,7 @@ class CustomerApp extends React.Component {
             <Route path="/customer/home/settings" component={CustomerSettingsContainer} />
             <Route path="/customer/home/:id/menu" component={MenuContainer} />
             <Route path="/customer/home/confirm-order" component={ConfirmOrderContainer} />
+            <Route path="/customer/home/payment" component={PaymentMethodsContainer} />
           </Switch>
         </main>
       </div>
