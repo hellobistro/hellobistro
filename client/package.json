@@ -41,9 +41,11 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
+    "react-stripe-elements": "^1.6.0",
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
     "style-loader": "^0.20.3",
+    "url-loader": "^1.0.1",
     "web-dev-server": "^1.1.1",
     "webpack": "^4.6.0"
   },

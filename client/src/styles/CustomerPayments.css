@@ -1,0 +1,44 @@
+.payment-methods {
+  padding: 20px;
+  font-family: Camphor,Open Sans,system-ui,sans-serif;
+}
+
+.payment-list {
+  padding: 20px;
+  background: #FFFFFF;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24);
+  margin: 0 10px 10px 0;
+  max-width: 600px;
+}
+
+
+.add-payment {
+  padding: 20px;
+  background: #FFFFFF;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24);
+  margin: 0 10px 10px 0;
+  max-width: 600px;
+}
+
+.add-button {
+  background-color: #4CAF50;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(54, 244, 162, .4);
+  color: #fff;
+  margin:  0 10px 20px 0;
+  text-transform: capitalize;
+  font-size: 13px;
+  padding: 10px 15px;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24);
+}
+
+.add-button .material-icons {
+  color: #fff;
+  vertical-align: -30%;
+  margin-right: 5px;
+}

@@ -9,3 +9,7 @@
   text-decoration: inherit;
   color: black;
 }
+
+.CustomerNav .material-icons {
+  vertical-align: -25%;
+}
