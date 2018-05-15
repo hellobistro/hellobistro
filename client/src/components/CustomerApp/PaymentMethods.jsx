@@ -7,7 +7,7 @@ import InjectedAddPayment from './AddPayment';
 import '../../styles/CustomerPayments.css';
 
 
-const PaymentMethods = () => {
+const PaymentMethods = (props) => {
   return (
     <div className="payment-methods">
       <h2>Manage your payment methods</h2>
@@ -19,7 +19,7 @@ const PaymentMethods = () => {
       </div>
       <StripeProvider apiKey="pk_test_lEspx1Lvu5kruar7NCjsiA4x">
         <Elements>
-          <InjectedAddPayment />
+          <InjectedAddPayment userId={props.state.user.userId} />
         </Elements>
       </StripeProvider>
     </div>
