@@ -246,4 +246,5 @@ module.exports = {
   OrderItem,
   Customer,
   CustomerRating,
+  PaymentMethods,
 };

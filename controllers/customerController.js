@@ -1,9 +1,12 @@
 const {
- Customer, CustomerRating, MenuItem, MenuSection, Order, OrderItem, Restaurant,
+ Customer, CustomerRating, MenuItem, MenuSection, Order, OrderItem, Restaurant, PaymentMethods,
 } = require('../database/index.js');
 const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const stripe = require('stripe')('sk_test_sJWgvI2cFmxaSynpc6s5bgh5');
+
+const stripeRegistration = (email, description) => stripe.customers.create({ description, email });
 
 const customerController = {
 
@@ -22,13 +25,14 @@ const customerController = {
       apiKey,
     } = req.body;
 
-    const user = await Customer.findOne({ where: { email }});
-    if(user) {
+    const user = await Customer.findOne({ where: { email } });
+    if (user) {
       res.status(400);
       res.send('email already exists');
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
     Customer.create({
       userName,
       firstName,
@@ -38,14 +42,31 @@ const customerController = {
       phone,
       email,
       availVotes: 5,
-      //paymenId can't be null?
       paymentId: 1,
       vendor,
       apiKey,
     }).then((customer) => {
-      var user = customer;
-      console.log('the newly created user>>>>>', user)
+      // Send back success message to customer.
       res.status(201).json(customer);
+      console.log('Customer account created', customer);
+      // Create stripe account for customer.
+      stripeRegistration(email, `hbCustomerId: ${customer.id}`)
+        .then((stripeCustomer) => {
+          console.log('Returned from stripe: ', stripeCustomer);
+          // Update customer record with Stripe data.
+          Customer.update({
+            paymentId: stripeCustomer.id,
+          }, {
+            where: {
+              id: customer.id,
+            },
+          }).then((result) => {
+            console.log('successful update of db with stripe data', result)
+          }).catch((err) => {
+            console.log(err);
+            res.send(err);
+          });
+        });
     }).catch((err) => {
       console.log('error created customerUser', err);
       res.send(err);

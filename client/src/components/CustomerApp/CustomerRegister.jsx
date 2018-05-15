@@ -1,9 +1,9 @@
 // Import dependencies
-import React, { Component } from "react";
-import AuthService from "../../services/AuthService";
-import Mast from "./Mast";
+import React, { Component } from 'react';
+import AuthService from '../../services/AuthService';
+import Mast from './Mast';
 
-require("babel-polyfill");
+require('babel-polyfill');
 
 class CustomerRegister extends Component {
   constructor() {
@@ -12,32 +12,34 @@ class CustomerRegister extends Component {
       error: false,
       passwordMatch: true,
       validEmail: true,
-      validUsername: true
+      validUsername: true,
     };
   }
 
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   }
 
   validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   }
 
   checkFields() {
-    const { password, verifypassword, email, username } = this.state;
+    const {
+ password, verifypassword, email, username 
+} = this.state;
     this.setState({
       passwordMatch: password.length > 0 && password === verifypassword,
       validEmail: this.validateEmail(email),
-      validUsername: username ? true : false
+      validUsername: !!username,
     });
   }
 
   async validFields() {
-    var check = await this.checkFields.call(this);
+    let check = await this.checkFields.call(this);
     return (
       this.state.username && this.state.passwordMatch && this.state.validEmail
     );
@@ -53,9 +55,9 @@ class CustomerRegister extends Component {
       verifypassword,
       zip,
       phone,
-      email
+      email,
     } = this.state;
-    var check = await this.validFields.call(this);
+    let check = await this.validFields.call(this);
     if (check) {
       AuthService.customerRegister(
         username,
@@ -64,16 +66,16 @@ class CustomerRegister extends Component {
         password,
         zip,
         phone,
-        email
+        email,
       )
-        .then(res => {
+        .then((res) => {
           this.setState({ error: false });
-          this.props.history.replace("/");
-          console.log("successfully registered ~~", res);
+          this.props.history.replace('/');
+          console.log('successfully registered ~~', res);
         })
-        .catch(err => {
+        .catch((err) => {
           this.setState({ error: true });
-          console.error("error registering customer", err);
+          console.error('error registering customer', err);
         });
     }
   }
