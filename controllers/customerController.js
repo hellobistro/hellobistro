@@ -319,9 +319,13 @@ const customerController = {
       lastName,
       email,
       phone
-    }, {where: { id: customer_id }})
-      .then((updatedUser) => {
-        console.log('the udpatedUser', updatedUser)
+    }, {
+      where: { id: customer_id },
+      returning: true,
+      plain: true
+    })
+      .then(async () => {
+        const updatedUser = await Customer.findOne({ where: { id: customer_id } })
         res.json(updatedUser)
       })
     

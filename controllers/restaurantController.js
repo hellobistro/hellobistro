@@ -208,6 +208,7 @@ const restaurantController = {
     const { restaurant_id } = req.params;
     const {
       name,
+      //description,
       price,
       vegan,
       vegetarian,

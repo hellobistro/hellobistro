@@ -44,6 +44,7 @@ const ApiService = {
   addNewMenuItem: (
     id,
     name,
+    description,
     price,
     vegan,
     vegetarian,
@@ -59,6 +60,7 @@ const ApiService = {
       method: "POST",
       body: {
         name,
+        //description,
         price,
         vegan,
         vegetarian,

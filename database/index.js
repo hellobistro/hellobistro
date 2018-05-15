@@ -70,6 +70,7 @@ const MenuItem = sequelize.define('MenuItem', {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  //description: Sequelize.STRING,
   price: {
     type: Sequelize.FLOAT,
     allowNull: false,

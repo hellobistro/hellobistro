@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../styles/MenuManager.css';
+import AuthService from '../../services/AuthService';
 
 class MenuItem extends React.Component {
   constructor(props) {
@@ -17,10 +18,35 @@ class MenuItem extends React.Component {
     this.refs.imageUploader.click();
   }
 
+  _onChange = () => {
+    var file = this.refs.imageUploader.files[0];
+    console.log('the fileee:  ', file)
+    // var reader = new FileReader();
+    // var url = reader.readAsDataURL(file);
+
+    var data = new FormData()
+    data.append('file', file)
+    //console.log('the urlll:  ', url)
+
+    fetch('http://localhost:3000/upload', {
+      method: "POST",
+      //headers: {'Content-Type': 'multipart/form-data'},
+      //form: data
+      body: data
+    });
+    //  reader.onloadend = function (e) {
+    //     this.setState({
+    //         imgSrc: [reader.result]
+    //     })
+    //   }.bind(this);
+    // console.log('the urllll:  ', url) 
+  }
+  
+
   render() {
     const others = ['vegan', 'vegetarian', 'glutenFree', 'spicy'];
     const { sectionIndex, itemIndex, inputChange, data } = this.props;
-    const img = data.image ? <img className="item-image" src={data.image} alt="food" /> : <div className="no-image" onClick={this.imageUpload}><span>Upload image.</span><input type="file" accept="image/*" ref="imageUploader" style={{display: "none"}}/></div>;
+    const img = data.image ? <img className="item-image" src={data.image} alt="food" /> : <div className="no-image" onClick={this.imageUpload}><span>Upload image.</span><input type="file" accept="image/*" ref="imageUploader" style={{display: "none"}} onChange={this._onChange}/></div>;
     const render = {
       name: <div className="item-input-div name"><input
         className="item-input"
@@ -37,6 +63,17 @@ class MenuItem extends React.Component {
         type="text"
         placeholder="$"
         defaultValue={data.price}
+        onChange={(e) => { inputChange(sectionIndex, itemIndex, e);}}
+      />
+      </div>,
+      description: <div className="item-input-div description"><i className="material-icons manager-icons description">format_align_justify</i><textarea
+        className="item-input"
+        name="description"
+        type="text"
+        placeholder="Description about food item"
+        defaultValue={data.description}
+        maxLength="255"
+        rows="1"
         onChange={(e) => { inputChange(sectionIndex, itemIndex, e);}}
       />
       </div>,
@@ -79,6 +116,7 @@ class MenuItem extends React.Component {
           {img}
         </div>
         {render.name}
+        {render.description}
         {render.price}
         {render.prepTime}
         <div className="item-specs">
