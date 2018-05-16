@@ -201,6 +201,8 @@ routes.delete('/restaurants/:restaurant_id/openorders/:order_id', (req, res) => 
 
 // Delete all menuSections and menuItems for a restaurant
 routes.delete('/restaurants/sections/items/:restaurant_id', (req, res) => {
+  console.log('~~got to the routes~~');
+  console.log('the req.body in routes:  ', req.body)
   restaurantController.deleteAllMenuSectionsAndItems(req, res);
 });
 
@@ -256,6 +258,11 @@ routes.patch('/api/:user_id', (req, res) => {
 // Retrieve an API user account
 routes.delete('/api/:user_id', (req, res) => {
   // implement
+});
+
+//upload photo
+routes.post('/upload/:item_id', (req, res) => {
+  restaurantController.uploadPhoto(req, res);
 });
 
 module.exports = routes;
