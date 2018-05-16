@@ -166,6 +166,32 @@ const CustomerRating = sequelize.define('CustomerRating', {
   },
 });
 
+const PaymentMethods = sequelize.define('PaymentMethod', {
+  cardId: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false,
+  },
+  zip: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  brand: Sequelize.STRING,
+  country: Sequelize.STRING,
+  exp_month: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  exp_year: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  last4: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+});
+
 RestaurantUser.belongsTo(Restaurant);
 Restaurant.hasMany(RestaurantUser);
 
@@ -190,6 +216,8 @@ MenuItem.belongsToMany(Order, { through: 'OrderItem' });
 Customer.belongsToMany(MenuItem, { through: 'CustomerRating' });
 MenuItem.belongsToMany(Customer, { through: 'CustomerRating' });
 
+PaymentMethods.belongsTo(Customer);
+Customer.hasMany(PaymentMethods);
 
 /// USE THIS TO SEED DB ///////
 
@@ -218,4 +246,5 @@ module.exports = {
   OrderItem,
   Customer,
   CustomerRating,
+  PaymentMethods,
 };
