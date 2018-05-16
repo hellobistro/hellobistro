@@ -50,39 +50,40 @@ class RestaurantLogin extends Component {
     return (
       <div className="RestaurantLogin">
         <Mast primaryText={"HelloBistro for Restaurants"} />
-        <div className="mock-form">
-          <div className="form-section">
-            <div className="form-section-header" />
+        <div className="rest-background">
+          <div className="mock-form">
+            <div className="form-section">
+              <div className="form-section-header" />
 
-            <div className="form-group">
-              <label htmlFor="restaurantName">Email</label>
-              <input
-                className="form-input"
-                placeholder="Email"
-                name="email"
-                type="text"
-                onChange={this.handleChange.bind(this)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="restaurantName">Password</label>
+              <div className="form-group">
+                <label htmlFor="restaurantName">Email</label>
+                <input
+                  className="form-input"
+                  placeholder="Email"
+                  name="email"
+                  type="text"
+                  onChange={this.handleChange.bind(this)}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="restaurantName">Password</label>
 
-              <input
-                className="form-input"
-                placeholder="Password"
-                name="password"
-                type="password"
-                onChange={this.handleChange.bind(this)}
-              />
+                <input
+                  className="form-input"
+                  placeholder="Password"
+                  name="password"
+                  type="password"
+                  onChange={this.handleChange.bind(this)}
+                />
+              </div>
+              <button className="login-button" onClick={this.handleLogin.bind(this)}>LOGIN</button>
+              <button className="register-button" onClick={this.handleCreateAcc.bind(this)}>
+                Create Account
+              </button>
             </div>
-            <button onClick={this.handleLogin.bind(this)}>LOGIN</button>
-            <button onClick={this.handleCreateAcc.bind(this)}>
-              Create Account
-            </button>
+            {this.state.error ? <div>Invalid credentials</div> : <div />}
           </div>
-          {this.state.error ? <div>Invalid credentials</div> : <div />}
         </div>
-
                   <div className="switch-customer">
         <Link to="/customer/login">
           <i class="material-icons">people</i>HelloBistro for Hungry People
