@@ -143,10 +143,7 @@ const ApiService = {
   retrieveOrders: id =>
     AuthService.fetch(`/customers/${id}/orders`, { method: 'GET' }),
 
-  addPaymentMethod: dataObject => AuthService.fetch('/customers/payments', {
-    method: 'POST',
-    body: dataObject,
-  }),
+  retrievePaymentMethods: id => AuthService.fetch(`/customers/${id}/payments`, { method: 'GET' }),
 };
 
 export default ApiService;

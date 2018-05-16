@@ -46,7 +46,7 @@ class Menu extends React.Component {
       <MenuSection key={section.id} data={section} />);
 
     const orderStatus = Object.keys(this.props.state.customer.cart.items).length === 0 ? null : <div id="order-status">You have {Object.keys(this.props.state.customer.cart.items).length} item(s) in your cart.</div>
-    const cartError = this.props.state.customer.cart.restaurantId === null || this.props.state.customer.cart.restaurantId === this.props.state.customer.currentRestaurant.id ? null : <div id="existing-cart"><p><strong>You already have an order started at a different restaurant.<br /> Clear your cart to start an order at {this.props.state.customer.currentRestaurant.name}.</strong></p></div>;
+    const cartError = !this.props.state.customer.cart.restaurantId || this.props.state.customer.cart.restaurantId === this.props.state.customer.currentRestaurant.id ? null : <div id="existing-cart"><p><strong>You already have an order started at a different restaurant.<br /> Clear your cart to start an order at {this.props.state.customer.currentRestaurant.name}.</strong></p></div>;
  
     return (
       <div className="Menu DebugComponentRed">

@@ -12,6 +12,7 @@ const ConfirmOrder = (props) => {
   console.log('Items from cart', items);
   const billTotal = items.reduce((a, b) =>
     a + (b.price * b.quantity), 0);
+  const paymentMethods = props.state.user.paymentMethods.length > 0 ? props.state.user.paymentMethods.map(card => (<option value={card.id}>{card.brand} -{card.last4}</option>)) : <option>No payment methods on file.</option>;
 
   const handleSubmit = () => {
     const { userId, paymentId } = props.state.user;
@@ -33,7 +34,7 @@ const ConfirmOrder = (props) => {
       <h2>Finalize Your Order</h2>
       <h3>Bill total: ${billTotal.toFixed(2)}</h3>
       <span>Your table number: <input className="table-number" onChange={e => props.updateTable(e.target.value)} type="text" placeholder="#" /></span>
-      <p>Choose your payment method:</p><select className="select-payment"><option>Visa -3533</option></select>
+      <span className="payment"><p>Choose your payment method:</p><select className="select-payment">{paymentMethods}</select></span>
       <button className="place-order" onClick={handleSubmit}>Place Order</button>
     </div>
   );

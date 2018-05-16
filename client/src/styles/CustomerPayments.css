@@ -11,6 +11,17 @@
   max-width: 600px;
 }
 
+.payment-item {
+  font-size: 18px;
+  opacity: 1;
+  transform: scale(1);
+  transition: background-color 100000000s,opacity .3s cubic-bezier(.25,.46,.45,.94);
+  transition-timing-function: cubic-bezier(.25,.46,.45,.94);
+  -webkit-animation: 1ms void-animation-out;
+  font-family: sans-serif;
+  cursor: text;
+}
+
 
 .add-payment {
   padding: 20px;

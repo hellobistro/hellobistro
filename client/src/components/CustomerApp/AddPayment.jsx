@@ -41,7 +41,7 @@ class AddPayment extends React.Component {
           <div className="add-payment">
             <CardSection />
           </div>
-          <button className="add-button"><i class="material-icons">add_box</i>Save card.</button>
+          <button className="add-button"><i className="material-icons">add_box</i>Save card.</button>
         </form>
     );
   }

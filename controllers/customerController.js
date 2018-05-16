@@ -309,8 +309,8 @@ const customerController = {
 
     const token = jwt.sign({ id: user.id, userType: 'Customer' }, 'secret', { expiresIn: 129600 });
     const info = {
- token, userId: user.id, userName: user.userName, firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, votes: user.availVotes, paymentId: user.paymentId 
-};
+      token, userId: user.id, userName: user.userName, firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, votes: user.availVotes, paymentId: user.paymentId, paymentMethods: user.PaymentMethods,
+    };
     res.json(info);
   },
 
