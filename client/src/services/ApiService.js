@@ -27,7 +27,7 @@ const ApiService = {
 
   removeOldMenu: id => {
     return AuthService.fetch(`/restaurants/sections/items/${id}`, {
-      method: "DELETE"
+      method: "DELETE",
     });
   },
 

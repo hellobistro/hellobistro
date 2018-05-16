@@ -6,7 +6,7 @@ class MenuItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      img: props.data.image
     };
   }
 
@@ -18,7 +18,7 @@ class MenuItem extends React.Component {
     this.refs.imageUploader.click();
   }
 
-  _onChange = () => {
+  _onChange = (itemId) => {
     var file = this.refs.imageUploader.files[0];
     console.log('the fileee:  ', file)
     // var reader = new FileReader();
@@ -28,25 +28,46 @@ class MenuItem extends React.Component {
     data.append('file', file)
     //console.log('the urlll:  ', url)
 
-    fetch('http://localhost:3000/upload', {
+    fetch(`http://localhost:3000/upload/${itemId}`, {
       method: "POST",
       //headers: {'Content-Type': 'multipart/form-data'},
       //form: data
       body: data
-    });
-    //  reader.onloadend = function (e) {
-    //     this.setState({
-    //         imgSrc: [reader.result]
-    //     })
-    //   }.bind(this);
-    // console.log('the urllll:  ', url) 
+    }).then((res) => {
+      console.log('the res after upload: ', res)
+      //this.setState({img: !this.state.reloadImg})
+    }).catch((err)=>{
+      console.log('error uploading: ', err)
+    }); 
   }
-  
+
+  removePhoto = () => {
+    this.setState({img: null})
+  }
 
   render() {
     const others = ['vegan', 'vegetarian', 'glutenFree', 'spicy'];
     const { sectionIndex, itemIndex, inputChange, data } = this.props;
-    const img = data.image ? <img className="item-image" src={data.image} alt="food" /> : <div className="no-image" onClick={this.imageUpload}><span>Upload image.</span><input type="file" accept="image/*" ref="imageUploader" style={{display: "none"}} onChange={this._onChange}/></div>;
+    console.log('the data:  ', data)
+    // const img = this.state.img 
+    // ? <div>
+    //     <img className="item-image" src={this.state.img} alt="food" /> 
+    //     <input type="file" accept="image/*" ref="imageUploader" style={{display: "none"}} 
+    //       onChange={()=>{this._onChange(data.id)}}/>
+    //   </div>
+    
+    const img = <div>
+                {
+                  this.state.img
+                  ? <div>
+                      <img onClick={this.imageUpload} className="item-image" src={this.state.img} alt="food" />
+                      <button>Remove photo</button>
+                    </div>
+                  : <span className="no-image" onClick={this.imageUpload}>Upload image.</span>
+                }
+                  <input type="file" accept="image/*" ref="imageUploader" style={{display: "none"}} 
+                    onChange={()=>{this._onChange(data.id)}}/>
+                </div>;
     const render = {
       name: <div className="item-input-div name"><input
         className="item-input"
