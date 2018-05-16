@@ -9,6 +9,7 @@ import RestaurantApp from './RestaurantApp/RestaurantApp';
 import RestaurantLogin from './RestaurantApp/RestaurantLogin';
 import ConfirmOrder from './CustomerApp/ConfirmOrder';
 import CustomerLogin from './CustomerApp/CustomerLogin';
+import PaymentMethods from './CustomerApp/PaymentMethods';
 import FindRestaurants from './CustomerApp/FindRestaurants';
 import Menu from './CustomerApp/Menu';
 import MenuItem from './CustomerApp/MenuItem';
@@ -53,6 +54,7 @@ export const RestaurantAppContainer = withRouter(connect(mapStateToProps, mapDis
 export const RestaurantLoginContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantLogin));
 export const ConfirmOrderContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ConfirmOrder));
 export const CustomerLoginContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerLogin));
+export const PaymentMethodsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(PaymentMethods));
 export const FindRestaurantsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FindRestaurants));
 export const MenuContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Menu));
 export const MenuItemContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(MenuItem));

@@ -24,6 +24,8 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "sequelize": "^4.37.6",
+    "sequelize-cli": "^4.0.0",
+    "stripe": "^5.9.0",
     "style-loader": "^0.20.3",
     "uuid": "^3.2.1",
     "webpack": "^4.6.0"

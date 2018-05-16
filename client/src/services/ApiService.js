@@ -1,8 +1,8 @@
 // Import sibling services
-import AuthService from "./AuthService";
+import AuthService from './AuthService';
 
 // Declare variables
-const domain = "http://localhost:3000";
+const domain = 'http://localhost:3000';
 
 // Declare ApiService object
 const ApiService = {
@@ -20,26 +20,23 @@ const ApiService = {
 
   updateRestaurant(id, formValues) {
     return AuthService.fetch(`/restaurants/${id}`, {
-      method: "PUT",
-      body: formValues
+      method: 'PUT',
+      body: formValues,
     });
   },
 
-  removeOldMenu: id => {
-    return AuthService.fetch(`/restaurants/sections/items/${id}`, {
-      method: "DELETE",
-    });
-  },
 
-  addNewMenuSection: (id, name, description) => {
-    return AuthService.fetch(`/restaurants/section/${id}`, {
+  removeOldMenu: (id) => AuthService.fetch(`/restaurants/sections/items/${id}`, {
+      method: "DELETE"
+    }),
+
+  addNewMenuSection: (id, name, description) => AuthService.fetch(`/restaurants/section/${id}`, {
       method: "POST",
       body: {
         name,
         description
       }
-    });
-  },
+    }),
 
   addNewMenuItem: (
     id,
@@ -54,9 +51,8 @@ const ApiService = {
     prepTime,
     rating,
     status,
-    menuSectionId
-  ) => {
-    return AuthService.fetch(`/restaurants/menu/${id}`, {
+    menuSectionId,
+  ) => AuthService.fetch(`/restaurants/menu/${id}`, {
       method: "POST",
       body: {
         name,
@@ -72,22 +68,19 @@ const ApiService = {
         status,
         menuSectionId
       }
-    });
-  },
+    }),
 
-  getOpenOrdersForRestaurant: id => {
-    return AuthService.fetch(`/restaurants/${id}/orders/open`, {
+  getOpenOrdersForRestaurant: (id) => AuthService.fetch(`/restaurants/${id}/orders/open`, {
       method: "GET",
 
-    });
-  },
+    }),
 
-  completeOpenOrder: (id) => {
+  completeOpenOrder: (id) => 
     //'/restaurants/:order_id'
-    return AuthService.fetch(`/restaurants/openorder/${id}`, {
+     fetch(`${domain}/restaurants/openorder/${id}`, {
       method: 'PATCH',
     })
-  },
+  ,
 
   submitOrder: (
     status,
@@ -96,10 +89,10 @@ const ApiService = {
     table,
     CustomerId,
     RestaurantId,
-    items
+    items,
   ) =>
     AuthService.fetch(`/customers/${CustomerId}/orders`, {
-      method: "POST",
+      method: 'POST',
       body: {
         status,
         total,
@@ -107,22 +100,21 @@ const ApiService = {
         table,
         CustomerId,
         RestaurantId,
-        items
-      }
+        items,
+      },
     }),
-  findRestaurants: () => AuthService.fetch('/customers/view', { method: "GET" }),
+  findRestaurants: () => AuthService.fetch('/customers/view', { method: 'GET' }),
   stripeProcessing: paymentId =>
     new Promise(resolve =>
       resolve({
-        status: "success",
+        status: 'success',
         transactionId: 12345,
-        paymentId
-      })
-    ),
+        paymentId,
+      }),),
 
   getCustomerProfile: id =>
     AuthService.fetch(`/customers/${id}`, {
-      method: "GET"
+      method: 'GET',
     }),
 
   updateCustomerProfile: (
@@ -133,10 +125,10 @@ const ApiService = {
     lastName,
     phone,
     originalEmail,
-    password
+    password,
   ) =>
     AuthService.fetch(`/customers/${id}/profile`, {
-      method: "PATCH",
+      method: 'PATCH',
       body: {
         email,
         userName,
@@ -144,12 +136,17 @@ const ApiService = {
         lastName,
         phone,
         password,
-        originalEmail
-      }
+        originalEmail,
+      },
     }),
 
   retrieveOrders: id =>
-    AuthService.fetch(`/customers/${id}/orders`, { method: "GET" })
+    AuthService.fetch(`/customers/${id}/orders`, { method: 'GET' }),
+
+  addPaymentMethod: dataObject => AuthService.fetch('/customers/payments', {
+    method: 'POST',
+    body: dataObject,
+  }),
 };
 
 export default ApiService;

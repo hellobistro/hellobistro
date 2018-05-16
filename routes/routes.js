@@ -40,6 +40,11 @@ routes.post('/customers/:customer_id/orders', (req, res) => {
   customerController.createOrder(req, res);
 });
 
+// Add a new payment methd for a customer
+routes.post('/customers/payments', (req, res) => {
+  customerController.addPaymentMethod(req, res);
+});
+
 // Create a new rating by a customer
 routes.put('/customers/:customer_id/ratings/:menu_item_id', (req, res) => {
   customerController.incrementRating(req, res);
