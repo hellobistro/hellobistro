@@ -11,6 +11,13 @@ const {
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+//upload photo
+const AWS = require('aws-sdk');
+const UUID = require('uuid/v4');
+const Busboy = require('busboy');
+AWS.config.update({ accessKeyId: 'AKIAJCL67PZSTIZDZNDA', secretAccessKey: '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' });
+const S3 = new AWS.S3();
+
 const moment = require("moment");
 
 const restaurantController = {
@@ -208,6 +215,7 @@ const restaurantController = {
     const { restaurant_id } = req.params;
     const {
       name,
+      //description,
       price,
       vegan,
       vegetarian,
@@ -393,20 +401,28 @@ const restaurantController = {
 
   deleteAllMenuSectionsAndItems(req, res) {
     const { restaurant_id } = req.params;
-
-    MenuItem.destroy({
-      where: { RestaurantId: restaurant_id }
-    })
-      .then(() => {
-        MenuSection.destroy({
-          where: { RestaurantId: restaurant_id }
-        }).then(() => {
-          res.sendStatus(200);
-        });
-      })
-      .catch(err => {
-        res.send(err);
-      });
+    console.log('the restaurantID in controller:  ', restaurant_id)
+    // MenuItem.count({ where: { RestaurantId: restaurant_id } })
+    //   .then(count => {
+    //     if (count != 0) {
+    //       MenuItem.destroy({
+    //         where: { RestaurantId: restaurant_id }
+    //       })
+    //         .then(() => {
+    //           MenuSection.destroy({
+    //             where: { RestaurantId: restaurant_id }
+    //           }).then(() => {
+    //             res.sendStatus(200);
+    //           });
+    //         })
+    //         .catch(err => {
+    //           res.send(err);
+    //         });
+    //     } else {
+    //       res.sendStatus(200);
+    //     }
+    //   })
+    res.sendStatus(200);
   },
 
   deleteOrder(req, res) {
@@ -443,6 +459,55 @@ const restaurantController = {
       }).catch(err => {
         res.send(err);
       })
+  },
+
+  uploadPhoto(req, res) {
+    const { item_id } = req.params;
+    console.log('the itemId in restaurantController: ', item_id)
+    let chunks = [], fname, ftype, fEncoding;
+    let busboy = new Busboy({ headers: req.headers });
+    busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+        console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
+        fname = filename.replace(/ /g,"_");
+        ftype = mimetype;
+        fEncoding = encoding;
+        file.on('data', function(data) {
+            // you will get chunks here will pull all chunk to an array and later concat it.
+            console.log (chunks.length);
+            chunks.push(data)
+        });
+        file.on('end', function() {
+            console.log('File [' + filename + '] Finished');
+        });
+    });
+    busboy.on('finish', function() {
+        const userId = UUID();
+        const params = {
+            Bucket: 'hbphotostorage', // your s3 bucket name
+            Key: `${userId}-${fname}`, 
+            Body: Buffer.concat(chunks), // concatinating all chunks
+            ACL: 'public-read',
+            ContentEncoding: fEncoding, // optional
+            ContentType: ftype // required
+        }
+    // we are sending buffer data to s3.
+      S3.upload(params, (err, s3res) => {
+        if (err){
+          res.send({err, status: 'error'});
+        } else {
+          console.log('the s3res: ', s3res)
+          MenuItem.update({
+            image: s3res.Location
+          },
+          { where: {
+            id: item_id
+            }
+          })
+          res.send({data:s3res, status: 'success', msg: 'Image successfully uploaded.'});
+        }
+      });
+    });
+  req.pipe(busboy);
   }
 };
 

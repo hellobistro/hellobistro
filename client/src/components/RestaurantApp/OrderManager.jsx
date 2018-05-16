@@ -39,14 +39,14 @@ class OrderManager extends React.Component {
       ? (<div className="">
       <div className="page-header"><strong>Open Orders:</strong></div>
       {
-        this.state.openOrders.map((order) => {
-          return <div className="menu-manager-item item-input">
+        this.state.openOrders.map((order, i) => {
+          return <div key={i} className="menu-manager-item item-input">
             <p>Order Number: {order.id}</p>
             <OrderTimer order={order}/>
             <button className="complete-open-order" onClick={() => this.closeOrder(order.id)}>Complete Order</button>
             <p>Quantity: {order.MenuItems.length}</p>
-          {order.MenuItems.map((item) => 
-            <div className="open-order-item">
+          {order.MenuItems.map((item, i) => 
+            <div key={i} className="open-order-item">
             <div>Item name: {item.name}</div>
             <div>Special Request: <i>{item.OrderItem.special}</i></div>
             </div>

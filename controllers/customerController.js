@@ -351,13 +351,17 @@ const customerController = {
       firstName,
       lastName,
       email,
-      phone,
-    }, { where: { id: customer_id } })
-      .then((updatedUser) => {
-        console.log('the udpatedUser', updatedUser);
-        res.json(updatedUser);
-      });
-  },
+      phone
+    }, {
+      where: { id: customer_id },
+      returning: true,
+      plain: true
+    })
+      .then(async () => {
+        const updatedUser = await Customer.findOne({ where: { id: customer_id } })
+        res.json(updatedUser)
+      })
+  }
 };
 
 module.exports = customerController;
