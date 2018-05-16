@@ -54,6 +54,7 @@ class CustomerSettings extends React.Component {
     if(await this.validFields()){
       ApiService.updateCustomerProfile(id, userName, email, firstName, lastName, phone, originalEmail, newPW1)
         .then((user) => {
+          this.props.loadCustomerUser(user);
           this.props.history.replace('/customer/home')
         })
         .catch((err)=>{

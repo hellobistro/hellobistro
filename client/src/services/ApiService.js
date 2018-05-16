@@ -25,6 +25,7 @@ const ApiService = {
     });
   },
 
+
   removeOldMenu: (id) => AuthService.fetch(`/restaurants/sections/items/${id}`, {
       method: "DELETE"
     }),
@@ -40,6 +41,7 @@ const ApiService = {
   addNewMenuItem: (
     id,
     name,
+    description,
     price,
     vegan,
     vegetarian,
@@ -54,6 +56,7 @@ const ApiService = {
       method: "POST",
       body: {
         name,
+        //description,
         price,
         vegan,
         vegetarian,
@@ -76,9 +79,6 @@ const ApiService = {
     //'/restaurants/:order_id'
      fetch(`${domain}/restaurants/openorder/${id}`, {
       method: 'PATCH',
-      headers: {
-        'content-type': 'application/json'
-      }
     })
   ,
 

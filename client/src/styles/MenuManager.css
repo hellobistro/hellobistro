@@ -26,9 +26,10 @@
   color: darkslategray;
   font-weight: 400;
   font-size: 18px;
-  width: 100%;
+  width: 98%;
   display: block;
 }
+textarea {resize: vertical}
 
 .item-input-div.status {
   border-bottom: 0px;
@@ -193,9 +194,8 @@ select.status {
 .item-image {
   box-shadow: 0 4px 6px rgba(0,0,0,0.24);
   float: right;
-  width: 100px;
-  height: 100px;
-  display: inline-block;
+  width: 200px;
+  /* display: inline-block; */
 }
 
 .no-image {
@@ -221,5 +221,28 @@ select.status {
   line-height: normal;
 }
 
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+:-moz-placeholder {
+  font-style: italic;  
+}
+::-moz-placeholder {
+  font-style: italic;  
+}
+:-ms-input-placeholder {  
+  font-style: italic; 
+}
 
+.item-input-div.description{
+  position: relative;
+  display: inline-block;
+}
+
+.material-icons.manager-icons.description {
+  color: #c75b39;
+  font-size: 18px;
+  position: absolute;
+  display: inline-block;
+}
 
