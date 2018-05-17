@@ -6,12 +6,9 @@ class MenuItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      img: props.data.image
+      img: props.data.image,
+      is_checked: true,
     };
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return (this.props !== nextProps);
   }
 
   imageUpload = (e) => {
@@ -45,10 +42,25 @@ class MenuItem extends React.Component {
     this.setState({img: null})
   }
 
+  toggleSlider = (e) => {
+    console.log('slider toggled!1')
+    // const target = event.target;
+    // const value = target.type === 'checkbox' ? target.checked : target.value;
+    // const name = target.name;
+
+    this.setState({
+      is_checked: !this.state.is_checked
+    });
+  }
+
+  // handleInputChange(event) {
+
+  // }
+
   render() {
     const others = ['vegan', 'vegetarian', 'glutenFree', 'spicy'];
     const { sectionIndex, itemIndex, inputChange, data } = this.props;
-    console.log('the data:  ', data)
+    console.log('state of is_checked:    ', this.state.is_checked)
     // const img = this.state.img 
     // ? <div>
     //     <img className="item-image" src={this.state.img} alt="food" /> 
@@ -56,12 +68,18 @@ class MenuItem extends React.Component {
     //       onChange={()=>{this._onChange(data.id)}}/>
     //   </div>
     
-    const img = <div>
+    const img = <div className="image-wrapper">
                 {
                   this.state.img
-                  ? <div>
-                      <img onClick={this.imageUpload} className="item-image" src={this.state.img} alt="food" />
-                      <button>Remove photo</button>
+                  ? 
+                  <div>
+                    <div style={{top: '0px', right: '0px', position: 'absolute'}}>
+                        <img onClick={this.imageUpload} className="item-image" src={this.state.img} alt="food" />
+                        <div className="remove-photo-button">
+                          <button >Remove photo</button>
+                        </div>
+                      </div>
+                      <div styles={{clear: 'both'}}>&nbsp;</div>
                     </div>
                   : <span className="no-image" onClick={this.imageUpload}>Upload image.</span>
                 }
@@ -116,18 +134,32 @@ class MenuItem extends React.Component {
                     <option value="null">N/A</option>
                   </select>
                        </div>)),
-      status: <div className="item-input-div status"><select 
-      className="status"
-      name="status"
-      value={data.status}
-      onChange={(e) => { inputChange(sectionIndex, itemIndex, e); }}
-      >
-        <option value="published">Published</option>
-        <option value="unavailable">Item Unavailable</option>
-        <option value="draft">Draft</option>
-        <option value="delete">Delete permanently</option>
-      </select>
-      </div>,
+      // status: <div className="item-input-div status"><select 
+      // className="status"
+      // name="status"
+      // value={data.status}
+      // onChange={(e) => { inputChange(sectionIndex, itemIndex, e); }}
+      // >
+      //   <option value="published">Published</option>
+      //   <option value="unavailable">Item Unavailable</option>
+      //   <option value="draft">Draft</option>
+      //   <option value="delete">Delete permanently</option>
+      // </select>
+      // </div>,
+      status: 
+              <div>
+              <label class="switch">
+                <input type="checkbox" checked={this.state.is_checked} onChange={this.toggleSlider}/>
+                <span class="slider round"></span>
+              </label>
+              {
+                  this.state.is_checked
+                  ? <div className="status-published">Published</div>
+                  : <div className="status-draft">Draft</div>
+                }
+            </div>
+              ,
+
     };
 
     return (
