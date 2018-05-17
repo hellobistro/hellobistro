@@ -88,6 +88,12 @@ routes.get('/customers/:customer_id/ratings', (req, res) => {
   customerController.getRatingsForCustomer(req, res);
 });
 
+// Retrieve all payment methods ofr a customer
+routes.get('/customers/payments/:customer_id/', (req, res) => {
+  console.log('here we are folks');
+  customerController.getPaymentMethods(req, res);
+});
+
 // Retrieve all restaurants for a specific customer
 // NOTE: Consider deprecating
 // routes.get('/customers/:customer_id/restaurants', (req, res) => {
@@ -103,6 +109,11 @@ routes.patch('/customers/:customer_id/profile', (req, res) => {
 });
 
 /* Destroy */
+
+// Delete payment method
+routes.delete('/customers/payments/:payment_id/', (req, res) => {
+  customerController.deletePaymentMethod(req, res);
+});
 
 // Delete customer account
 routes.delete('/customers/:customer_id', (req, res) => {
