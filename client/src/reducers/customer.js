@@ -1,4 +1,4 @@
-function customer(state = { currentRestaurant: { MenuSections: ['loading'] }, cart: { restaurantId: null, items: {}, table: null } }, action) {
+function customer(state = { currentRestaurant: { MenuSections: ['loading'] }, cart: { paymentId: null, restaurantId: null, items: {}, table: null } }, action) {
   switch (action.type) {
     case 'LOAD_RESTAURANT_LIST':
       return Object.assign({}, state, {
@@ -48,6 +48,10 @@ function customer(state = { currentRestaurant: { MenuSections: ['loading'] }, ca
     case 'UPDATE_TABLE':
       return Object.assign({}, state, {
         cart: { ...state.cart, table: action.tableNumber },
+      });
+    case 'CHOOSE_PAYMENT':
+      return Object.assign({}, state, {
+        cart: {...state.cart, paymentId: action.paymentId },
       });
     default:
       return state;

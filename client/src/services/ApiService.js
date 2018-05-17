@@ -75,42 +75,10 @@ const ApiService = {
 
     }),
 
-  completeOpenOrder: (id) => 
-    //'/restaurants/:order_id'
-     fetch(`${domain}/restaurants/openorder/${id}`, {
-      method: 'PATCH',
-    })
-  ,
+  completeOpenOrder: id => fetch(`${domain}/restaurants/openorder/${id}`, { method: 'PATCH' }),
 
-  submitOrder: (
-    status,
-    total,
-    transactionId,
-    table,
-    CustomerId,
-    RestaurantId,
-    items,
-  ) =>
-    AuthService.fetch(`/customers/${CustomerId}/orders`, {
-      method: 'POST',
-      body: {
-        status,
-        total,
-        transactionId,
-        table,
-        CustomerId,
-        RestaurantId,
-        items,
-      },
-    }),
+  submitOrder: orderData => AuthService.fetch(`/customers/${orderData.CustomerId}/orders`, { method: 'POST', body: orderData }),
   findRestaurants: () => AuthService.fetch('/customers/view', { method: 'GET' }),
-  stripeProcessing: paymentId =>
-    new Promise(resolve =>
-      resolve({
-        status: 'success',
-        transactionId: 12345,
-        paymentId,
-      }),),
 
   getCustomerProfile: id =>
     AuthService.fetch(`/customers/${id}`, {
@@ -143,7 +111,14 @@ const ApiService = {
   retrieveOrders: id =>
     AuthService.fetch(`/customers/${id}/orders`, { method: 'GET' }),
 
-  retrievePaymentMethods: id => AuthService.fetch(`/customers/${id}/payments`, { method: 'GET' }),
+  addPaymentMethod: dataObject => AuthService.fetch('/customers/payments', {
+    method: 'POST',
+    body: dataObject,
+  }),
+
+  retrievePaymentMethods: id => AuthService.fetch(`/customers/payments/${id}`, { method: 'GET' }),
+
+  deletePaymentMethod: paymentId => AuthService.fetch(`/customers/payments/${paymentId}`, { method: 'DELETE' }),
 };
 
 export default ApiService;

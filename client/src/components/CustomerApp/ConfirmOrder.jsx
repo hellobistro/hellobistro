@@ -6,36 +6,35 @@ import '../../styles/CustomerConfirmOrder.css';
 // ConfirmOrder component
 // Confirm before a user places an order
 const ConfirmOrder = (props) => {
-  const cartItems = props.state.customer.cart.items;
-  console.log(cartItems);
-  const items = Object.values(cartItems);
-  console.log('Items from cart', items);
-  const billTotal = items.reduce((a, b) =>
-    a + (b.price * b.quantity), 0);
-  const paymentMethods = props.state.user.paymentMethods.length > 0 ? props.state.user.paymentMethods.map(card => (<option value={card.id}>{card.brand} -{card.last4}</option>)) : <option>No payment methods on file.</option>;
-
+  const items = Object.values(props.state.customer.cart.items);
+  const billTotal = items.reduce((a, b) => a + (b.price * b.quantity), 0).toFixed(2);
+  const paymentMethods = props.state.user.paymentMethods.length > 0 ? props.state.user.paymentMethods.map(card => (<option key={card.id} value={card.cardId}>{card.brand} -{card.last4}</option>)) : <option>No payment methods on file.</option>;
   const handleSubmit = () => {
     const { userId, paymentId } = props.state.user;
-    const restaurantId = props.state.customer.cart.restaurantId;
-    console.log('restaurant id on handle submit: ', restaurantId)
+    const CardId = props.state.customer.cart.paymentId || props.state.user.paymentMethods[0].cardId;
+    const CustomerStripeId = props.state.user.paymentId;
+    const RestaurantId = props.state.customer.cart.restaurantId;
     const { table } = props.state.customer.cart;
-    ApiService.stripeProcessing(paymentId).then((res) => {
-      console.log('Stripe mockup', res);
-      ApiService.submitOrder('queued', billTotal, res.transactionId, table, userId, restaurantId, items)
-        .then(() => {
-          props.clearCart();
-          props.history.push('/customer/home/history');
-        });
-    });
+    console.log('submitting order');
+    ApiService.submitOrder({ total: billTotal, table, CustomerId: userId, StripeId: CustomerStripeId, CardId, RestaurantId, items })
+      .then((res) => {
+        console.log('no error from server', res)
+        props.clearCart();
+        props.history.push('/customer/home/history');
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
   };
+  const button = !props.state.customer.cart.table || props.state.user.paymentMethods.length > 0 ? <button className="place-order" onClick={handleSubmit}>Place Order</button> : <button className="order-error">Place Order</button>;
 
   return (
     <div className="ConfirmOrder DebugComponentRed">
       <h2>Finalize Your Order</h2>
-      <h3>Bill total: ${billTotal.toFixed(2)}</h3>
+      <h3>Bill total: ${billTotal}</h3>
       <span>Your table number: <input className="table-number" onChange={e => props.updateTable(e.target.value)} type="text" placeholder="#" /></span>
-      <span className="payment"><p>Choose your payment method:</p><select className="select-payment">{paymentMethods}</select></span>
-      <button className="place-order" onClick={handleSubmit}>Place Order</button>
+      <span className="payment"><p>Choose your payment method:</p><select className="select-payment" onChange={e => props.choosePayment(e.target.value)}><option>Select payment method</option>{paymentMethods}</select></span>
+      {button}
     </div>
   );
 };
