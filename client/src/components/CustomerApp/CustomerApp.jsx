@@ -41,7 +41,7 @@ class CustomerApp extends React.Component {
 
   render() {
     return (
-      <div className="CustomerApp DebugComponentRed">
+      <div className="CustomerApp">
         <div className="sidebar-left">
           <Mast />
           <CustomerNav {...this.props} />

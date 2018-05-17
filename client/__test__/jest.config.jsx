@@ -3,6 +3,8 @@ import { expect } from 'chai';
 import { sinon } from 'sinon';
 import Adapter from 'enzyme-adapter-react-16';
 import register from 'ignore-styles';
+import fetch from 'jest-fetch-mock';
+import 'jest-localstorage-mock';
 
 // React 16 Enzyme adapter
 Enzyme.configure({ adapter: new Adapter() });
@@ -16,3 +18,4 @@ global.render = render;
 global.mount = mount;
 global.expect = expect;
 global.sinon = sinon;
+global.fetch = fetch;
