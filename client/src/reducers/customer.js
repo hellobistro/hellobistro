@@ -1,4 +1,9 @@
-function customer(state = { currentRestaurant: { MenuSections: ['loading'] }, cart: { paymentId: null, restaurantId: null, items: {}, table: null } }, action) {
+function customer(state = {
+ currentRestaurant: { MenuSections: ['loading'] },
+cart: {
+  paymentId: null, restaurantId: null, items: {}, table: null,
+} 
+}, action) {
   switch (action.type) {
     case 'LOAD_RESTAURANT_LIST':
       return Object.assign({}, state, {
@@ -17,8 +22,7 @@ function customer(state = { currentRestaurant: { MenuSections: ['loading'] }, ca
     case 'EDIT_CART_ITEM':
       return Object.assign({}, state, {
         cart: {
-          restaurant: state.cart.restaurant,
-          table: state.cart.table,
+          ...state.cart,
           items: {
             ...state.cart.items,
             [action.id]: {
@@ -29,13 +33,22 @@ function customer(state = { currentRestaurant: { MenuSections: ['loading'] }, ca
         },
       });
     case 'DELETE_CART_ITEM': {
-      const oldState = Object.assign({}, state);
-      delete oldState.cart.items[action.id];
-      return oldState;
+      if (Object.keys(state.cart.items).length > 1) {
+        const oldState = Object.assign({}, state);
+        delete oldState.cart.items[action.id];
+        return oldState;
+      }
+      return Object.assign({}, state, {
+        cart: {
+          restaurantId: null, items: {}, table: null, paymentId: null,
+        },
+      });
     }
     case 'CLEAR_CART':
       return Object.assign({}, state, {
-        cart: { restaurantId: null, items: {}, table: null },
+        cart: {
+          restaurantId: null, items: {}, table: null, paymentId: null,
+        },
       });
     case 'SET_CART_RESTAURANT':
       return Object.assign({}, state, {
@@ -51,7 +64,7 @@ function customer(state = { currentRestaurant: { MenuSections: ['loading'] }, ca
       });
     case 'CHOOSE_PAYMENT':
       return Object.assign({}, state, {
-        cart: {...state.cart, paymentId: action.paymentId },
+        cart: { ...state.cart, paymentId: action.paymentId },
       });
     default:
       return state;
