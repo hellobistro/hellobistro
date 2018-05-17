@@ -1,22 +1,22 @@
 // Import dependencies
-import { createMockStore } from 'redux-test-utils';
 import React from 'react';
 // Import jest config
 import '../jest.config';
 // Import test helpers
-import { shallowWithStore, testState } from '../testHelpers';
+import { initialState } from '../testHelpers';
 // Import container/component
 import { CustomerAppContainer } from '../../src/components/Containers';
 
-// Setup 
-const store = createMockStore(testState);
-const wrapper = shallowWithStore(<CustomerAppContainer />, store);
+// Setup mocks
+jest.mock('../../src/services/ApiService');
+
+// Apply shallow rendering wrapper
+const wrapper = shallow(<CustomerAppContainer.WrappedComponent {...initialState} />);
 
 describe('CustomerApp Component', () => {
-  it('should render CustomerApp component', () => {
+  it('should render the CustomerApp component', () => {
     global.expect(wrapper.length).to.equal(1);
-    global.expect(wrapper.dive().exists()).to.equal(true);
-    global.expect(wrapper.dive()).to.be.a('object');
-    global.expect(wrapper.dive().text()).to.contain('This is the CustomerApp component');
+    global.expect(wrapper.find('.CustomerApp').length).to.equal(1);
+    global.expect(JSON.stringify(wrapper.instance().props)).to.equal(JSON.stringify(initialState));
   });
 });
