@@ -56,7 +56,6 @@ class RestaurantLogin extends Component {
               <div className="form-section-header" />
 
               <div className="form-group">
-                <label htmlFor="restaurantName">Email</label>
                 <input
                   className="form-input"
                   placeholder="Email"
@@ -66,8 +65,6 @@ class RestaurantLogin extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="restaurantName">Password</label>
-
                 <input
                   className="form-input"
                   placeholder="Password"
