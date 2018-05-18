@@ -182,20 +182,18 @@ const customerController = {
       RestaurantId,
       items,
     } = req.body;
-
-    console.log('Processing Stripe charge');
+  
     stripe.charges.create({
       amount: Math.round(total * 100),
       currency: 'usd',
       customer: StripeId,
       source: CardId,
-      description: `RestId: ${RestaurantId}, hbCustomerId: ${CustomerId}, items: ${items}`,
+      description: `RestId: ${RestaurantId}, hbCustomerId: ${CustomerId}, items: ${Object.values(items).map(item => `{Item: ${item.name} quantity: ${item.quantity}}`)}`,
     }, (err, charge) => {
       if (err) {
         console.log('Stripe error', err);
         res.send(err);
       } else {
-        console.log('Stripe success', charge);
         Order.create({
           status: 'queued',
           total,
