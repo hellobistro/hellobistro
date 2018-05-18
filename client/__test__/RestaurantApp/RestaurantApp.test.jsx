@@ -15,8 +15,8 @@ const wrapper = shallow(<RestaurantAppContainer.WrappedComponent {...initialStat
 
 describe('RestaurantApp Component', () => {
   it('should render the RestaurantApp component', () => {
-    global.expect(wrapper.length).to.equal(1);
-    global.expect(wrapper.find('.RestaurantApp').length).to.equal(1);
-    global.expect(JSON.stringify(wrapper.instance().props)).to.equal(JSON.stringify(initialState));
+    expect(wrapper.length).to.equal(1);
+    expect(wrapper.find('.RestaurantApp').length).to.equal(1);
+    expect(JSON.stringify(wrapper.instance().props)).to.equal(JSON.stringify(initialState));
   });
 });
