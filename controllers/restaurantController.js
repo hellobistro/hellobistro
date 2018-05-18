@@ -254,6 +254,7 @@ const restaurantController = {
     const { restaurant_id, item_id } = req.params;
     const {
       name,
+      status,
       price,
       vegan,
       vegetarian,
@@ -267,6 +268,7 @@ const restaurantController = {
     MenuItem.update(
       {
         name,
+        status,
         price,
         vegan,
         vegetarian,
