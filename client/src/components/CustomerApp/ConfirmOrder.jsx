@@ -15,7 +15,6 @@ const ConfirmOrder = (props) => {
     const CustomerStripeId = props.state.user.paymentId;
     const RestaurantId = props.state.customer.cart.restaurantId;
     const { table } = props.state.customer.cart;
-    console.log('submitting order');
     ApiService.submitOrder({ total: billTotal, table, CustomerId: userId, StripeId: CustomerStripeId, CardId, RestaurantId, items })
       .then((res) => {
         console.log('no error from server', res)
@@ -29,7 +28,7 @@ const ConfirmOrder = (props) => {
   const button = !props.state.customer.cart.table || props.state.user.paymentMethods.length > 0 ? <button className="place-order" onClick={handleSubmit}>Place Order</button> : <button className="order-error">Place Order</button>;
 
   return (
-    <div className="ConfirmOrder DebugComponentRed">
+    <div className="ConfirmOrder">
       <h2>Finalize Your Order</h2>
       <h3>Bill total: ${billTotal}</h3>
       <span>Your table number: <input className="table-number" onChange={e => props.updateTable(e.target.value)} type="text" placeholder="#" /></span>

@@ -60,7 +60,7 @@ class CustomerLogin extends Component {
 
   render() {
     return (
-      <div className="CustomerLogin DebugComponentRed">
+      <div className="CustomerLogin">
         <Mast />
         <div className="background">
           <div className="mock-form">

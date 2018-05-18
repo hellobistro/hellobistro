@@ -50,8 +50,8 @@ const protectRoutes = type => function (req, res, next) {
   }
 };
 
-app.use('/restaurants', protectRoutes('Restaurant'));
-app.use('/customers', protectRoutes('Customer'));
+// app.use('/restaurants', protectRoutes('Restaurant'));
+// app.use('/customers', protectRoutes('Customer'));
 app.use('/', routes);
 
 // app.use(express.static(path.join(__dirname, '../client/dist')));
