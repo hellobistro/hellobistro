@@ -29,7 +29,6 @@ class CustomerApp extends React.Component {
 
   componentDidMount() {
     ApiService.findRestaurants().then((res) => {
-      console.log('updating restaurant list');
       this.props.loadRestaurantList(res);
     });
   }

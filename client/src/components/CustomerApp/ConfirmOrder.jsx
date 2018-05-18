@@ -19,7 +19,6 @@ const ConfirmOrder = (props) => {
     console.log('restaurant id on handle submit: ', restaurantId)
     const { table } = props.state.customer.cart;
     ApiService.stripeProcessing(paymentId).then((res) => {
-      console.log('Stripe mockup', res);
       ApiService.submitOrder('queued', billTotal, res.transactionId, table, userId, restaurantId, items)
         .then(() => {
           props.clearCart();
@@ -29,7 +28,7 @@ const ConfirmOrder = (props) => {
   };
 
   return (
-    <div className="ConfirmOrder DebugComponentRed">
+    <div className="ConfirmOrder">
       <h2>Finalize Your Order</h2>
       <h3>Bill total: ${billTotal.toFixed(2)}</h3>
       <span>Your table number: <input className="table-number" onChange={e => props.updateTable(e.target.value)} type="text" placeholder="#" /></span>

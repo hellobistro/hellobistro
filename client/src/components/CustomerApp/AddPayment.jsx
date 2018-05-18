@@ -3,7 +3,7 @@ import {injectStripe} from 'react-stripe-elements';
 import CardSection from './CardSection';
 import ApiService from '../../services/ApiService';
 
-class AddPayment extends React.Component {
+export class AddPayment extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -36,7 +36,7 @@ class AddPayment extends React.Component {
 
   render() {
     return (
-        <form onSubmit={this.handleSubmit}>
+        <form className="AddPayment" onSubmit={this.handleSubmit}>
         <h3>Add a new payment method:</h3>
           <div className="add-payment">
             <CardSection />
