@@ -4,9 +4,8 @@ const {
 const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const stripe = require('stripe')('sk_test_sJWgvI2cFmxaSynpc6s5bgh5');
-
-const stripeRegistration = (email, description) => stripe.customers.create({ description, email });
+const { stripeKey } = require('../config/config.js');
+const stripe = require('stripe')(stripeKey);
 
 const customerController = {
 
@@ -113,10 +112,60 @@ const customerController = {
   },
 
   addPaymentMethod(req, res) {
-    PaymentMethods.create(req.body)
-      .then((paymentConfirmation) => {
+    const { StripeId, CustomerId, token } = req.body;
+    console.log('creating stripe source', StripeId, token, token.token.id);
+
+    stripe.customers.createSource(StripeId, {
+      source: token.token.id,
+    })
+      .then((response) => {
+        if (response.error) {
+          console.log('Stripe error', response);
+          // send back error
+          res.status(400).json(response);
+        } else {
+          // create record in payment methods database.
+          console.log('Response from Stripe', response);
+          PaymentMethods.create({
+            CustomerId,
+            cardId: response.id,
+            zip: response.address_zip,
+            brand: response.brand,
+            country: response.address_country,
+            exp_month: response.exp_month,
+            exp_year: response.exp_year,
+            last4: response.last4,
+          })
+            .then((paymentConfirmation) => {
+              // Send back success message to customer.
+              res.status(201).json(paymentConfirmation);
+            })
+            .catch((err) => {
+              res.send(err);
+            });
+        }
+      });
+  },
+
+  getPaymentMethods(req, res) {
+    const { customer_id } = req.params;
+    PaymentMethods.findAll({ where: { CustomerId: customer_id } })
+      .then((paymentData) => {
+        console.log('sending payment data', paymentData);
+        // Send back data to customer.
+        res.status(201).json(paymentData);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  },
+
+  deletePaymentMethod(req, res) {
+    const { payment_id } = req.params;
+    PaymentMethods.destroy({ where: { id: payment_id } })
+      .then((deleteConfirmation) => {
         // Send back success message to customer.
-        res.status(201).json(paymentConfirmation);
+        res.status(201).json(deleteConfirmation);
       })
       .catch((err) => {
         res.send(err);
@@ -125,45 +174,57 @@ const customerController = {
 
   createOrder(req, res) {
     const {
-      status,
       total,
-      transactionId,
       table,
       CustomerId,
+      StripeId,
+      CardId,
       RestaurantId,
       items,
     } = req.body;
 
-    console.log('Order placed by', CustomerId, 'RestaurantId', RestaurantId, 'items: ', items);
-
-    Order.create({
-      status,
-      total,
-      transactionId,
-      table,
-      CustomerId,
-      RestaurantId,
-    }).then(async (order) => {
-      let newOrder = null;
-      async function buildOrderItems() {
-        items.forEach((item) => {
-          order.addMenuItem(item.id, { through: { special: item.special, price: item.price } });
-        });
-        newOrder = Order.findById(order.id, {
-          include: [MenuItem],
-          required: false,
+    console.log('Processing Stripe charge');
+    stripe.charges.create({
+      amount: Math.round(total * 100),
+      currency: 'usd',
+      customer: StripeId,
+      source: CardId,
+      description: `RestId: ${RestaurantId}, hbCustomerId: ${CustomerId}, items: ${items}`,
+    }, (err, charge) => {
+      if (err) {
+        console.log('Stripe error', err);
+        res.send(err);
+      } else {
+        console.log('Stripe success', charge);
+        Order.create({
+          status: 'queued',
+          total,
+          transactionId: charge.id,
+          table,
+          CustomerId,
+          RestaurantId,
+        }).then(async (order) => {
+          let newOrder = null;
+          async function buildOrderItems() {
+            items.forEach((item) => {
+              order.addMenuItem(item.id, { through: { special: item.special, price: item.price } });
+            });
+            newOrder = Order.findById(order.id, {
+              include: [MenuItem],
+              required: false,
+            });
+          }
+    
+          await buildOrderItems();
+    
+          return newOrder;
+        }).then((order) => {
+          res.json(order);
+        }).catch((error) => {
+          res.send(error);
+          console.log(error);
         });
       }
-
-      await buildOrderItems();
-      console.log('new order built and stored', newOrder);
-
-      return newOrder;
-    }).then((order) => {
-      res.json(order);
-    }).catch((err) => {
-      res.send(err);
-      console.log(err);
     });
   },
 
@@ -309,8 +370,8 @@ const customerController = {
 
     const token = jwt.sign({ id: user.id, userType: 'Customer' }, 'secret', { expiresIn: 129600 });
     const info = {
- token, userId: user.id, userName: user.userName, firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, votes: user.availVotes, paymentId: user.paymentId 
-};
+      token, userId: user.id, userName: user.userName, firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, votes: user.availVotes, paymentId: user.paymentId, paymentMethods: user.PaymentMethods,
+    };
     res.json(info);
   },
 
@@ -334,8 +395,8 @@ const customerController = {
   async updateCustomerProfile(req, res) {
     const { customer_id } = req.params;
     const {
- userName, firstName, lastName, password, email, originalEmail, phone 
-} = req.body;
+      userName, firstName, lastName, password, email, originalEmail, phone,
+    } = req.body;
     if (originalEmail !== email) {
       const existingEmail = await Customer.findOne({ where: { email } });
       if (existingEmail) {
@@ -351,17 +412,17 @@ const customerController = {
       firstName,
       lastName,
       email,
-      phone
+      phone,
     }, {
       where: { id: customer_id },
       returning: true,
-      plain: true
+      plain: true,
     })
       .then(async () => {
-        const updatedUser = await Customer.findOne({ where: { id: customer_id } })
-        res.json(updatedUser)
-      })
-  }
+        const updatedUser = await Customer.findOne({ where: { id: customer_id } });
+        res.json(updatedUser);
+      });
+  },
 };
 
 module.exports = customerController;
