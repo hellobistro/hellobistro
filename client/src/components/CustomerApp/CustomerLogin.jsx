@@ -1,61 +1,61 @@
 // Import dependencies
-import React, { Component } from "react";
-import AuthService from "../../services/AuthService";
-const jwt = require("jsonwebtoken");
-import decode from "jwt-decode";
+import React, { Component } from 'react';
+import AuthService from '../../services/AuthService';
 
-import "../../styles/CustomerLogin.css";
-import Mast from "./Mast";
+const jwt = require('jsonwebtoken');
 
-//import { history } from '../../store';
-import { withRouter, Link } from "react-router-dom";
+import decode from 'jwt-decode';
+
+import '../../styles/CustomerLogin.css';
+import Mast from './Mast';
+
+// import { history } from '../../store';
+import { withRouter, Link } from 'react-router-dom';
 // CustomerLogin component
 // Used by Customers to log into app
 class CustomerLogin extends Component {
   constructor() {
     super();
     this.state = {
-      error: false
+      error: false,
     };
   }
 
   componentWillMount() {
-    var token = AuthService.getToken();
-    var decoded = jwt.decode(token, { complete: true });
+    let token = AuthService.getToken();
+    let decoded = jwt.decode(token, { complete: true });
     if (token) {
-      if (decoded.payload.userType === "Customer") {
-        this.props.history.replace("/customer/home/findRestaurants");
-      } else if (decoded.payload.userType === "Restaurant") {
-        this.props.history.replace("/restaurant/home");
+      if (decoded.payload.userType === 'Customer') {
+        this.props.history.replace('/customer/home/findRestaurants');
+      } else if (decoded.payload.userType === 'Restaurant') {
+        this.props.history.replace('/restaurant/home');
       }
     }
   }
 
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   }
 
   handleLogin(e) {
     e.preventDefault();
     AuthService.login(this.state.email, this.state.password)
-      .then(res => {
-        delete res["token"];
-        console.log("New res", res);
+      .then((res) => {
+        delete res.token;
         this.props.loadCustomerUser(res);
         this.setState({ error: false });
-        this.props.history.replace("/customer/home/findRestaurants");
+        this.props.history.replace('/customer/home/findRestaurants');
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ error: true });
-        console.error("err in handlesubmit", err);
       });
   }
 
   handleCreate(e) {
     e.preventDefault();
-    this.props.history.replace("/customer/register");
+    this.props.history.replace('/customer/register');
   }
 
   render() {
@@ -93,7 +93,7 @@ class CustomerLogin extends Component {
           </div>
         </div>
 
-        {/* <Link to='/developer/login'>HelloBistro for Developers</Link>*/}
+        {/* <Link to='/developer/login'>HelloBistro for Developers</Link> */}
         <div className="switch-restaurant">
           <Link to="/restaurant/login">
             <i className="material-icons">store</i>HelloBistro for Restaurants
