@@ -23,16 +23,22 @@ class MenuItem extends React.Component {
 
   _onChange = (itemId) => {
     var file = this.refs.imageUploader.files[0];
-    var data = new FormData()
-    data.append('file', file)
+    var formData = new FormData()
+    formData.append('file', file)
 
     fetch(`http://localhost:3000/upload/${itemId}`, {
       method: 'POST',
-      body: data
+      body: formData
     }).then((res) => {
-      console.log('the res after upload: ', res)
-      this.setState({hasChanged: true})
-    }).catch((err)=>{
+      return res.json()
+    }).then(res => {
+      console.log('the res after uploaddd: ', res)
+      let url = res.data.Location;
+      let data = this.state.data;
+      data.image = url
+      this.setState({data, hasChanged: false})
+    })
+    .catch((err)=>{
       console.log('error uploading: ', err)
     }); 
   }
