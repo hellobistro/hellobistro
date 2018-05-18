@@ -83,7 +83,7 @@ class RestaurantLogin extends Component {
         </div>
                   <div className="switch-customer">
         <Link to="/customer/login">
-          <i class="material-icons">people</i>HelloBistro for Hungry People
+          <i className="material-icons">people</i>HelloBistro for Hungry People
         </Link>
     
           </div>

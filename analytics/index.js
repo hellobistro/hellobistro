@@ -1,37 +1,37 @@
-const moment = require("moment");
+const moment = require('moment');
 const {
   Customer,
   Restaurant,
   MenuSection,
   MenuItem,
   Order,
-  OrderItem
-} = require("../database/index.js");
+  OrderItem,
+} = require('../database/index.js');
 
 let customerDirectory = {};
 
-let colors = [
-  "#EF5350",
-  "#FF7043",
-  "#FFEE58",
-  "#66BB6A",
-  "#29B6F6",
-  "#5C6BC0",
-  "#AB47BC",
-  "#EF5350",
-  "#FF7043",
-  "#FFEE58",
-  "#66BB6A",
-  "#29B6F6",
-  "#5C6BC0",
-  "#AB47BC",
-  "#EF5350",
-  "#FF7043",
-  "#FFEE58",
-  "#66BB6A",
-  "#29B6F6",
-  "#5C6BC0",
-  "#AB47BC"
+const colors = [
+  '#EF5350',
+  '#FF7043',
+  '#FFEE58',
+  '#66BB6A',
+  '#29B6F6',
+  '#5C6BC0',
+  '#AB47BC',
+  '#EF5350',
+  '#FF7043',
+  '#FFEE58',
+  '#66BB6A',
+  '#29B6F6',
+  '#5C6BC0',
+  '#AB47BC',
+  '#EF5350',
+  '#FF7043',
+  '#FFEE58',
+  '#66BB6A',
+  '#29B6F6',
+  '#5C6BC0',
+  '#AB47BC',
 ];
 
 let analyticsData = null;
@@ -91,10 +91,10 @@ const generateAnalyticsObject = () => {
             label: null,
             data: [],
             backgroundColor: colors,
-          }
+          },
         ],
-        labels: []
-      }
+        labels: [],
+      },
     },
     itemOrderTotals: {
       data: {},
@@ -102,13 +102,27 @@ const generateAnalyticsObject = () => {
         datasets: [
           {
             data: [],
-            backgroundColor: colors
-          }
+            backgroundColor: colors,
+          },
         ],
-        labels: []
-      }
+        labels: [],
+      },
     },
-    openOrders: []
+    openOrders: [],
+    timeline: {
+      widgetData: {
+        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        datasets: [{
+          label: 'apples',
+          data: [12, 19, 3, 17, 6, 3, 7],
+          backgroundColor: "rgba(153,255,51,0.4)"
+        }, {
+          label: 'oranges',
+          data: [2, 29, 5, 5, 2, 3, 10],
+          backgroundColor: "rgba(255,153,0,0.4)"
+        }],
+      },
+    },
   };
 
   return defaultAnalyticsObject;
@@ -118,15 +132,15 @@ const buildTotalCustomers = () => {
   analyticsData.totalCustomers = customerDirectory.length;
 };
 
-const buildTotalRevenue = order => {
+const buildTotalRevenue = (order) => {
   analyticsData.totalRevenue += order.total;
   return null;
 };
 
-const buildTotalRevenueLast30Days = order => {
-  let now = moment(Date.now());
-  let completed = moment(order.completedAt);
-  let diffInDays = now.diff(completed, "days");
+const buildTotalRevenueLast30Days = (order) => {
+  const now = moment(Date.now());
+  const completed = moment(order.completedAt);
+  const diffInDays = now.diff(completed, 'days');
 
   if (diffInDays <= 30) {
     analyticsData.totalRevenueLast30Days += order.total;
@@ -135,10 +149,10 @@ const buildTotalRevenueLast30Days = order => {
   return null;
 };
 
-const buildTotalRevenueLast60Days = order => {
-  let now = moment(Date.now());
-  let completed = moment(order.completedAt);
-  let diffInDays = now.diff(completed, "days");
+const buildTotalRevenueLast60Days = (order) => {
+  const now = moment(Date.now());
+  const completed = moment(order.completedAt);
+  const diffInDays = now.diff(completed, 'days');
 
   if (diffInDays <= 60) {
     analyticsData.totalRevenueLast60Days += order.total;
@@ -147,17 +161,17 @@ const buildTotalRevenueLast60Days = order => {
   return null;
 };
 
-const buildTotalRevenueByDayOfWeek = order => {
-  let day = moment(order.completedAt).format("dddd");
+const buildTotalRevenueByDayOfWeek = (order) => {
+  const day = moment(order.completedAt).format('dddd');
   analyticsData.totalRevenueByDayOfWeek.data[day] += order.total;
 };
 
-const buildTotalRevenueByMonth = order => {
-  let month = moment(order.completedAt).format("MMM");
+const buildTotalRevenueByMonth = (order) => {
+  const month = moment(order.completedAt).format('MMM');
   analyticsData.totalRevenueByMonth.data[month] += order.total;
 };
 
-const buildCustomerDirectory = order => {
+const buildCustomerDirectory = (order) => {
   const currentCustomer = order.Customer.userName;
 
   if (!customerDirectory[currentCustomer]) {
@@ -165,7 +179,7 @@ const buildCustomerDirectory = order => {
       orders: 1,
       totalRevenue: order.total,
       averageRevenue: order.total,
-      lastOrderDate: order.completedAt
+      lastOrderDate: order.completedAt,
     };
   } else {
     customerDirectory[currentCustomer].orders++;
@@ -185,11 +199,11 @@ const buildAllCustomers = () => {
 
   // analyticsData.totalCustomers = customerDirectory.length;
 
-  for (var key in customerDirectory) {
-    let completed = moment(customerDirectory[key].lastOrderDate);
-    let now = moment(Date.now());
+  for (let key in customerDirectory) {
+    const completed = moment(customerDirectory[key].lastOrderDate);
+    const now = moment(Date.now());
 
-    let diffInDays = now.diff(completed, "days");
+    const diffInDays = now.diff(completed, 'days');
 
     analyticsData.totalCustomers++;
 
@@ -205,13 +219,13 @@ const buildAllCustomers = () => {
       analyticsData.totalCustomersLast90Days++;
     }
 
-    let customer = Object.assign({}, customerDirectory[key], { userName: key });
+    const customer = Object.assign({}, customerDirectory[key], { userName: key });
     analyticsData.allCustomers.push(customer);
   }
 
   analyticsData.allCustomers.sort((a, b) => {
-    var nameA = a.userName.toLowerCase();
-    var nameB = b.userName.toLowerCase();
+    let nameA = a.userName.toLowerCase();
+    let nameB = b.userName.toLowerCase();
     if (nameA < nameB) {
       return -1;
     }
@@ -256,13 +270,13 @@ const buildTopFiveCustomersByRevenue = () => {
     });
 };
 
-const buildItemOrderTotals = order => {
-  order.MenuItems.forEach(item => {
+const buildItemOrderTotals = (order) => {
+  order.MenuItems.forEach((item) => {
     if (!analyticsData.itemOrderTotals.data[item.id]) {
       analyticsData.itemOrderTotals.data[item.id] = {
         name: item.name,
         orders: 1,
-        totalRevenue: item.price
+        totalRevenue: item.price,
       };
     } else {
       analyticsData.itemOrderTotals.data[item.id].orders++;
@@ -278,23 +292,23 @@ const analytics = {
 
     orders = await Order.findAll({
       where: {
-        RestaurantId: restaurant_id
+        RestaurantId: restaurant_id,
       },
       include: [
         {
           model: MenuItem,
-          required: false
+          required: false,
         },
         {
           model: Customer,
-          required: false
-        }
-      ]
+          required: false,
+        },
+      ],
     });
 
     customerDirectory = {};
 
-    await orders.forEach(order => {
+    await orders.forEach((order) => {
       // If order is not completed, push it to openOrders
       if (!order.completedAt) {
         analyticsData.openOrders.push(order);
@@ -314,29 +328,26 @@ const analytics = {
     await buildTopFiveCustomersByOrders();
 
     for (var key in analyticsData.itemOrderTotals.data) {
-      let item = analyticsData.itemOrderTotals.data[key];
-      analyticsData.itemOrderTotals.widgetData.datasets[0].data.push(
-        item.orders
-      );
+      const item = analyticsData.itemOrderTotals.data[key];
+      analyticsData.itemOrderTotals.widgetData.datasets[0].data.push(item.orders,);
       analyticsData.itemOrderTotals.widgetData.labels.push(item.name);
     }
 
     for (var key in analyticsData.totalRevenueByMonth.data) {
-      let month = analyticsData.totalRevenueByMonth.data[key];
+      const month = analyticsData.totalRevenueByMonth.data[key];
       analyticsData.totalRevenueByMonth.widgetData.datasets[0].data.push(month);
       analyticsData.totalRevenueByMonth.widgetData.labels.push(key);
     }
 
     for (var key in analyticsData.totalRevenueByDayOfWeek.data) {
-      let day = analyticsData.totalRevenueByDayOfWeek.data[key];
-      analyticsData.totalRevenueByDayOfWeek.widgetData.datasets[0].data.push(
-        day
-      );
+      const day = analyticsData.totalRevenueByDayOfWeek.data[key];
+      analyticsData.totalRevenueByDayOfWeek.widgetData.datasets[0].data.push(day,);
       analyticsData.totalRevenueByDayOfWeek.widgetData.labels.push(key);
     }
 
+console.log(analyticsData, "analytics data")
     res.json(analyticsData);
-  }
+  },
 };
 
 module.exports = analytics;

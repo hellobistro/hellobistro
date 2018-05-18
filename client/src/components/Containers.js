@@ -33,6 +33,7 @@ import WidgetTopCustomersOrders from './RestaurantApp/Widgets/WidgetTopCustomers
 import WidgetItemOrderTotals from './RestaurantApp/Widgets/WidgetItemOrderTotals';
 import WidgetTotalRevenueByMonth from './RestaurantApp/Widgets/WidgetTotalRevenueByMonth';
 import WidgetTotalRevenueByDay from './RestaurantApp/Widgets/WidgetTotalRevenueByDay';
+import WidgetTimelineChart from './RestaurantApp/Widgets/WidgetTimelineChart';
 import { withRouter } from 'react-router';
 
 
@@ -78,3 +79,4 @@ export const WidgetTopCustomersOrdersContainer = withRouter(connect(mapStateToPr
 export const WidgetItemOrderTotalsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetItemOrderTotals));
 export const WidgetTotalRevenueByMonthContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalRevenueByMonth));
 export const WidgetTotalRevenueByDayContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalRevenueByDay));
+export const WidgetTimelineChartContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTimelineChart));
