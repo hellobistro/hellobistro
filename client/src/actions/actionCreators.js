@@ -43,7 +43,6 @@ export function editCartItem(id, key, value) {
 }
 
 export function deleteCartItem(id) {
-  console.log('deleting item', id);
   return {
     type: 'DELETE_CART_ITEM',
     id,
@@ -53,6 +52,20 @@ export function deleteCartItem(id) {
 export function clearCart() {
   return {
     type: 'CLEAR_CART',
+  };
+}
+
+export function updateTable(tableNumber) {
+  return {
+    type: 'UPDATE_TABLE',
+    tableNumber,
+  };
+}
+
+export function choosePayment(paymentId) {
+  return {
+    type: 'CHOOSE_PAYMENT',
+    paymentId,
   };
 }
 
@@ -73,6 +86,13 @@ export function setCartRestaurant(id) {
 export function loadOrders(data) {
   return {
     type: 'LOAD_ORDERS',
+    data,
+  };
+}
+
+export function updatePaymentMethods(data) {
+  return {
+    type: 'UPDATE_PAYMENT_METHODS',
     data,
   };
 }
@@ -115,13 +135,6 @@ export function addUser(userId, userName) {
   };
 }
 
-export function updateTable(tableNumber) {
-  return {
-    type: 'UPDATE_TABLE',
-    tableNumber,
-  };
-}
-
 export function modalOn(id, data) {
   return {
     type: 'MODAL_ON',
@@ -135,6 +148,4 @@ export function modalOff() {
     type: 'MODAL_OFF',
   };
 }
-
-
 

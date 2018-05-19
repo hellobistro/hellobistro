@@ -12,6 +12,8 @@ function user(state = initialState, action) {
       });
     case 'LOAD_CUSTOMER':
       return Object.assign({}, state, { ...action.data });
+    case 'UPDATE_PAYMENT_METHODS':
+      return Object.assign({}, state, { ...state.user, paymentMethods: action.data });
     default:
       return state;
   }
