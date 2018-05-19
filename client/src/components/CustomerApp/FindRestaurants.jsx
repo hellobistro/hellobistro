@@ -42,7 +42,7 @@ const FindRestaurants = (props) => {
   };
 
   return (
-    <div className="FindRestaurants DebugComponentRed">
+    <div className="FindRestaurants">
       <h2 id="header">What restaurant would you like to check in to?</h2>
       <p id="sub-header">We&#39;ve located the following restaurants in your area:</p>
       {!props.state.customer.restaurants ? <div className="customer-loader" /> : renderRestaurantList()}
