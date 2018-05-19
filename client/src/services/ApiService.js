@@ -125,6 +125,22 @@ const ApiService = {
     body: dataObject,
   }),
 
+  //patch('/restaurants/:restaurant_id/menu/:item_id'
+
+  updateMenuItem: (restaurantId, itemId, info) => {
+    return AuthService.fetch(`/restaurants/${restaurantId}/menu/${itemId}`, {
+      method: 'PATCH',
+      body: info
+    })
+  },
+  
+  updateMenuSection: (restaurantId, menuSection, info) => {
+    return AuthService.fetch(`/restaurants/menusection/${restaurantId}/${menuSection}`, {
+      method: 'PATCH',
+      body: info
+    })
+  },
+
   retrievePaymentMethods: id => AuthService.fetch(`/customers/payments/${id}`, { method: 'GET' }),
 
   deletePaymentMethod: paymentId => AuthService.fetch(`/customers/payments/${paymentId}`, { method: 'DELETE' }),
