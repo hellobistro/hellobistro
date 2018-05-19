@@ -20,6 +20,18 @@
   padding: 30px;
 }
 
+.widget-modal {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ECEFF1;
+  border-radius: 5px;
+  max-width: 400px;
+  min-height: 100px;
+  margin: auto;
+  padding: 30px;
+}
+
 input[type=number] {
   height: 30px;
   line-height: 30px;

@@ -31,10 +31,19 @@
 }
 
 .customer-menu-item {
+  width: 100%;
+  margin: 40px auto;
+  overflow:hidden;
   padding: 20px;
   background: #FFFFFF;
   box-shadow: 0 4px 6px rgba(0,0,0,0.24);
-  margin: 0 10px 20px 10px;
+  margin-bottom: 20px;
+  text-align: left;
+  max-width: 700px;
+}
+
+.customer-menu-item img {
+  float: right;
 }
 
 .modal-button {

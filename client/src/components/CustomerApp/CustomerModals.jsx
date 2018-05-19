@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/Modals.css';
-
+import WidgetModal from '../Modals/WidgetModal';
 import { OrderModalContainer } from '../Containers';
 
 const CustomerModals = (props) => {
@@ -15,6 +15,7 @@ const CustomerModals = (props) => {
   // MODAL TEMPLATES
   const modals = {
     orderModal: <OrderModalContainer />,
+    widgetModal: <WidgetModal />,
   };
 
   return (

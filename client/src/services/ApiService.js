@@ -18,13 +18,22 @@ const ApiService = {
     return AuthService.fetch(`/data/${id}`);
   },
 
+  getUserLikes(id) {
+    return AuthService.fetch(`/customers/${id}/ratings`);
+  },
+
+  incrementRating(customerId, itemId) {
+    return AuthService.fetch(`/customers/${customerId}/ratings/${itemId}`, {
+      method: 'PUT'
+    });
+  },
+
   updateRestaurant(id, formValues) {
     return AuthService.fetch(`/restaurants/${id}`, {
       method: 'PUT',
       body: formValues,
     });
   },
-
 
   removeOldMenu: (id) => AuthService.fetch(`/restaurants/sections/items/${id}`, {
       method: "DELETE"
@@ -131,6 +140,7 @@ const ApiService = {
       body: info
     })
   },
+
 
   retrievePaymentMethods: id => AuthService.fetch(`/customers/payments/${id}`, { method: 'GET' }),
 

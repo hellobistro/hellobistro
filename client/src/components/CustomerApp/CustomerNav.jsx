@@ -8,6 +8,7 @@ const CustomerNav = (props) => {
   const logout = () => {
     localStorage.clear();
     props.history.push('/');
+    props.logOut();
   };
 
   return (
