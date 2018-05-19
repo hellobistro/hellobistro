@@ -22,6 +22,7 @@ const MenuItem = (props) => {
 
   return (
     <div className="customer-menu-item">
+      <p><img className="item-image" src={props.data.image}/></p>
       <h3>{props.data.name}</h3>
       <p>${price}</p>
       {button}

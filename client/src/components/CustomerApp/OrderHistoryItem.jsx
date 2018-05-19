@@ -51,7 +51,8 @@ export default class OrderHistoryItem extends React.Component {
       <p><strong>Items ordered:</strong></p>
       {
         data.MenuItems.map((item) => {
-          return (<OrderHistoryIndividualItem name={item.name} likes={3} />);
+          console.log('adsfasdfasdfasdfsadfsad', item);
+          return (<OrderHistoryIndividualItem { ...item } />);
         })
       }
       </div>
