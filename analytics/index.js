@@ -271,7 +271,9 @@ const buildTopFiveCustomersByRevenue = () => {
 };
 
 const buildItemOrderTotals = (order) => {
+  console.log(order.Customer, 'item')
   order.MenuItems.forEach((item) => {
+    
     if (!analyticsData.itemOrderTotals.data[item.id]) {
       analyticsData.itemOrderTotals.data[item.id] = {
         name: item.name,
@@ -280,7 +282,7 @@ const buildItemOrderTotals = (order) => {
       };
     } else {
       analyticsData.itemOrderTotals.data[item.id].orders++;
-      analyticsData.itemOrderTotals.data[item.id].totalRevnue += item.price;
+      analyticsData.itemOrderTotals.data[item.id].totalRevenue += item.price;
     }
   });
 };
@@ -290,7 +292,7 @@ const analytics = {
     analyticsData = generateAnalyticsObject();
     const { restaurant_id } = req.params;
 
-    orders = await Order.findAll({
+    const orders = await Order.findAll({
       where: {
         RestaurantId: restaurant_id,
       },
@@ -305,6 +307,7 @@ const analytics = {
         },
       ],
     });
+    console.log(orders, 'orders')
 
     customerDirectory = {};
 
@@ -345,7 +348,6 @@ const analytics = {
       analyticsData.totalRevenueByDayOfWeek.widgetData.labels.push(key);
     }
 
-console.log(analyticsData, "analytics data")
     res.json(analyticsData);
   },
 };
