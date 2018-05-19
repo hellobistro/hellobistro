@@ -31,26 +31,13 @@ export default class Favorites extends React.Component {
 
   handleIncrement(userId, itemId) {
     ApiService.incrementRating(userId, itemId).then((data) => {
-      console.log(data);
       this.setState({
         rated: data.rated,
         unrated: data.unrated,
-        userId: data.userId
+        userId: data.userId,
       });
     }).catch((err) => {
       console.log(err);
-    });
-  }
-
-  handleMouseOver() {
-    this.setState({
-      showDrool: true
-    });
-  }
-
-  handleMouseLeave() {
-    this.setState({
-      showDrool: false
     });
   }
 
@@ -63,11 +50,9 @@ export default class Favorites extends React.Component {
   renderLikedItems() {
     return (
       <div className="rated-items">
-        { this.state.rated.map((item) => {
-          return (
-              <FavoritesIndividualItem handleIncrement={this.handleIncrement.bind(this)} userId={this.state.userId} {...item} />
-          );
-        })}
+        { this.state.rated.map((item) => (
+            <FavoritesIndividualItem handleIncrement={this.handleIncrement.bind(this)} userId={this.state.userId} {...item} />
+          ))}
       </div>
     );
   }
@@ -75,15 +60,13 @@ export default class Favorites extends React.Component {
   renderUnratedItems() {
     return (
       <div className="unrated-items">
-        { this.state.unrated.map((item) => {
-          return (
+        { this.state.unrated.map((item) => (
             <div>
               <p>{item.name}</p>
               <p>{item.restaurant}</p>
               <p>{item.likes} likes</p>
             </div>
-          );
-        })}
+          ))}
       </div>
     );
   }
@@ -91,11 +74,11 @@ export default class Favorites extends React.Component {
   render() {
     return (
       <div className="Favorites">
-      <h2 id="header">Your favorite items:</h2>
-      <p id="sub-header">Click the {emojify('🤤')} next to any item to like it even more!</p>
+        <h2 id="header">Your favorite items:</h2>
+        <p id="sub-header">Click the {emojify('🤤')} next to any item to like it even more!</p>
         { this.state.rated ? this.renderLikedItems() : <div>No Liked Items</div> }
 
-      <h2 id="header">Other items:</h2>
+        <h2 id="header">Other items:</h2>
         { this.state.renderUnratedItems }
 
       </div>

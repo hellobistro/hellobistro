@@ -1,6 +1,5 @@
-import React from "react";
-import { emojify } from "react-emojione";
-import ApiService from "../../services/ApiService";
+import React from 'react';
+import { emojify } from 'react-emojione';
 
 import '../../styles/Favorites.css';
 
@@ -8,7 +7,6 @@ export default class FavoritesIndividualItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showDroolMessage: false,
       showBounce: false,
     };
   }
@@ -17,35 +15,23 @@ export default class FavoritesIndividualItem extends React.Component {
     const { userId, itemId } = this.props;
 
     this.setState({
-      showBounce: true
+      showBounce: true,
     });
-    let context = this;
+    const context = this;
     setTimeout(() => {
-      this.setState({
-        showBounce: false
+      context.setState({
+        showBounce: false,
       });
-    }, 500).bind(this);
+    }, 500);
     this.props.handleIncrement(userId, itemId);
-  }
-
-  handleMouseOver() {
-    this.setState({
-      showDroolMessage: true
-    });
-  }
-
-  handleMouseLeave() {
-    this.setState({
-      showDroolMessage: false
-    });
   }
 
   renderDrool() {
     const drool = (
-      <span className="drool" onClick={this.handleClick.bind(this)}>{emojify("🤤")}</span>
+      <span className="drool" onClick={this.handleClick.bind(this)}>{emojify('🤤')}</span>
     );
     const droolBounce = (
-      <span className="drool-bounce" onClick={this.handleClick.bind(this)}>{emojify("🤤")}</span>
+      <span className="drool-bounce" onClick={this.handleClick.bind(this)}>{emojify('🤤')}</span>
     );
 
     return this.state.showBounce ? droolBounce : drool;
@@ -53,8 +39,8 @@ export default class FavoritesIndividualItem extends React.Component {
 
   renderItem(name) {
     return (
-      <div onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
-        {name} {renderDrool()}
+      <div>
+        {name} {this.renderDrool()}
       </div>
     );
   }
@@ -62,16 +48,12 @@ export default class FavoritesIndividualItem extends React.Component {
   render() {
     const { name, likes, restaurant } = this.props;
     return (
-      <div
-        className="FavoritesIndividualItem"
-        onMouseOver={this.handleMouseOver.bind(this)}
-        onMouseLeave={this.handleMouseLeave.bind(this)}
-      >
+      <div className="FavoritesIndividualItem">
         <p>
           <strong>{name}</strong> from {restaurant}
         </p>
         <p>
-          <strong>{this.props.likes}</strong> {this.renderDrool()} { this.state.showDroolMessage ? 'Click' : ''}
+          <strong>{this.props.likes}</strong> {this.renderDrool()}
         </p>
       </div>
     );
