@@ -47,3 +47,6 @@ ESLint has already been setup and configured. Please make sure that you have run
 
 [Forthcoming]
 
+#### Deploying
+Set upstream to https://github.com/hellobistro/hellobistro.git and push to upstream master (must have admin priviliges). This will trigger testing and deployment via Travis CI.
+
