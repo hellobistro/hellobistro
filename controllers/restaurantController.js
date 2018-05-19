@@ -318,6 +318,12 @@ const restaurantController = {
       });
   },
 
+  deleteMenuSection(req, res) {
+    const { restaurant_id, section_id } = req.params;
+
+    
+  },
+
   getAllRatingsForRestaurant(req, res) {
     const { restaurant_id } = req.params;
     Order.findAll({
@@ -523,19 +529,27 @@ const restaurantController = {
           res.send({err, status: 'error'});
         } else {
           console.log('the s3res: ', s3res)
-          // MenuItem.update({
-          //   image: s3res.Location
-          // },
-          // { where: {
-          //   id: item_id
-          //   }
-          // })
           res.send({data:s3res, status: 'success', msg: 'Image successfully uploaded.'});
         }
       });
     });
   req.pipe(busboy);
-  }
+  },
+
+  deletePhoto(req, res) {
+    const { imageKey } = req.body;
+    var params = { Bucket: 'hbphotostorage', Key: imageKey };
+    S3.deleteObject(params, function(err, data) {
+      if (err) {
+        console.log(err, err.stack) 
+        res.sendStatus(400); 
+      } else {
+        console.log('successfully deleted photo');
+        res.sendStatus(200);
+      }                     
+    });
+  },
+
 };
 
 module.exports = restaurantController;

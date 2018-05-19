@@ -65,7 +65,7 @@ class MenuItem extends React.Component {
     });
   }
 
-  inputChange = (field, e) => {
+  inputChange = (e) => {
     let name = e.target.name;
     let value;
     if (name === "name" || name === "status") {
@@ -77,7 +77,7 @@ class MenuItem extends React.Component {
     }
     let data = this.state.data;
     data[name] = value;
-    this.setState({ data, hasChanged: true, [field]: true})
+    this.setState({ data, hasChanged: true })
   }
 
   updateItem = () => {
@@ -125,7 +125,7 @@ class MenuItem extends React.Component {
         type='text'
         defaultValue={name}
         placeholder='Item name.'
-        onChange={(e) => { this.inputChange("namedEdited", e); }}
+        onChange={(e) => { this.inputChange(e); }}
       />
       </div>,
       price: <div className={'item-input-div price ' + (this.state.priceEdited ? 'show-edited' : null)}>

@@ -73,12 +73,12 @@ class MenuSection extends React.Component {
         />
         {
           this.state.hasChanged
-          ? <button className="menu-section-button save" onClick={this.updateMenuSection} > Save Changes </button>
+          ? <button className="menu-section-button save" onClick={this.updateMenuSection}> Save Changes </button>
           : <div></div>
         }
         {
           this.state.itemCount < 1
-          ? <button className="menu-section-button delete"> Delete Section </button>
+          ? <button className="menu-section-button delete" onClick={() => {this.props.deleteSection(this.props.indx)}}> Delete Section </button>
           : <div></div>
         }
         <br />

@@ -132,6 +132,21 @@ const ApiService = {
     })
   },
 
+  deleteMenuSection: (restaurantId, menuSection) => {
+    return AuthService.fetch(`/restaurants/deletemenusection/${restaurantId}/${menuSection}`, {
+      method: 'DELETE'
+    })
+  },
+
+  deletePhoto: (imageKey) => {
+    return AuthService.fetch('/deletephoto', {
+      method: 'DELETE',
+      body: {
+        imageKey
+      }
+    })
+  },
+
   retrievePaymentMethods: id => AuthService.fetch(`/customers/payments/${id}`, { method: 'GET' }),
 
   deletePaymentMethod: paymentId => AuthService.fetch(`/customers/payments/${paymentId}`, { method: 'DELETE' }),

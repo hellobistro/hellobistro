@@ -285,4 +285,9 @@ routes.post('/upload/:item_id', (req, res) => {
   restaurantController.uploadPhoto(req, res);
 });
 
+//delete photo
+routes.delete('/deletephoto', (req, res) => {
+  restaurantController.deletePhoto(req, res);
+})
+
 module.exports = routes;
