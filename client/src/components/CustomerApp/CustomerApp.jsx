@@ -29,7 +29,6 @@ class CustomerApp extends React.Component {
 
   componentDidMount() {
     ApiService.findRestaurants().then((res) => {
-      console.log('updating restaurant list');
       this.props.loadRestaurantList(res);
     });
   }
@@ -41,7 +40,7 @@ class CustomerApp extends React.Component {
 
   render() {
     return (
-      <div className="CustomerApp DebugComponentRed">
+      <div className="CustomerApp">
         <div className="sidebar-left">
           <Mast />
           <CustomerNav {...this.props} />

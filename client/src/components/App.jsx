@@ -54,7 +54,7 @@ class App extends React.Component {
   
   render() {
     return (
-      <div>
+      <div className="App">
         {/* <Switch> */}
         {
         this.checkUser() === 'Customer'

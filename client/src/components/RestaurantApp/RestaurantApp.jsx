@@ -26,22 +26,6 @@ class RestaurantApp extends React.Component {
   }
 
   componentDidMount() {
-    // Update core restaurant information upon mount, only if different
-    // try {
-    //   ApiService.getRestaurantData(this.props.state.restaurant.restaurantInfo.id).then((data) => {
-    //     if (this.props.state.restaurant.restaurantInfo.updatedAt !== data.updatedAt) {
-
-    //       this.props.updateRestaurantData(data);
-    //     }
-    //     console.log(data);
-    //   }).catch((err) => {
-    //     console.log(err);
-    //   });
-    // }
-    // catch(error) {
-    //   console.error(error);
-    // }
-
     ApiService.getRestaurantData(this.props.state.restaurant.restaurantInfo.id)
       .then((data) => {
         // Update restaurant information upon mount, only if different
@@ -84,7 +68,7 @@ class RestaurantApp extends React.Component {
 
   render() {
     return (
-      <div className="RestaurantApp DebugComponentBlue">
+      <div className="RestaurantApp">
         <div className="sidebar-left">
           <Mast />
           <RestaurantNav {...this.props} />

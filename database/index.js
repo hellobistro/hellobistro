@@ -191,6 +191,13 @@ const PaymentMethods = sequelize.define('PaymentMethod', {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  default: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  description: {
+    type: Sequelize.STRING,
+  },
 });
 
 RestaurantUser.belongsTo(Restaurant);
