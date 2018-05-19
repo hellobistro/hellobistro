@@ -188,6 +188,10 @@ routes.patch('/restaurants/:restaurant_id/menu/:item_id', (req, res) => {
   restaurantController.updateMenuItem(req, res);
 });
 
+routes.patch('/restaurants/menusection/:restaurant_id/:section_id', (req, res) => {
+  restaurantController.updateMenuSection(req, res);
+});
+
 routes.patch('/restaurants/openorder/:order_id', (req, res) => {
   restaurantController.completeOpenOrder(req, res);
 });

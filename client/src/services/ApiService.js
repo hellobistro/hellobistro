@@ -155,7 +155,14 @@ const ApiService = {
       method: 'PATCH',
       body: info
     })
-  }
+  },
+  
+  updateMenuSection: (restaurantId, menuSection, info) => {
+    return AuthService.fetch(`/restaurants/menusection/${restaurantId}/${menuSection}`, {
+      method: 'PATCH',
+      body: info
+    })
+  },
 
 };
 

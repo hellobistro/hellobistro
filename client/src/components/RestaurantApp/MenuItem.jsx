@@ -10,11 +10,16 @@ class MenuItem extends React.Component {
     };
   }
 
+  // componentWillReceiveProps (props){
+  //   this.setState({data: props.data, hasChanged: false}) // This will update your component.
+  //  }
+
   componentWillMount() {
     let data = this.props.data;
-    if(status !== 'archived') {
-      this.setState({ data, hasChanged: false })
-    }
+    this.setState({ data, hasChanged: false })
+  }
+
+  componentDidMount() {
   }
 
   imageUpload = (e) => {
@@ -36,7 +41,7 @@ class MenuItem extends React.Component {
       let url = res.data.Location;
       let data = this.state.data;
       data.image = url
-      this.setState({data, hasChanged: false})
+      this.setState({data, hasChanged: true})
     })
     .catch((err)=>{
       console.log('error uploading: ', err)
@@ -50,7 +55,6 @@ class MenuItem extends React.Component {
   }
 
   toggleSlider = (e) => {
-    console.log('slider toggled!1')
     let data = this.state.data
     data.status = data.status === 'published' ? 'draft' : 'published',
     this.setState({
@@ -60,7 +64,6 @@ class MenuItem extends React.Component {
   }
 
   inputChange = (e) => {
-    console.log('input change is called~!~!')
     let name = e.target.name;
     let value;
     if (name === "name" || name === "status") {
@@ -85,10 +88,20 @@ class MenuItem extends React.Component {
       )
   }
 
+  deleteItem = () => {
+    let data = this.state.data;
+    data.status = 'archived'
+    const { RestaurantId, id } = this.state.data
+    this.setState({ data }, () => {
+        this.props.updateCount(-1);
+        ApiService.updateMenuItem(RestaurantId, id, this.state.data)
+      }
+    )
+  }
+
   render() {
     const others = ['vegan', 'vegetarian', 'glutenFree', 'spicy'];
     const { id, status, name, image, price, prepTime, vegan, vegetarian, glutenFree, spicy } = this.state.data
-    console.log('the state for this menu item', this.state)
     const img = <div className='image-container'>
                 {
                   image
@@ -168,27 +181,32 @@ class MenuItem extends React.Component {
               onClick={this.updateItem}
               className="change-button save-changes-button">Save Changes</button>,
       deleteItem:
-              <button className="change-button delete-item-button">Delete Item</button>
+              <button className="change-button delete-item-button"
+              onClick={this.deleteItem}>Delete Item</button>
     };
-
     return (
-      <div className='form-group menu-manager-item'>
-        <div className='item-header'>
-          {render.status}
-          {img}
+      <div>
+        {this.state.data.status !== 'archived'
+        ? <div className='form-group menu-manager-item'>
+          <div className='item-header'>
+            {render.status}
+            {img}
+          </div>
+          {render.name}
+          {/* {render.description} */}
+          {render.price}
+          {render.prepTime}
+          <div className='item-specs'>
+            {render.nutriFacts}
+          </div>
+          <div className="two-buttons">
+            {render.saveChanges}
+            <div className="divider"/>
+            {render.deleteItem}
+          </div>
         </div>
-        {render.name}
-        {/* {render.description} */}
-        {render.price}
-        {render.prepTime}
-        <div className='item-specs'>
-          {render.nutriFacts}
-        </div>
-        <div className="two-buttons">
-          {render.saveChanges}
-          <div className="divider"/>
-          {render.deleteItem}
-        </div>
+        : <div></div>
+        }
       </div>
     );
   }

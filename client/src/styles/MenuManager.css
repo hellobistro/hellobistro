@@ -92,6 +92,8 @@ textarea {resize: vertical}
   /* float:right; */
 }
 
+
+
 .image-container {
   display: flex;
   flex-direction: row;
@@ -134,6 +136,11 @@ textarea {resize: vertical}
   margin-top: 30px
 }
 
+.change-button:active{
+  box-shadow: 0 0px #999;
+  transform: translateY(5px);
+}
+
 .item-button:active {
   box-shadow: 0 2px #666;
   transform: translateY(4px);
@@ -169,6 +176,32 @@ textarea {resize: vertical}
   display:inline-block;
 }
 
+.menu-section-button {
+  /* display: inline-block; */
+  padding: 8px 15px;
+  font-size: 13px;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px #999;
+  float: right;
+}
+
+.menu-section-button:active {
+  box-shadow: 0 0px #999;
+  transform: translateY(4px);
+}
+
+.menu-section-button.save {
+  background-color: #81e384;
+}
+
+.menu-section-button.delete {
+  background-color: #da4646
+}
 
 .item-specs {
   flex: 0 0 24%;

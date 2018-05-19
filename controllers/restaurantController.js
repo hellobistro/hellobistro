@@ -262,11 +262,17 @@ const restaurantController = {
       spicy,
       image,
       prepTime,
-      rating
+      rating,
+      MenuSectionId,
     } = req.body;
 
-    MenuItem.update(
+    if(status === 'archived' && typeof JSON.parse(item_id) !== "number"){
+      return res.sendStatus(200);
+    } 
+
+    MenuItem.upsert(
       {
+        id: item_id,
         name,
         status,
         price,
@@ -276,13 +282,32 @@ const restaurantController = {
         spicy,
         image,
         prepTime,
-        rating
-      },
+        rating,
+        MenuSectionId,
+        RestaurantId: restaurant_id,
+      }
+    )
+      .then(item => {
+        res.json(item);
+      })
+      .catch(err => {
+        res.send(err);
+      });
+  },
+
+  updateMenuSection(req, res) {
+    const { restaurant_id, section_id } = req.params;
+    const {
+      name,
+      description,
+    } = req.body;
+
+    MenuSection.upsert(
       {
-        where: {
-          id: item_id,
-          RestaurantId: restaurant_id
-        }
+        id: section_id,
+        name,
+        description,
+        RestaurantId: restaurant_id,
       }
     )
       .then(item => {
@@ -498,13 +523,13 @@ const restaurantController = {
           res.send({err, status: 'error'});
         } else {
           console.log('the s3res: ', s3res)
-          MenuItem.update({
-            image: s3res.Location
-          },
-          { where: {
-            id: item_id
-            }
-          })
+          // MenuItem.update({
+          //   image: s3res.Location
+          // },
+          // { where: {
+          //   id: item_id
+          //   }
+          // })
           res.send({data:s3res, status: 'success', msg: 'Image successfully uploaded.'});
         }
       });
