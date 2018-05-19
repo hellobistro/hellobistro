@@ -5,14 +5,13 @@ files:
     destination: /home/ubuntu/hellobistro
 hooks:
 BeforeInstall:
-   - location: /home/ubuntu/hellobistro/bin/before-install > /dev/null 2> /dev/null < /dev/null &
+   - location: /home/ubuntu/hellobistro/bin/before-install.sh >/dev/null 2>&1 &
      timeout: 1200
      runas: ec2-user
 AfterInstall:
-   - location: /home/ubuntu/hellobistro/bin/install-pkgs > /dev/null 2> /dev/null < /dev/null &
+   - location: /home/ubuntu/hellobistro/bin/install-pkgs.sh >/dev/null 2>&1 &
      timeout: 1200
      runas: ec2-user
 ApplicationStart:
-   - location: /home/ubuntu/hellobistro/bin/app-start > /dev/null 2> /dev/null < /dev/null &
-     timeout: 60
+   - location: /home/ubuntu/hellobistro/bin/app-start.sh >/dev/null 2>&1 &
      runas: ec2-user
