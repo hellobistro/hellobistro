@@ -1,3 +1,3 @@
 #!/bin/bash
-pm2 start all
+pm2 restart all
 echo "servers booted"
