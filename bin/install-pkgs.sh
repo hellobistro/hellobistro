@@ -4,5 +4,5 @@ cd /home/ubuntu/hellobistro
 sudo npm install
 cd /home/ubuntu/hellobistro/client
 sudo npm install
-sudo npm run prod
+sudo ./node_modules/.bin/webpack --progress --colors --config webpack.config.js --bail
 echo "install complete"
