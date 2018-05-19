@@ -18,7 +18,7 @@ const MenuItem = (props) => {
   };
   const price = props.data.price.toFixed(2);
   const description = props.data.description ? <p>Description: {props.data.description}</p> : null;
-  const button = props.state.customer.cart.restaurantId === null || props.state.customer.cart.restaurantId === props.state.customer.currentRestaurant.id ? <button className="modal-button" onClick={addToCart}>Add to cart</button> : null;
+  const button = !props.state.customer.cart.restaurantId || props.state.customer.cart.restaurantId === props.state.customer.currentRestaurant.id ? <button className="modal-button" onClick={addToCart}>Add to cart</button> : null;
 
   return (
     <div className="customer-menu-item">

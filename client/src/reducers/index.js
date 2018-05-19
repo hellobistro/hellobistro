@@ -9,8 +9,16 @@ import user from './user';
 import modals from './modals';
 
 // Create a Root Reducer
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   modals, customer, restaurant, user, routing: routerReducer,
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === 'USER_LOGOUT') {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+};
 
 export default rootReducer;

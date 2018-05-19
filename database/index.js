@@ -163,7 +163,7 @@ const Customer = sequelize.define('Customer', {
 const CustomerRating = sequelize.define('CustomerRating', {
   total: {
     type: Sequelize.INTEGER,
-    defaultValue: 1,
+    defaultValue: 0,
   },
 });
 
@@ -190,6 +190,13 @@ const PaymentMethods = sequelize.define('PaymentMethod', {
   last4: {
     type: Sequelize.STRING,
     allowNull: false,
+  },
+  default: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  description: {
+    type: Sequelize.STRING,
   },
 });
 
