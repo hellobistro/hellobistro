@@ -125,10 +125,10 @@ const customerController = {
     const { StripeId, CustomerId, token } = req.body;
     console.log('creating stripe source', StripeId, token, token.token.id);
 
-    stripe.customers
-      .createSource(StripeId, {
-        source: token.token.id,
-      })
+    stripe.customers.createSource(StripeId, {
+      source: token.token.id,
+    })
+
       .then((response) => {
         if (response.error) {
           console.log('Stripe error', response);
@@ -256,6 +256,7 @@ const customerController = {
         }
       },
     );
+
   },
 
   incrementRating(req, res) {
@@ -487,6 +488,7 @@ const customerController = {
       votes: user.availVotes,
       paymentId: user.paymentId,
       paymentMethods: user.PaymentMethods,
+
     };
     res.json(info);
   },
@@ -520,6 +522,7 @@ const customerController = {
       email,
       originalEmail,
       phone,
+
     } = req.body;
     if (originalEmail !== email) {
       const existingEmail = await Customer.findOne({ where: { email } });
@@ -534,25 +537,22 @@ const customerController = {
         { where: { id: customer_id } },
       );
     }
-    Customer.update(
-      {
-        userName,
-        firstName,
-        lastName,
-        email,
-        phone,
-      },
-      {
-        where: { id: customer_id },
-        returning: true,
-        plain: true,
-      },
-    ).then(async () => {
-      const updatedUser = await Customer.findOne({
-        where: { id: customer_id },
+
+    Customer.update({
+      userName,
+      firstName,
+      lastName,
+      email,
+      phone,
+    }, {
+      where: { id: customer_id },
+      returning: true,
+      plain: true,
+    })
+      .then(async () => {
+        const updatedUser = await Customer.findOne({ where: { id: customer_id } });
+        res.json(updatedUser);
       });
-      res.json(updatedUser);
-    });
   },
 };
 
