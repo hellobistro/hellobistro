@@ -7,6 +7,8 @@ class MenuItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      nameEdited: false,
+      priceEdited: false
     };
   }
 
@@ -63,7 +65,7 @@ class MenuItem extends React.Component {
     });
   }
 
-  inputChange = (e) => {
+  inputChange = (field, e) => {
     let name = e.target.name;
     let value;
     if (name === "name" || name === "status") {
@@ -75,7 +77,7 @@ class MenuItem extends React.Component {
     }
     let data = this.state.data;
     data[name] = value;
-    this.setState({ data, hasChanged: true})
+    this.setState({ data, hasChanged: true, [field]: true})
   }
 
   updateItem = () => {
@@ -117,16 +119,17 @@ class MenuItem extends React.Component {
                     onChange={()=>{this._onChange(id)}}/>
                 </div>;
     const render = {
-      name: <div className='item-input-div name'><input
-        className='item-input'
+      name: <div className='item-input-div name '>
+        <input className={'item-input ' + (this.state.nameEdited ? 'show-edited' : null)}
         name='name'
         type='text'
         defaultValue={name}
         placeholder='Item name.'
-        onChange={(e) => { this.inputChange(e); }}
+        onChange={(e) => { this.inputChange("namedEdited", e); }}
       />
       </div>,
-      price: <div className='item-input-div price'><i className='material-icons manager-icons'>attach_money</i><input
+      price: <div className={'item-input-div price ' + (this.state.priceEdited ? 'show-edited' : null)}>
+        <i className='material-icons manager-icons'>attach_money</i><input
         className='item-input'
         name='price'
         type='text'
@@ -182,7 +185,9 @@ class MenuItem extends React.Component {
               className="change-button save-changes-button">Save Changes</button>,
       deleteItem:
               <button className="change-button delete-item-button"
-              onClick={this.deleteItem}>Delete Item</button>
+                onClick={this.deleteItem}><span>Delete Item  </span> 
+                <i className='material-icons delete'>delete_forever</i>
+              </button>
     };
     return (
       <div>
