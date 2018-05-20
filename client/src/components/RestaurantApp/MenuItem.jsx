@@ -52,8 +52,9 @@ class MenuItem extends React.Component {
 
   removePhoto = () => {
     let data = this.state.data
-    data.image = null
-    this.setState({data, hasChanged: true})
+    let imageKey = data.image.substring(50);
+    data.image = null;
+    this.setState({data, imageKey, hasChanged: true})
   }
 
   toggleSlider = (e) => {
@@ -82,9 +83,16 @@ class MenuItem extends React.Component {
 
   updateItem = () => {
     const { RestaurantId, id } = this.state.data
+    const imageKey = this.state.imageKey
     ApiService.updateMenuItem(RestaurantId, id, this.state.data)
       .then((updatedItem) => (
-        this.setState({hasChanged: false})
+        this.setState({hasChanged: false}, () => {
+          if(imageKey) 
+          ApiService.deletePhoto(imageKey)
+            .then(() => { 
+              console.log('delete photo a successs~')
+            });
+        })
       )).catch(err => 
         console.log('error updating item', err)
       )

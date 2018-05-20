@@ -13,10 +13,10 @@ class MenuManager extends React.Component {
     let restaurantId = JSON.parse(window.localStorage.state).restaurant.restaurantInfo.id
     ApiService.getRestaurantData(restaurantId).then((info) => {
       console.log('the info:   ', {...info})
-        // info.MenuSections = info.MenuSections.map((sec)=>{
-        //   sec.uniqueTime = 0;
-        //   return sec
-        // })
+        info.MenuSections = info.MenuSections.map((sec, i)=>{
+          sec.uniqueId = i + 1;
+          return sec
+        })
         this.setState({ ...info })
       })
   }
@@ -25,17 +25,15 @@ class MenuManager extends React.Component {
     let MenuSections = this.state.MenuSections;
     MenuSections.push({
       MenuItems: [],
-      RestaurantId: this.state.id
+      RestaurantId: this.state.id,
+      uniqueId: MenuSections.length + 1,
     });
     this.setState({ MenuSections });
   }
 
   deleteSection = (indx) => {
-    console.log('the indx:   ~~~ ', indx )
     let MenuSections = Array.slice(this.state.MenuSections);
-    // console.log('the menuSection before splice', JSON.stringify(MenuSections))
     MenuSections.splice(indx, 1);
-    // console.log('the menuSection after splice', JSON.stringify(MenuSections))
     this.setState({ MenuSections });
   }
 
@@ -50,7 +48,7 @@ class MenuManager extends React.Component {
           </p>
         </div>
         {this.state.MenuSections.map((section, i) => {
-        return <MenuSection indx={i} data={section} deleteSection={this.deleteSection} />})}
+        return <MenuSection key={section.uniqueId} indx={i} data={section} deleteSection={this.deleteSection} />})}
         <button className="section-button" onClick={this.addSection}>Add a menu section</button>
       </div>
     );

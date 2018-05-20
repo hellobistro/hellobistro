@@ -139,11 +139,15 @@ const ApiService = {
   },
 
   deletePhoto: (imageKey) => {
-    return AuthService.fetch('/deletephoto', {
+    return fetch(`${domain}/deletephoto`, {
       method: 'DELETE',
-      body: {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
         imageKey
-      }
+      })
     })
   },
 
