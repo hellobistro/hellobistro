@@ -19,7 +19,7 @@ export default class RestaurantNav extends React.Component {
 
   handleLogOut() {
     localStorage.clear();
-    this.props.history.push("/");
+    this.props.history.push("/restaurant/login");
     this.props.logOut();
   }
 
