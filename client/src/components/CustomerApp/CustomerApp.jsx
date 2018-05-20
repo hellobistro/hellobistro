@@ -48,7 +48,7 @@ class CustomerApp extends React.Component {
           <CustomerNav {...this.props} />
         </div>
         <main>
-          <div className="small-screen">
+          <div className="small-screen-customer">
             <Mast />
             <CustomerNavContainer {...this.props} />
           </div>
