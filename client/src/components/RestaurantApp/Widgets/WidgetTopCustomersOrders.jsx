@@ -10,7 +10,7 @@ const WidgetTopCustomersOrders = (props) => {
   const renderTopFiveCustomers = () => topFiveCustomersByOrders.map((customer, index) => {
     if (index < 5) {
       return (
-        <div className="section info" key={index} onClick={() => {props.modalOn('WidgetModal', customer.userName)}}>
+        <div className="section info" key={index} onClick={() => { props.modalOn('widgetUserModal', customer.userName) }}>
           <span className="info-detail">{customer.orders}</span>
           <span className="info-label">{customer.userName}</span>
         </div>

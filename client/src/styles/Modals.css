@@ -9,6 +9,7 @@
 }
 
 .order-modal {
+  z-index: 100;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -20,16 +21,35 @@
   padding: 30px;
 }
 
-.widget-modal {
+.widget-user-modal {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #ECEFF1;
+  background-color: #FFF;
   border-radius: 5px;
-  max-width: 400px;
+  max-width: 600px;
   min-height: 100px;
   margin: auto;
-  padding: 30px;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14);
+}
+
+.widget-user-modal-header {
+  display: inline-block;
+  font-size: 20px;
+  margin: 0 15px;
+  margin-top: -20px;
+  background-color: #8E24AA;
+  line-height: 10px;
+  padding: 25px;
+  height: 30px;
+  color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(255,152,0,.4);
+}
+
+.widget-user-modal-content {
+  display:block;
+  padding: 20px;
 }
 
 input[type=number] {

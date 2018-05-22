@@ -28,7 +28,9 @@ import {
   CustomerRegisterContainer,
   MenuContainer,
   ConfirmOrderContainer,
+  ModalBackdropContainer,
 } from './Containers';
+
 
 // import {sampleRestaurantGet} from '../../sampleData';
 
@@ -54,8 +56,9 @@ class App extends React.Component {
   
   render() {
     return (
-      <div className="App">
+      <div className="App"> 
         {/* <Switch> */}
+        <ModalBackdropContainer />
         {
         this.checkUser() === 'Customer'
          ? <Route path="/customer/home" component={CustomerAppContainer} />
