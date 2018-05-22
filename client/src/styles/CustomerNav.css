@@ -7,9 +7,32 @@
 
 .CustomerNav a {
   text-decoration: inherit;
-  color: black;
+  color: inherit;
 }
 
 .CustomerNav .material-icons {
   vertical-align: -25%;
+}
+
+.menu-control {
+  display: none;
+}
+
+
+@media (max-width: 540px) {
+  .menu-control {
+    display: inherit;
+  }
+
+  .sidebar-left {
+    display: none;
+  }
+
+  .small-screen-customer {
+    display: flex;
+    flex-direction: column;
+    max-height: fit-content;
+    color: white;
+  }
+  
 }
