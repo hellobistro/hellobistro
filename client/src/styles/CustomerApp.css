@@ -39,12 +39,14 @@ main {
   flex-wrap: wrap;
 }
 
-.small-screen {
+.small-screen-customer {
   display: none;
-  background:#A5D6A7;
+  background: #4CAF50;
   text-align: center;
   padding: 20px;
+  color: white;
 }
+
 
 .collapsed {
   display: none;
@@ -77,10 +79,11 @@ main {
     display: none;
   }
 
-  .small-screen {
+  .small-screen-customer {
     display: flex;
     flex-direction: column;
     max-height: fit-content;
+    color: white;
   }
   
 }
