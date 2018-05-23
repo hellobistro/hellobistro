@@ -6,7 +6,7 @@ import '../../../styles/Widgets.css';
 
 const WidgetTopCustomersOrders = (props) => {
   const topFiveCustomersByOrders =
-    props.state.restaurant.analytics.top5CustomersByOrders;
+    props.state.restaurant.analytics.topFiveCustomersByOrders;
 
   const renderTopFiveCustomers = () => topFiveCustomersByOrders.map((customer, index) => {
     if (index < 5) {
