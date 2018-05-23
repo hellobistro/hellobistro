@@ -319,9 +319,20 @@ const restaurantController = {
   },
 
   deleteMenuSection(req, res) {
-    const { restaurant_id, section_id } = req.params;
-
-    
+    const { section_id } = req.params;
+    MenuSection.destroy({
+      where: { id: section_id }
+    })
+      .then(deleted => {
+        if (deleted < 1) {
+          res.sendStatus(400);
+        } else {
+          res.status(200).json(deleted);
+        }
+      })
+      .catch(err => {
+        res.send(err);
+      });
   },
 
   getAllRatingsForRestaurant(req, res) {
@@ -542,10 +553,10 @@ const restaurantController = {
     S3.deleteObject(params, function(err, data) {
       if (err) {
         console.log(err, err.stack) 
-        res.sendStatus(400); 
+        res.status(400).json(err);
       } else {
         console.log('successfully deleted photo');
-        res.sendStatus(200);
+        res.status(200).json(data);
       }                     
     });
   },
