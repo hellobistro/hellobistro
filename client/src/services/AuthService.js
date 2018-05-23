@@ -26,7 +26,6 @@ const AuthService = {
         password,
       },
     }).then((res) => {
-      console.log('TOKEN COMING BACK', res);
       AuthService.setToken(res.token); // Setting the token in localStorage
       return res;
     });
@@ -90,7 +89,6 @@ const AuthService = {
   fetch: (url, options = {}) => {
     // performs api calls sending the required authentication headers
     options.body = JSON.stringify(options.body);
-    console.log('Auth service is fetching', options, url);
     const headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json'

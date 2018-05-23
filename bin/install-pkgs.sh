@@ -1,8 +1,8 @@
 #!/bin/bash
-pm2 stop all
+sudo cp -a /home/ubuntu/config/ /home/ubuntu/hellobistro/config
 cd /home/ubuntu/hellobistro
 sudo npm install
 cd /home/ubuntu/hellobistro/client
 sudo npm install
-sudo npm run prod
+sudo ./node_modules/.bin/webpack --progress --colors --config webpack.config.js --bail
 echo "install complete"

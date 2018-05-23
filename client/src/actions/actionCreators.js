@@ -4,6 +4,13 @@ export function increment() {
   };
 }
 
+export function logOut(data) {
+  return {
+    type: 'USER_LOGOUT',
+    data,
+  }
+}
+
 // CUSTOMER APP ACTIONS
 
 export function addCustomer(obj) {
@@ -132,6 +139,13 @@ export function addUser(userId, userName) {
       userId,
       userName,
     },
+  };
+}
+
+export function addOrders(data) {
+  return {
+    type: 'ADD_ORDERS',
+    data,
   };
 }
 

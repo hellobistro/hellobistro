@@ -6,13 +6,14 @@ import Mast from './Mast';
 import CustomerNav from './CustomerNav';
 import {
   FindRestaurantsContainer,
+  FavoritesContainer,
   OrderHistoryContainer,
   OrderContainer,
   CustomerSettingsContainer,
   MenuContainer,
   ConfirmOrderContainer,
-  CustomerModalsContainer,
   PaymentMethodsContainer,
+  CustomerNavContainer,
 } from '../Containers';
 // Import Services
 import AuthService from '../../services/AuthService';
@@ -46,16 +47,16 @@ class CustomerApp extends React.Component {
           <CustomerNav {...this.props} />
         </div>
         <main>
-          <div className="small-screen">
+          <div className="small-screen-customer">
             <Mast />
-            <CustomerNav {...this.props} />
+            <CustomerNavContainer {...this.props} />
           </div>
-          <CustomerModalsContainer />
           <Switch>
             <Route path="/customer/home/findRestaurants" component={FindRestaurantsContainer} />
             <Route path="/customer/home/history" component={OrderHistoryContainer} />
             <Route path="/customer/home/order" component={OrderContainer} />
             <Route path="/customer/home/settings" component={CustomerSettingsContainer} />
+            <Route path="/customer/home/favorites" component={FavoritesContainer} />
             <Route path="/customer/home/:id/menu" component={MenuContainer} />
             <Route path="/customer/home/confirm-order" component={ConfirmOrderContainer} />
             <Route path="/customer/home/payment" component={PaymentMethodsContainer} />

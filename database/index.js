@@ -163,7 +163,7 @@ const Customer = sequelize.define('Customer', {
 const CustomerRating = sequelize.define('CustomerRating', {
   total: {
     type: Sequelize.INTEGER,
-    defaultValue: 1,
+    defaultValue: 0,
   },
 });
 

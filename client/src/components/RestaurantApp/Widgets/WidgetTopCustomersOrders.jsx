@@ -1,25 +1,23 @@
 // Import dependencies
-import React from "react";
+import React from 'react';
 
 // Import CSS
-import "../../../styles/Widgets.css";
+import '../../../styles/Widgets.css';
 
-const WidgetTopCustomersOrders = props => {
-  let topFiveCustomersByOrders =
-    props.state.restaurant.analytics.topFiveCustomersByOrders;
+const WidgetTopCustomersOrders = (props) => {
+  const topFiveCustomersByOrders =
+    props.state.restaurant.analytics.top5CustomersByOrders;
 
-  const renderTopFiveCustomers = () => {
-    return topFiveCustomersByOrders.map((customer, index) => {
-      if (index < 5) {
-        return (
-          <div className="section info" key={index}>
-            <span className="info-detail">{customer.orders}</span>
-            <span className="info-label">{customer.userName}</span>
-          </div>
-        );
-      }
-    });
-  };
+  const renderTopFiveCustomers = () => topFiveCustomersByOrders.map((customer, index) => {
+    if (index < 5) {
+      return (
+        <div className="section info" key={index} onClick={() => { props.modalOn('widgetUserModal', { customerId: customer.customerId, userName: customer.userName }) ;}}>
+          <span className="info-detail">{customer.orders}</span>
+          <span className="info-label">{customer.userName}</span>
+        </div>
+      );
+    }
+  });
 
   return (
     <div className="WidgetTotalCustomers widget widget-small">

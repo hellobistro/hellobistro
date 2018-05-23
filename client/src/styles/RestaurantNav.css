@@ -12,3 +12,26 @@
   text-decoration: inherit;
   color: black;
 }
+
+.RestaurantNav .menu-control {
+  display: none;
+}
+
+
+@media (max-width: 540px) {
+  .RestaurantNav .menu-control {
+    display: inherit;
+  }
+
+  .RestaurantNav .sidebar-left {
+    display: none;
+  }
+
+  .small-screen-restaurant {
+    display: flex;
+    flex-direction: column;
+    max-height: fit-content;
+    color: white;
+  }
+  
+}

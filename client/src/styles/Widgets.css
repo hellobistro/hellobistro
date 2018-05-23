@@ -32,7 +32,6 @@
   padding: 10px;
   align-items: center;
   justify-content: center;
-  font-family: 'Bitter', serif;
   font-size: 20px;
 }
 
@@ -70,6 +69,15 @@
   width: 100%;
   padding: 20px 0px;
 
+}
+
+.section.info {
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.section.info:hover {
+  background-color: rgba(211, 211, 211, 0.296);
 }
 
 .section-chart {
