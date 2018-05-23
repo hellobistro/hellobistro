@@ -53,10 +53,8 @@ const customerController = {
       .then((customer) => {
         // Send back success message to customer.
         res.status(201).json(customer);
-        console.log('Customer account created', customer);
         // Create stripe account for customer.
         stripeRegistration(email, `hbCustomerId: ${customer.id}`).then((stripeCustomer) => {
-          console.log('Returned from stripe: ', stripeCustomer);
           // Update customer record with Stripe data.
           Customer.update(
             {
@@ -123,7 +121,6 @@ const customerController = {
 
   addPaymentMethod(req, res) {
     const { StripeId, CustomerId, token } = req.body;
-    console.log('creating stripe source', StripeId, token, token.token.id);
 
     stripe.customers.createSource(StripeId, {
       source: token.token.id,
@@ -136,7 +133,6 @@ const customerController = {
           res.status(400).json(response);
         } else {
           // create record in payment methods database.
-          console.log('Response from Stripe', response);
           PaymentMethods.create({
             CustomerId,
             cardId: response.id,
@@ -162,7 +158,6 @@ const customerController = {
     const { customer_id } = req.params;
     PaymentMethods.findAll({ where: { CustomerId: customer_id } })
       .then((paymentData) => {
-        console.log('sending payment data', paymentData);
         // Send back data to customer.
         res.status(201).json(paymentData);
       })
@@ -194,7 +189,6 @@ const customerController = {
       items,
     } = req.body;
 
-    console.log('Processing Stripe charge');
     stripe.charges.create(
       {
         amount: Math.round(total * 100),
@@ -208,7 +202,6 @@ const customerController = {
           console.log('Stripe error', err);
           res.send(err);
         } else {
-          console.log('Stripe success', charge);
           Order.create({
             status: 'queued',
             total,
@@ -385,8 +378,6 @@ const customerController = {
 
   getAllOrdersForCustomer(req, res) {
     const { customer_id } = req.params;
-    console.log('Customer Id for order request', customer_id);
-
     Order.findAll({
       where: {
         CustomerId: customer_id,
@@ -403,7 +394,6 @@ const customerController = {
       ],
     })
       .then((orders) => {
-        console.log('Orders coming');
         res.json(orders);
       })
       .catch((err) => {
@@ -458,7 +448,6 @@ const customerController = {
 
   async loginCustomer(req, res) {
     const { email, password } = req.body;
-    console.log('login email', email, 'login password', password);
     const user = await Customer.findOne({
       where: { email },
       include: [{ model: PaymentMethods, required: false }],

@@ -17,6 +17,9 @@ routes.get('/data/:restaurant_id/', (req, res) => {
   analytics.buildAndSendData(req, res);
 });
 
+routes.get('/data/customers/:RestaurantId/:CustomerId/', (req, res) => {
+  restaurantController.fetchUserDataForWidget(req, res);
+});
 
 /* *************** */
 /* CUSTOMER ROUTES */

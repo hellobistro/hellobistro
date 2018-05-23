@@ -1,3 +1,4 @@
+const { photos } = require('../config/config.js');
 const {
   Customer,
   Restaurant,
@@ -5,20 +6,21 @@ const {
   MenuSection,
   MenuItem,
   Order,
-  OrderItem
-} = require("../database/index.js");
+  OrderItem,
+} = require('../database/index.js');
 
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-//upload photo
+// upload photo
 const AWS = require('aws-sdk');
 const UUID = require('uuid/v4');
 const Busboy = require('busboy');
-AWS.config.update({ accessKeyId: 'AKIAJCL67PZSTIZDZNDA', secretAccessKey: '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' });
+
+AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.secretAccessKey });
 const S3 = new AWS.S3();
 
-const moment = require("moment");
+const moment = require('moment');
 
 const restaurantController = {
   async createRestaurant(req, res) {
@@ -37,16 +39,14 @@ const restaurantController = {
       genre,
       type,
       paymentId,
-      password
+      password,
     } = req.body;
-
-    console.log(req.body, "cats");
 
     const possibleUser = await RestaurantUser.findOne({ where: { email } });
 
     if (possibleUser) {
       res.status(400);
-      res.send("email already exists");
+      res.send('email already exists');
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -63,25 +63,25 @@ const restaurantController = {
       description,
       genre,
       type,
-      paymentId
+      paymentId,
     })
-      .then(restaurant => {
+      .then((restaurant) => {
         newRestaurant = restaurant;
 
         return RestaurantUser.create({
           RestaurantId: restaurant.id,
           email,
           password: hashedPassword,
-          phone
+          phone,
         });
       })
-      .then(user => {
+      .then((user) => {
         res.status(201).json({
           user: user.id,
-          restaurant: newRestaurant
+          restaurant: newRestaurant,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         res.send(err);
       });
@@ -89,10 +89,10 @@ const restaurantController = {
 
   getAllRestaurants(req, res) {
     Restaurant.findAll({})
-      .then(restaurants => {
+      .then((restaurants) => {
         res.send(restaurants);
       })
-      .catch(err => {
+      .catch((err) => {
         res.send(err);
       });
   },
@@ -109,20 +109,20 @@ const restaurantController = {
           include: [
             {
               model: MenuItem,
-              required: false
-            }
-          ]
-        }
-      ]
+              required: false,
+            },
+          ],
+        },
+      ],
     })
-      .then(restaurant => {
+      .then((restaurant) => {
         if (restaurant === null) {
           res.sendStatus(400);
         } else {
           res.status(200).json(restaurant);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         res.send(err);
       });
   },
@@ -131,23 +131,23 @@ const restaurantController = {
     const { restaurant_id } = req.params;
     Order.findAll({
       where: {
-        RestaurantId: restaurant_id
+        RestaurantId: restaurant_id,
       },
       include: [
         {
           model: MenuItem,
-          required: false
+          required: false,
         },
         {
           model: Customer,
-          required: false
-        }
-      ]
+          required: false,
+        },
+      ],
     })
-      .then(orders => {
+      .then((orders) => {
         res.json(orders);
       })
-      .catch(err => {
+      .catch((err) => {
         res.send(err);
       });
   },
@@ -158,26 +158,28 @@ const restaurantController = {
     Order.findAll({
       where: {
         RestaurantId: restaurant_id,
-        completedAt: null
+        completedAt: null,
       },
       include: [
         {
           model: MenuItem,
-          required: false
-        }
-      ]
+          required: false,
+        },
+      ],
     })
-      .then(orders => {
+      .then((orders) => {
         res.json(orders);
       })
-      .catch(err => {
+      .catch((err) => {
         res.send(err);
       });
   },
 
   createNewOrder(req, res) {
     const { restaurant_id } = req.params;
-    const { status, total, completedAt, transactionId, table } = req.body;
+    const {
+      status, total, completedAt, transactionId, table,
+    } = req.body;
 
     Order.create({
       status,
@@ -185,12 +187,12 @@ const restaurantController = {
       completedAt,
       transactionId,
       table,
-      RestaurantId: restaurant_id
+      RestaurantId: restaurant_id,
     })
-      .then(order => {
+      .then((order) => {
         res.json(order);
       })
-      .catch(err => {
+      .catch((err) => {
         res.send(err);
       });
   },
@@ -201,12 +203,12 @@ const restaurantController = {
     MenuSection.create({
       name,
       description,
-      RestaurantId: restaurant_id
+      RestaurantId: restaurant_id,
     })
-      .then(item => {
+      .then((item) => {
         res.json(item);
       })
-      .catch(err => {
+      .catch((err) => {
         res.send(err);
       });
   },
@@ -215,7 +217,7 @@ const restaurantController = {
     const { restaurant_id } = req.params;
     const {
       name,
-      //description,
+      // description,
       price,
       vegan,
       vegetarian,
@@ -225,7 +227,7 @@ const restaurantController = {
       prepTime,
       rating,
       status,
-      menuSectionId
+      menuSectionId,
     } = req.body;
 
     MenuItem.create({
@@ -240,12 +242,12 @@ const restaurantController = {
       rating,
       status,
       MenuSectionId: menuSectionId,
-      RestaurantId: restaurant_id
+      RestaurantId: restaurant_id,
     })
-      .then(item => {
+      .then((item) => {
         res.json(item);
       })
-      .catch(err => {
+      .catch((err) => {
         res.send(err);
       });
   },
@@ -266,31 +268,29 @@ const restaurantController = {
       MenuSectionId,
     } = req.body;
 
-    if(status === 'archived' && typeof JSON.parse(item_id) !== "number"){
+    if (status === 'archived' && typeof JSON.parse(item_id) !== 'number') {
       return res.sendStatus(200);
-    } 
+    }
 
-    MenuItem.upsert(
-      {
-        id: item_id,
-        name,
-        status,
-        price,
-        vegan,
-        vegetarian,
-        glutenFree,
-        spicy,
-        image,
-        prepTime,
-        rating,
-        MenuSectionId,
-        RestaurantId: restaurant_id,
-      }
-    )
-      .then(item => {
+    MenuItem.upsert({
+      id: item_id,
+      name,
+      status,
+      price,
+      vegan,
+      vegetarian,
+      glutenFree,
+      spicy,
+      image,
+      prepTime,
+      rating,
+      MenuSectionId,
+      RestaurantId: restaurant_id,
+    })
+      .then((item) => {
         res.json(item);
       })
-      .catch(err => {
+      .catch((err) => {
         res.send(err);
       });
   },
@@ -302,18 +302,16 @@ const restaurantController = {
       description,
     } = req.body;
 
-    MenuSection.upsert(
-      {
-        id: section_id,
-        name,
-        description,
-        RestaurantId: restaurant_id,
-      }
-    )
-      .then(item => {
+    MenuSection.upsert({
+      id: section_id,
+      name,
+      description,
+      RestaurantId: restaurant_id,
+    })
+      .then((item) => {
         res.json(item);
       })
-      .catch(err => {
+      .catch((err) => {
         res.send(err);
       });
   },
@@ -322,19 +320,19 @@ const restaurantController = {
     const { restaurant_id } = req.params;
     Order.findAll({
       where: {
-        RestaurantId: restaurant_id
+        RestaurantId: restaurant_id,
       },
       include: [
         {
           model: MenuItem,
-          required: false
-        }
-      ]
+          required: false,
+        },
+      ],
     })
-      .then(orders => {
+      .then((orders) => {
         res.json(orders);
       })
-      .catch(err => {
+      .catch((err) => {
         res.send(err);
       });
   },
@@ -342,11 +340,10 @@ const restaurantController = {
   async updateRestaurant(req, res) {
     const { restaurant_id } = req.params;
     const updatedValues = req.body;
-    console.log(updatedValues);
 
-    Restaurant.findOne({ where: { id: restaurant_id }, include: [{model: RestaurantUser, required: false}] })
+    Restaurant.findOne({ where: { id: restaurant_id }, include: [{ model: RestaurantUser, required: false }] })
       .then(async (restaurant) => {
-        let user = restaurant.RestaurantUsers[0];
+        const user = restaurant.RestaurantUsers[0];
         let hashedPassword = null;
         if (updatedValues.password) {
           hashedPassword = await bcrypt.hash(updatedValues.password, 10);
@@ -357,26 +354,26 @@ const restaurantController = {
           await user.update({
             email: updatedValues.email,
             password: updatedValues.password,
-          });        
+          });
         } else if (updatedValues.password) {
           await user.update({
             password: updatedValues.password,
-          });        
+          });
         } else if (updatedValues.email) {
           await user.update({
             email: updatedValues.email,
-          });        
+          });
         }
 
         return restaurant.update(updatedValues);
       })
-      .then(updatedRestaurant => {
+      .then((updatedRestaurant) => {
         res.json(updatedRestaurant);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         res.json({
-          message: "An error was encountered updating the restaurant"
+          message: 'An error was encountered updating the restaurant',
         });
       });
   },
@@ -385,7 +382,7 @@ const restaurantController = {
     const { email, password } = req.body;
     const user = await RestaurantUser.findOne({ where: { email } });
     const restaurantInfo = await Restaurant.findOne({
-      where: { id: user.RestaurantId }
+      where: { id: user.RestaurantId },
     });
     if (!user) {
       res.sendStatus(400);
@@ -396,14 +393,14 @@ const restaurantController = {
       res.sendStatus(400);
     }
 
-    const token = jwt.sign({ userType: "Restaurant" }, "secret", {
-      expiresIn: 129600
+    const token = jwt.sign({ userType: 'Restaurant' }, 'secret', {
+      expiresIn: 129600,
     });
     const info = {
       token,
       userId: user.id,
       userName: user.userName,
-      restaurantInfo
+      restaurantInfo,
     };
     res.json(info);
   },
@@ -412,23 +409,22 @@ const restaurantController = {
     const { restaurant_id } = req.params;
 
     Restaurant.destroy({
-      where: { id: restaurant_id }
+      where: { id: restaurant_id },
     })
-      .then(deleted => {
+      .then((deleted) => {
         if (deleted < 1) {
           res.sendStatus(400);
         } else {
           res.sendStatus(200);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         res.send(err);
       });
   },
 
   deleteAllMenuSectionsAndItems(req, res) {
     const { restaurant_id } = req.params;
-    console.log('the restaurantID in controller:  ', restaurant_id)
     // MenuItem.count({ where: { RestaurantId: restaurant_id } })
     //   .then(count => {
     //     if (count != 0) {
@@ -458,71 +454,82 @@ const restaurantController = {
     Order.destroy({
       where: {
         id: order_id,
-        RestaurantId: restaurant_id
-      }
+        RestaurantId: restaurant_id,
+      },
     })
-      .then(deleted => {
+      .then((deleted) => {
         if (deleted < 1) {
           res.sendStatus(400);
         } else {
           res.sendStatus(200);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         res.send(err);
       });
   },
 
   completeOpenOrder(req, res) {
     const { order_id } = req.params;
-    Order.update({
-        status: "completed",
-        completedAt: moment()
+    Order.update(
+      {
+        status: 'completed',
+        completedAt: moment(),
       },
       {
-        where: {id: order_id}
-      }).then((res) => {
-        res.json(res)
-      }).catch(err => {
-        res.send(err);
+        where: { id: order_id },
+      },
+    ).then((res) => {
+      res.json(res);
+    }).catch((err) => {
+      res.send(err);
+    });
+  },
+
+  fetchUserDataForWidget(req, res) {
+    const { CustomerId, RestaurantId } = req.params;
+    Order.findAll({ where: { RestaurantId, CustomerId }, include: [{ model: MenuItem, required: false }] })
+      .then((orders) => {
+        const formatted = orders.map(order => ({ id: order.id, createdAt: moment(order.createdAt).format('ddd, MMMM D, YYYY'), total: order.total }));
+        res.json(formatted);
       })
+      .catch((err) => { console.log(err); res.send(err); });
   },
 
   uploadPhoto(req, res) {
     const { item_id } = req.params;
-    console.log('the itemId in restaurantController: ', item_id)
-    let chunks = [], fname, ftype, fEncoding;
-    let busboy = new Busboy({ headers: req.headers });
-    busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-        console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
-        fname = filename.replace(/ /g,"_");
-        ftype = mimetype;
-        fEncoding = encoding;
-        file.on('data', function(data) {
-            // you will get chunks here will pull all chunk to an array and later concat it.
-            console.log (chunks.length);
-            chunks.push(data)
-        });
-        file.on('end', function() {
-            console.log('File [' + filename + '] Finished');
-        });
+    let chunks = [],
+      fname,
+      ftype,
+      fEncoding;
+    const busboy = new Busboy({ headers: req.headers });
+    busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
+      fname = filename.replace(/ /g, '_');
+      ftype = mimetype;
+      fEncoding = encoding;
+      file.on('data', (data) => {
+        // you will get chunks here will pull all chunk to an array and later concat it.
+        chunks.push(data);
+      });
+      file.on('end', () => {
+        console.log(`File [${filename}] Finished`);
+      });
     });
-    busboy.on('finish', function() {
-        const userId = UUID();
-        const params = {
-            Bucket: 'hbphotostorage', // your s3 bucket name
-            Key: `${userId}-${fname}`, 
-            Body: Buffer.concat(chunks), // concatinating all chunks
-            ACL: 'public-read',
-            ContentEncoding: fEncoding, // optional
-            ContentType: ftype // required
-        }
-    // we are sending buffer data to s3.
+    busboy.on('finish', () => {
+      const userId = UUID();
+      const params = {
+        Bucket: 'hbphotostorage',
+        Key: `${userId}-${fname}`,
+        Body: Buffer.concat(chunks), // concatinating all chunks
+        ACL: 'public-read',
+        ContentEncoding: fEncoding, // optional
+        ContentType: ftype, // required
+      };
+      // we are sending buffer data to s3.
       S3.upload(params, (err, s3res) => {
-        if (err){
-          res.send({err, status: 'error'});
+        if (err) {
+          res.send({ err, status: 'error' });
         } else {
-          console.log('the s3res: ', s3res)
           // MenuItem.update({
           //   image: s3res.Location
           // },
@@ -530,12 +537,13 @@ const restaurantController = {
           //   id: item_id
           //   }
           // })
-          res.send({data:s3res, status: 'success', msg: 'Image successfully uploaded.'});
+          res.send({ data: s3res, status: 'success', msg: 'Image successfully uploaded.' });
         }
       });
     });
-  req.pipe(busboy);
-  }
+    req.pipe(busboy);
+  },
+
 };
 
 module.exports = restaurantController;

@@ -130,16 +130,17 @@ const ApiService = {
   updateMenuItem: (restaurantId, itemId, info) => {
     return AuthService.fetch(`/restaurants/${restaurantId}/menu/${itemId}`, {
       method: 'PATCH',
-      body: info
-    })
+      body: info,
+    });
   },
-  
   updateMenuSection: (restaurantId, menuSection, info) => {
     return AuthService.fetch(`/restaurants/menusection/${restaurantId}/${menuSection}`, {
       method: 'PATCH',
-      body: info
-    })
+      body: info,
+    });
   },
+
+  fetchUserWidgetData: (restaurantId, customerId) => AuthService.fetch(`/data/customers/${restaurantId}/${customerId}`, { method: 'GET' }),
 
 
   retrievePaymentMethods: id => AuthService.fetch(`/customers/payments/${id}`, { method: 'GET' }),

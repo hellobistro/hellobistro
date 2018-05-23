@@ -180,6 +180,7 @@ const buildCustomerDirectory = (order) => {
       totalRevenue: order.total,
       averageRevenue: order.total,
       lastOrderDate: order.completedAt,
+      customerId: order.CustomerId,
     };
   } else {
     customerDirectory[currentCustomer].orders++;

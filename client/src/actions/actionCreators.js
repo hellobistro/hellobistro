@@ -142,6 +142,13 @@ export function addUser(userId, userName) {
   };
 }
 
+export function addOrders(data) {
+  return {
+    type: 'ADD_ORDERS',
+    data,
+  };
+}
+
 export function modalOn(id, data) {
   return {
     type: 'MODAL_ON',
