@@ -45,8 +45,8 @@
     "jest": "^22.4.3"
   },
   "scripts": {
-    "test": "echo hello",
-    "test jest": "jest",
+    "test": "mocha server/test --exit",
+    "test jest": "jest client/",
     "test mocha": "mocha",
     "test-server": "mocha server/test --exit",
     "jest": "jest",
