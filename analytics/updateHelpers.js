@@ -49,6 +49,7 @@ module.exports = {
         totalRevenue: order.total,
         averageRevenue: order.total,
         lastOrderDate: order.completedAt,
+        customerId: order.CustomerId,
       };
     } else {
       customers[currentCustomer].orders++;

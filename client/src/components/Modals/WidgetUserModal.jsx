@@ -16,7 +16,7 @@ class WidgetUserModal extends React.Component {
 
   render() {
     const orders = this.state.orders.length >= 1 ? this.state.orders.map(order => <tr key={order.id}><td>{order.id}</td><td>{order.createdAt}</td><td>${order.total}</td></tr>) : null;
-    const table = this.state.orders.length >= 1 ? <table className="widget-modal-table"><tr><th>Order Id</th><th>Date</th><th>Bill</th></tr>{orders}</table> : <div className="modal-loader" />;
+    const table = this.state.orders.length >= 1 ? <table className="widget-modal-table"><thead><tr><th>Order Id</th><th>Date</th><th>Bill</th></tr></thead><tbody>{orders}</tbody></table> : <div className="modal-loader" />;
     const { data } = this.props.state.modals;
     return (
       <div className="widget-modal user">
