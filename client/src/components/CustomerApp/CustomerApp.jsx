@@ -12,7 +12,6 @@ import {
   CustomerSettingsContainer,
   MenuContainer,
   ConfirmOrderContainer,
-  CustomerModalsContainer,
   PaymentMethodsContainer,
   CustomerNavContainer,
 } from '../Containers';
@@ -52,7 +51,6 @@ class CustomerApp extends React.Component {
             <Mast />
             <CustomerNavContainer {...this.props} />
           </div>
-          <CustomerModalsContainer />
           <Switch>
             <Route path="/customer/home/findRestaurants" component={FindRestaurantsContainer} />
             <Route path="/customer/home/history" component={OrderHistoryContainer} />

@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreators';
 import App from './App';
 import CustomerApp from './CustomerApp/CustomerApp';
-import CustomerModals from './CustomerApp/CustomerModals';
+import ModalBackdrop from './Modals/ModalBackdrop';
 import OrderModal from './Modals/OrderModal';
+import WidgetUserModal from './Modals/WidgetUserModal';
 import RestaurantApp from './RestaurantApp/RestaurantApp';
 import RestaurantLogin from './RestaurantApp/RestaurantLogin';
 import ConfirmOrder from './CustomerApp/ConfirmOrder';
@@ -36,6 +37,7 @@ import WidgetTopCustomersOrders from './RestaurantApp/Widgets/WidgetTopCustomers
 import WidgetItemOrderTotals from './RestaurantApp/Widgets/WidgetItemOrderTotals';
 import WidgetTotalRevenueByMonth from './RestaurantApp/Widgets/WidgetTotalRevenueByMonth';
 import WidgetTotalRevenueByDay from './RestaurantApp/Widgets/WidgetTotalRevenueByDay';
+import WidgetTimelineChart from './RestaurantApp/Widgets/WidgetTimelineChart';
 import { withRouter } from 'react-router';
 
 
@@ -51,8 +53,9 @@ function mapDispatchToProps(dispatch) {
 
 export const AppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 export const CustomerAppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerApp));
-export const CustomerModalsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerModals));
+export const ModalBackdropContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ModalBackdrop));
 export const OrderModalContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderModal));
+export const WidgetUserModalContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetUserModal));
 export const RestaurantAppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantApp));
 export const RestaurantNavContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantNav));
 export const CustomerNavContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerNav));
@@ -84,3 +87,4 @@ export const WidgetTopCustomersOrdersContainer = withRouter(connect(mapStateToPr
 export const WidgetItemOrderTotalsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetItemOrderTotals));
 export const WidgetTotalRevenueByMonthContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalRevenueByMonth));
 export const WidgetTotalRevenueByDayContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTotalRevenueByDay));
+export const WidgetTimelineChartContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetTimelineChart));

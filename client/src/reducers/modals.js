@@ -12,6 +12,10 @@ function modals(state = { id: null, data: {}, visible: false }, action) {
         data: {},
         visible: false,
       });
+    case 'ADD_ORDERS':
+      return Object.assign({}, state, {
+        data: { ...state.data, orders: action.data },
+      });
     default:
       return state;
   }

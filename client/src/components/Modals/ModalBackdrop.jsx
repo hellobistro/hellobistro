@@ -1,9 +1,9 @@
 import React from 'react';
 import '../../styles/Modals.css';
-import WidgetModal from '../Modals/WidgetModal';
-import { OrderModalContainer } from '../Containers';
+import { OrderModalContainer, WidgetUserModalContainer } from '../Containers';
 
-const CustomerModals = (props) => {
+const ModalBackdrop = (props) => {
+  console.log('MODAL BACKDROP', props.state.modals.id, props.state.restaurant.restaurantInfo)
   if (!props.state.modals.visible) {
     return null;
   } else if (!props.state.modals.id || !props.state.modals.data) {
@@ -15,7 +15,7 @@ const CustomerModals = (props) => {
   // MODAL TEMPLATES
   const modals = {
     orderModal: <OrderModalContainer />,
-    widgetModal: <WidgetModal />,
+    widgetUserModal: <WidgetUserModalContainer />,
   };
 
   return (
@@ -25,4 +25,4 @@ const CustomerModals = (props) => {
   );
 };
 
-export default CustomerModals;
+export default ModalBackdrop;
