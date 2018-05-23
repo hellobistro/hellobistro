@@ -14,7 +14,7 @@ class MenuManager extends React.Component {
     ApiService.getRestaurantData(restaurantId).then((info) => {
       console.log('the info:   ', {...info})
         info.MenuSections = info.MenuSections.map((sec, i)=>{
-          sec.uniqueId = i + 1;
+          sec.uniqueId = new Date().getTime() + i;
           return sec
         })
         this.setState({ ...info })
@@ -26,15 +26,22 @@ class MenuManager extends React.Component {
     MenuSections.push({
       MenuItems: [],
       RestaurantId: this.state.id,
-      uniqueId: MenuSections.length + 1,
+      uniqueId: new Date().getTime() + MenuSections.length,
     });
     this.setState({ MenuSections });
   }
 
   deleteSection = (indx) => {
     let MenuSections = Array.slice(this.state.MenuSections);
-    MenuSections.splice(indx, 1);
-    this.setState({ MenuSections });
+    let oldSection = MenuSections.splice(indx, 1);
+    console.log('the oldSection:  ', oldSection)
+    this.setState({ MenuSections }, () => {
+      if(oldSection[0].hasOwnProperty('id')) {
+        ApiService.deleteMenuSection(oldSection[0].id)
+      } else { 
+        console.log('this menusection is not in the database')
+      }
+    });
   }
 
   render() {

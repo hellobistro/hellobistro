@@ -118,38 +118,30 @@ const ApiService = {
 
   //patch('/restaurants/:restaurant_id/menu/:item_id'
 
-  updateMenuItem: (restaurantId, itemId, info) => {
-    return AuthService.fetch(`/restaurants/${restaurantId}/menu/${itemId}`, {
+  updateMenuItem: (restaurantId, itemId, info) => 
+    AuthService.fetch(`/restaurants/${restaurantId}/menu/${itemId}`, {
       method: 'PATCH',
       body: info
-    })
-  },
+    }),
   
-  updateMenuSection: (restaurantId, menuSection, info) => {
-    return AuthService.fetch(`/restaurants/menusection/${restaurantId}/${menuSection}`, {
+  updateMenuSection: (restaurantId, menuSection, info) => 
+    AuthService.fetch(`/restaurants/menusection/${restaurantId}/${menuSection}`, {
       method: 'PATCH',
       body: info
-    })
-  },
+    }),
 
-  deleteMenuSection: (restaurantId, menuSection) => {
-    return AuthService.fetch(`/restaurants/deletemenusection/${restaurantId}/${menuSection}`, {
-      method: 'DELETE'
-    })
-  },
-
-  deletePhoto: (imageKey) => {
-    return fetch(`${domain}/deletephoto`, {
+  deleteMenuSection: (menuSection) => 
+    AuthService.fetch(`/restaurants/menusection/${menuSection}`, {
       method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    }),
+
+  deletePhoto: (imageKey) => 
+    AuthService.fetch('/restaurants/photo', {
+      method: 'DELETE',
+      body: {
         imageKey
-      })
-    })
-  },
+      }
+    }),
 
   retrievePaymentMethods: id => AuthService.fetch(`/customers/payments/${id}`, { method: 'GET' }),
 

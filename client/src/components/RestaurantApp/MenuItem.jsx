@@ -2,26 +2,26 @@ import React from 'react';
 import '../../styles/MenuManager.css';
 import AuthService from '../../services/AuthService';
 import ApiService from '../../services/ApiService';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 class MenuItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       nameEdited: false,
-      priceEdited: false
+      priceEdited: false,
+      prepTimeEdited: false,
+      veganEdited: false,
+      vegetarianEdited: false,
+      glutenFreeEdited: false,
+      spicyEdited: false
     };
   }
-
-  // componentWillReceiveProps (props){
-  //   this.setState({data: props.data, hasChanged: false}) // This will update your component.
-  //  }
 
   componentWillMount() {
     let data = this.props.data;
     this.setState({ data, hasChanged: false })
-  }
-
-  componentDidMount() {
   }
 
   imageUpload = (e) => {
@@ -71,14 +71,20 @@ class MenuItem extends React.Component {
     let value;
     if (name === "name" || name === "status") {
       value = e.target.value
-    } else if(typeof JSON.parse(e.target.value) === "number" || typeof JSON.parse(e.target.value) === "boolean") {
+    } else if(typeof JSON.parse(e.target.value) === "number") {
       value = JSON.parse(e.target.value)
     } else {
       value = null;
     }
     let data = this.state.data;
     data[name] = value;
-    this.setState({ data, hasChanged: true })
+    this.setState({ data, hasChanged: true, [name + 'Edited']: true})
+  }
+
+  dropDownChange = (name, selectedOption) => {
+    let data = this.state.data
+    data[name] = JSON.parse(selectedOption.value)
+    this.setState({ data, hasChanged: true, [name + 'Edited']: true });
   }
 
   updateItem = () => {
@@ -86,7 +92,14 @@ class MenuItem extends React.Component {
     const imageKey = this.state.imageKey
     ApiService.updateMenuItem(RestaurantId, id, this.state.data)
       .then((updatedItem) => (
-        this.setState({hasChanged: false}, () => {
+        this.setState({hasChanged: false, 
+          nameEdited: false,
+          priceEdited: false,
+          prepTimeEdited: false,
+          veganEdited: false,
+          vegetarianEdited: false,
+          glutenFreeEdited: false,
+          spicyEdited: false}, () => {
           if(imageKey) 
           ApiService.deletePhoto(imageKey)
             .then(() => { 
@@ -110,8 +123,10 @@ class MenuItem extends React.Component {
   }
 
   render() {
-    const others = ['vegan', 'vegetarian', 'glutenFree', 'spicy'];
+    console.log('the state inside MenuItem:  ', this.state)
     const { id, status, name, image, price, prepTime, vegan, vegetarian, glutenFree, spicy } = this.state.data
+    const { selectedOption, veganEdited, vegetarianEdited, glutenFreeEdited, spicyEdited } = this.state;
+  	const value = selectedOption && selectedOption.value;
     const img = <div className='image-container'>
                 {
                   image
@@ -126,9 +141,29 @@ class MenuItem extends React.Component {
                   <input type='file' accept='image/*' ref='imageUploader' style={{display: 'none'}} 
                     onChange={()=>{this._onChange(id)}}/>
                 </div>;
+    const others = ['vegan', 'vegetarian', 'glutenFree', 'spicy'];
     const render = {
+      nutriFacts: others.map((attr, i) => {
+        const options = [ { label: 'Yes', value: 'true', clearableValue: false, color: '#E31864' },
+                          { label: 'No', value: 'false', clearableValue: false, color: '#E31864' },
+                          { label: 'N/A', value: 'null', clearableValue: false, color: '#E31864' } ];
+        return <div key={i} className='nutri-facts'>
+          <p className='option-name'>{attr}:</p>
+          <Select className='option-select' 
+            options={options}
+            clearable={false}
+            valueRenderer={(option) => {
+                if(this.state[attr + 'Edited']){
+                  return <strong style={{ color: option.color }}>{option.label}</strong>
+                } else {
+                  return <strong style={{ color: 'black' }}>{option.label}</strong>
+                }
+            }}
+            value={eval(attr) === null ? 'null' : eval(attr)}
+            onChange={(e)=>{this.dropDownChange(attr, e)}}/>
+          </div>}),
       name: <div className='item-input-div name '>
-        <input className={'item-input ' + (this.state.nameEdited ? 'show-edited' : null)}
+        <input className={'item-input ' + (this.state.nameEdited ? 'edited' : null)}
         name='name'
         type='text'
         defaultValue={name}
@@ -136,9 +171,9 @@ class MenuItem extends React.Component {
         onChange={(e) => { this.inputChange(e); }}
       />
       </div>,
-      price: <div className={'item-input-div price ' + (this.state.priceEdited ? 'show-edited' : null)}>
+      price: <div className='item-input-div price '>
         <i className='material-icons manager-icons'>attach_money</i><input
-        className='item-input'
+        className={'item-input ' + (this.state.priceEdited ? 'edited' : null)}
         name='price'
         type='text'
         placeholder='$'
@@ -157,8 +192,9 @@ class MenuItem extends React.Component {
       //   onChange={(e) => { this.inputChange(e); }}
       // />
       // </div>,
-      prepTime: <div className='item-input-div prep'><i className='material-icons manager-icons'>timer</i><input
-          className='item-input'
+      prepTime: <div className='item-input-div prep'>
+          <i className='material-icons manager-icons'>timer</i><input
+          className={'item-input ' + (this.state.prepTimeEdited ? 'edited' : null)}
           name='prepTime'
           type='text'
           placeholder='Estimated item prep time (in minutes).'
@@ -166,15 +202,6 @@ class MenuItem extends React.Component {
           onChange={(e) => { this.inputChange(e); }}
         />
       </div>,
-      nutriFacts: others.map((attr, i) => (<div key={i} className='nutri-facts'>
-                  <p className='option-name'>{attr}:</p>
-                  <select className='option-select' name={attr} value={eval(attr) === null ? 'null' : eval(attr)}
-                    onChange={(e) => { this.inputChange(e); }} >
-                    <option value='true'>Yes</option>
-                    <option value='false'>No</option>
-                    <option value='null'>N/A</option>
-                  </select>
-                       </div>)),
       status: 
               <div>
               <label className='switch'>
@@ -207,11 +234,11 @@ class MenuItem extends React.Component {
           </div>
           {render.name}
           {/* {render.description} */}
-          {render.price}
-          {render.prepTime}
           <div className='item-specs'>
             {render.nutriFacts}
           </div>
+          {render.price}
+          {render.prepTime}
           <div className="two-buttons">
             {render.saveChanges}
             <div className="divider"/>

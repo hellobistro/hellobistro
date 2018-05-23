@@ -25,7 +25,7 @@
   border-bottom: 1px solid darkslategray;
   color: darkslategray;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 38px;
   width: 98%;
   display: block;
 }
@@ -56,6 +56,11 @@ textarea {resize: vertical}
   width: 100%;
   display: inline-block;
 }
+
+.edited {
+  color: #E31864 !important;
+}
+
 .manager-icons {
   color: #c75b39;
   display: inline-block;
@@ -211,9 +216,8 @@ textarea {resize: vertical}
 }
 
 .item-specs {
-  flex: 0 0 24%;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .nutri-facts {
@@ -226,12 +230,12 @@ textarea {resize: vertical}
 }
 
 .option-name {
-  display: inline-block;
-  margin-right: 10px
+  font-weight: bold;
 }
 
 .option-select {
   display: inline-block;
+  width: 5em;
 }
 
 .item-button {
@@ -304,9 +308,6 @@ select.status {
   display: inline-block;
 }
 
-.show-edited {
-  color: red;
-}
 
 .item-image {
   box-shadow: 0 4px 6px rgba(0,0,0,0.24);
