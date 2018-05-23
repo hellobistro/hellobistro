@@ -58,7 +58,7 @@ class MenuSection extends React.Component {
   }
 
   render() {
-    const { data, deleteMenuSection, inputChange, sectionIndex, dropDown, sectionChange } = this.props;
+    const { data, deleteSection, indx } = this.props;
     const items = data.MenuItems.map((item, i) =>  (<MenuItem key={i} data={item} updateCount={this.updateCount} />));
     return (
       <div className="form-section">
@@ -78,7 +78,7 @@ class MenuSection extends React.Component {
         }
         {
           this.state.itemCount < 1
-          ? <button className="menu-section-button delete" onClick={() => {this.props.deleteSection(this.props.indx)}}> Delete Section </button>
+          ? <button className="menu-section-button delete" onClick={() => {deleteSection(indx)}}> Delete Section </button>
           : <div></div>
         }
         <br />

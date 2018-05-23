@@ -9,13 +9,6 @@ class MenuItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nameEdited: false,
-      priceEdited: false,
-      prepTimeEdited: false,
-      veganEdited: false,
-      vegetarianEdited: false,
-      glutenFreeEdited: false,
-      spicyEdited: false
     };
   }
 
@@ -39,7 +32,6 @@ class MenuItem extends React.Component {
     }).then((res) => {
       return res.json()
     }).then(res => {
-      console.log('the res after uploaddd: ', res)
       let url = res.data.Location;
       let data = this.state.data;
       data.image = url
@@ -178,9 +170,8 @@ class MenuItem extends React.Component {
         type='text'
         placeholder='$'
         defaultValue={price}
-        onChange={(e) => { this.inputChange(e); }}
-      />
-      </div>,
+        onChange={(e) => { this.inputChange(e); }}/>
+        </div>,
       // description: <div className='item-input-div description'><i className='material-icons manager-icons description'>format_align_justify</i><textarea
       //   className='item-input'
       //   name='description'
@@ -193,36 +184,34 @@ class MenuItem extends React.Component {
       // />
       // </div>,
       prepTime: <div className='item-input-div prep'>
-          <i className='material-icons manager-icons'>timer</i><input
-          className={'item-input ' + (this.state.prepTimeEdited ? 'edited' : null)}
-          name='prepTime'
-          type='text'
-          placeholder='Estimated item prep time (in minutes).'
-          defaultValue={prepTime}
-          onChange={(e) => { this.inputChange(e); }}
-        />
-      </div>,
-      status: 
-              <div>
-              <label className='switch'>
-                <input type='checkbox' checked={status === 'published'} onChange={this.toggleSlider}/>
-                <span className='slider round'></span>
-              </label>
-              {
-                status === 'published'
-                ? <div className='status-published'>Published</div>
-                : <div className='status-draft'>Draft</div>
-              }
-              </div>,
+        <i className='material-icons manager-icons'>timer</i><input
+        className={'item-input ' + (this.state.prepTimeEdited ? 'edited' : null)}
+        name='prepTime'
+        type='text'
+        placeholder='Estimated item prep time (in minutes).'
+        defaultValue={prepTime}
+        onChange={(e) => { this.inputChange(e); }}/>
+        </div>,
+      status: <div>
+        <label className='switch'>
+          <input type='checkbox' checked={status === 'published'} onChange={this.toggleSlider}/>
+          <span className='slider round'></span>
+        </label>
+        {
+          status === 'published'
+          ? <div className='status-published'>Published</div>
+          : <div className='status-draft'>Draft</div>
+        }
+        </div>,
       saveChanges:
-              <button disabled={!this.state.hasChanged}
-              onClick={this.updateItem}
-              className="change-button save-changes-button">Save Changes</button>,
+        <button disabled={!this.state.hasChanged}
+        onClick={this.updateItem}
+        className="change-button save-changes-button">Save Changes</button>,
       deleteItem:
-              <button className="change-button delete-item-button"
-                onClick={this.deleteItem}><span>Delete Item  </span> 
-                <i className='material-icons delete'>delete_forever</i>
-              </button>
+        <button className="change-button delete-item-button"
+          onClick={this.deleteItem}><span>Delete Item  </span> 
+          <i className='material-icons delete'>delete_forever</i>
+        </button>
     };
     return (
       <div>
