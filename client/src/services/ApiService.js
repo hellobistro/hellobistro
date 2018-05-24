@@ -127,18 +127,30 @@ const ApiService = {
 
   //patch('/restaurants/:restaurant_id/menu/:item_id'
 
-  updateMenuItem: (restaurantId, itemId, info) => {
-    return AuthService.fetch(`/restaurants/${restaurantId}/menu/${itemId}`, {
+  updateMenuItem: (restaurantId, itemId, info) => 
+    AuthService.fetch(`/restaurants/${restaurantId}/menu/${itemId}`, {
       method: 'PATCH',
-      body: info,
-    });
-  },
-  updateMenuSection: (restaurantId, menuSection, info) => {
-    return AuthService.fetch(`/restaurants/menusection/${restaurantId}/${menuSection}`, {
+      body: info
+    }),
+  
+  updateMenuSection: (restaurantId, menuSection, info) => 
+    AuthService.fetch(`/restaurants/menusection/${restaurantId}/${menuSection}`, {
       method: 'PATCH',
-      body: info,
-    });
-  },
+      body: info
+    }),
+
+  deleteMenuSection: (menuSection) => 
+    AuthService.fetch(`/restaurants/menusection/${menuSection}`, {
+      method: 'DELETE',
+    }),
+
+  deletePhoto: (imageKey) => 
+    AuthService.fetch('/restaurants/photo', {
+      method: 'DELETE',
+      body: {
+        imageKey
+      }
+    }),
 
   fetchUserWidgetData: (restaurantId, customerId) => AuthService.fetch(`/data/customers/${restaurantId}/${customerId}`, { method: 'GET' }),
 

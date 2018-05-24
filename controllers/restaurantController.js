@@ -316,6 +316,23 @@ const restaurantController = {
       });
   },
 
+  deleteMenuSection(req, res) {
+    const { section_id } = req.params;
+    MenuSection.destroy({
+      where: { id: section_id }
+    })
+      .then(deleted => {
+        if (deleted < 1) {
+          res.sendStatus(400);
+        } else {
+          res.status(200).json(deleted);
+        }
+      })
+      .catch(err => {
+        res.send(err);
+      });
+  },
+
   getAllRatingsForRestaurant(req, res) {
     const { restaurant_id } = req.params;
     Order.findAll({
@@ -530,18 +547,26 @@ const restaurantController = {
         if (err) {
           res.send({ err, status: 'error' });
         } else {
-          // MenuItem.update({
-          //   image: s3res.Location
-          // },
-          // { where: {
-          //   id: item_id
-          //   }
-          // })
-          res.send({ data: s3res, status: 'success', msg: 'Image successfully uploaded.' });
+          console.log('the s3res: ', s3res)
+          res.send({ data:s3res, status: 'success', msg: 'Image successfully uploaded.' });
         }
       });
     });
-    req.pipe(busboy);
+  req.pipe(busboy);
+  },
+
+  deletePhoto(req, res) {
+    const { imageKey } = req.body;
+    var params = { Bucket: 'hbphotostorage', Key: imageKey };
+    S3.deleteObject(params, function(err, data) {
+      if (err) {
+        console.log(err, err.stack) 
+        res.status(400).json(err);
+      } else {
+        console.log('successfully deleted photo');
+        res.status(200).json(data);
+      }                     
+    });
   },
 
 };
