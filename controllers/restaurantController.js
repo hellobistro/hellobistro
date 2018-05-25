@@ -65,6 +65,7 @@ const restaurantController = {
         .catch(err => {
           console.log('error getting lat & lng')
         })
+    const point = { type: 'Point', coordinates: [lat, lng]};
 
     Restaurant.create({
       name,
@@ -79,8 +80,7 @@ const restaurantController = {
       genre,
       type,
       paymentId,
-      // lat,
-      // lng,
+      //gemoetry: point,
     })
       .then((restaurant) => {
         newRestaurant = restaurant;
@@ -440,31 +440,6 @@ const restaurantController = {
       });
   },
 
-  deleteAllMenuSectionsAndItems(req, res) {
-    const { restaurant_id } = req.params;
-    // MenuItem.count({ where: { RestaurantId: restaurant_id } })
-    //   .then(count => {
-    //     if (count != 0) {
-    //       MenuItem.destroy({
-    //         where: { RestaurantId: restaurant_id }
-    //       })
-    //         .then(() => {
-    //           MenuSection.destroy({
-    //             where: { RestaurantId: restaurant_id }
-    //           }).then(() => {
-    //             res.sendStatus(200);
-    //           });
-    //         })
-    //         .catch(err => {
-    //           res.send(err);
-    //         });
-    //     } else {
-    //       res.sendStatus(200);
-    //     }
-    //   })
-    res.sendStatus(200);
-  },
-
   deleteOrder(req, res) {
     const { restaurant_id, order_id } = req.params;
 
@@ -547,18 +522,26 @@ const restaurantController = {
         if (err) {
           res.send({ err, status: 'error' });
         } else {
-          // MenuItem.update({
-          //   image: s3res.Location
-          // },
-          // { where: {
-          //   id: item_id
-          //   }
-          // })
           res.send({ data: s3res, status: 'success', msg: 'Image successfully uploaded.' });
         }
       });
     });
     req.pipe(busboy);
+  },
+
+  closestRestaurants(req, res){
+    const { lat, lng } = req.body
+    const location = sequelize.literal(`ST_GeomFromText('POINT(${lat} ${lng})', 4326)`);
+
+    Restaurant.findAll({
+      attributes: [[sequelize.literal("6371 * acos(cos(radians("+lat+")) * cos(radians(latitude)) * cos(radians("+lng+") - radians(longitude)) + sin(radians("+lat+")) * sin(radians(latitude)))"),'distance']],
+      order: 'distance',
+      limit: 10,
+      logging: console.log
+    })
+    .then(function(instance){
+      console.log(instance);
+    })
   },
 
 };

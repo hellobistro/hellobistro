@@ -63,6 +63,9 @@ const Restaurant = sequelize.define('Restaurant', {
   },
   type: Sequelize.STRING,
   paymentId: Sequelize.STRING,
+  // point: {
+  //   type: Sequelize.GEOMETRY('POINT'),
+  // },
 });
 
 const MenuItem = sequelize.define('MenuItem', {
