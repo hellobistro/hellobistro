@@ -1,9 +1,11 @@
 .Mast {
   font-family: 'Bitter', serif;
   font-size: 28px;
+  text-shadow: .75px .75px rgba(0, 0, 0, 0.413);
   text-align: center;
   padding: 50px;
   background: #c75b39;
+ 
   color: white;
 }
 

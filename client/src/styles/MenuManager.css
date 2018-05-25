@@ -75,6 +75,16 @@ textarea {resize: vertical}
   text-align: left;
 }
 
+.form-section .section-header {
+  background-image: linear-gradient(60deg,#ef5350,#e53935);
+  margin-bottom: -60px;
+  border-radius: 3px;
+  padding: 20px;
+  z-index: 2;
+  position: relative;
+}
+
+
 .section-name {
   font-size: 20px;
   margin: 0px 0px 0px 0px !important;
@@ -88,11 +98,13 @@ textarea {resize: vertical}
 }
 
 .menu-manager-item {
+  position: relative;
   margin: 10px;
   padding: 20px;
   background: #FFFFFF;
   box-shadow: 0 4px 6px rgba(0,0,0,0.24);
   margin-bottom: 20px;
+  z-index: 1;
   /* position: absolute */
   /* float:right; */
 }

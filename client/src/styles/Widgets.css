@@ -12,17 +12,20 @@
   flex: 1 0 24%;
   min-width: 300px;
   max-width: 350px;
+  margin-bottom: 30px;
 }
 
 .widget-medium {
   flex: 1 0 24%;
   min-width: 600px;
   max-width: 650px;
+  margin-bottom: 30px;
 }
 
 .widget-large {
   flex: 1 0 96%;
   width: 100%;
+  margin-bottom: 30px;
 }
 
 .widget-header-text {
@@ -30,21 +33,30 @@
   display: flex;
   max-height: 50px;
   padding: 10px;
-  align-items: center;
+  align-items: right;
   justify-content: center;
   font-size: 20px;
+  color: #999;
 }
 
 .widget-header-icon {
   flex: 1;
   display: flex;
-  max-width: 50px;
-  max-height: 50px;
+  max-width: 86px;
+  max-height: 86px;
+  height: 86px;
+  width: 86px;
   padding: 10px;
   border-radius: 2px;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  margin-top: -35px;
+}
+
+.widget-header-icon .material-icons {
+  font-size: 36px;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: .25px .25px #333333;
 }
 
 .widget-chart {
@@ -105,27 +117,32 @@
 }
 
 .mat-color-orange {
-  background: #F4511E;
+  background-image: linear-gradient(60deg, rgb(254, 114, 71), rgb(244, 81, 30));
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(255,152,0,.4);
   color: white;
 }
 
 .mat-color-purple {
-  background: #8E24AA;
+  background-image: linear-gradient(60deg, rgb(176, 72, 205), rgb(142, 36, 170));
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgb(176, 72, 205);
   color: white;
 }
 
 .mat-color-lightblue {
-  background: #1E88E5;
+  background-image: linear-gradient(60deg, rgb(77, 162, 237), rgb(30, 136, 229));
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgb(77, 162, 237);
   color: white;
 }
 
 .mat-color-teal {
-  background: #00897B;
+  background-image: linear-gradient(60deg, rgb(22, 179, 163), rgb(0, 137, 123));
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgb(22, 179, 163);
   color: white;
 }
 
 .mat-color-green {
-  background: #43A047;
+  background-image: linear-gradient(60deg, rgb(97, 199, 102), rgb(67, 160, 71));
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgb(97, 199, 102);
   color: white;
 } 
 

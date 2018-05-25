@@ -1,6 +1,6 @@
 // Import dependencies
 import React from "react";
-import { Route, Link, Switch } from "react-router-dom";
+import { Route, NavLink, Switch } from "react-router-dom";
 
 import "../../styles/RestaurantNav.css";
 
@@ -34,31 +34,31 @@ export default class RestaurantNav extends React.Component {
       return (
         <div>
           <ul className="link-list">
+            <NavLink activeClassName="activeLink" to="/restaurant/home/dashboard">
+              <li>
+                  <i className="material-icons">dashboard</i>Dashboard
+              </li>
+            </NavLink>
+            <NavLink activeClassName="activeLink" to="/restaurant/home/menuManager">
             <li>
-              <Link to="/restaurant/home/dashboard">
-                <i className="material-icons">dashboard</i>Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link to="/restaurant/home/menuManager">
                 <i className="material-icons">restaurant_menu</i>Menu Manager
-              </Link>
             </li>
+            </NavLink>
+            <NavLink activeClassName="activeLink" to="/restaurant/home/orderManager">
             <li>
-              <Link to="/restaurant/home/orderManager">
                 <i className="material-icons">assignment</i>Orders Manager
-              </Link>
             </li>
+            </NavLink>
+            <NavLink activeClassName="activeLink" to="/restaurant/home/settings">
             <li>
-              <Link to="/restaurant/home/settings">
                 <i className="material-icons">settings</i>Settings
-              </Link>
             </li>
+            </NavLink>
+            <NavLink activeClassName="activeLink" to="/restaurant/home/promos">
             <li>
-              <Link to="/restaurant/home/promos">
                 <i className="material-icons">event</i>Promos
-              </Link>
             </li>
+            </NavLink>
             <li className="link-log-out" onClick={this.handleLogOut}>
               <i className="material-icons">exit_to_app</i>
               <span>Logout</span>

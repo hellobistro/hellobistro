@@ -62,36 +62,38 @@ class MenuSection extends React.Component {
     const items = data.MenuItems.map((item, i) =>  (<MenuItem key={i} data={item} updateCount={this.updateCount} />));
     return (
       <div className="form-section">
-        <input
-          className="form-input section-name"
-          name="name"
-          type="text"
-          placeholder="Add your menu section name here."
-          defaultValue={data.name}
-          maxLength="255"
-          onChange={this.inputChange}
-        />
-        {
-          this.state.hasChanged
-          ? <button className="menu-section-button save" onClick={this.updateMenuSection}> Save Changes </button>
-          : <div></div>
-        }
-        {
-          this.state.itemCount < 1
-          ? <button className="menu-section-button delete" onClick={() => {deleteSection(indx)}}> Delete Section </button>
-          : <div></div>
-        }
-        <br />
-        <textarea
-          className="form-input section-description"
-          name="description"
-          type="text"
-          defaultValue={data.description}
-          placeholder="Add a section description here (not required)."
-          maxLength="255"
-          rows="1"
-          onChange={this.inputChange}
-        />
+        <div className="section-header">
+          <input
+            className="form-input section-name"
+            name="name"
+            type="text"
+            placeholder="Add your menu section name here."
+            defaultValue={data.name}
+            maxLength="255"
+            onChange={this.inputChange}
+          />
+          {
+            this.state.hasChanged
+            ? <button className="menu-section-button save" onClick={this.updateMenuSection}> Save Changes </button>
+            : <div></div>
+          }
+          {
+            this.state.itemCount < 1
+            ? <button className="menu-section-button delete" onClick={() => {deleteSection(indx)}}> Delete Section </button>
+            : <div></div>
+          }
+          <br />
+          <textarea
+            className="form-input section-description"
+            name="description"
+            type="text"
+            defaultValue={data.description}
+            placeholder="Add a section description here (not required)."
+            maxLength="255"
+            rows="1"
+            onChange={this.inputChange}
+          />
+        </div>
         {items}
         <button className="item-button" onClick={this.addItem}><i className="material-icons manager-icons">add_box</i>Add {data.name} item</button>
       </div>
