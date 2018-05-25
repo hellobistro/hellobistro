@@ -1,4 +1,4 @@
-const { photos } = require('../config/config.js');
+const { photos, googleApiKey } = require('../config/config.js');
 const {
   Customer,
   Restaurant,
@@ -21,6 +21,8 @@ AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.sec
 const S3 = new AWS.S3();
 
 const moment = require('moment');
+
+const fetch = require("node-fetch");
 
 const restaurantController = {
   async createRestaurant(req, res) {
@@ -51,6 +53,19 @@ const restaurantController = {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    let lat;
+    let lng;
+    await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=
+          ${addressOne},${addressCity},${addressState}&key=${googleApiKey}`)
+      .then((res) => res.json())
+        .then((res) => {
+          lat = res.results[0].geometry.location.lat
+          lng = res.results[0].geometry.location.lng
+        })
+        .catch(err => {
+          console.log('error getting lat & lng')
+        })
+
     Restaurant.create({
       name,
       addressOne,
@@ -64,6 +79,8 @@ const restaurantController = {
       genre,
       type,
       paymentId,
+      // lat,
+      // lng,
     })
       .then((restaurant) => {
         newRestaurant = restaurant;
