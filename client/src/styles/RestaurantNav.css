@@ -9,12 +9,12 @@
   border-radius: 3px;
 }
 
-a:not(.activeLink) li:hover {
-  background-color: rgba(211, 211, 211, 0.358)
+li.link-log-out:hover {
+  background-color: rgba(211, 211, 211, 0.358);
 }
 
-li:hover .link-log-out {
-  background-color: rgba(211, 211, 211, 0.358)
+a:not(.activeLink) li:hover {
+  background-color: rgba(211, 211, 211, 0.358);
 }
 
 .activeLink li {

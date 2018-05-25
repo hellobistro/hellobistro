@@ -59,30 +59,27 @@ class MenuSection extends React.Component {
 
   render() {
     const { data, deleteSection, indx } = this.props;
-    const items = data.MenuItems.map((item, i) =>  (<MenuItem key={i} data={item} updateCount={this.updateCount} />));
+    const items = this.state.itemCount > 1 ? data.MenuItems.map((item, i) =>  (<MenuItem key={i} data={item} updateCount={this.updateCount} />)) : <div className="empty-section"><h4>This menu section is empty.</h4><button className="menu-section-button delete" onClick={() => {deleteSection(indx)}}> Delete Section </button></div>;
     return (
       <div className="form-section">
         <div className="section-header">
-          <input
-            className="form-input section-name"
-            name="name"
-            type="text"
-            placeholder="Add your menu section name here."
-            defaultValue={data.name}
-            maxLength="255"
-            onChange={this.inputChange}
-          />
+          <div>
+            <i className="material-icons manager-header-icon">label_important</i>
+            <input
+              className="form-input section-name"
+              name="name"
+              type="text"
+              placeholder="Add your menu section name here."
+              defaultValue={data.name}
+              maxLength="255"
+              onChange={this.inputChange}
+            />
+          </div>
           {
             this.state.hasChanged
             ? <button className="menu-section-button save" onClick={this.updateMenuSection}> Save Changes </button>
-            : <div></div>
+            : null
           }
-          {
-            this.state.itemCount < 1
-            ? <button className="menu-section-button delete" onClick={() => {deleteSection(indx)}}> Delete Section </button>
-            : <div></div>
-          }
-          <br />
           <textarea
             className="form-input section-description"
             name="description"
@@ -94,8 +91,10 @@ class MenuSection extends React.Component {
             onChange={this.inputChange}
           />
         </div>
-        {items}
-        <button className="item-button" onClick={this.addItem}><i className="material-icons manager-icons">add_box</i>Add {data.name} item</button>
+        <div className="section-content">
+          {items}
+        </div>
+          <button className="item-button" onClick={this.addItem}><i className="material-icons manager-icons">add_box</i>Add {data.name} item</button>
       </div>
     );
   }

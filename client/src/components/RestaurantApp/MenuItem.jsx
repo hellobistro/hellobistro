@@ -223,11 +223,11 @@ class MenuItem extends React.Component {
           </div>
           {render.name}
           {/* {render.description} */}
+          {render.price}
+          {render.prepTime}
           <div className='item-specs'>
             {render.nutriFacts}
           </div>
-          {render.price}
-          {render.prepTime}
           <div className="two-buttons">
             {render.saveChanges}
             <div className="divider"/>
