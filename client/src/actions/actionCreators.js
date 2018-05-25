@@ -104,6 +104,14 @@ export function updatePaymentMethods(data) {
   };
 }
 
+export function setCustomerLocation(lat, long){
+  return{
+    type: 'SET_CUSTOMER_LOCATION',
+    lat,
+    long,
+  }
+}
+
 // RESTAURANT APP ACTIONS
 
 export function loadRestaurantData(data) {

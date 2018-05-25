@@ -66,6 +66,10 @@ cart: {
       return Object.assign({}, state, {
         cart: { ...state.cart, paymentId: action.paymentId },
       });
+    case 'SET_CUSTOMER_LOCATION':
+      return Object.assign({}, state, {
+        location: {lattitude: action.lat, longitude: action.long}
+      });
     default:
       return state;
   }
