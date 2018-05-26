@@ -94,7 +94,7 @@ class MenuSection extends React.Component {
         <div className="section-content">
           {items}
         </div>
-          <button className="item-button" onClick={this.addItem}><i className="material-icons manager-icons">add_box</i>Add {data.name} item</button>
+          <button className="add-item-button" onClick={this.addItem}><i className="material-icons manager-icons">add_box</i>Add {data.name} item</button>
       </div>
     );
   }
