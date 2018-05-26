@@ -297,17 +297,10 @@ routes.get('/customers/restaurantList/:lat/:lng', (req, res) => {
   restaurantController.closestRestaurants(req, res);
 })
 
-<<<<<<< HEAD
-=======
-//get coords
-routes.get('/getCoords/:restaurant_id', (req, res) =>{
-  restaurantController.getCoordinates(req, res)
-
 //delete photo
 routes.delete('/restaurants/photo', (req, res) => {
   restaurantController.deletePhoto(req, res);
 
 })
 
->>>>>>> 04c0d06a4cae524a4e671cb1c5c16f2c56b9e6ff
 module.exports = routes;
