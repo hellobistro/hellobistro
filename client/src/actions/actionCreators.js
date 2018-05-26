@@ -32,6 +32,13 @@ export function loadSelectedRestaurant(data) {
   };
 }
 
+export function loadClosestRestaurantList(data) {
+  return {
+    type: 'LOAD_CLOSEST_RESTAURANT_LIST',
+    data,
+  };
+}
+
 export function addToCart(data) {
   console.log('adding to cart');
   return {

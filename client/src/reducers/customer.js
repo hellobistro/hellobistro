@@ -9,6 +9,10 @@ cart: {
       return Object.assign({}, state, {
         restaurants: action.data,
       });
+    case 'LOAD_CLOSEST_RESTAURANT_LIST':
+    return Object.assign({}, state, {
+      closestRestaurants: action.data,
+    });
     case 'LOAD_SELECTED_RESTAURANT':
       return Object.assign({}, state, {
         currentRestaurant: action.data,
@@ -68,7 +72,7 @@ cart: {
       });
     case 'SET_CUSTOMER_LOCATION':
       return Object.assign({}, state, {
-        location: {lattitude: action.lat, longitude: action.long}
+        location: {latitude: action.lat, longitude: action.long}
       });
     default:
       return state;

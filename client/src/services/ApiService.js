@@ -142,10 +142,20 @@ const ApiService = {
 
   fetchUserWidgetData: (restaurantId, customerId) => AuthService.fetch(`/data/customers/${restaurantId}/${customerId}`, { method: 'GET' }),
 
-
   retrievePaymentMethods: id => AuthService.fetch(`/customers/payments/${id}`, { method: 'GET' }),
 
   deletePaymentMethod: paymentId => AuthService.fetch(`/customers/payments/${paymentId}`, { method: 'DELETE' }),
+
+  getRestaurantList: (lat, lng) => {
+    return AuthService.fetch(`/customers/restaurantList/${lat}/${lng}`, {
+      method: 'GET',
+      // body: {
+      //   lat,
+      //   lng
+      // }
+    })
+  }
+
 };
 
 export default ApiService;
