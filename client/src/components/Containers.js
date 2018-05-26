@@ -25,9 +25,9 @@ import Restaurant from './CustomerApp/Restaurant';
 import RestaurantList from './CustomerApp/RestaurantList';
 import DashBoard from './RestaurantApp/DashBoard';
 import MenuManager from './RestaurantApp/MenuManager';
-import Promos from './RestaurantApp/Promos';
 import RestaurantRegister from './RestaurantApp/RestaurantRegister';
 import RestaurantSettings from './RestaurantApp/RestaurantSettings';
+import CustomerList from './RestaurantApp/CustomerList';
 import CustomerRegister from './CustomerApp/CustomerRegister';
 import CustomerSettings from './CustomerApp/CustomerSettings';
 import OrderManager from './RestaurantApp/OrderManager';
@@ -43,8 +43,8 @@ import { withRouter } from 'react-router';
 
 function mapStateToProps(state) {
   return {
-    state
-  }
+    state,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -75,9 +75,9 @@ export const RestaurantContainer = withRouter(connect(mapStateToProps, mapDispat
 export const RestaurantListContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantList));
 export const DashBoardContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(DashBoard));
 export const MenuManagerContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(MenuManager));
-export const PromosContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Promos));
 export const RestaurantRegisterContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantRegister));
 export const RestaurantSettingsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantSettings));
+export const CustomerListContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerList));
 export const CustomerRegisterContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerRegister));
 export const CustomerSettingsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerSettings));
 export const OrderManagerContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderManager));
