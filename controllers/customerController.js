@@ -189,66 +189,80 @@ const customerController = {
       items,
     } = req.body;
 
-    stripe.charges.create(
-      {
-        amount: Math.round(total * 100),
-        currency: 'usd',
-        customer: StripeId,
-        source: CardId,
-        description: `RestId: ${RestaurantId}, hbCustomerId: ${CustomerId}, items: ${items}`,
-      },
-      (err, charge) => {
-        if (err) {
-          console.log('Stripe error', err);
-          res.send(err);
-        } else {
-          Order.create({
-            status: 'queued',
-            total,
-            transactionId: charge.id,
-            table,
-            CustomerId,
-            RestaurantId,
-          })
-            .then(async (order) => {
-              let newOrder = null;
-              async function buildOrderItems() {
-                items.forEach((item) => {
-                  order.addMenuItem(item.id, {
-                    through: { special: item.special, price: item.price },
+    console.log('aaaa', items);
+
+    // Check to make sure at least one item is included in order
+    // If not, reject the order
+    if (items.length >= 1) {
+      stripe.charges.create(
+        {
+          amount: Math.round(total * 100),
+          currency: 'usd',
+          customer: StripeId,
+          source: CardId,
+          description: `RestId: ${RestaurantId}, hbCustomerId: ${CustomerId}, items: ${items}`,
+        },
+        (err, charge) => {
+          if (err) {
+            console.log('Stripe error', err);
+            res.send(err);
+          } else {
+            Order.create({
+              status: 'queued',
+              total,
+              transactionId: charge.id,
+              table,
+              CustomerId,
+              RestaurantId,
+            })
+              .then(async (order) => {
+                let newOrder = null;
+                async function buildOrderItems() {
+
+                  items.forEach((item) => {
+
+                    if (item.quantity > 0) {
+                      order.addMenuItem(item.id, {
+                        through: { special: item.special, price: item.price },
+                      });
+    
+                      CustomerRating.findOrCreate({
+                        where: {
+                          CustomerId,
+                          MenuItemId: item.id,
+                        },
+                      })
+                        .spread((rating, created) => rating.increment('total'))
+                        .catch((err) => {
+                          console.log(error);
+                        });
+
+                    }
                   });
+                  newOrder = Order.findById(order.id, {
+                    include: [MenuItem],
+                    required: false,
+                  });
+                }
+  
+                await buildOrderItems();
+  
+                return newOrder;
+              })
+              .then((order) => {
+                res.json(order);
+              })
+              .catch((error) => {
+                res.send(error);
+                console.log(error);
+              });
+          }
+        },
+      );
+    } else {
+      res.send(error);
+    }
 
-                  CustomerRating.findOrCreate({
-                    where: {
-                      CustomerId: customer_id,
-                      MenuItemId: menu_item_id,
-                    },
-                  })
-                    .spread((rating, created) => rating.increment('total'))
-                    .catch((err) => {
-                      console.log(error);
-                    });
-                });
-                newOrder = Order.findById(order.id, {
-                  include: [MenuItem],
-                  required: false,
-                });
-              }
-
-              await buildOrderItems();
-
-              return newOrder;
-            })
-            .then((order) => {
-              res.json(order);
-            })
-            .catch((error) => {
-              res.send(error);
-              console.log(error);
-            });
-        }
-      },
-    );
 
   },
 

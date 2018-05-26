@@ -15,8 +15,8 @@ const wrapper = shallow(<AppContainer.WrappedComponent {...initialState} />);
 
 describe('App Component', () => {
   it('should render the App component', () => {
-    expect(wrapper.length).to.equal(1);
-    expect(wrapper.find('.App').length).to.equal(1);
-    expect(JSON.stringify(wrapper.instance().props)).to.equal(JSON.stringify(initialState));
+    expect(wrapper.length).toBe(1);
+    expect(wrapper.find('.App').length).toBe(1);
+    expect(JSON.stringify(wrapper.instance().props)).toBe(JSON.stringify(initialState));
   });
 });
