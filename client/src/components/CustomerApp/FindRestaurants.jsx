@@ -23,11 +23,10 @@ class FindRestaurants extends React.Component {
 
   componentWillMount() {
     this.getLocation();
-    this.closestRestaurants()
   }
 
   componentDidMount() {
-    
+    this.closestRestaurants()
   }
 
   handleClick = (id) => {
