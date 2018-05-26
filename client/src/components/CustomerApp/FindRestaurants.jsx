@@ -40,7 +40,7 @@ class FindRestaurants extends React.Component {
         className="restaurant-snippet"
         key={biz.id}
         onClick={() => {
-          handleClick(biz.id);
+          this.handleClick(biz.id);
         }}
       >
         <h3>{biz.name}</h3>
