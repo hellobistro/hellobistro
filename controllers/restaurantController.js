@@ -1,4 +1,4 @@
-const { photos } = require('../config/config.js');
+const { photos, googleApiKey } = require('../config/config.js');
 const {
   Customer,
   Restaurant,
@@ -21,6 +21,10 @@ AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.sec
 const S3 = new AWS.S3();
 
 const moment = require('moment');
+
+const fetch = require("node-fetch");
+
+const sequelize = require('sequelize');
 
 const restaurantController = {
   async createRestaurant(req, res) {
@@ -51,6 +55,19 @@ const restaurantController = {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    let lat;
+    let lng;
+    await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=
+          ${addressOne},${addressCity},${addressState}&key=${googleApiKey}`)
+      .then((res) => res.json())
+        .then((res) => {
+          lat = res.results[0].geometry.location.lat
+          lng = res.results[0].geometry.location.lng
+        })
+        .catch(err => {
+          console.log('error getting lat & lng', err)
+        })
+
     Restaurant.create({
       name,
       addressOne,
@@ -64,10 +81,12 @@ const restaurantController = {
       genre,
       type,
       paymentId,
+      latitude: lat,
+      longitude: lng,
     })
       .then((restaurant) => {
+        console.log('the new restaurant: ', restaurant)
         newRestaurant = restaurant;
-
         return RestaurantUser.create({
           RestaurantId: restaurant.id,
           email,
@@ -440,31 +459,6 @@ const restaurantController = {
       });
   },
 
-  deleteAllMenuSectionsAndItems(req, res) {
-    const { restaurant_id } = req.params;
-    // MenuItem.count({ where: { RestaurantId: restaurant_id } })
-    //   .then(count => {
-    //     if (count != 0) {
-    //       MenuItem.destroy({
-    //         where: { RestaurantId: restaurant_id }
-    //       })
-    //         .then(() => {
-    //           MenuSection.destroy({
-    //             where: { RestaurantId: restaurant_id }
-    //           }).then(() => {
-    //             res.sendStatus(200);
-    //           });
-    //         })
-    //         .catch(err => {
-    //           res.send(err);
-    //         });
-    //     } else {
-    //       res.sendStatus(200);
-    //     }
-    //   })
-    res.sendStatus(200);
-  },
-
   deleteOrder(req, res) {
     const { restaurant_id, order_id } = req.params;
 
@@ -547,8 +541,7 @@ const restaurantController = {
         if (err) {
           res.send({ err, status: 'error' });
         } else {
-          console.log('the s3res: ', s3res)
-          res.send({ data:s3res, status: 'success', msg: 'Image successfully uploaded.' });
+          res.send({ data: s3res, status: 'success', msg: 'Image successfully uploaded.' });
         }
       });
     });
@@ -568,6 +561,32 @@ const restaurantController = {
       }                     
     });
   },
+
+  async closestRestaurants(req, res){
+    let { lat, lng } = req.params
+
+    Restaurant.findAll({
+      attributes: [[sequelize.literal("6371 * acos(cos(radians("+lat+")) * cos(radians(latitude)) * cos(radians("+lng+") - radians(longitude)) + sin(radians("+lat+")) * sin(radians(latitude)))"),'distance'], 
+      'id', 'name', 'genre', 'type', 'addressOne', 'addressTwo', 'city', 'state', 'phone'],
+      order: sequelize.col('distance'),
+      limit: 3,
+    }).then(result => {
+      res.json(result)
+    }).catch(err => {
+      res.send(err)
+    });
+  },
+
+  getCoordinates(req, res){
+    const { restaurant_id } = req.params;
+    Restaurant.findAll({
+      where: {
+        id: restaurant_id
+      }
+    }).then((info) => {
+      res.json(info)
+    })
+  }
 
 };
 

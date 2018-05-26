@@ -291,9 +291,16 @@ routes.post('/upload/:item_id', (req, res) => {
   restaurantController.uploadPhoto(req, res);
 });
 
+
+//get closest restaurants
+routes.get('/customers/restaurantList/:lat/:lng', (req, res) => {
+  restaurantController.closestRestaurants(req, res);
+})
+
 //delete photo
 routes.delete('/restaurants/photo', (req, res) => {
   restaurantController.deletePhoto(req, res);
+
 })
 
 module.exports = routes;

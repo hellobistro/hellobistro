@@ -1,4 +1,6 @@
 const Sequelize = require('sequelize');
+const DataTypes = require('sequelize/lib/data-types');
+
 const {
   database,
   username,
@@ -59,8 +61,11 @@ const Restaurant = sequelize.define('Restaurant', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  type: Sequelize.STRING,
+  // type: Sequelize.STRING,
   paymentId: Sequelize.STRING,
+  location: DataTypes.GEOMETRY('POINT'),
+  latitude: DataTypes.DECIMAL(11,2),
+  longitude: DataTypes.DECIMAL(11,2),
 });
 
 const MenuItem = sequelize.define('MenuItem', {
