@@ -189,6 +189,8 @@ const customerController = {
       items,
     } = req.body;
 
+    console.log('aaaa', items);
+
     // Check to make sure at least one item is included in order
     // If not, reject the order
     if (items.length >= 1) {
@@ -216,21 +218,26 @@ const customerController = {
               .then(async (order) => {
                 let newOrder = null;
                 async function buildOrderItems() {
+
                   items.forEach((item) => {
-                    order.addMenuItem(item.id, {
-                      through: { special: item.special, price: item.price },
-                    });
-  
-                    CustomerRating.findOrCreate({
-                      where: {
-                        CustomerId: customer_id,
-                        MenuItemId: menu_item_id,
-                      },
-                    })
-                      .spread((rating, created) => rating.increment('total'))
-                      .catch((err) => {
-                        console.log(error);
+
+                    if (item.quantity > 0) {
+                      order.addMenuItem(item.id, {
+                        through: { special: item.special, price: item.price },
                       });
+    
+                      CustomerRating.findOrCreate({
+                        where: {
+                          CustomerId,
+                          MenuItemId: item.id,
+                        },
+                      })
+                        .spread((rating, created) => rating.increment('total'))
+                        .catch((err) => {
+                          console.log(error);
+                        });
+
+                    }
                   });
                   newOrder = Order.findById(order.id, {
                     include: [MenuItem],
