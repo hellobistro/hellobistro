@@ -38,6 +38,13 @@ export function loadSelectedRestaurant(data) {
   };
 }
 
+export function loadClosestRestaurantList(data) {
+  return {
+    type: 'LOAD_CLOSEST_RESTAURANT_LIST',
+    data,
+  };
+}
+
 export function addToCart(data) {
   console.log('adding to cart');
   return {
@@ -108,6 +115,14 @@ export function updatePaymentMethods(data) {
     type: 'UPDATE_PAYMENT_METHODS',
     data,
   };
+}
+
+export function setCustomerLocation(lat, long){
+  return{
+    type: 'SET_CUSTOMER_LOCATION',
+    lat,
+    long,
+  }
 }
 
 // RESTAURANT APP ACTIONS

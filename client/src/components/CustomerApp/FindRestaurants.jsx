@@ -1,6 +1,9 @@
 // Import dependencies
 import React from 'react';
 import { Route } from 'react-router-dom';
+import AuthService from '../../services/AuthService';
+import ApiService from '../../services/ApiService';
+
 
 // Import components
 import { RestaurantContainer, RestaurantListContainer } from '../Containers';
@@ -10,13 +13,29 @@ import '../../styles/CustomerFindRestaurants.css';
 
 // FindRestaurants component
 
-const FindRestaurants = (props) => {
-  const handleClick = (id) => {
-    props.history.push(`/customer/home/${id}/Menu`);
+class FindRestaurants extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+     
+    };
+  }
+
+  componentWillMount() {
+    this.getLocation();
+    this.closestRestaurants()
+  }
+
+  componentDidMount() {
+    
+  }
+
+  handleClick = (id) => {
+    this.props.history.push(`/customer/home/${id}/Menu`);
   };
 
-  const renderRestaurantList = () => {
-    const restaurantList = props.state.customer.restaurants.map(biz => (
+  renderRestaurantList = () => {
+    const restaurantList = this.props.state.customer.closestRestaurants.map(biz => (
       <div
         className="restaurant-snippet"
         key={biz.id}
@@ -37,16 +56,36 @@ const FindRestaurants = (props) => {
         <p>Contact: {biz.phone}</p>
       </div>
     ));
-
     return restaurantList;
   };
+  
+  getPosition = () => {
+    return new Promise((res, rej) => {
+        navigator.geolocation.getCurrentPosition(res, rej);
+    });
+  }
 
-  return (
-    <div className="FindRestaurants">
-      <h2 id="header">What restaurant would you like to check in to?</h2>
-      <p id="sub-header">We&#39;ve located the following restaurants in your area:</p>
-      {!props.state.customer.restaurants ? <div className="customer-loader" /> : renderRestaurantList()}
-    </div>
-  );
+  getLocation = () => {
+      this.getPosition().then((res) => {
+        this.props.setCustomerLocation(res.coords.latitude, res.coords.longitude);
+      });
+  }
+
+  closestRestaurants = () => {
+    const { latitude, longitude } = JSON.parse(window.localStorage.state).customer.location
+    ApiService.getRestaurantList(latitude, longitude).then(res => {
+      this.props.loadClosestRestaurantList(res)
+    })
+  }
+  
+  render() {
+    return (
+      <div className="FindRestaurants">
+        <h2 id="header">What restaurant would you like to check in to?</h2>
+        <p id="sub-header">We&#39;ve located the following restaurants in your area:</p>
+        {!this.props.state.customer.closestRestaurants ? <div className="customer-loader" /> : this.renderRestaurantList()}
+      </div>
+    );
+  }
 };
 export default FindRestaurants;
