@@ -2,7 +2,6 @@
 import React from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 // Import components
-import Mast from './Mast';
 import CustomerNav from './CustomerNav';
 import {
   FindRestaurantsContainer,
@@ -14,6 +13,7 @@ import {
   ConfirmOrderContainer,
   PaymentMethodsContainer,
   CustomerNavContainer,
+  MastContainer,
 } from '../Containers';
 // Import Services
 import AuthService from '../../services/AuthService';
@@ -43,12 +43,12 @@ class CustomerApp extends React.Component {
     return (
       <div className="CustomerApp">
         <div className="sidebar-left">
-          <Mast />
+          <MastContainer />
           <CustomerNav {...this.props} />
         </div>
         <main>
           <div className="small-screen-customer">
-            <Mast />
+            <MastContainer />
             <CustomerNavContainer {...this.props} />
           </div>
           <Switch>

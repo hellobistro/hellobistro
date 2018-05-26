@@ -30,11 +30,11 @@ export default class CustomerNav extends React.Component {
   }
 
   renderMenu() {
-    if (this.state.expandMenu) {
+    if (this.props.state.ui.navVisible) {
       return (
         <div className="link-list-container">
           <ul className="link-list">
-            <li><Link to="/customer/home/findRestaurants"><i className="material-icons">location_on</i>Find Restaurants</Link></li>
+            <li onClick={this.props.toggleNav}><Link to="/customer/home/findRestaurants"><i className="material-icons">location_on</i>Find Restaurants</Link></li>
             <li><Link to="/customer/home/order"><i className="material-icons">list</i>Your Cart</Link></li>
             <li><Link to="/customer/home/history"><i className="material-icons">dashboard</i>Your Orders</Link></li>
             <li><Link to="/customer/home/favorites"><i className="material-icons">favorite</i>Favorites</Link></li>
@@ -57,12 +57,6 @@ export default class CustomerNav extends React.Component {
   render() {
     return (
       <div className="CustomerNav">
-        <div
-          className="menu-control"
-          onClick={this.handleMenuToggle}
-        >
-          <i className="material-icons">menu</i>
-        </div>
         { this.renderMenu() }
       </div>
     );

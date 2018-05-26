@@ -21,7 +21,7 @@
 
 @media (max-width: 540px) {
   .menu-control {
-    display: inherit;
+    display: inline-block;
   }
 
   .sidebar-left {

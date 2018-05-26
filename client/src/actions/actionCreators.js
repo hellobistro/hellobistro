@@ -13,6 +13,12 @@ export function logOut(data) {
 
 // CUSTOMER APP ACTIONS
 
+export function toggleNav() {
+  return {
+    type: 'TOGGLE_NAV',
+  };
+}
+
 export function addCustomer(obj) {
   obj.type = 'ADD_CUSTOMER';
   return obj;
@@ -43,8 +49,8 @@ export function addToCart(data) {
 export function editCartItem(id, key, value) {
   return {
     type: 'EDIT_CART_ITEM',
-    id, 
-    key, 
+    id,
+    key,
     value,
   };
 }
