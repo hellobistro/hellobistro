@@ -69,47 +69,91 @@ textarea {resize: vertical}
   vertical-align: -9%;
 }
 
+.manager-header-icon {
+  color: #FFFFFF;
+  display: inline-block;
+  margin-right: 10px;
+}
+
 .form-section {
   font-size: 18px;
-  margin: 10px 0px 30px 0px;
+  margin: 10px 0px 0 0px;
   text-align: left;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  height: auto;
 }
 
 .form-section .section-header {
-  background-image: linear-gradient(60deg,#ef5350,#e53935);
-  margin-bottom: -60px;
+  background-image: linear-gradient(60deg, rgb(77, 162, 237), rgb(30, 136, 229));
+  color: #FFFFFF;
+  margin: 20px 10px -50px 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24);
   border-radius: 3px;
-  padding: 20px;
+  padding: 10px;
   z-index: 2;
   position: relative;
+  display: block;
 }
 
 
 .section-name {
   font-size: 20px;
+  color: #FFFFFF !important;
   margin: 0px 0px 0px 0px !important;
   border-bottom: 0 !important;
+  padding: 0 !important;
+  display: inline-block !important;
+  width: 90% !important;
+  vertical-align: 25%;
 }
 
 .section-description {
   font-style: italic;
+  color: #FFFFFF !important;
   font-size: 14px !important;
   padding-top: 1px !important;
+  height: auto !important;
+  border-bottom: 0 !important;
+  margin: 0 !important;
+}
+
+.section-content {
+  flex: 1 1 auto;
+  -webkit-box-flex: 1;
+  display: block;
+  padding-top: 60px;
+  position: relative;
+  box-shadow: 4px 4px 4px 6px rgba(0,0,0,0.24);
 }
 
 .menu-manager-item {
-  position: relative;
   margin: 10px;
-  padding: 20px;
   background: #FFFFFF;
   box-shadow: 0 4px 6px rgba(0,0,0,0.24);
   margin-bottom: 20px;
-  z-index: 1;
-  /* position: absolute */
-  /* float:right; */
+  padding: 20px;
 }
 
+.empty-section {
+  margin: 10px;
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: center;
+  background: #FFFFFF;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24);
+}
 
+.section-footer {
+  margin: 20px;
+  padding: 10px;
+  display: block;
+  position: relative;
+}
 
 .image-container {
   display: flex;
@@ -224,7 +268,8 @@ textarea {resize: vertical}
 }
 
 .menu-section-button.delete {
-  background-color: #da4646
+  background-color: #da4646;
+  float: none !important;
 }
 
 .item-specs {
@@ -251,24 +296,26 @@ textarea {resize: vertical}
 }
 
 .item-button {
-  background-color: #c75b39;
+  background-color: #48c74c;
   box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(244,67,54,.4);
   color: #fff;
-  margin: auto;
+  margin: 0;
+  z-index: 2;
   text-transform: capitalize;
   font-size: 13px;
   padding: 10px 15px;
-  border-radius: 3px;
   display: block;
   cursor: pointer;
+  border-radius: 0 0 6px 6px;
 }
 
 .item-button .manager-icons {
-  color: #fff;
+  color: #FFFFFF;
   vertical-align: -18%;
 }
 
 .item-button:hover {
+  background-color: #19911d;
   box-shadow: 0 4px 6px rgba(0,0,0,0.24);
 }
 
