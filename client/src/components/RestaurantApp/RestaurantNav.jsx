@@ -1,15 +1,15 @@
 // Import dependencies
-import React from "react";
-import { Route, NavLink, Switch } from "react-router-dom";
+import React from 'react';
+import { Route, NavLink, Switch } from 'react-router-dom';
 
-import "../../styles/RestaurantNav.css";
+import '../../styles/RestaurantNav.css';
 
 //
 export default class RestaurantNav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      expandMenu: true
+      expandMenu: true,
     };
 
     // Bind functions in constructor
@@ -19,13 +19,13 @@ export default class RestaurantNav extends React.Component {
 
   handleLogOut() {
     localStorage.clear();
-    this.props.history.push("/restaurant/login");
+    this.props.history.push('/restaurant/login');
     this.props.logOut();
   }
 
   handleMenuToggle() {
     this.setState({
-      expandMenu: !this.state.expandMenu
+      expandMenu: !this.state.expandMenu,
     });
   }
 
@@ -36,28 +36,28 @@ export default class RestaurantNav extends React.Component {
           <ul className="link-list">
             <NavLink activeClassName="activeLink" to="/restaurant/home/dashboard">
               <li>
-                  <i className="material-icons">dashboard</i>Dashboard
+                <i className="material-icons">dashboard</i>Dashboard
               </li>
             </NavLink>
             <NavLink activeClassName="activeLink" to="/restaurant/home/menuManager">
-            <li>
+              <li>
                 <i className="material-icons">restaurant_menu</i>Menu Manager
-            </li>
+              </li>
             </NavLink>
             <NavLink activeClassName="activeLink" to="/restaurant/home/orderManager">
-            <li>
+              <li>
                 <i className="material-icons">assignment</i>Orders Manager
-            </li>
+              </li>
             </NavLink>
             <NavLink activeClassName="activeLink" to="/restaurant/home/settings">
-            <li>
+              <li>
                 <i className="material-icons">settings</i>Settings
-            </li>
+              </li>
             </NavLink>
-            <NavLink activeClassName="activeLink" to="/restaurant/home/promos">
-            <li>
-                <i className="material-icons">event</i>Promos
-            </li>
+            <NavLink activeClassName="activeLink" to="/restaurant/home/customers">
+              <li>
+                <i className="material-icons">people</i>Customers
+              </li>
             </NavLink>
             <li className="link-log-out" onClick={this.handleLogOut}>
               <i className="material-icons">exit_to_app</i>
