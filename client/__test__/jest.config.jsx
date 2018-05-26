@@ -1,5 +1,4 @@
 import Enzyme, { shallow, render, mount } from 'enzyme';
-import { expect } from 'chai';
 import { sinon } from 'sinon';
 import Adapter from 'enzyme-adapter-react-16';
 import register from 'ignore-styles';
@@ -16,6 +15,5 @@ register(['.css', '.sass', '.scss']);
 global.shallow = shallow;
 global.render = render;
 global.mount = mount;
-global.expect = expect;
 global.sinon = sinon;
 global.fetch = fetch;
