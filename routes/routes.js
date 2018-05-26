@@ -224,9 +224,12 @@ routes.delete('/restaurants/:restaurant_id/openorders/:order_id', (req, res) => 
 
 // Delete all menuSections and menuItems for a restaurant
 routes.delete('/restaurants/sections/items/:restaurant_id', (req, res) => {
-  console.log('~~got to the routes~~');
-  console.log('the req.body in routes:  ', req.body)
   restaurantController.deleteAllMenuSectionsAndItems(req, res);
+});
+
+//Delete a menu section
+routes.delete('/restaurants/menusection/:section_id', (req, res) => {
+  restaurantController.deleteMenuSection(req, res);
 });
 
 /* ********** */
@@ -288,6 +291,7 @@ routes.post('/upload/:item_id', (req, res) => {
   restaurantController.uploadPhoto(req, res);
 });
 
+
 //get closest restaurants
 routes.get('/customers/restaurantList/:lat/:lng', (req, res) => {
   restaurantController.closestRestaurants(req, res);
@@ -296,6 +300,11 @@ routes.get('/customers/restaurantList/:lat/:lng', (req, res) => {
 //get coords
 routes.get('/getCoords/:restaurant_id', (req, res) =>{
   restaurantController.getCoordinates(req, res)
+
+//delete photo
+routes.delete('/restaurants/photo', (req, res) => {
+  restaurantController.deletePhoto(req, res);
+
 })
 
 module.exports = routes;

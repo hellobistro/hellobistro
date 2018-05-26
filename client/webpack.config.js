@@ -11,7 +11,6 @@ const config = {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist'),
   },
-  mode: 'development',
   plugins: [
     // new HtmlWebpackPlugin({
     //   title: 'HelloBistro',
@@ -27,7 +26,7 @@ const config = {
           loader: 'babel-loader',
           query: {
             compact: false,
-            presets: ['es2015', 'react', 'stage-2' ],
+            presets: ['es2015', 'react', 'stage-2'],
           },
         },
       },
@@ -42,7 +41,7 @@ const config = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
 };
 
