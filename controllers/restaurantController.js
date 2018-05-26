@@ -532,23 +532,7 @@ const restaurantController = {
   },
 
   async closestRestaurants(req, res){
-    //let { lat, lng } = req.params
-    let lat = 37.7862199
-    let lng = -122.20992
-
-    // const location = sequelize.literal(`ST_GeomFromText('POINT(${ lng } ${ lat })')`)
-    // const locationB = sequelize.literal(`ST_GeomFromText('POINT(37.7239446 -122.1540415)')`)
-    // const distance = sequelize.fn('ST_Distance_Sphere', locationB, location)
-    // // console.log('the sequelize.col(location):  ', sequelize.col('location'))
-    // console.log('the distance is: ', distance)
-    // Restaurant.findAll({
-    // order: distance,
-    // where: sequelize.where(distance,  '<= 10000' ),
-    // logging: console.log
-    // }).then(result => {
-    //   console.log('the closest restaurants list: ', result)
-    //   res.json(result)
-    // })
+    let { lat, lng } = req.params
 
     Restaurant.findAll({
       attributes: [[sequelize.literal("6371 * acos(cos(radians("+lat+")) * cos(radians(latitude)) * cos(radians("+lng+") - radians(longitude)) + sin(radians("+lat+")) * sin(radians(latitude)))"),'distance'], 
@@ -560,57 +544,6 @@ const restaurantController = {
     }).catch(err => {
       res.send(err)
     });
-
-    // lat = parseFloat(lat);
-    // lng = parseFloat(lng);
-    // var attributes = Object.keys(Restaurant.attributes);
-    // var location = sequelize.literal(`ST_GeomFromText('POINT(${lng} ${lat})')`);
-    // var distance = sequelize.fn('ST_Distance_Sphere', sequelize.col('location'), location);
-    // //attributes.push([distance,'distance']);
-
-    // Restaurant.findAll({
-    //   attributes: [[sequelize.literal("6371 * acos(cos(radians("+lat+")) * cos(radians(latitude)) * cos(radians("+lng+") - radians(longitude)) + sin(radians("+lat+")) * sin(radians(latitude)))"),'distance']],
-    //   order: sequelize.col('distance'),
-    //   where: sequelize.where(distance, '<= 10000'),
-    //   logging: console.log
-    // })
-    // .then(function(instance){
-    //   return res.json(200, instance);
-    // })
-
-    
-    // const location = sequelize.literal(`ST_GeomFromText('POINT(${lat} ${lng})', 4326)`);
-    // var distance = sequelize.fn('ST_Distance_Sphere', sequelize.literal('location'), location);
-
-    // Restaurant.findAll({
-    //   attributes: [[sequelize.literal("6371 * acos(cos(radians("+lat+")) * cos(radians(latitude)) * cos(radians("+lng+") - radians(longitude)) + sin(radians("+lat+")) * sin(radians(latitude)))"),'distance']],      order: distance,
-    //   limit: 2,
-    // })
-    // .then((instance) => {
-    //   console.log('the restaurant list in controller: ', instance);
-    //   res.json(instance)
-    // })
-
-
-    // const location = sequelize.literal(`ST_GeomFromText('POINT(${lng} ${lat})')`)
-    // const distance = sequelize.fn('ST_Distance_Sphere', sequelize.col('location'), location)
-
-    // console.log('the location in controller:  ', location)
-    // console.log('the distance in controller:  ', distance)
-
-    // Restaurant.findAll({
-    //   // attribute: ["*", [sequelize.fn("ST_Distance_Sphere", sequelize.fn("ST_MakePoint", lat, lng), sequelize.col("location")), "distance"]],
-    //   order: distance,
-    //   // where: sequelize.where(distance, { $lte: '10000' }),
-    //   where: sequelize.where(distance, "<= 10000"),
-    //   logging: console.log
-    // }).then((result) => {
-    //   console.log('the result: ', result)
-    //   res.json(result)
-    // }).catch(err => {
-    //   console.log('the error~~:   ', err)
-    //   res.send(err)
-    // })
   },
 
   getCoordinates(req, res){

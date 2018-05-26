@@ -293,9 +293,4 @@ routes.get('/customers/restaurantList/:lat/:lng', (req, res) => {
   restaurantController.closestRestaurants(req, res);
 })
 
-//get coords
-routes.get('/getCoords/:restaurant_id', (req, res) =>{
-  restaurantController.getCoordinates(req, res)
-})
-
 module.exports = routes;

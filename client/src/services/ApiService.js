@@ -149,10 +149,6 @@ const ApiService = {
   getRestaurantList: (lat, lng) => {
     return AuthService.fetch(`/customers/restaurantList/${lat}/${lng}`, {
       method: 'GET',
-      // body: {
-      //   lat,
-      //   lng
-      // }
     })
   }
 

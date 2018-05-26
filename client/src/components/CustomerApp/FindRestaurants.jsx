@@ -72,18 +72,9 @@ class FindRestaurants extends React.Component {
   }
 
   closestRestaurants = () => {
-    // JSON.parse(window.localStorage.state).
     const { latitude, longitude } = JSON.parse(window.localStorage.state).customer.location
     ApiService.getRestaurantList(latitude, longitude).then(res => {
       this.props.loadClosestRestaurantList(res)
-    })
-  }
-
-  getCoords = (id) => {
-    AuthService.fetch(`/getCoords/${id}`,{
-      method: 'GET'
-    }).then(res => {
-      console.log('the coordinates: for restaurant ', id, ' : ', (res[0].location.coordinates))
     })
   }
   
