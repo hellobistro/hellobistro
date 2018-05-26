@@ -7,8 +7,6 @@ const {
   port,
 } = require('../config/config.js');
 
-const seed = require('../sampleData');
-
 const sequelize = new Sequelize(database, username, password, {
   host,
   port,
