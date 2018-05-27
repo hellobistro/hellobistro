@@ -6,7 +6,7 @@ const MenuSection = ({ data }) => {
     return (
     <div className="menu-section">
       <h2 className="menu-section-name">{data.name}</h2>
-      <p classname="menu-section-subheader">This menu section is currently empty.</p>
+      <p className="menu-section-subheader">This menu section is currently empty.</p>
     </div>
     );
   }

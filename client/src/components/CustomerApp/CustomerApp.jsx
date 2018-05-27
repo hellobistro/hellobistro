@@ -24,7 +24,7 @@ import '../../styles/CustomerApp.css';
 // Create parent application
 class CustomerApp extends React.Component {
   constructor(props) {
-    super(props);   
+    super(props);
     this.state = {};
   }
 
@@ -40,6 +40,10 @@ class CustomerApp extends React.Component {
   }
 
   render() {
+    const width = window.innerWidth;
+    if (width > 768) {
+      console.log('big window');
+    }
     return (
       <div className="CustomerApp">
         <div className="sidebar-left">
@@ -49,7 +53,7 @@ class CustomerApp extends React.Component {
         <main>
           <div className="small-screen-customer">
             <MastContainer />
-            <CustomerNavContainer {...this.props} />
+            <CustomerNavContainer small {...this.props} />
           </div>
           <Switch>
             <Route path="/customer/home/findRestaurants" component={FindRestaurantsContainer} />
