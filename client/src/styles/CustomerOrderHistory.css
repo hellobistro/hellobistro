@@ -1,22 +1,26 @@
 
 .header {
-  margin: 0 0 40px 0;
+  margin: 10px 0 40px 10px;
 }
 
 .open {
   margin: 0 20px 20px 10px;
   padding: 5px;
   box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.24);
+  background-color: #FFFFFF;
 }
 
 .order-history-item {
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.24);
   margin: 10px 0 10px 0;
+  background: #FFFFFF;
 }
 
-.open .order-history-item {
-  background: #FFFFFF;
+.order-delay {
+  color: #f44336;
+  margin-right: 5px;
+  vertical-align: -20%;
 }
 
 .open-sub-header {
@@ -45,7 +49,7 @@
   z-index: 2;
 }
 
-.completed-history-table {
+.order-history-table {
   width: 100%;
   margin: 20px 0 20px 0;
   background-color: transparent;
@@ -57,18 +61,18 @@
   padding: 5px;
 }
 
-.completed-history-table thead {
+.order-history-table thead {
   display: table-header-group;
   vertical-align: middle;
   border-color: inherit;
 }
 
-.completed-history-table tbody {
+.order-history-table tbody {
   display: table-row-group;
   vertical-align: middle;
 }
 
-.completed-history-table td {
+.order-history-table td {
   padding: .75rem;
   vertical-align: top;
   border-top: 1px solid rgba(0,0,0,.06);

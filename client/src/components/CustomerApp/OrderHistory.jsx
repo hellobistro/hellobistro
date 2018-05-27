@@ -33,12 +33,24 @@ class OrderHistory extends React.Component {
       <div className="order-history">
         <h2 className="header">Your orders.</h2>
         <div className="open">
-          <h3 className="open-sub-header">Currently open:</h3>
-          {openRender}
+          <h3 className="open-sub-header">Current orders:</h3>
+          <table className="order-history-table">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Order Id</th>
+                <th>Restaurant</th>
+                <th>Bill</th>
+              </tr>
+            </thead>
+            <tbody>
+              {openRender}
+            </tbody>
+          </table>
         </div>
         <div className="completed">
-          <div className="completed-sub-header"><h3>Completed orders:</h3></div>
-          <table className="completed-history-table">
+          <div className="completed-sub-header"><h3>Past orders:</h3></div>
+          <table className="order-history-table">
             <thead>
               <tr>
                 <th>Order Id</th>
