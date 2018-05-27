@@ -43,7 +43,7 @@
 }
 
 .completed-history-table {
-  max-width: 90%;
+  width: 100%;
   margin-bottom: 1rem;
   background-color: transparent;
   display: table;
