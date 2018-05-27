@@ -11,7 +11,7 @@ const MenuSection = ({ data }) => {
     );
   }
 
-  const items = data.MenuItems.map(item => <MenuItemContainer key={item.id} data={item} />);
+  const items = data.MenuItems.map(item => (item.status === 'published' ? <MenuItemContainer key={item.id} data={item} /> : null));
   return (
     <div className="menu-section">
       <h2 className="menu-section-name">{data.name}</h2>
