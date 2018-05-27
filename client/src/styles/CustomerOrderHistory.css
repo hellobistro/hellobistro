@@ -17,6 +17,18 @@
   background: #FFFFFF;
 }
 
+.open tbody > tr:hover {
+  background-color:  rgba(241, 233, 233, 0.512);
+  border-radius: 6px;
+}
+
+.order-history-expand td {
+  border-top: 0 !important;
+  text-align: left !important;
+  margin: auto !important;
+  padding: 30px !important;
+}
+
 .order-delay {
   color: #f44336;
   margin-right: 5px;
@@ -55,10 +67,10 @@
   background-color: transparent;
   display: table;
   border-collapse: separate;
-  border-spacing: 2px;
-  border-color: grey;
+  border-color: rgb(128, 128, 128);
   background-color: #FFFFFF;
   padding: 5px;
+  border-spacing: 0;
 }
 
 .order-history-table thead {
@@ -72,9 +84,13 @@
   vertical-align: middle;
 }
 
+.order-history-table tr {
+  border-top: 1px solid rgba(0, 0, 0, 0.738) !important;
+}
+
 .order-history-table td {
   padding: .75rem;
   vertical-align: top;
-  border-top: 1px solid rgba(0,0,0,.06);
   text-align: center;
+  border: 0 none !important;
 }

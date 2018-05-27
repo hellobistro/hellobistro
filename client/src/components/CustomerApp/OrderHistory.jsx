@@ -43,9 +43,7 @@ class OrderHistory extends React.Component {
                 <th>Bill</th>
               </tr>
             </thead>
-            <tbody>
-              {openRender}
-            </tbody>
+            {openRender}
           </table>
         </div>
         <div className="completed">
