@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreators';
 import App from './App';
 import CustomerApp from './CustomerApp/CustomerApp';
+import Mast from './CustomerApp/Mast';
 import ModalBackdrop from './Modals/ModalBackdrop';
 import OrderModal from './Modals/OrderModal';
 import WidgetUserModal from './Modals/WidgetUserModal';
@@ -53,6 +54,7 @@ function mapDispatchToProps(dispatch) {
 
 export const AppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 export const CustomerAppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerApp));
+export const MastContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Mast));
 export const ModalBackdropContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ModalBackdrop));
 export const OrderModalContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderModal));
 export const WidgetUserModalContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetUserModal));

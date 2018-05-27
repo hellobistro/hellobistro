@@ -176,7 +176,7 @@ class MenuItem extends React.Component {
         className={'item-input ' + (this.state.priceEdited ? 'edited' : null)}
         name='price'
         type='text'
-        placeholder='$'
+        placeholder='Price.'
         defaultValue={price}
         onChange={(e) => { this.inputChange(e); }}/>
         </div>,

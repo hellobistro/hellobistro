@@ -21,13 +21,8 @@ class FindRestaurants extends React.Component {
     };
   }
 
-  componentWillMount() {
-    this.getLocation();
-    this.closestRestaurants()
-  }
-
   componentDidMount() {
-    
+    this.getLocation();
   }
 
   handleClick = (id) => {
@@ -40,7 +35,7 @@ class FindRestaurants extends React.Component {
         className="restaurant-snippet"
         key={biz.id}
         onClick={() => {
-          handleClick(biz.id);
+          this.handleClick(biz.id);
         }}
       >
         <h3>{biz.name}</h3>
@@ -67,8 +62,13 @@ class FindRestaurants extends React.Component {
 
   getLocation = () => {
       this.getPosition().then((res) => {
+        console.log('settting location', res)
         this.props.setCustomerLocation(res.coords.latitude, res.coords.longitude);
-      });
+      })
+      .then(() => {
+        console.log('retrieving closest restaurants')
+        this.closestRestaurants() 
+      })
   }
 
   closestRestaurants = () => {

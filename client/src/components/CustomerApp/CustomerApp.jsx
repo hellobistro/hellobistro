@@ -2,7 +2,6 @@
 import React from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 // Import components
-import Mast from './Mast';
 import CustomerNav from './CustomerNav';
 import {
   FindRestaurantsContainer,
@@ -14,6 +13,7 @@ import {
   ConfirmOrderContainer,
   PaymentMethodsContainer,
   CustomerNavContainer,
+  MastContainer,
 } from '../Containers';
 // Import Services
 import AuthService from '../../services/AuthService';
@@ -24,7 +24,7 @@ import '../../styles/CustomerApp.css';
 // Create parent application
 class CustomerApp extends React.Component {
   constructor(props) {
-    super(props);   
+    super(props);
     this.state = {};
   }
 
@@ -40,16 +40,20 @@ class CustomerApp extends React.Component {
   }
 
   render() {
+    const width = window.innerWidth;
+    if (width > 768) {
+      console.log('big window');
+    }
     return (
       <div className="CustomerApp">
         <div className="sidebar-left">
-          <Mast />
+          <MastContainer />
           <CustomerNav {...this.props} />
         </div>
         <main>
           <div className="small-screen-customer">
-            <Mast />
-            <CustomerNavContainer {...this.props} />
+            <MastContainer />
+            <CustomerNavContainer small {...this.props} />
           </div>
           <Switch>
             <Route path="/customer/home/findRestaurants" component={FindRestaurantsContainer} />

@@ -22,3 +22,13 @@
   color: white;
   margin-bottom: 0;
 }
+
+.hb-header {
+  display: inline-block;
+  margin-left: 30px;
+}
+
+.menu-control .material-icons {
+  font-size: 40px;
+  vertical-align: -24%;
+}

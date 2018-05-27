@@ -2,6 +2,16 @@
   margin-top: 0;
 }
 
+.customer-login-mast {
+  font-family: 'Bitter', serif;
+  font-size: 28px;
+  text-align: center;
+  padding: 50px;
+  background: #4CAF50;
+  color: white;
+  margin-bottom: 0;
+}
+
 .background {
   background-image: url('../img/bg-spreads/dsc_9739.jpg');
   background-size: cover;
@@ -22,7 +32,7 @@
   border-radius: 3px;
 }
 
-.form-section {
+.customer-login-form-section {
   font-size: 18px;
   margin: 10px 0px 30px 0px;
   text-align: left;

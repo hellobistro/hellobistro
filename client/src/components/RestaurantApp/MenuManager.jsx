@@ -56,7 +56,7 @@ class MenuManager extends React.Component {
         </div>
         {this.state.MenuSections.map((section, i) => {
         return <MenuSection key={section.uniqueId} indx={i} data={section} deleteSection={this.deleteSection} />})}
-        <button className="section-button" onClick={this.addSection}>Add a menu section</button>
+        <button className="section-button" onClick={this.addSection}><i className="material-icons section-button-icon">label_important</i>Create a New Menu Section</button>
       </div>
     );
    } else {
