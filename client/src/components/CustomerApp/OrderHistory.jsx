@@ -31,13 +31,13 @@ class OrderHistory extends React.Component {
 
     return (
       <div className="order-history">
+        <h2 className="header">Your orders.</h2>
         <div className="open">
-          <h2 className="header">Your orders.</h2>
-          <h3 className="history-sub-header">Currently open:</h3>
+          <h3 className="open-sub-header">Currently open:</h3>
           {openRender}
         </div>
         <div className="completed">
-          <h3 className="history-sub-header">Completed orders:</h3>
+          <div className="completed-sub-header"><h3>Completed orders:</h3></div>
           <table className="completed-history-table">
             <thead>
               <tr>
