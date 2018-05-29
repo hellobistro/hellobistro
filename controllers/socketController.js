@@ -9,4 +9,8 @@ const {
   OrderItem,
 } = require('../database/index.js');
 
-const restaurantController = {
+// const socketController = {
+//   welcome
+// };
+
+module.exports = socketController;

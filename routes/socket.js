@@ -4,17 +4,13 @@ let currentConnections = {};
 
 exports.set = (socket) => {
   io = socket;
-  io.sockets.on('connection', (client) => {
-    console.log('new connection', client.id);
-    currentConnections[client.id] = { socket: client };
-    client.emit('welcome', 'hello, bistro!');
-    client.on('data', (someData) => {
-      currentConnections[client.id].data = someData;
-      console.log('currentConnections: ', currentConnections[client.id].data);
+  io.sockets.on('connection', (connection) => {
+    connection.on('data', (data) => {
+      connection.user = data.userId;
+      currentConnections[data.userId] = { socket: connection, token: data.token };
     });
-    client.on('disconnect', () => {
-      console.log('disconnecting', client.id);
-      delete currentConnections[client.id];
+    connection.on('disconnect', () => {
+      delete currentConnections[connection.user];
     });
   });
 };

@@ -1,9 +1,10 @@
 import decode from 'jwt-decode';
 import io from 'socket.io-client';
-let webSocket = null;
 
 const AuthService = {
   domain: 'http://localhost:3000',
+
+  webSocket: null,
 
   customerRegister: (userName, firstName, lastName, password, zip, phone, email) => {
     return AuthService.fetch('/register/customers', {
@@ -31,8 +32,8 @@ const AuthService = {
       // Setting the token in localStorage
       AuthService.setToken(res.token);
       // Establishing websocket connection and sending token
-      webSocket = io.connect('http://localhost:3000');
-      webSocket.emit('data', { token: res.token, userId: res.userId });
+      AuthService.webSocket = io.connect('http://localhost:3000');
+      AuthService.webSocket.emit('data', { token: res.token, userId: res.userId });
       return res;
     });
   },
@@ -43,7 +44,7 @@ const AuthService = {
       method: 'POST',
       body: {
         email,
-        password
+        password,
       }
     }).then(res => {
       AuthService.setToken(res.token) // Setting the token in localStorage
@@ -86,7 +87,7 @@ const AuthService = {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
     console.log('disconnect called')
-    webSocket.disconnect();
+    AuthService.webSocket.disconnect();
   },
 
   getProfile: () => {
