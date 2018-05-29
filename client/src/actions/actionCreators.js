@@ -8,7 +8,7 @@ export function logOut(data) {
   return {
     type: 'USER_LOGOUT',
     data,
-  }
+  };
 }
 
 // CUSTOMER APP ACTIONS
@@ -46,7 +46,6 @@ export function loadClosestRestaurantList(data) {
 }
 
 export function addToCart(data) {
-  console.log('adding to cart');
   return {
     type: 'ADD_TO_CART',
     data,
@@ -181,6 +180,14 @@ export function modalOn(id, data) {
 export function modalOff() {
   return {
     type: 'MODAL_OFF',
+  };
+}
+
+export function addNotification(data) {
+  console.log('order notification posting', data);
+  return {
+    type: 'ADD_NOTIFICATION',
+    data,
   };
 }
 

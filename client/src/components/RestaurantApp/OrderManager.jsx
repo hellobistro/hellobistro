@@ -9,8 +9,8 @@ class OrderManager extends React.Component {
     super();
   }
 
-  closeOrder = (id) => {
-    ApiService.completeOpenOrder(id)
+  closeOrder = (orderId, customerId) => {
+    ApiService.completeOpenOrder(orderId, customerId)
       .then((res) => {
         this.getOpenOrders();
       }).catch(err => {
@@ -43,7 +43,7 @@ class OrderManager extends React.Component {
           return <div key={i} className="menu-manager-item item-input">
             <p>Order Number: {order.id}</p>
             <OrderTimer order={order}/>
-            <button className="complete-open-order" onClick={() => this.closeOrder(order.id)}>Complete Order</button>
+            <button className="complete-open-order" onClick={() => this.closeOrder(order.id, order.CustomerId)}>Complete Order</button>
             <p>Quantity: {order.MenuItems.length}</p>
           {order.MenuItems.map((item, i) => 
             <div key={i} className="open-order-item">

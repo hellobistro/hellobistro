@@ -22,8 +22,6 @@ import Order from './CustomerApp/Order';
 import OrderItem from './CustomerApp/OrderItem';
 import OrderHistory from './CustomerApp/OrderHistory';
 import OrderStatus from './CustomerApp/OrderStatus';
-import Restaurant from './CustomerApp/Restaurant';
-import RestaurantList from './CustomerApp/RestaurantList';
 import DashBoard from './RestaurantApp/DashBoard';
 import MenuManager from './RestaurantApp/MenuManager';
 import Promos from './RestaurantApp/Promos';
@@ -73,8 +71,6 @@ export const OrderContainer = withRouter(connect(mapStateToProps, mapDispatchToP
 export const OrderItemContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderItem));
 export const OrderHistoryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderHistory));
 export const OrderStatusContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderStatus));
-export const RestaurantContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Restaurant));
-export const RestaurantListContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantList));
 export const DashBoardContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(DashBoard));
 export const MenuManagerContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(MenuManager));
 export const PromosContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Promos));

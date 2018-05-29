@@ -12,6 +12,8 @@ const { photos, googleApiKey } = require('../config/config.js');
 AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.secretAccessKey });
 const S3 = new AWS.S3();
 // sequelize models
+const socket = require('../routes/socket');
+
 const {
   Customer,
   Restaurant,
@@ -477,17 +479,23 @@ const restaurantController = {
   },
 
   completeOpenOrder(req, res) {
-    const { order_id } = req.params;
+    const { OrderId, CustomerId } = req.params;
+    console.log('order completing', OrderId, CustomerId);
     Order.update(
       {
         status: 'completed',
         completedAt: moment(),
       },
       {
-        where: { id: order_id },
+        where: { id: OrderId },
       },
-    ).then((res) => {
-      res.json(res);
+    ).then((completedOrder) => {
+      console.log('sending web socket notifcation');
+      const notification = socket.get();
+      const connectionId = socket.connections[CustomerId].socket.id;
+      notification.to(connectionId).emit('notification', { OrderId, status: 'complete' });
+      console.log('order completed', completedOrder);
+      res.json(completedOrder);
     }).catch((err) => {
       res.send(err);
     });
