@@ -1,4 +1,17 @@
+const sequelize = require('sequelize');
+const moment = require('moment');
+const fetch = require("node-fetch");
+// authentication
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+// image processing and upload
+const AWS = require('aws-sdk');
+const UUID = require('uuid/v4');
+const Busboy = require('busboy');
 const { photos, googleApiKey } = require('../config/config.js');
+AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.secretAccessKey });
+const S3 = new AWS.S3();
+// sequelize models
 const {
   Customer,
   Restaurant,
@@ -8,23 +21,6 @@ const {
   Order,
   OrderItem,
 } = require('../database/index.js');
-
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
-// upload photo
-const AWS = require('aws-sdk');
-const UUID = require('uuid/v4');
-const Busboy = require('busboy');
-
-AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.secretAccessKey });
-const S3 = new AWS.S3();
-
-const moment = require('moment');
-
-const fetch = require("node-fetch");
-
-const sequelize = require('sequelize');
 
 const restaurantController = {
   async createRestaurant(req, res) {

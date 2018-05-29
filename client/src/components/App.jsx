@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
 import decode from 'jwt-decode';
-import jwt from "jsonwebtoken"
+import jwt from 'jsonwebtoken';
 // Import services
 import AuthService from '../services/AuthService';
 import ApiService from '../services/ApiService';

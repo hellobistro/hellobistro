@@ -28,11 +28,11 @@ class CustomerApp extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    ApiService.findRestaurants().then((res) => {
-      this.props.loadRestaurantList(res);
-    });
-  }
+  // componentDidMount() {
+  //   ApiService.findRestaurants().then((res) => {
+  //     this.props.loadRestaurantList(res);
+  //   });
+  // }
 
   logout() {
     AuthService.logout();

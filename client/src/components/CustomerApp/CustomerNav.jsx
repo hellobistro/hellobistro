@@ -1,6 +1,7 @@
 // Import dependencies
 import React from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
+import AuthService from '../../services/AuthService';
 
 import '../../styles/CustomerNav.css';
 
@@ -17,7 +18,7 @@ export default class CustomerNav extends React.Component {
   }
 
   handleLogOut() {
-    localStorage.clear();
+    AuthService.logout();
     this.props.history.push('/');
     this.props.logOut();
   }
