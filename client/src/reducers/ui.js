@@ -8,6 +8,10 @@ function ui(state = { navVisible: false, notifications: [] }, action) {
       return Object.assign({}, state, {
         notifications: state.notifications.concat(action.data),
       });
+    case 'CLEAR_NOTIFICATION':
+      return Object.assign({}, state, {
+        notifications: [],
+      });
     default:
       return state;
   }

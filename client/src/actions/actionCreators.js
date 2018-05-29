@@ -184,10 +184,15 @@ export function modalOff() {
 }
 
 export function addNotification(data) {
-  console.log('order notification posting', data);
   return {
     type: 'ADD_NOTIFICATION',
     data,
+  };
+}
+
+export function clearNotification() {
+  return {
+    type: 'CLEAR_NOTIFICATION',
   };
 }
 

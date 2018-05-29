@@ -9,7 +9,7 @@ const Notifications = (props) => {
 
   return (
     <div className="notifications">
-      Order is ready.
+      <i className="material-icons notify">restaurant</i><span className="notification-message">Your food is ready!</span><i className="material-icons notify-close" onClick={props.clearNotification}>close</i>
     </div>
   );
 };

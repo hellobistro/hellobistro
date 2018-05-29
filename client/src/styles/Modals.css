@@ -45,10 +45,28 @@
   transition: all 0.5s ease-in-out;
   top: 20px;
   right: 20px;
+  padding: 20px;
   background-color: rgb(0, 202, 227);
   color: rgb(255, 255, 255);
-  box-shadow: rgba(0, 0, 0, 0.14) 0px 4px 20px 0px, rgba(244, 67, 54, 0.4) 0px 7px 10px -5px;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 4px 20px 0px, rgba(0, 200, 227, 0.361) 0px 7px 10px -5px;
+  animation-name: fadeInDown;
+  animation-duration: 1s;
+  animation-fill-mode: both;
   max-width: 33.33%
+}
+
+.notification-message {
+  vertical-align: 35%;
+  margin: 0 10px 0 10px;
+}
+
+.notify-close {
+  font-size: 14px;
+  vertical-align: 20px;
+}
+
+.notify-close:hover {
+  color: #333333; 
 }
 
 .widget-modal-header {
