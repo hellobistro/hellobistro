@@ -2,13 +2,14 @@ import React from 'react';
 import '../../styles/Modals.css';
 
 const Notifications = (props) => {
-  if (props.state.ui.notifications.length === 0) {
-    return null;
+  const componentClasses = ['notifications'];
+  if (props.state.ui.notifications.length > 0) {
+    componentClasses.push('show');
   }
   console.log('notifications up and running');
 
   return (
-    <div className="notifications">
+    <div className={componentClasses.join(' ')}>
       <i className="material-icons notify">restaurant</i><span className="notification-message">Your food is ready!</span><i className="material-icons notify-close" onClick={props.clearNotification}>close</i>
     </div>
   );
