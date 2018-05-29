@@ -29,6 +29,7 @@ import {
   MenuContainer,
   ConfirmOrderContainer,
   ModalBackdropContainer,
+  NotificationsContainer,
 } from './Containers';
 
 

@@ -6,7 +6,7 @@ function ui(state = { navVisible: false, notifications: [] }, action) {
       });
     case 'ADD_NOTIFICATION':
       return Object.assign({}, state, {
-        notifications: action.data,
+        notifications: state.notifications.concat(action.data),
       });
     default:
       return state;

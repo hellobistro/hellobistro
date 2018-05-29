@@ -7,6 +7,7 @@ import Mast from './CustomerApp/Mast';
 import ModalBackdrop from './Modals/ModalBackdrop';
 import OrderModal from './Modals/OrderModal';
 import WidgetUserModal from './Modals/WidgetUserModal';
+import Notifications from './Modals/Notifications';
 import RestaurantApp from './RestaurantApp/RestaurantApp';
 import RestaurantLogin from './RestaurantApp/RestaurantLogin';
 import ConfirmOrder from './CustomerApp/ConfirmOrder';
@@ -42,8 +43,8 @@ import { withRouter } from 'react-router';
 
 function mapStateToProps(state) {
   return {
-    state
-  }
+    state,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -56,6 +57,7 @@ export const MastContainer = withRouter(connect(mapStateToProps, mapDispatchToPr
 export const ModalBackdropContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ModalBackdrop));
 export const OrderModalContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderModal));
 export const WidgetUserModalContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(WidgetUserModal));
+export const NotificationsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Notifications));
 export const RestaurantAppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantApp));
 export const RestaurantNavContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RestaurantNav));
 export const CustomerNavContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerNav));

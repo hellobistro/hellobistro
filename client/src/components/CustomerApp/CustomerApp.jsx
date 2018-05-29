@@ -14,6 +14,7 @@ import {
   PaymentMethodsContainer,
   CustomerNavContainer,
   MastContainer,
+  NotificationsContainer,
 } from '../Containers';
 // Import Services
 import AuthService from '../../services/AuthService';
@@ -43,6 +44,7 @@ class CustomerApp extends React.Component {
         <div className="sidebar-left">
           <MastContainer />
           <CustomerNav {...this.props} />
+          <NotificationsContainer />
         </div>
         <main>
           <div className="small-screen-customer">
