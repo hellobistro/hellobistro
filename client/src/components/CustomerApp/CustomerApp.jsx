@@ -41,10 +41,10 @@ class CustomerApp extends React.Component {
     }
     return (
       <div className="CustomerApp">
+        <NotificationsContainer />
         <div className="sidebar-left">
           <MastContainer />
           <CustomerNav {...this.props} />
-          <NotificationsContainer />
         </div>
         <main>
           <div className="small-screen-customer">
