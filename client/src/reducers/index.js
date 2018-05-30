@@ -7,10 +7,11 @@ import customer from './customer';
 import restaurant from './restaurant';
 import user from './user';
 import modals from './modals';
+import ui from './ui';
 
 // Create a Root Reducer
 const appReducer = combineReducers({
-  modals, customer, restaurant, user, routing: routerReducer,
+  modals, ui, customer, restaurant, user, routing: routerReducer,
 });
 
 const rootReducer = (state, action) => {

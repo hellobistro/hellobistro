@@ -52,7 +52,7 @@ class RestaurantLogin extends Component {
         <Mast primaryText={"HelloBistro for Restaurants"} />
         <div className="rest-background">
           <div className="mock-form">
-            <div className="form-section">
+            <div className="restaurant-login-form-section">
               <div className="form-section-header" />
 
               <div className="form-group">

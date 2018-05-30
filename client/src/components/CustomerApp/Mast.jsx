@@ -6,7 +6,10 @@ import '../../styles/Mast.css';
 
 const Mast = props => (
   <div className="customer-mast">
-    <span>{props.primaryText || 'HelloBistro'}</span>
+    <div className="menu-control" onClick={props.toggleNav}>
+      <i className="material-icons">menu</i>
+    </div>
+    <span className="hb-header">{props.primaryText || 'HelloBistro'}</span>
   </div>
 );
 

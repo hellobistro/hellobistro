@@ -1,4 +1,19 @@
+const sequelize = require('sequelize');
+const moment = require('moment');
+const fetch = require("node-fetch");
+// authentication
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+// image processing and upload
+const AWS = require('aws-sdk');
+const UUID = require('uuid/v4');
+const Busboy = require('busboy');
 const { photos, googleApiKey } = require('../config/config.js');
+AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.secretAccessKey });
+const S3 = new AWS.S3();
+// sequelize models
+const socket = require('../routes/socket');
+
 const {
   Customer,
   Restaurant,
@@ -8,23 +23,6 @@ const {
   Order,
   OrderItem,
 } = require('../database/index.js');
-
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
-// upload photo
-const AWS = require('aws-sdk');
-const UUID = require('uuid/v4');
-const Busboy = require('busboy');
-
-AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.secretAccessKey });
-const S3 = new AWS.S3();
-
-const moment = require('moment');
-
-const fetch = require("node-fetch");
-
-const sequelize = require('sequelize');
 
 const restaurantController = {
   async createRestaurant(req, res) {
@@ -481,17 +479,23 @@ const restaurantController = {
   },
 
   completeOpenOrder(req, res) {
-    const { order_id } = req.params;
+    const { OrderId, CustomerId } = req.params;
+    console.log('order completing', OrderId, CustomerId);
     Order.update(
       {
         status: 'completed',
         completedAt: moment(),
       },
       {
-        where: { id: order_id },
+        where: { id: OrderId },
       },
-    ).then((res) => {
-      res.json(res);
+    ).then((completedOrder) => {
+      console.log('sending web socket notifcation');
+      const notification = socket.get();
+      const connectionId = socket.connections[CustomerId].socket.id;
+      notification.to(connectionId).emit('notification', { OrderId, status: 'complete' });
+      console.log('order completed', completedOrder);
+      res.json(completedOrder);
     }).catch((err) => {
       res.send(err);
     });
