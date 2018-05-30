@@ -20,6 +20,7 @@ class Menu extends React.Component {
     if (JSON.stringify(this.props.state.customer.currentRestaurant.id) !== this.props.match.params.id) {
       // If new restaurant doesn't match prior restaurant, clear prior restaurant data.
       ApiService.getMenuData(this.props.match.params.id).then((res) => {
+        console.log('menu data returned', res);
         // Load new restaurant data into redux store.
         this.props.loadSelectedRestaurant(res);
       });
