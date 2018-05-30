@@ -63,7 +63,6 @@ const Restaurant = sequelize.define('Restaurant', {
   },
   // type: Sequelize.STRING,
   paymentId: Sequelize.STRING,
-  location: DataTypes.GEOMETRY('POINT'),
   latitude: DataTypes.DECIMAL(11,2),
   longitude: DataTypes.DECIMAL(11,2),
 });

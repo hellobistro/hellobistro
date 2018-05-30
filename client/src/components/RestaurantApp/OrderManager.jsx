@@ -10,6 +10,7 @@ class OrderManager extends React.Component {
   }
 
   closeOrder = (orderId, customerId) => {
+    console.log('closing order');
     ApiService.completeOpenOrder(orderId, customerId)
       .then((res) => {
         this.getOpenOrders();

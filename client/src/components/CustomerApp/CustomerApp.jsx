@@ -35,10 +35,6 @@ class CustomerApp extends React.Component {
   }
 
   render() {
-    const width = window.innerWidth;
-    if (width > 768) {
-      console.log('big window');
-    }
     return (
       <div className="CustomerApp">
         <NotificationsContainer />
