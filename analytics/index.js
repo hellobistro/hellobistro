@@ -114,7 +114,6 @@ const analytics = {
         },
       ],
     });
-    console.log(orders, 'orders')
 
     customerDirectory = {};
 

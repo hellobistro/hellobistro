@@ -1,7 +1,9 @@
 const express = require('express');
+const socketio = require('socket.io');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
 const jwt = require('jsonwebtoken');
 const jwtDecode = require('jwt-decode');
 
@@ -9,8 +11,10 @@ const jwtDecode = require('jwt-decode');
 const db = require('../database/index');
 // Require routes
 const routes = require('../routes/routes');
+const socket = require('../routes/socket');
 
 const app = express();
+
 const port = 3000;
 
 app.use(cors());
@@ -65,8 +69,12 @@ app.use('/', routes);
 // });
 
 // Note: the below console.log is intentional, and required for minimal server logging.
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Starting the server at port ${port}`);
 });
+const io = require('socket.io').listen(server);
+
+socket.set(io);
+
 
 module.exports = app;

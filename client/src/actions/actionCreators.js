@@ -8,10 +8,16 @@ export function logOut(data) {
   return {
     type: 'USER_LOGOUT',
     data,
-  }
+  };
 }
 
 // CUSTOMER APP ACTIONS
+
+export function toggleNav() {
+  return {
+    type: 'TOGGLE_NAV',
+  };
+}
 
 export function addCustomer(obj) {
   obj.type = 'ADD_CUSTOMER';
@@ -32,8 +38,14 @@ export function loadSelectedRestaurant(data) {
   };
 }
 
+export function loadClosestRestaurantList(data) {
+  return {
+    type: 'LOAD_CLOSEST_RESTAURANT_LIST',
+    data,
+  };
+}
+
 export function addToCart(data) {
-  console.log('adding to cart');
   return {
     type: 'ADD_TO_CART',
     data,
@@ -43,8 +55,8 @@ export function addToCart(data) {
 export function editCartItem(id, key, value) {
   return {
     type: 'EDIT_CART_ITEM',
-    id, 
-    key, 
+    id,
+    key,
     value,
   };
 }
@@ -104,6 +116,14 @@ export function updatePaymentMethods(data) {
   };
 }
 
+export function setCustomerLocation(lat, long){
+  return{
+    type: 'SET_CUSTOMER_LOCATION',
+    lat,
+    long,
+  }
+}
+
 // RESTAURANT APP ACTIONS
 
 export function loadRestaurantData(data) {
@@ -160,6 +180,19 @@ export function modalOn(id, data) {
 export function modalOff() {
   return {
     type: 'MODAL_OFF',
+  };
+}
+
+export function addNotification(data) {
+  return {
+    type: 'ADD_NOTIFICATION',
+    data,
+  };
+}
+
+export function clearNotification() {
+  return {
+    type: 'CLEAR_NOTIFICATION',
   };
 }
 
