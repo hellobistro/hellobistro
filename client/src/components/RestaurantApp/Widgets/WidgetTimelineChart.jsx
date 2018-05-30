@@ -6,7 +6,6 @@ import { Line } from 'react-chartjs-2';
 import '../../../styles/Widgets.css';
 
 const WidgetTimelineChart = (props) => {
-
   const renderChart = () => (!props.state.restaurant.analytics.timeline ? 'loading...'
     : (<Line
       data={props.state.restaurant.analytics.timeline.widgetData}
