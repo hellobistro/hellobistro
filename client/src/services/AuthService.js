@@ -32,18 +32,8 @@ const AuthService = {
     }).then((res) => {
       // Setting the token in localStorage
       AuthService.setToken(res.token);
-      // Establishing websocket connection and sending token
-      AuthService.webSocket = io.connect('http://localhost:3000', {
-        reconnection: true,
-        reconnectionDelay: 1000,
-        reconnectionDelayMax: 5000,
-        reconnectionAttempts: Infinity,
-      });
-      AuthService.webSocket.on('connection', (socket) => {
-        console.log('socket connected');
-      });
-      AuthService.webSocket.emit('data', { token: res.token, userId: res.userId });
-      SocketService(AuthService.webSocket);
+      // Setting user identification on websocket connection
+      SocketService.setCustomer(res.token, res.userId);
       return res;
     }),
 
@@ -79,7 +69,6 @@ const AuthService = {
   },
 
   setToken: (idToken) => {
-    console.log('setting token', idToken);
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
   },
@@ -88,12 +77,18 @@ const AuthService = {
     // Retrieves the user token from localStorage
     localStorage.getItem('id_token'),
 
+  getIdFromToken: () => {
+    return new Promise((resolve) => {
+      const token = localStorage.getItem('id_token');
+      const decoded = decode(token);
+      resolve(decoded.id);
+    });
+  },
+
   logout: () => {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
-    if (AuthService.webSocket) {
-      AuthService.webSocket.disconnect();
-    }
+    SocketService.clearCustomer();
   },
 
   getProfile: () =>

@@ -6,7 +6,6 @@ const Notifications = (props) => {
   if (props.state.ui.notifications.length > 0) {
     componentClasses.push('show');
   }
-  console.log('notifications up and running');
 
   return (
     <div className={componentClasses.join(' ')}>
