@@ -63,7 +63,7 @@ const ApiService = {
 
   getOpenOrdersForRestaurant: id => AuthService.fetch(`/restaurants/${id}/orders/open`, { method: 'GET' }),
 
-  completeOpenOrder: (orderId, customerId) => AuthService.fetch(`${domain}/restaurants/openorder/${orderId}/${customerId}`, { method: 'PATCH' }),
+  completeOpenOrder: (orderId, customerId) => fetch(`${domain}/restaurants/openorder/${orderId}/${customerId}`, { method: 'PATCH' }),
 
   submitOrder: orderData => AuthService.fetch(`/customers/${orderData.CustomerId}/orders`, { method: 'POST', body: orderData }),
 
