@@ -16,17 +16,10 @@ import '../../styles/CustomerFindRestaurants.css';
 class FindRestaurants extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-     
-    };
-  }
-
-  componentWillMount() {
-    this.getLocation();
   }
 
   componentDidMount() {
-    this.closestRestaurants()
+    this.getLocation();
   }
 
   handleClick = (id) => {
@@ -41,8 +34,9 @@ class FindRestaurants extends React.Component {
         onClick={() => {
           this.handleClick(biz.id);
         }}
-      >
-        <h3>{biz.name}</h3>
+      >   
+        <h3 >{biz.name}</h3>
+        <div style={{'float': 'right'}}>{biz.distance.toFixed(2)} km away</div>
         <p>
           {biz.genre} - {biz.type}
         </p>
@@ -67,6 +61,8 @@ class FindRestaurants extends React.Component {
   getLocation = () => {
       this.getPosition().then((res) => {
         this.props.setCustomerLocation(res.coords.latitude, res.coords.longitude);
+      }).then(() => {
+        this.closestRestaurants()
       });
   }
 

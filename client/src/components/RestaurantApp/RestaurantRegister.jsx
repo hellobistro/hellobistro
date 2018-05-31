@@ -39,32 +39,33 @@ class RestaurantRegister extends Component {
     return this.state.passwordMatch && this.state.validEmail;
   }
 
-  async registerRestaurantUser(e) {
+  registerRestaurantUser(e) {
     e.preventDefault();
     const { email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type } = this.state;
-    var check = await this.validFields.call(this)
-    if(check){
-      AuthService.restaurantRegister(email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type)
-        .then(res => {
-          this.setState({error: false});
-          this.props.history.replace('/restaurant/login')
-          console.log('successfully registered restaurant ~~', res)
+    this.setState({error: false}, async () => {
+      let check = await this.validFields.call(this)
+      if(check){
+        AuthService.restaurantRegister(email, password, phone, name, addressOne, addressTwo, addressCity, addressState, addressZip, description, genre, type)
+          .then(res => {
+            this.setState({error: false});
+            this.props.history.replace('/restaurant/login')
+            console.log('successfully registered restaurant ~~', res)
+          })
+          .catch(error => {
+            console.log('error registering restaurant', error)
+            error.response.json().then((err)=>{
+            console.log('the apple: ', err)
+            this.setState({ error: err.error });
+          })
         })
-        .catch(err => {
-          this.setState({error: true});
-          console.error('error registering restaurant', err)
-        })
-    }
+      }
+    })
   }
 
   render(){
     console.log('the state inside restaurantRegister', this.state)
     return(
       <div className="RestaurantUserRegister"> 
-
-
-
-
 
 
       <Mast primaryText={'HelloBistro for Restaurants'}/>
@@ -153,7 +154,7 @@ class RestaurantRegister extends Component {
 
 
           <div className="form-group">
-              <label htmlFor="name">Address (2) *</label>
+              <label htmlFor="name">Address (2)</label>
               <input
                 className="form-input"
                 name="addressTwo"
@@ -187,7 +188,7 @@ class RestaurantRegister extends Component {
             </div>
 
                       <div className="form-group">
-              <label htmlFor="name">Zip Code*</label>
+              <label htmlFor="name">Zip Code *</label>
               <input
                 className="form-input"
                 name="addressZip"
@@ -231,7 +232,7 @@ class RestaurantRegister extends Component {
           <button onClick={this.registerRestaurantUser.bind(this)}>Register</button>
           {
             this.state.error
-            ? <div>Email already exists </div>
+            ? <div>{this.state.error}</div>
             : <div></div>
           }
           {
