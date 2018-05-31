@@ -33,7 +33,7 @@ const AuthService = {
       // Setting the token in localStorage
       AuthService.setToken(res.token);
       // Setting user identification on websocket connection
-      SocketService.setCustomer(res.token, res.userId);
+      SocketService.setCustomer(res.userId);
       return res;
     }),
 
