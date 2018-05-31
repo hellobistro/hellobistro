@@ -491,6 +491,7 @@ const restaurantController = {
       },
     ).then((completedOrder) => {
       console.log('sending web socket notifcation');
+      console.log('connections: ', socket.connections);
       const notification = socket.get();
       const connectionId = socket.connections[CustomerId].socket.id;
       notification.to(connectionId).emit('notification', { OrderId, status: 'complete' });

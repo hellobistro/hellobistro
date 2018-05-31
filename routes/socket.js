@@ -5,11 +5,14 @@ let currentConnections = {};
 exports.set = (socket) => {
   io = socket;
   io.sockets.on('connection', (connection) => {
-    connection.on('data', (data) => {
-      connection.user = data.userId;
-      currentConnections[data.userId] = { socket: connection, token: data.token };
+    console.log('connection established: ', connection.id)
+    connection.on('user', (userId) => {
+      console.log('saving user to log', userId);
+      connection.user = userId;
+      currentConnections[userId] = { socket: connection };
     });
     connection.on('disconnect', () => {
+      console.log('disconnecting user: ', connection.id);
       delete currentConnections[connection.user];
     });
   });
