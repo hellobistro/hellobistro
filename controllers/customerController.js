@@ -12,6 +12,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { stripeKey } = require('../config/config.js');
 const stripe = require('stripe')(stripeKey);
+const stripeRegistration = (email, description) => stripe.customers.create({ description, email });
 
 const customerController = {
   async createCustomer(req, res) {
@@ -46,7 +47,7 @@ const customerController = {
       phone,
       email,
       availVotes: 5,
-      paymentId: 1,
+      paymentId: 'Stripe Registration Error',
       vendor,
       apiKey,
     })
@@ -55,6 +56,7 @@ const customerController = {
         res.status(201).json(customer);
         // Create stripe account for customer.
         stripeRegistration(email, `hbCustomerId: ${customer.id}`).then((stripeCustomer) => {
+          console.log('response from stripe', stripeCustomer);
           // Update customer record with Stripe data.
           Customer.update(
             {
@@ -71,9 +73,9 @@ const customerController = {
             })
             .catch((err) => {
               console.log(err);
-              res.send(err);
+              // res.send(err);
             });
-        } );
+        });
       })
       .catch((err) => {
         res.send(err);
@@ -188,8 +190,6 @@ const customerController = {
       RestaurantId,
       items,
     } = req.body;
-
-    console.log('aaaa', items);
 
     // Check to make sure at least one item is included in order
     // If not, reject the order
