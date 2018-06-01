@@ -30,7 +30,6 @@ class CustomerList extends React.Component {
   setSortCriteria(criteria) {
     if (this.state.sortBy === criteria) {
       const reversed = Array.slice(this.state.customers).reverse();
-      console.log(reversed);
       this.setState({
         customers: reversed,
       });
@@ -73,7 +72,7 @@ class CustomerList extends React.Component {
     const { customers } = this.state;
 
     return customers.map(customer => (
-      <tr>
+      <tr key={customer.userName} >
         <td>{customer.userName}</td>
         <td>{customer.orders}</td>
         <td>${customer.totalRevenue.toFixed(2)}</td>
@@ -99,23 +98,23 @@ class CustomerList extends React.Component {
         <tbody>
           <tr>
             <th>User Name</th>
-            <th onClick={this.setSortCriteria.bind(this, 'orders')}>
+            <th className="header-orders" onClick={this.setSortCriteria.bind(this, 'orders')}>
               {this.renderActiveOrInactiveHeader('orders', 'Orders')}
             </th>
-            <th onClick={this.setSortCriteria.bind(this, 'totalRevenue')}>
+            <th className="header-total-revenue" onClick={this.setSortCriteria.bind(this, 'totalRevenue')}>
               {this.renderActiveOrInactiveHeader(
                 'totalRevenue',
                 'Total Revenue',
               )}
             </th>
-            <th onClick={this.setSortCriteria.bind(this, 'averageRevenue')}>
+            <th className="header-average-revenue" onClick={this.setSortCriteria.bind(this, 'averageRevenue')}>
               {' '}
               {this.renderActiveOrInactiveHeader(
                 'averageRevenue',
                 'Average Revenue',
               )}
             </th>
-            <th onClick={this.setSortCriteria.bind(this, 'lastOrderDate')}>
+            <th className="header-last-order-date" onClick={this.setSortCriteria.bind(this, 'lastOrderDate')}>
               {this.renderActiveOrInactiveHeader(
                 'lastOrderDate',
                 'Last Order Date',
