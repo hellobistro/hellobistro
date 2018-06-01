@@ -13,11 +13,15 @@ class OrderHistoryItem extends React.Component {
 
   renderWait = order => {
     const orderPrep = order.MenuItems.reduce((a, b) => a.prepTime + b.prepTime, { prepTime: 0 });
-    const currentWait = moment(order.createdAt).add('minutes', orderPrep || 0).diff(moment(), 'minutes')
-    if (currentWait > 0 ) {
-      this.setState({ delay: false, currentWait: 'Your estimated wait is ' + currentWait + '\u00A0minute(s).' })
+    const currentWait = moment(order.createdAt).add(orderPrep || 0, 'minutes').diff(moment(), 'minutes')
+    if (order.status === 'completed') {
+      this.setState({ delay: false, currentWait: 'Order is ready.' })
     } else {
-      this.setState({ delay: true, currentWait: 'Your order is delayed. Check with staff.'})
+      if (currentWait > 0 ) {
+        this.setState({ delay: false, currentWait: 'Your estimated wait is ' + currentWait + '\u00A0minute(s).' })
+      } else {
+        this.setState({ delay: true, currentWait: 'Your order is delayed. Check with staff.'})
+      }
     }
   }
 
@@ -30,7 +34,7 @@ class OrderHistoryItem extends React.Component {
   }
 
   render() {
-    let expanded = this.state.expand ? <tr className="order-history-expand"><td colSpan="4"><strong>Your order includes: </strong>{this.renderItems(this.props.data.MenuItems)}</td></tr> : null;
+    let expanded = this.state.expand ? <tr className="order-history-expand"><td /><td colSpan="2"><strong>Order {this.props.data.id} includes: </strong>{this.renderItems(this.props.data.MenuItems)}</td><td /></tr> : null;
     return (
       <tbody>
         <tr onClick={this.clickHandler}>

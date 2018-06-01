@@ -1,5 +1,6 @@
 // Import dependencies
 import React from 'react';
+import moment from 'moment';
 import ApiService from '../../services/ApiService';
 import OrderHistoryItem from './OrderHistoryItem';
 import OrderHistoryCompleted from './OrderHistoryCompleted';
@@ -11,6 +12,7 @@ class OrderHistory extends React.Component {
   componentDidMount(props) {
     ApiService.retrieveOrders(this.props.state.user.userId)
       .then((res) => {
+        console.log('updated orders', res);
         this.props.loadOrders(res);
       });
   }
@@ -24,10 +26,12 @@ class OrderHistory extends React.Component {
       );
     }
 
-    const openOrders = orders.filter(order => order.status === 'queued');
+    const openOrders = orders.filter((order) => {
+      return order.status === 'queued' || moment.duration(moment().diff(moment(order.completedAt))).as('hours') <= 1;
+    });
     const openRender = openOrders.map(order => <OrderHistoryItem key={order.id} data={order} />);
-    const closedOrders = orders.filter(order => order.status === 'completed');
-    const closedRender = closedOrders.map(order => <OrderHistoryCompleted key={order.id} data={order} key={order.id} />);
+    const closedOrders = orders.filter(order => order.status === 'completed' && moment.duration(moment().diff(moment(order.completedAt))).as('hours') > 1);
+    const closedRender = closedOrders.map(order => <OrderHistoryCompleted data={order} key={order.id} />);
 
     return (
       <div className="order-history">

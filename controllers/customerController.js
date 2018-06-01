@@ -393,6 +393,7 @@ const customerController = {
   getAllOrdersForCustomer(req, res) {
     const { customer_id } = req.params;
     Order.findAll({
+      order: [['createdAt', 'DESC']],
       where: {
         CustomerId: customer_id,
       },

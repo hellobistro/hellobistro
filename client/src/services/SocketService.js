@@ -1,8 +1,9 @@
 import { dispatch } from 'redux';
 import openSocket from 'socket.io-client';
-import { addNotification } from '../actions/actionCreators';
+import { addNotification, loadOrders } from '../actions/actionCreators';
 import store from '../store';
 import AuthService from './AuthService';
+import ApiService from './ApiService';
 // create socket connection
 const socket = openSocket.connect('http://localhost:3000', {
   reconnection: true,
@@ -12,7 +13,6 @@ const socket = openSocket.connect('http://localhost:3000', {
 });
 // methods available to socket
 const SocketService = {
-  store: null,
   setCustomer: (userId) => {
     socket.emit('user', userId);
   },
@@ -39,6 +39,13 @@ socket.on('disconnect', () => {
 });
 socket.on('notification', (data) => {
   store.dispatch(addNotification(data));
+  AuthService.getIdFromToken().then((userId) => {
+    ApiService.retrieveOrders(userId)
+      .then((res) => {
+        console.log('refreshing page?', res);
+        store.dispatch(loadOrders(res));
+      });
+  });
 });
 
 export default SocketService;
