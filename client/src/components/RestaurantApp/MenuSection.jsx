@@ -59,7 +59,7 @@ class MenuSection extends React.Component {
 
   render() {
     const { data, deleteSection, indx } = this.props;
-    const items = this.state.itemCount > 1 ? data.MenuItems.map((item, i) =>  (<MenuItem key={i} data={item} updateCount={this.updateCount} />)) : <div className="empty-section"><h4>This menu section is empty.</h4><button className="menu-section-button delete" onClick={() => {deleteSection(indx)}}> Delete Section </button></div>;
+    const items = this.state.itemCount > 0 ? data.MenuItems.map((item, i) =>  (<MenuItem key={i} data={item} updateCount={this.updateCount} />)) : <div className="empty-section"><h4>This menu section is empty.</h4><button className="delete-section-button" onClick={() => {deleteSection(indx)}}><i className="material-icons">delete_forever</i>Delete Section </button></div>;
     return (
       <div className="form-section">
         <div className="section-header">
@@ -93,8 +93,8 @@ class MenuSection extends React.Component {
         </div>
         <div className="section-content">
           {items}
-        </div>
-          <button className="item-button" onClick={this.addItem}><i className="material-icons manager-icons">add_box</i>Add {data.name} item</button>
+          <button className="add-item-button" onClick={this.addItem}><i className="material-icons manager-icons">add_box</i>Add {data.name} item</button>
+        </div> 
       </div>
     );
   }

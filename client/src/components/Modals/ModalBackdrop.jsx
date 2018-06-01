@@ -3,7 +3,6 @@ import '../../styles/Modals.css';
 import { OrderModalContainer, WidgetUserModalContainer } from '../Containers';
 
 const ModalBackdrop = (props) => {
-  console.log('MODAL BACKDROP', props.state.modals.id, props.state.restaurant.restaurantInfo)
   if (!props.state.modals.visible) {
     return null;
   } else if (!props.state.modals.id || !props.state.modals.data) {
