@@ -27,6 +27,7 @@ class RestaurantApp extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     ApiService.getRestaurantData(this.props.state.restaurant.restaurantInfo.id)
       .then((data) => {
         // Update restaurant information upon mount, only if different
