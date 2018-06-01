@@ -298,7 +298,6 @@ routes.get('/customers/restaurantList/:lat/:lng', (req, res) => {
 //delete photo
 routes.delete('/restaurants/photo', (req, res) => {
   restaurantController.deletePhoto(req, res);
-
 })
 
 module.exports = routes;

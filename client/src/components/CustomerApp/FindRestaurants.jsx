@@ -16,9 +16,6 @@ import '../../styles/CustomerFindRestaurants.css';
 class FindRestaurants extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-     
-    };
   }
 
   componentDidMount() {
@@ -37,8 +34,9 @@ class FindRestaurants extends React.Component {
         onClick={() => {
           this.handleClick(biz.id);
         }}
-      >
-        <h3>{biz.name}</h3>
+      >   
+        <h3 >{biz.name}</h3>
+        <div style={{'float': 'right'}}>{biz.distance.toFixed(2)} km away</div>
         <p>
           {biz.genre} - {biz.type}
         </p>
