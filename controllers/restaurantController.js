@@ -49,10 +49,7 @@ const restaurantController = {
     const possibleUser = await RestaurantUser.findOne({ where: { email } });
 
     if (possibleUser) {
-      return res.status(400).json({error: 'Email already exist.'});
-      //res.end(JSON.stringify({error: 'Email already exist.'}));
-      // res.write(JSON.stringify({error: 'Email already exist.'}))
-      
+      return res.status(400).json({error: 'Email already exist.'});  
     }
     console.log('passed first res.json')
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -73,17 +70,15 @@ const restaurantController = {
           if(data.ErrorCode !== 0){
             console.log('got into erroCode check')
             return res.status(400).json({error: data.ErrorMessage})
-            //res.end(JSON.stringify({error: data.ErrorMessage}))
-            // res.write(JSON.stringify({error: data.ErrorMessage}))
           }
           console.log('passed second res.json')
           lat = data.Latitude;
           lng = data.Longitude;
         })
+
     if(apple !== undefined){
       return;
     }
-    console.log('the apple: ', apple)
 
     Restaurant.create({
       name,
