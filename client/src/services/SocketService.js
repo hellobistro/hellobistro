@@ -13,17 +13,20 @@ const socket = openSocket.connect('http://localhost:3000', {
 });
 // methods available to socket
 const SocketService = {
-  setCustomer: (userId) => {
-    socket.emit('user', userId);
+  setUser: (userInfo) => {
+    console.log('set user was called', userInfo);
+    socket.emit('user', userInfo);
   },
-  refreshCustomer: () => {
+  refreshUser: () => {
     if (AuthService.loggedIn) {
-      AuthService.getIdFromToken().then((userId) => {
-        socket.emit('user', userId);
+      AuthService.decodeToken().then((res) => {
+        console.log('refreshing user', res.id, res.userType);
+        socket.emit('user', { userId: res.id, userType: res.userType });
       });
     }
   },
-  clearCustomer: () => {
+  clearUser: () => {
+    console.log('clearing socket');
     socket.disconnect();
     socket.connect();
   },
@@ -31,7 +34,7 @@ const SocketService = {
 // socket event listeners
 socket.on('connect', () => {
   console.log('socket connected');
-  SocketService.refreshCustomer();
+  SocketService.refreshUser();
 });
 socket.on('disconnect', () => {
   console.log('socket disconnected');
@@ -39,8 +42,8 @@ socket.on('disconnect', () => {
 });
 socket.on('notification', (data) => {
   store.dispatch(addNotification(data));
-  AuthService.getIdFromToken().then((userId) => {
-    ApiService.retrieveOrders(userId)
+  AuthService.decodeToken().then((token) => {
+    ApiService.retrieveOrders(token.userId)
       .then((res) => {
         console.log('refreshing page?', res);
         store.dispatch(loadOrders(res));

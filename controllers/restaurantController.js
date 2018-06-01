@@ -427,12 +427,13 @@ const restaurantController = {
       res.sendStatus(400);
     }
 
-    const token = jwt.sign({ userType: 'Restaurant' }, 'secret', {
+    const token = jwt.sign({ userType: 'Restaurant', id: user.id }, 'secret', {
       expiresIn: 129600,
     });
     const info = {
       token,
       userId: user.id,
+      userType: 'Restaurant',
       userName: user.userName,
       restaurantInfo,
     };
@@ -480,7 +481,6 @@ const restaurantController = {
 
   completeOpenOrder(req, res) {
     const { OrderId, CustomerId } = req.params;
-    console.log('order completing', OrderId, CustomerId);
     Order.update(
       {
         status: 'completed',
@@ -490,8 +490,10 @@ const restaurantController = {
         where: { id: OrderId },
       },
     ).then((completedOrder) => {
+      console.log('order completing', OrderId, CustomerId);
       const notification = socket.get();
-      const connectionId = socket.connections[CustomerId].socket.id;
+      const connectionId = socket.customerConnections[CustomerId].socket.id;
+      console.log('found socket connection', connectionId);
       notification.to(connectionId).emit('notification', { OrderId, status: 'complete' });
       res.json(completedOrder);
     }).catch((err) => {

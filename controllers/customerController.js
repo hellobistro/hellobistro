@@ -484,6 +484,7 @@ const customerController = {
     const info = {
       token,
       userId: user.id,
+      userType: 'Customer',
       userName: user.userName,
       firstName: user.firstName,
       lastName: user.lastName,
