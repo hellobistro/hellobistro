@@ -8,6 +8,7 @@ export default class FavoritesIndividualItem extends React.Component {
     super(props);
     this.state = {
       showBounce: false,
+      showDrool: false,
     };
   }
 
@@ -47,6 +48,21 @@ export default class FavoritesIndividualItem extends React.Component {
 
   render() {
     const { name, likes, restaurant } = this.props;
+
+    if (this.props.unliked) {
+      return (
+        <div className="FavoritesIndividualItem">
+          <p onMouseOver={() => {
+            this.setState({
+              showDrool: true,
+            });
+          }}
+          >
+            <strong>{name}</strong> from {restaurant} { this.state.showDrool ? this.renderDrool() : ''}
+          </p>
+        </div>
+      );
+    }
     return (
       <div className="FavoritesIndividualItem">
         <p>
