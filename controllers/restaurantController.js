@@ -47,24 +47,36 @@ const restaurantController = {
     const possibleUser = await RestaurantUser.findOne({ where: { email } });
 
     if (possibleUser) {
-      res.status(400);
-      res.send('email already exists');
+      return res.status(400).json({error: 'Email already exist.'});  
     }
-
+    console.log('passed first res.json')
     const hashedPassword = await bcrypt.hash(password, 10);
-
     let lat;
     let lng;
-    await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=
-          ${addressOne},${addressCity},${addressState}&key=${googleApiKey}`)
-      .then((res) => res.json())
-        .then((res) => {
-          lat = res.results[0].geometry.location.lat
-          lng = res.results[0].geometry.location.lng
+    let addyTwo = encodeURI(addressCity + ' ' + addressState + ' ' + addressZip)
+    let url = 'http://www.yaddress.net/api/Address?AddressLine1=' + addressOne + '&AddressLine2=' + addyTwo + '&UserKey='
+    console.log('the url: ', url)
+    let apple = await fetch(url,{
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+            }
+          })
+      .then((result) => result.json())
+        .then((data) => {
+          console.log('the data of the restaurant:  ', data)
+          if(data.ErrorCode !== 0){
+            console.log('got into erroCode check')
+            return res.status(400).json({error: data.ErrorMessage})
+          }
+          console.log('passed second res.json')
+          lat = data.Latitude;
+          lng = data.Longitude;
         })
-        .catch(err => {
-          console.log('error getting lat & lng', err)
-        })
+
+    if(apple !== undefined){
+      return;
+    }
 
     Restaurant.create({
       name,
@@ -568,14 +580,14 @@ const restaurantController = {
     });
   },
 
-  async closestRestaurants(req, res){
+  closestRestaurants(req, res){
     let { lat, lng } = req.params
 
     Restaurant.findAll({
       attributes: [[sequelize.literal("6371 * acos(cos(radians("+lat+")) * cos(radians(latitude)) * cos(radians("+lng+") - radians(longitude)) + sin(radians("+lat+")) * sin(radians(latitude)))"),'distance'], 
       'id', 'name', 'genre', 'type', 'addressOne', 'addressTwo', 'city', 'state', 'phone'],
       order: sequelize.col('distance'),
-      limit: 3,
+      limit: 8,
     }).then(result => {
       res.json(result)
     }).catch(err => {
