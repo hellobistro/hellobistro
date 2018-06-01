@@ -574,7 +574,7 @@ const restaurantController = {
       attributes: [[sequelize.literal("6371 * acos(cos(radians("+lat+")) * cos(radians(latitude)) * cos(radians("+lng+") - radians(longitude)) + sin(radians("+lat+")) * sin(radians(latitude)))"),'distance'], 
       'id', 'name', 'genre', 'type', 'addressOne', 'addressTwo', 'city', 'state', 'phone'],
       order: sequelize.col('distance'),
-      limit: 3,
+      limit: 120,
     }).then(result => {
       res.json(result)
     }).catch(err => {
