@@ -13,9 +13,8 @@ const socket = openSocket.connect('http://localhost:3000', {
 // methods available to socket
 const SocketService = {
   store: null,
-  setCustomer: (token, userId) => {
-    SocketService.store = { token, userId };
-    socket.emit('user', SocketService.store);
+  setCustomer: (userId) => {
+    socket.emit('user', userId);
   },
   refreshCustomer: () => {
     if (AuthService.loggedIn) {
