@@ -20,7 +20,7 @@ export default class Favorites extends React.Component {
   }
 
   componentDidMount() {
-    ApiService.getUserLikes(5).then((data) => {
+    ApiService.getUserLikes(this.props.state.user.userId).then((data) => {
       this.setState({
         rated: data.rated,
         unrated: data.unrated,
@@ -50,8 +50,8 @@ export default class Favorites extends React.Component {
   renderLikedItems() {
     return (
       <div className="rated-items">
-        { this.state.rated.map((item) => (
-            <FavoritesIndividualItem handleIncrement={this.handleIncrement.bind(this)} userId={this.state.userId} {...item} />
+        { this.state.rated.map(item => (
+          <FavoritesIndividualItem handleIncrement={this.handleIncrement.bind(this)} userId={this.state.userId} {...item} />
           ))}
       </div>
     );
@@ -60,12 +60,12 @@ export default class Favorites extends React.Component {
   renderUnratedItems() {
     return (
       <div className="unrated-items">
-        { this.state.unrated.map((item) => (
-            <div>
-              <p>{item.name}</p>
-              <p>{item.restaurant}</p>
-              <p>{item.likes} likes</p>
-            </div>
+        { this.state.unrated.map(item => (
+          <div>
+            <p>{item.name}</p>
+            <p>{item.restaurant}</p>
+            <p>{item.likes} likes</p>
+          </div>
           ))}
       </div>
     );

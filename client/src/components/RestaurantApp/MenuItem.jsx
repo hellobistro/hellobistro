@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../../styles/MenuManager.css';
 import AuthService from '../../services/AuthService';
 import ApiService from '../../services/ApiService';
@@ -9,6 +10,14 @@ class MenuItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      test: {
+        id: null,
+      },
+      data: {
+        id: null,
+        status: null,
+        name: null,
+      }
     };
   }
 
@@ -80,7 +89,7 @@ class MenuItem extends React.Component {
   }
 
   updateItem = () => {
-    const { RestaurantId, id } = this.state.data
+    const { RestaurantId, id } = this.state.data;
     const imageKey = this.state.imageKey
     ApiService.updateMenuItem(RestaurantId, id, this.state.data)
       .then((updatedItem) => (
@@ -106,7 +115,7 @@ class MenuItem extends React.Component {
   deleteItem = () => {
     let data = this.state.data;
     data.status = 'archived'
-    const { RestaurantId, id } = this.state.data
+    const { RestaurantId, id } = this.state.data;
     this.setState({ data }, () => {
         this.props.updateCount(-1);
         ApiService.updateMenuItem(RestaurantId, id, this.state.data)
@@ -115,8 +124,7 @@ class MenuItem extends React.Component {
   }
 
   render() {
-    console.log('the state inside MenuItem:  ', this.state)
-    const { id, status, name, image, price, prepTime, vegan, vegetarian, glutenFree, spicy } = this.state.data
+    const { id, status, image, price, prepTime, vegan, vegetarian, glutenFree, spicy } = this.state.data;
     const { selectedOption, veganEdited, vegetarianEdited, glutenFreeEdited, spicyEdited } = this.state;
   	const value = selectedOption && selectedOption.value;
     const img = <div className='image-container'>
@@ -168,7 +176,7 @@ class MenuItem extends React.Component {
         className={'item-input ' + (this.state.priceEdited ? 'edited' : null)}
         name='price'
         type='text'
-        placeholder='$'
+        placeholder='Price.'
         defaultValue={price}
         onChange={(e) => { this.inputChange(e); }}/>
         </div>,
@@ -239,6 +247,9 @@ class MenuItem extends React.Component {
       </div>
     );
   }
-}
+};
+
+MenuItem.propTypes = {
+};
 
 export default MenuItem;

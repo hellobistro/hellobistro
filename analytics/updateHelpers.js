@@ -42,13 +42,14 @@ module.exports = {
 
   updateCustomerDirectory(analytics, order, customers) {
     const currentCustomer = order.Customer.userName;
-    
+
     if (!customers[currentCustomer]) {
       customers[currentCustomer] = {
         orders: 1,
         totalRevenue: order.total,
         averageRevenue: order.total,
         lastOrderDate: order.completedAt,
+        lastOrderDateHumanReadable: moment(order.completedAt).format('MMMM DD, YYYY'),
         customerId: order.CustomerId,
       };
     } else {

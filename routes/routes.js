@@ -93,7 +93,6 @@ routes.get('/customers/:customer_id/ratings', (req, res) => {
 
 // Retrieve all payment methods ofr a customer
 routes.get('/customers/payments/:customer_id/', (req, res) => {
-  console.log('here we are folks');
   customerController.getPaymentMethods(req, res);
 });
 
@@ -205,7 +204,7 @@ routes.patch('/restaurants/menusection/:restaurant_id/:section_id', (req, res) =
   restaurantController.updateMenuSection(req, res);
 });
 
-routes.patch('/restaurants/openorder/:order_id', (req, res) => {
+routes.patch('/restaurants/openorder/:OrderId/:CustomerId', (req, res) => {
   restaurantController.completeOpenOrder(req, res);
 });
 

@@ -61,10 +61,12 @@ class CustomerLogin extends Component {
   render() {
     return (
       <div className="CustomerLogin">
-        <Mast />
+        <div className="customer-login-mast">
+          <span>HelloBistro</span>
+        </div>
         <div className="background">
           <div className="mock-form">
-            <div className="form-section">
+            <div className="customer-login-form-section">
               <div className="form-section-header" />
               <div className="form-group">
                 <input

@@ -1,23 +1,24 @@
 // Import dependencies
-import React from "react";
-import { Route, Link, Switch } from "react-router-dom";
+import React from 'react';
+import { Route, Link, Switch } from 'react-router-dom';
 // Import components/containers
-import RestaurantNav from "./RestaurantNav";
-import Mast from "./Mast";
+import RestaurantNav from './RestaurantNav';
+import CustomerList from './CustomerList';
+import Mast from './Mast';
 import {
   RestaurantLoginContainer,
   DashBoardContainer,
   MenuManagerContainer,
-  PromosContainer,
   RestaurantRegisterContainer,
   RestaurantSettingsContainer,
   OrderManagerContainer,
+  CustomerListContainer,
 } from '../Containers';
 
-import AuthService from "../../services/AuthService";
-import ApiService from "../../services/ApiService";
+import AuthService from '../../services/AuthService';
+import ApiService from '../../services/ApiService';
 
-import "../../styles/RestaurantApp.css";
+import '../../styles/RestaurantApp.css';
 
 class RestaurantApp extends React.Component {
   constructor(props) {
@@ -57,14 +58,14 @@ class RestaurantApp extends React.Component {
           this.props.updateAnalyticsData(data);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
 
   logout() {
     AuthService.logout();
-    this.props.history.replace("/");
+    this.props.history.replace('/');
   }
 
   render() {
@@ -84,6 +85,7 @@ class RestaurantApp extends React.Component {
             <Route path="/restaurant/home/dashboard" component={DashBoardContainer} />
             <Route path="/restaurant/home/menuManager" component={MenuManagerContainer} />
             <Route path="/restaurant/home/orderManager" component={OrderManagerContainer} />
+            <Route path="/restaurant/home/customers" component={CustomerListContainer} />
             <Route path="/restaurant/home/settings" component={RestaurantSettingsContainer} />
           </Switch>
         </main>

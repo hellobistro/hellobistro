@@ -61,9 +61,10 @@ class FindRestaurants extends React.Component {
   getLocation = () => {
       this.getPosition().then((res) => {
         this.props.setCustomerLocation(res.coords.latitude, res.coords.longitude);
-      }).then(() => {
-        this.closestRestaurants()
-      });
+      })
+      .then(() => {
+        this.closestRestaurants() 
+      })
   }
 
   closestRestaurants = () => {
