@@ -9,6 +9,7 @@ const AWS = require('aws-sdk');
 const UUID = require('uuid/v4');
 const Busboy = require('busboy');
 const { photos, googleApiKey } = require('../config/config.js');
+const analyticsController = require('../controllers/analyticsController');
 
 AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.secretAccessKey });
 const S3 = new AWS.S3();
@@ -449,6 +450,8 @@ const restaurantController = {
       userName: user.userName,
       restaurantInfo,
     };
+
+    analyticsController.poke();
     res.json(info);
   },
 
@@ -585,7 +588,7 @@ const restaurantController = {
     const { lat, lng } = req.params;
 
     Restaurant.findAll({
-      attributes: [[sequelize.literal(`6371 * acos(cos(radians(${lat })) * cos(radians(latitude)) * cos(radians(${lng}) - radians(longitude)) + sin(radians(${lat })) * sin(radians(latitude)))`), 'distance'],
+      attributes: [[sequelize.literal(`6371 * acos(cos(radians(${lat})) * cos(radians(latitude)) * cos(radians(${lng}) - radians(longitude)) + sin(radians(${lat})) * sin(radians(latitude)))`), 'distance'],
         'id', 'name', 'genre', 'type', 'addressOne', 'addressTwo', 'city', 'state', 'phone'],
       order: sequelize.col('distance'),
       limit: 8,
