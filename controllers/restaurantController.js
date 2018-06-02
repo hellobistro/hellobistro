@@ -26,6 +26,8 @@ const fetch = require("node-fetch");
 
 const sequelize = require('sequelize');
 
+const _ = require('lodash');
+
 const restaurantController = {
   async createRestaurant(req, res) {
     let newRestaurant = null;
@@ -45,19 +47,17 @@ const restaurantController = {
       paymentId,
       password,
     } = req.body;
-
+    
     const possibleUser = await RestaurantUser.findOne({ where: { email } });
 
     if (possibleUser) {
       return res.status(400).json({error: 'Email already exist.'});  
     }
-    console.log('passed first res.json')
     const hashedPassword = await bcrypt.hash(password, 10);
     let lat;
     let lng;
-    let addyTwo = encodeURI(addressCity + ' ' + addressState + ' ' + addressZip)
+    let addyTwo = addressCity + ' ' + addressState + ' ' + addressZip;
     let url = 'http://www.yaddress.net/api/Address?AddressLine1=' + addressOne + '&AddressLine2=' + addyTwo + '&UserKey='
-    console.log('the url: ', url)
     let apple = await fetch(url,{
             method: 'GET',
             headers: {
@@ -66,12 +66,9 @@ const restaurantController = {
           })
       .then((result) => result.json())
         .then((data) => {
-          console.log('the data of the restaurant:  ', data)
           if(data.ErrorCode !== 0){
-            console.log('got into erroCode check')
             return res.status(400).json({error: data.ErrorMessage})
           }
-          console.log('passed second res.json')
           lat = data.Latitude;
           lng = data.Longitude;
         })
@@ -97,7 +94,6 @@ const restaurantController = {
       longitude: lng,
     })
       .then((restaurant) => {
-        console.log('the new restaurant: ', restaurant)
         newRestaurant = restaurant;
         return RestaurantUser.create({
           RestaurantId: restaurant.id,
@@ -387,8 +383,33 @@ const restaurantController = {
 
   async updateRestaurant(req, res) {
     const { restaurant_id } = req.params;
-    const updatedValues = req.body;
+    const updatedValues = req.body.formValues;
+    console.log('the boday: ~~~~', req.body)
+    console.log('the updatedvalues:  ', updatedValues)
+    let { addressOne, city, state, zip } = _.assign({}, req.body.info, updatedValues)
+    let lat;
+    let lng;
+    let addyTwo = city + ' ' + state + ' ' + zip;
+    let url = 'http://www.yaddress.net/api/Address?AddressLine1=' + addressOne + '&AddressLine2=' + addyTwo + '&UserKey='
+    let apple = await fetch(url,{
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+            }
+          })
+      .then((result) => result.json())
+        .then((data) => {
+          if(data.ErrorCode !== 0){
+            return res.status(400).json({error: data.ErrorMessage})
+          }
+          lat = data.Latitude;
+          lng = data.Longitude;
+        })
 
+    if(apple !== undefined){
+      return;
+    }
+    console.log('the new coordinates: ', lat, lng)
     Restaurant.findOne({ where: { id: restaurant_id }, include: [{ model: RestaurantUser, required: false }] })
       .then(async (restaurant) => {
         const user = restaurant.RestaurantUsers[0];
@@ -412,7 +433,8 @@ const restaurantController = {
             email: updatedValues.email,
           });
         }
-
+        updatedValues.latitude = lat
+        updatedValues.longitude = lng
         return restaurant.update(updatedValues);
       })
       .then((updatedRestaurant) => {

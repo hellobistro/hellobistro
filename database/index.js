@@ -61,7 +61,7 @@ const Restaurant = sequelize.define('Restaurant', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  // type: Sequelize.STRING,
+  type: Sequelize.STRING,
   paymentId: Sequelize.STRING,
   latitude: DataTypes.DECIMAL(10, 8),
   longitude: DataTypes.DECIMAL(11, 8),
@@ -113,6 +113,7 @@ const Order = sequelize.define('Order', {
 const OrderItem = sequelize.define('OrderItem', {
   special: Sequelize.STRING,
   price: Sequelize.FLOAT,
+  //quantity: Sequelize.INTEGER
 });
 
 const RestaurantUser = sequelize.define('RestaurantUser', {

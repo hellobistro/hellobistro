@@ -28,10 +28,13 @@ const ApiService = {
     });
   },
 
-  updateRestaurant(id, formValues) {
-    return AuthService.fetch(`/restaurants/${id}`, {
+  updateRestaurant(info, formValues) {
+    return AuthService.fetch(`/restaurants/${info.id}`, {
       method: 'PUT',
-      body: formValues,
+      body: {
+        formValues, 
+        info,
+      }
     });
   },
 

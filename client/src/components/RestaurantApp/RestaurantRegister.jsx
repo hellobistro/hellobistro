@@ -54,7 +54,6 @@ class RestaurantRegister extends Component {
           .catch(error => {
             console.log('error registering restaurant', error)
             error.response.json().then((err)=>{
-            console.log('the apple: ', err)
             this.setState({ error: err.error });
           })
         })

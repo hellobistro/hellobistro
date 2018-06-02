@@ -143,6 +143,7 @@ export function updateAnalyticsData(data) {
 }
 
 export function addRestaurant(obj) {
+  obj.restaurantType = obj.type;
   obj.type = 'ADD_RESTAURANT';
   return obj;
 }

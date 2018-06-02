@@ -193,7 +193,6 @@ routes.get('/restaurants/:id', (req, res) => {
 
 // Update a restaurant profile/settings
 routes.put('/restaurants/:restaurant_id', (req, res) => {
-  console.log(req.body);
   restaurantController.updateRestaurant(req, res);
 });
 
@@ -300,6 +299,7 @@ routes.get('/customers/restaurantList/:lat/:lng', (req, res) => {
 //delete photo
 routes.delete('/restaurants/photo', (req, res) => {
   restaurantController.deletePhoto(req, res);
+
 })
 
 module.exports = routes;

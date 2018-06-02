@@ -26,13 +26,15 @@ class RestaurantSettings extends React.Component {
   handleSubmit = (e) => {
     console.log('id', this.props.state.restaurant.restaurantInfo.id);
     e.preventDefault();
-    ApiService.updateRestaurant(this.props.state.restaurant.restaurantInfo.id, this.state.formValues).then((data) => {
+    ApiService.updateRestaurant(this.props.state.restaurant.restaurantInfo, this.state.formValues).then((data) => {
       this.props.updateRestaurantData(data);
     }).then(() => {
       this.setState({confirmation: true});
       window.scrollTo(0,0);
     }).catch(err => {
-      // Do nothing with error at this time
+      err.response.json().then((errMsg) => {
+        this.setState({errorMessage: errMsg.error})
+      })
     });
   }
 
@@ -130,6 +132,28 @@ class RestaurantSettings extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
+            <div className="form-group">
+              <label htmlFor="genre">Genre </label>
+              <input
+                className="form-input"
+                cid="genre"
+                name="genre"
+                type="text"
+                defaultValue={this.props.state.restaurant.restaurantInfo.genre}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="type">Type</label>
+              <input
+                className="form-input"
+                cid="type"
+                name="type"
+                type="text"
+                defaultValue={this.props.state.restaurant.restaurantInfo.restaurantType}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
 
           <div className="form-section">
@@ -157,6 +181,11 @@ class RestaurantSettings extends React.Component {
               />
             </div>
           </div>
+          {
+            this.state.errorMessage
+            ? <div className='error'>{this.state.errorMessage}</div>
+            : <div></div>
+          }
           <button onClick={this.handleSubmit}>Submit Changes</button>
         </form>
       </div>
