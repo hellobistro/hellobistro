@@ -55,7 +55,7 @@ const restaurantController = {
     let lat;
     let lng;
     const addyTwo = encodeURI(`${addressCity} ${addressState} ${addressZip}`);
-    const url = `http://www.yaddress.net/api/Address?AddressLine1=${addressOne }&AddressLine2=${addyTwo }&UserKey=`;
+    const url = `http://www.yaddress.net/api/Address?AddressLine1=${addressOne}&AddressLine2=${addyTwo}&UserKey=`;
     console.log('the url: ', url);
     const apple = await fetch(url, {
       method: 'GET',
@@ -585,10 +585,10 @@ const restaurantController = {
     const { lat, lng } = req.params;
 
     Restaurant.findAll({
-      attributes: [[sequelize.literal(`6371 * acos(cos(radians(${  lat  })) * cos(radians(latitude)) * cos(radians(${  lng  }) - radians(longitude)) + sin(radians(${  lat  })) * sin(radians(latitude)))`), 'distance'],
+      attributes: [[sequelize.literal(`6371 * acos(cos(radians(${lat })) * cos(radians(latitude)) * cos(radians(${lng}) - radians(longitude)) + sin(radians(${lat })) * sin(radians(latitude)))`), 'distance'],
         'id', 'name', 'genre', 'type', 'addressOne', 'addressTwo', 'city', 'state', 'phone'],
       order: sequelize.col('distance'),
-      limit: 128,
+      limit: 8,
     }).then((result) => {
       res.json(result);
     }).catch((err) => {
