@@ -1,46 +1,32 @@
 // Import dependencies
 import React from 'react';
 import ApiService from '../../services/ApiService';
+import SocketService from '../../services/SocketService';
 import OrderTimer from './OrderTimer'
 import moment from "moment";
 
 class OrderManager extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   closeOrder = (orderId, customerId) => {
-    console.log('closing order');
-    ApiService.completeOpenOrder(orderId, customerId)
-      .then((res) => {
-        this.getOpenOrders();
-      }).catch(err => {
-        console.log('error completing order', err)
-      })
-  }
-
-  getOpenOrders = () => {
-    let restaurantId = JSON.parse(window.localStorage.state).restaurant.restaurantInfo.id
-    ApiService.getOpenOrdersForRestaurant(restaurantId)
-      .then((openOrders) => {
-        this.setState({ openOrders })
-      })
-      .catch(err => {
-        console.log('error getting orders>>  ', err)
-      })
+    const restaurantId = this.props.state.restaurant.restaurantInfo.id;
+    SocketService.closeOrder(orderId, customerId, restaurantId);
   }
 
   componentDidMount(){
-    this.getOpenOrders();
+    const restaurantId = this.props.state.restaurant.restaurantInfo.id;
+    SocketService.refreshOpenRestaurantOrders(restaurantId);
   }
 
   render() {
     return (
-      this.state
+      this.props.state.restaurant.data.openOrders.length > 0
       ? (<div className="">
       <div className="page-header"><strong>Open Orders:</strong></div>
       {
-        this.state.openOrders.map((order, i) => {
+        this.props.state.restaurant.data.openOrders.map((order, i) => {
           return <div key={i} className="menu-manager-item item-input">
             <p>Order Number: {order.id}</p>
             <OrderTimer order={order}/>
@@ -56,7 +42,7 @@ class OrderManager extends React.Component {
         })
       }
       </div>)
-      : <div className='restaurant-loader'></div>
+      : <div><div className='restaurant-loader' />Waiting for new orders.</div>
     );
    }
 }

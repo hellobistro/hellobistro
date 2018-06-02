@@ -196,3 +196,9 @@ export function clearNotification() {
   };
 }
 
+export function refreshOpenOrders(data) {
+  return {
+    type: 'REFRESH_OPEN_ORDERS',
+    data,
+  };
+}

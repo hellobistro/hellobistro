@@ -1,34 +1,56 @@
-// const socketController = require('../controllers/socketController');
+const restaurantController = require('../controllers/restaurantController');
+
 let io = null;
-let customerConnections = {};
-let restaurantConnections = {};
+const customerConnections = {};
+const restaurantConnections = {};
 
 exports.set = (socket) => {
   io = socket;
   io.sockets.on('connection', (connection) => {
-    console.log('connection established: ', connection.id)
     connection.on('user', (user) => {
       connection.user = user.userId;
       connection.userType = user.userType;
+
+      // RESTAURANT HANDLER
       if (connection.userType === 'Restaurant') {
-        console.log('saving restaurant user to socket log', user);
         restaurantConnections[user.userId] = { socket: connection };
+
         connection.on('disconnect', () => {
-          console.log('disconnecting restaurant user: ', connection.id);
           delete restaurantConnections[connection.user];
         });
-      } else if (connection.userType === 'Customer') {
-        console.log('saving customer user to socket log', user);
+
+        connection.on('refreshOpenOrders', (RestaurantId) => {
+          console.log('blkadfj');
+          restaurantController.getOpenRestaurantOrders(RestaurantId)
+            .then((orders) => {
+              console.log('sending order refresh');
+              connection.emit('refreshOpenOrders', orders);
+            });
+        });
+
+        connection.on('closeOrder', (OrderId, CustomerId, RestaurantId) => {
+          console.log('closing order')
+          restaurantController.closeOrder(OrderId)
+            .then(() => {
+              connection.to(customerConnections[CustomerId]).emit('orderUpdate', { OrderId, status: 'complete' });
+              restaurantController.getOpenRestaurantOrders(RestaurantId)
+                .then((orders) => {
+                  console.log('sending order refresh');
+                  connection.emit('refreshOpenOrders', orders);
+                });
+            });
+        });
+      }
+      // CUSTOMER HANDLER
+      if (connection.userType === 'Customer') {
         customerConnections[user.userId] = { socket: connection };
         connection.on('disconnect', () => {
-          console.log('disconnecting customer user: ', connection.id);
           delete customerConnections[connection.user];
         });
       }
     });
   });
 };
-
 
 exports.get = () => io;
 

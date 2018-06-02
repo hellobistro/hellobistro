@@ -12,7 +12,6 @@ const { photos, googleApiKey } = require('../config/config.js');
 AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.secretAccessKey });
 const S3 = new AWS.S3();
 // sequelize models
-const socket = require('../routes/socket');
 
 const {
   Customer,
@@ -49,7 +48,6 @@ const restaurantController = {
     if (possibleUser) {
       return res.status(400).json({error: 'Email already exist.'});  
     }
-    console.log('passed first res.json')
     const hashedPassword = await bcrypt.hash(password, 10);
     let lat;
     let lng;
@@ -181,12 +179,10 @@ const restaurantController = {
       });
   },
 
-  getAllOpenOrdersForRestaurant(req, res) {
-    const { restaurant_id } = req.params;
-
-    Order.findAll({
+  getOpenRestaurantOrders(RestaurantId) {
+    return Order.findAll({
       where: {
-        RestaurantId: restaurant_id,
+        RestaurantId,
         completedAt: null,
       },
       include: [
@@ -195,14 +191,31 @@ const restaurantController = {
           required: false,
         },
       ],
-    })
-      .then((orders) => {
-        res.json(orders);
-      })
-      .catch((err) => {
-        res.send(err);
-      });
+    });
   },
+
+  // getAllOpenOrdersForRestaurant(req, res) {
+  //   const { restaurant_id } = req.params;
+
+  //   Order.findAll({
+  //     where: {
+  //       RestaurantId: restaurant_id,
+  //       completedAt: null,
+  //     },
+  //     include: [
+  //       {
+  //         model: MenuItem,
+  //         required: false,
+  //       },
+  //     ],
+  //   })
+  //     .then((orders) => {
+  //       res.json(orders);
+  //     })
+  //     .catch((err) => {
+  //       res.send(err);
+  //     });
+  // },
 
   createNewOrder(req, res) {
     const { restaurant_id } = req.params;
@@ -427,18 +440,16 @@ const restaurantController = {
   async loginRestaurant(req, res) {
     const { email, password } = req.body;
     const user = await RestaurantUser.findOne({ where: { email } });
-    const restaurantInfo = await Restaurant.findOne({
-      where: { id: user.RestaurantId },
-    });
     if (!user) {
       res.sendStatus(400);
     }
-
     const authorized = await bcrypt.compare(password, user.password);
     if (!authorized) {
       res.sendStatus(400);
     }
-
+    const restaurantInfo = await Restaurant.findOne({
+      where: { id: user.RestaurantId },
+    });
     const token = jwt.sign({ userType: 'Restaurant', id: user.id }, 'secret', {
       expiresIn: 129600,
     });
@@ -491,9 +502,9 @@ const restaurantController = {
       });
   },
 
-  completeOpenOrder(req, res) {
-    const { OrderId, CustomerId } = req.params;
-    Order.update(
+  closeOrder(OrderId) {
+    console.log('database close order', OrderId);
+    return Order.update(
       {
         status: 'completed',
         completedAt: moment(),
@@ -501,16 +512,7 @@ const restaurantController = {
       {
         where: { id: OrderId },
       },
-    ).then((completedOrder) => {
-      console.log('order completing', OrderId, CustomerId);
-      const notification = socket.get();
-      const connectionId = socket.customerConnections[CustomerId].socket.id;
-      console.log('found socket connection', connectionId);
-      notification.to(connectionId).emit('notification', { OrderId, status: 'complete' });
-      res.json(completedOrder);
-    }).catch((err) => {
-      res.send(err);
-    });
+    );
   },
 
   fetchUserDataForWidget(req, res) {
