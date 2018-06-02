@@ -1,6 +1,6 @@
 const sequelize = require('sequelize');
 const moment = require('moment');
-const fetch = require("node-fetch");
+const fetch = require('node-fetch');
 // authentication
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -9,6 +9,7 @@ const AWS = require('aws-sdk');
 const UUID = require('uuid/v4');
 const Busboy = require('busboy');
 const { photos, googleApiKey } = require('../config/config.js');
+
 AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.secretAccessKey });
 const S3 = new AWS.S3();
 // sequelize models
@@ -47,34 +48,34 @@ const restaurantController = {
     const possibleUser = await RestaurantUser.findOne({ where: { email } });
 
     if (possibleUser) {
-      return res.status(400).json({error: 'Email already exist.'});  
+      return res.status(400).json({ error: 'Email already exist.' });
     }
-    console.log('passed first res.json')
+    console.log('passed first res.json');
     const hashedPassword = await bcrypt.hash(password, 10);
     let lat;
     let lng;
-    let addyTwo = encodeURI(addressCity + ' ' + addressState + ' ' + addressZip)
-    let url = 'http://www.yaddress.net/api/Address?AddressLine1=' + addressOne + '&AddressLine2=' + addyTwo + '&UserKey='
-    console.log('the url: ', url)
-    let apple = await fetch(url,{
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-            }
-          })
-      .then((result) => result.json())
-        .then((data) => {
-          console.log('the data of the restaurant:  ', data)
-          if(data.ErrorCode !== 0){
-            console.log('got into erroCode check')
-            return res.status(400).json({error: data.ErrorMessage})
-          }
-          console.log('passed second res.json')
-          lat = data.Latitude;
-          lng = data.Longitude;
-        })
+    const addyTwo = encodeURI(`${addressCity} ${addressState} ${addressZip}`);
+    const url = `http://www.yaddress.net/api/Address?AddressLine1=${addressOne}&AddressLine2=${addyTwo}&UserKey=`;
+    console.log('the url: ', url);
+    const apple = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+      .then(result => result.json())
+      .then((data) => {
+        console.log('the data of the restaurant:  ', data);
+        if (data.ErrorCode !== 0) {
+          console.log('got into erroCode check');
+          return res.status(400).json({ error: data.ErrorMessage });
+        }
+        console.log('passed second res.json');
+        lat = data.Latitude;
+        lng = data.Longitude;
+      });
 
-    if(apple !== undefined){
+    if (apple !== undefined) {
       return;
     }
 
@@ -95,7 +96,7 @@ const restaurantController = {
       longitude: lng,
     })
       .then((restaurant) => {
-        console.log('the new restaurant: ', restaurant)
+        console.log('the new restaurant: ', restaurant);
         newRestaurant = restaurant;
         return RestaurantUser.create({
           RestaurantId: restaurant.id,
@@ -348,16 +349,16 @@ const restaurantController = {
   deleteMenuSection(req, res) {
     const { section_id } = req.params;
     MenuSection.destroy({
-      where: { id: section_id }
+      where: { id: section_id },
     })
-      .then(deleted => {
+      .then((deleted) => {
         if (deleted < 1) {
           res.sendStatus(400);
         } else {
           res.status(200).json(deleted);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         res.send(err);
       });
   },
@@ -563,48 +564,48 @@ const restaurantController = {
         }
       });
     });
-  req.pipe(busboy);
+    req.pipe(busboy);
   },
 
   deletePhoto(req, res) {
     const { imageKey } = req.body;
-    var params = { Bucket: 'hbphotostorage', Key: imageKey };
-    S3.deleteObject(params, function(err, data) {
+    const params = { Bucket: 'hbphotostorage', Key: imageKey };
+    S3.deleteObject(params, (err, data) => {
       if (err) {
-        console.log(err, err.stack) 
+        console.log(err, err.stack);
         res.status(400).json(err);
       } else {
         console.log('successfully deleted photo');
         res.status(200).json(data);
-      }                     
+      }
     });
   },
 
-  closestRestaurants(req, res){
-    let { lat, lng } = req.params
+  closestRestaurants(req, res) {
+    const { lat, lng } = req.params;
 
     Restaurant.findAll({
-      attributes: [[sequelize.literal("6371 * acos(cos(radians("+lat+")) * cos(radians(latitude)) * cos(radians("+lng+") - radians(longitude)) + sin(radians("+lat+")) * sin(radians(latitude)))"),'distance'], 
-      'id', 'name', 'genre', 'type', 'addressOne', 'addressTwo', 'city', 'state', 'phone'],
+      attributes: [[sequelize.literal(`6371 * acos(cos(radians(${lat })) * cos(radians(latitude)) * cos(radians(${lng}) - radians(longitude)) + sin(radians(${lat })) * sin(radians(latitude)))`), 'distance'],
+        'id', 'name', 'genre', 'type', 'addressOne', 'addressTwo', 'city', 'state', 'phone'],
       order: sequelize.col('distance'),
       limit: 8,
-    }).then(result => {
-      res.json(result)
-    }).catch(err => {
-      res.send(err)
+    }).then((result) => {
+      res.json(result);
+    }).catch((err) => {
+      res.send(err);
     });
   },
 
-  getCoordinates(req, res){
+  getCoordinates(req, res) {
     const { restaurant_id } = req.params;
     Restaurant.findAll({
       where: {
-        id: restaurant_id
-      }
+        id: restaurant_id,
+      },
     }).then((info) => {
-      res.json(info)
-    })
-  }
+      res.json(info);
+    });
+  },
 
 };
 

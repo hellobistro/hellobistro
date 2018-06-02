@@ -1,10 +1,7 @@
 // Require controllers
 const restaurantController = require('../controllers/restaurantController');
 const customerController = require('../controllers/customerController');
-
-// Reqyure analytics engine
-const analytics = require('../analytics');
-
+const analyticsController = require('../controllers/analyticsController');
 
 // Create a router object
 const routes = require('express').Router();
@@ -13,8 +10,8 @@ const routes = require('express').Router();
 /* ANALYTICS ROUTES */
 /* **************** */
 
-routes.get('/data/:restaurant_id/', (req, res) => {
-  analytics.buildAndSendData(req, res);
+routes.get('/data/:id/', (req, res) => {
+  analyticsController.fetchData(req, res);
 });
 
 routes.get('/data/customers/:RestaurantId/:CustomerId/', (req, res) => {
@@ -134,7 +131,7 @@ routes.delete('/customers/:customer_id', (req, res) => {
 
 /* Authenticate */
 
-//Create restaurant User
+// Create restaurant User
 // routes.post('/restaurantUser', (req, res) => {
 //   restaurantController.createRestaurantUser(req, res);
 // });
@@ -225,7 +222,7 @@ routes.delete('/restaurants/sections/items/:restaurant_id', (req, res) => {
   restaurantController.deleteAllMenuSectionsAndItems(req, res);
 });
 
-//Delete a menu section
+// Delete a menu section
 routes.delete('/restaurants/menusection/:section_id', (req, res) => {
   restaurantController.deleteMenuSection(req, res);
 });
@@ -284,20 +281,20 @@ routes.delete('/api/:user_id', (req, res) => {
   // implement
 });
 
-//upload photo
+// upload photo
 routes.post('/upload/:item_id', (req, res) => {
   restaurantController.uploadPhoto(req, res);
 });
 
 
-//get closest restaurants
+// get closest restaurants
 routes.get('/customers/restaurantList/:lat/:lng', (req, res) => {
   restaurantController.closestRestaurants(req, res);
-})
+});
 
-//delete photo
+// delete photo
 routes.delete('/restaurants/photo', (req, res) => {
   restaurantController.deletePhoto(req, res);
-})
+});
 
 module.exports = routes;
