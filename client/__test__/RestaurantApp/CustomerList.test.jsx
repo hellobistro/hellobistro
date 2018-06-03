@@ -4,6 +4,8 @@ import '../jest.config';
 import { CustomerListContainer } from '../../src/components/Containers';
 import { fakeProps } from '../testHelpers';
 
+const { describe, test, expect } = global;
+
 jest.mock('../../src/services/ApiService.js');
 
 const wrapper = shallow(<MemoryRouter><CustomerListContainer.WrappedComponent {...fakeProps} /></MemoryRouter >);

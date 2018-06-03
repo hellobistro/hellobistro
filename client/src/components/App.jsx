@@ -8,32 +8,22 @@ import jwt from 'jsonwebtoken';
 import AuthService from '../services/AuthService';
 import ApiService from '../services/ApiService';
 
-// Import CustomerApp component and subcomponents
-
-// Import RestaurantApp component and subcomponents
+// Import Customer/RestaurantApp component and subcomponents
 import {
   CustomerAppContainer,
   RestaurantAppContainer,
   RestaurantLoginContainer,
   CustomerLoginContainer,
-  FindRestaurantsContainer,
-  OrderHistoryContainer,
   CustomerOrderContainer,
   CustomerSettingsContainer,
   RestaurantRegisterContainer,
-  DashBoardContainer,
   MenuManagerContainer,
   RestaurantSettingsContainer,
   PromosContainer,
   CustomerRegisterContainer,
-  MenuContainer,
-  ConfirmOrderContainer,
   ModalBackdropContainer,
   NotificationsContainer,
 } from './Containers';
-
-
-// import {sampleRestaurantGet} from '../../sampleData';
 
 // Create parent application
 class App extends React.Component {

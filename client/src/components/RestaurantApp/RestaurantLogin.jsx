@@ -1,55 +1,55 @@
 // Import dependencies
-import React, { Component } from "react";
-import AuthService from "../../services/AuthService";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
+import AuthService from '../../services/AuthService';
 
 // Import CSS
-import "../../styles/RestaurantLogin.css";
-import Mast from "./Mast";
-import { withRouter, Link } from "react-router-dom";
+import '../../styles/RestaurantLogin.css';
+import Mast from './Mast';
 
 // Used by Restaurant Users to log into app
 class RestaurantLogin extends Component {
   constructor() {
     super();
     this.state = {
-      error: false
+      error: false,
     };
   }
 
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   }
 
   handleLogin(e) {
     e.preventDefault();
     AuthService.restaurantLogin(this.state.email, this.state.password)
-      .then(res => {
+      .then((res) => {
         this.setState({ error: false });
-        console.log("the res after logging in", res);
         const { userId, userName, restaurantInfo } = res;
         this.props.addUser(userId, userName);
         this.props.addRestaurant(restaurantInfo);
       })
       .then(() => {
-        this.props.history.replace("/restaurant/home/dashboard");
+        this.props.history.replace('/restaurant/home/dashboard');
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ error: true });
-        console.error("err in handlesubmit", err);
+        console.error('err in handlesubmit', err);
       });
   }
 
   handleCreateAcc(e) {
     e.preventDefault();
-    this.props.history.replace("/restaurant/userRegister");
+    this.props.history.replace('/restaurant/userRegister');
   }
 
   render() {
     return (
       <div className="RestaurantLogin">
-        <Mast primaryText={"HelloBistro for Restaurants"} />
+        <Mast primaryText="HelloBistro for Restaurants" />
         <div className="rest-background">
           <div className="mock-form">
             <div className="restaurant-login-form-section">
@@ -81,12 +81,12 @@ class RestaurantLogin extends Component {
             {this.state.error ? <div>Invalid credentials</div> : <div />}
           </div>
         </div>
-                  <div className="switch-customer">
-        <Link to="/customer/login">
-          <i className="material-icons">people</i>HelloBistro for Hungry People
-        </Link>
-    
-          </div>
+        <div className="switch-customer">
+          <Link to="/customer/login">
+            <i className="material-icons">people</i>HelloBistro for Hungry People
+          </Link>
+
+        </div>
 
 
       </div>
