@@ -24,28 +24,8 @@ const {
   OrderItem,
 } = require('../database/index.js');
 
-<<<<<<< HEAD
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
-// upload photo
-const AWS = require('aws-sdk');
-const UUID = require('uuid/v4');
-const Busboy = require('busboy');
-
-AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.secretAccessKey });
-const S3 = new AWS.S3();
-
-const moment = require('moment');
-
-const fetch = require("node-fetch");
-
-const sequelize = require('sequelize');
-
 const _ = require('lodash');
 
-=======
->>>>>>> 6c374eeb7f6807abc8bd37e150434d80aba0a32f
 const restaurantController = {
   async createRestaurant(req, res) {
     let newRestaurant = null;
@@ -402,9 +382,9 @@ const restaurantController = {
   async updateRestaurant(req, res) {
     const { restaurant_id } = req.params;
     const updatedValues = req.body.formValues;
-    console.log('the boday: ~~~~', req.body)
-    console.log('the updatedvalues:  ', updatedValues)
-    let { addressOne, city, state, zip } = _.assign({}, req.body.info, updatedValues)
+    const data = req.body.info
+    console.log('fckkkk thisss', updatedValues, data)
+    let { addressOne, city, state, zip } = _.assign({}, data, updatedValues)
     let lat;
     let lng;
     let addyTwo = city + ' ' + state + ' ' + zip;

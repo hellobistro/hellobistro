@@ -24,7 +24,7 @@ class RestaurantSettings extends React.Component {
   }
 
   handleSubmit = (e) => {
-    console.log('id', this.props.state.restaurant.restaurantInfo.id);
+    console.log('wtf is happeninggg', this.props.state.restaurant.restaurantInfo);
     e.preventDefault();
     ApiService.updateRestaurant(this.props.state.restaurant.restaurantInfo, this.state.formValues).then((data) => {
       this.props.updateRestaurantData(data);
@@ -47,12 +47,13 @@ class RestaurantSettings extends React.Component {
   }
 
   render() {
+    let info = this.props.state.restaurant.restaurantInfo;
     return(
       <div className="RestaurantSettings">
         <div className="page-header">
           <p>
             Information/Settings for{' '}
-            <strong>{this.props.state.restaurant.restaurantInfo.name}</strong>
+            <strong>{info.name}</strong>
           </p>
           { this.state.confirmation ? this.renderConfirmation() : <div></div>}
         </div>
@@ -68,7 +69,7 @@ class RestaurantSettings extends React.Component {
                 cid="restaurantName"
                 name="name"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.name}
+                defaultValue={info.name}
                 onChange={this.handleChange}
 
               />
@@ -80,7 +81,7 @@ class RestaurantSettings extends React.Component {
                 cid="addressOne"
                 name="addressOne"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.addressOne}
+                defaultValue={info.addressOne}
                 onChange={this.handleChange}
 
               />
@@ -92,7 +93,7 @@ class RestaurantSettings extends React.Component {
                 cid="addressTwo"
                 name="addressTwo"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.addressTwo}
+                defaultValue={info.addressTwo}
                 onChange={this.handleChange}
 
               />
@@ -104,7 +105,7 @@ class RestaurantSettings extends React.Component {
                 cid="city"
                 name="city"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.city}
+                defaultValue={info.city}
                 onChange={this.handleChange}
 
               />
@@ -116,7 +117,7 @@ class RestaurantSettings extends React.Component {
                 cid="state"
                 name="state"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.state}
+                defaultValue={info.state}
                 onChange={this.handleChange}
 
               />
@@ -128,7 +129,7 @@ class RestaurantSettings extends React.Component {
                 cid="zip"
                 name="zip"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.zip}
+                defaultValue={info.zip}
                 onChange={this.handleChange}
               />
             </div>
@@ -139,7 +140,7 @@ class RestaurantSettings extends React.Component {
                 cid="genre"
                 name="genre"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.genre}
+                defaultValue={info.genre}
                 onChange={this.handleChange}
               />
             </div>
@@ -150,7 +151,7 @@ class RestaurantSettings extends React.Component {
                 cid="type"
                 name="type"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.restaurantType}
+                defaultValue={info.type}
                 onChange={this.handleChange}
               />
             </div>
@@ -166,7 +167,7 @@ class RestaurantSettings extends React.Component {
                 cid="email"
                 name="email"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.email}
+                defaultValue={info.email}
                 onChange={this.handleChange}
               />
             </div>

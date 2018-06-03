@@ -124,7 +124,7 @@ class MenuItem extends React.Component {
   }
 
   render() {
-    const { id, status, image, price, prepTime, vegan, vegetarian, glutenFree, spicy } = this.state.data;
+    const { id, name, status, image, price, prepTime, vegan, vegetarian, glutenFree, spicy } = this.state.data;
     const { selectedOption, veganEdited, vegetarianEdited, glutenFreeEdited, spicyEdited } = this.state;
   	const value = selectedOption && selectedOption.value;
     const img = <div className='image-container'>

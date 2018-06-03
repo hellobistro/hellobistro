@@ -18,7 +18,6 @@ const ApiService = {
 
   incrementRating: (customerId, itemId) => AuthService.fetch(`/customers/${customerId}/ratings/${itemId}`, { method: 'PUT' }),
 
-<<<<<<< HEAD
   updateRestaurant(info, formValues) {
     return AuthService.fetch(`/restaurants/${info.id}`, {
       method: 'PUT',
@@ -28,9 +27,6 @@ const ApiService = {
       }
     });
   },
-=======
-  updateRestaurant: (id, formValues) => { AuthService.fetch(`/restaurants/${id}`, { method: 'PUT', body: formValues }); },
->>>>>>> 6c374eeb7f6807abc8bd37e150434d80aba0a32f
 
   removeOldMenu: id => AuthService.fetch(`/restaurants/sections/items/${id}`, { method: 'DELETE' }),
 
