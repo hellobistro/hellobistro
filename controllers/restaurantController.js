@@ -194,50 +194,26 @@ const restaurantController = {
     });
   },
 
-  // getAllOpenOrdersForRestaurant(req, res) {
-  //   const { restaurant_id } = req.params;
+  // submitOrder(order) {
+  //   const {
+  //     status, total, completedAt, transactionId, table, RestaurantId,
+  //   } = order;
 
-  //   Order.findAll({
-  //     where: {
-  //       RestaurantId: restaurant_id,
-  //       completedAt: null,
-  //     },
-  //     include: [
-  //       {
-  //         model: MenuItem,
-  //         required: false,
-  //       },
-  //     ],
+  //   Order.create({
+  //     status,
+  //     total,
+  //     completedAt,
+  //     transactionId,
+  //     table,
+  //     RestaurantId,
   //   })
-  //     .then((orders) => {
-  //       res.json(orders);
+  //     .then((order) => {
+  //       res.json(order);
   //     })
   //     .catch((err) => {
   //       res.send(err);
   //     });
   // },
-
-  createNewOrder(req, res) {
-    const { restaurant_id } = req.params;
-    const {
-      status, total, completedAt, transactionId, table,
-    } = req.body;
-
-    Order.create({
-      status,
-      total,
-      completedAt,
-      transactionId,
-      table,
-      RestaurantId: restaurant_id,
-    })
-      .then((order) => {
-        res.json(order);
-      })
-      .catch((err) => {
-        res.send(err);
-      });
-  },
 
   createMenuSection(req, res) {
     const { restaurant_id } = req.params;
@@ -450,7 +426,7 @@ const restaurantController = {
     const restaurantInfo = await Restaurant.findOne({
       where: { id: user.RestaurantId },
     });
-    const token = jwt.sign({ userType: 'Restaurant', id: user.id }, 'secret', {
+    const token = jwt.sign({ userType: 'Restaurant', id: user.RestaurantId }, 'secret', {
       expiresIn: 129600,
     });
     const info = {

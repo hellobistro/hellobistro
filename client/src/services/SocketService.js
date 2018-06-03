@@ -37,6 +37,15 @@ const SocketService = {
   },
 
   closeOrder: (orderId, customerId, restaurantId) => socket.emit('closeOrder', orderId, customerId, restaurantId),
+
+  submitOrder: order => new Promise((resolve, reject) => {
+    socket.emit('submitOrder', order, (res, err) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(res);
+    });
+  }),
 };
 
 // Socket service event listeners
@@ -48,11 +57,13 @@ socket.on('disconnect', () => {
   console.log('socket disconnected');
   socket.connect();
 });
-socket.on('notification', (data) => {
+socket.on('foodReady', (data) => {
+  console.log('setting notification');
   store.dispatch(addNotification(data));
   AuthService.decodeToken().then((token) => {
     ApiService.retrieveOrders(token.userId)
       .then((res) => {
+        console.log('loading orders to store', res);
         store.dispatch(loadOrders(res));
       });
   });

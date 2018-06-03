@@ -62,6 +62,10 @@ cart: {
       return Object.assign({}, state, {
         orders: action.data,
       });
+    case 'UPDATE_ORDER':
+      return Object.assign({}, state, {
+        orders: state.orders.map((order => (order.id === action.id ? { ...order, status: 'completed' } : order))),
+      });
     case 'UPDATE_TABLE':
       return Object.assign({}, state, {
         cart: { ...state.cart, table: action.tableNumber },
