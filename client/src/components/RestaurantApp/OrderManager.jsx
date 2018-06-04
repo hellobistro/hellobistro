@@ -12,7 +12,10 @@ class OrderManager extends React.Component {
 
   closeOrder = (orderId, customerId) => {
     const restaurantId = this.props.state.restaurant.restaurantInfo.id;
-    SocketService.closeOrder(orderId, customerId, restaurantId);
+    SocketService.closeOrder(orderId, customerId, restaurantId)
+    .catch((err) => {
+      console.log('Error closing order', err)
+    })
   }
 
   componentDidMount(){

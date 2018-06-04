@@ -479,7 +479,6 @@ const restaurantController = {
   },
 
   closeOrder(OrderId) {
-    console.log('database close order', OrderId);
     return Order.update(
       {
         status: 'completed',

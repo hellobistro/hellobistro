@@ -29,7 +29,8 @@ class OrderHistory extends React.Component {
     const openOrders = orders.filter((order) => {
       return order.status === 'queued' || moment.duration(moment().diff(moment(order.completedAt))).as('hours') <= 1;
     });
-    const openRender = openOrders.map(order => <OrderHistoryItem key={order.id} data={order} />);
+    const openRender = openOrders.map(order => <OrderHistoryItem key={order.id} data={order} {...this.props} />);
+    console.log('open render', openRender);
     const closedOrders = orders.filter(order => order.status === 'completed' && moment.duration(moment().diff(moment(order.completedAt))).as('hours') > 1);
     const closedRender = closedOrders.map(order => <OrderHistoryCompleted data={order} key={order.id} />);
 
@@ -47,7 +48,8 @@ class OrderHistory extends React.Component {
                 <th>Bill</th>
               </tr>
             </thead>
-            {openRender}
+            {/* {openRender} */}
+            {openOrders.map(order => <OrderHistoryItem key={order.id} data={order} />)}
           </table>
         </div>
         <div className="completed">

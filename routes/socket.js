@@ -9,6 +9,7 @@ exports.set = (socket) => {
   io = socket;
   io.sockets.on('connection', (connection) => {
     connection.on('user', (user) => {
+      console.log('logging new user', user);
       connection.user = user.userId;
       connection.userType = user.userType;
 
@@ -29,15 +30,18 @@ exports.set = (socket) => {
             });
         });
 
-        connection.on('closeOrder', (OrderId, CustomerId, RestaurantId) => {
-          console.log('closing order')
+        connection.on('closeOrder', (OrderId, CustomerId, RestaurantId, acknowledgment) => {
           restaurantController.closeOrder(OrderId)
+            .then(() => restaurantController.getOpenRestaurantOrders(RestaurantId))
+            .then((orders) => {
+              acknowledgment(orders, null);
+            })
             .then(() => {
-              connection.to(customerConnections[CustomerId]).emit('foodReady', { OrderId });
-              restaurantController.getOpenRestaurantOrders(RestaurantId)
-                .then((orders) => {
-                  connection.emit('refreshOpenOrders', orders);
-                });
+              connection.to(customerConnections[CustomerId].socket.id).emit('foodReady', OrderId, CustomerId);
+            })
+            .catch((error) => {
+              console.log('error closing order', error);
+              acknowledgment(null, error);
             });
         });
       }

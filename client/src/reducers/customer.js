@@ -1,8 +1,8 @@
 function customer(state = {
- currentRestaurant: { MenuSections: ['loading'] },
-cart: {
-  paymentId: null, restaurantId: null, items: {}, table: null,
-} 
+  currentRestaurant: { MenuSections: ['loading'] },
+  cart: {
+    paymentId: null, restaurantId: null, items: {}, table: null,
+  },
 }, action) {
   switch (action.type) {
     case 'LOAD_RESTAURANT_LIST':
@@ -10,9 +10,9 @@ cart: {
         restaurants: action.data,
       });
     case 'LOAD_CLOSEST_RESTAURANT_LIST':
-    return Object.assign({}, state, {
-      closestRestaurants: action.data,
-    });
+      return Object.assign({}, state, {
+        closestRestaurants: action.data,
+      });
     case 'LOAD_SELECTED_RESTAURANT':
       return Object.assign({}, state, {
         currentRestaurant: action.data,
@@ -64,7 +64,7 @@ cart: {
       });
     case 'UPDATE_ORDER':
       return Object.assign({}, state, {
-        orders: state.orders.map((order => (order.id === action.id ? { ...order, status: 'completed' } : order))),
+        orders: state.orders.map((order => (order.id === action.orderId ? { ...order, status: 'completed' } : order))),
       });
     case 'UPDATE_TABLE':
       return Object.assign({}, state, {
@@ -76,7 +76,7 @@ cart: {
       });
     case 'SET_CUSTOMER_LOCATION':
       return Object.assign({}, state, {
-        location: {latitude: action.lat, longitude: action.long}
+        location: { latitude: action.lat, longitude: action.long },
       });
     default:
       return state;
