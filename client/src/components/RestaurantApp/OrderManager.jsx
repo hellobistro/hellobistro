@@ -45,7 +45,7 @@ class OrderManager extends React.Component {
         })
       }
       </div>)
-      : <div><div className='restaurant-loader' />Waiting for new orders.</div>
+      : <div><h4>Waiting for new orders.</h4><div className='restaurant-loader' /></div>
     );
    }
 }

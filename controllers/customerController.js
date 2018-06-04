@@ -57,7 +57,6 @@ const customerController = {
         res.status(201).json(customer);
         // Create stripe account for customer.
         stripeRegistration(email, `hbCustomerId: ${customer.id}`).then((stripeCustomer) => {
-          console.log('response from stripe', stripeCustomer);
           // Update customer record with Stripe data.
           Customer.update(
             {
@@ -69,12 +68,9 @@ const customerController = {
               },
             },
           )
-            .then((result) => {
-              console.log('successful update of db with stripe data', result);
-            })
             .catch((err) => {
               console.log(err);
-              // res.send(err);
+              res.send(err);
             });
         });
       })

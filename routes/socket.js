@@ -9,7 +9,6 @@ exports.set = (socket) => {
   io = socket;
   io.sockets.on('connection', (connection) => {
     connection.on('user', (user) => {
-      console.log('logging new user', user);
       connection.user = user.userId;
       connection.userType = user.userType;
 
@@ -22,10 +21,8 @@ exports.set = (socket) => {
         });
 
         connection.on('refreshOpenOrders', (RestaurantId) => {
-          console.log('blkadfj');
           restaurantController.getOpenRestaurantOrders(RestaurantId)
             .then((orders) => {
-              console.log('sending order refresh');
               connection.emit('refreshOpenOrders', orders);
             });
         });
@@ -54,7 +51,6 @@ exports.set = (socket) => {
         });
 
         connection.on('submitOrder', (order, acknowledgment) => {
-          console.log('submitting order');
           customerController.submitOrder(order)
             .then(() => {
               acknowledgment('Success', null);
@@ -64,6 +60,9 @@ exports.set = (socket) => {
               acknowledgment(null, err);
             })
             .then(() => restaurantController.getOpenRestaurantOrders(order.RestaurantId))
+            .then((orders) => {
+              connection.to(restaurantConnections[order.RestaurantId].socket.id).emit('refreshOpenOrders', orders);
+            })
             .catch((err) => {
               console.log('Error updating Order Manager', err);
             });

@@ -72,7 +72,6 @@ socket.on('foodReady', (orderId, customerId) => {
 });
 
 socket.on('refreshOpenOrders', (data) => {
-  console.log('refreshing open orders', data);
   store.dispatch(refreshOpenOrders(data));
 });
 
