@@ -14,7 +14,7 @@ const socket = openSocket.connect('http://localhost:3000', {
 
 // Socket service methods
 const SocketService = {
-  setUser: (userInfo) => socket.emit('user', userInfo),
+  setUser: userInfo => socket.emit('user', userInfo),
 
   refreshUser: () => {
     if (AuthService.loggedIn) {
@@ -30,7 +30,6 @@ const SocketService = {
   },
 
   refreshOpenRestaurantOrders: (restaurantId) => {
-    console.log('socket refresh orders request');
     socket.emit('refreshOpenOrders', restaurantId);
   },
 
@@ -58,18 +57,20 @@ const SocketService = {
 socket.on('connect', () => {
   SocketService.refreshUser();
 });
+
 socket.on('disconnect', () => {
   socket.connect();
 });
+
 socket.on('foodReady', (orderId, customerId) => {
   // store.dispatch(updateOrder(orderId));
   ApiService.retrieveOrders(customerId)
     .then((res) => {
       store.dispatch(loadOrders(res));
     });
-
   store.dispatch(addNotification(orderId));
 });
+
 socket.on('refreshOpenOrders', (data) => {
   console.log('refreshing open orders', data);
   store.dispatch(refreshOpenOrders(data));
