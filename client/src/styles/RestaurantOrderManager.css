@@ -34,6 +34,8 @@
 .open-order-item {
   border-bottom: 1px solid rgba(0,0,0,.06);
   padding: 10px;
+  display: block;
+  text-align: left;
 }
 
 .order-item-box {
@@ -72,7 +74,7 @@
 .order-item-name {
   display: inline-block;
   vertical-align: 35%;
-  margin-left: 10px;
+  margin: 0 15px 10px 10px;
 }
 
 .complete-open-order{

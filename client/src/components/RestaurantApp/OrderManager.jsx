@@ -25,7 +25,7 @@ class OrderManager extends React.Component {
   }
 
   render() {
-    const orderItem = this.props.state.restaurant.data.openOrders.map((order, i) => <div key={i} className="open-order"><div className="open-order-header"><h3>Order # {order.id}</h3><OrderTimer order={order}/></div>{order.MenuItems.map((item, i) => <div key={i} className="open-order-item"><input type="checkbox" className="order-item-box"/><div className="order-item-name">Item name: {item.name}</div>{item.OrderItem.special ? <div>Special Request: <i>{item.OrderItem.special}</i></div> : null}</div>)}<button className="complete-open-order" onClick={() => this.closeOrder(order.id, order.CustomerId)}>Complete Order</button></div>);
+    const orderItem = this.props.state.restaurant.data.openOrders.map((order, i) => <div key={i} className="open-order"><div className="open-order-header"><h3>Order # {order.id}</h3><OrderTimer order={order}/></div>{order.MenuItems.map((item, i) => <div key={i} className="open-order-item"><input type="checkbox" className="order-item-box"/><div className="order-item-name">{item.name}</div>{item.OrderItem.special ? <div><i>Special Request: {item.OrderItem.special}</i></div> : null}</div>)}<button className="complete-open-order" onClick={() => this.closeOrder(order.id, order.CustomerId)}>Complete Order</button></div>);
 
     return (
       <div className="order-manager">
