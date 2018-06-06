@@ -3,6 +3,7 @@ import React from 'react';
 import ApiService from '../../services/ApiService';
 import OrderTimer from './OrderTimer'
 import moment from "moment";
+import '../../styles/OrderManager.css';
 
 class OrderManager extends React.Component {
   constructor() {
@@ -41,7 +42,7 @@ class OrderManager extends React.Component {
       <div className="page-header"><strong>Open Orders:</strong></div>
       {
         this.state.openOrders.map((order, i) => {
-          return <div key={i} className="menu-manager-item item-input">
+          return <div key={i} className="order-manager-item item-input">
             <p>Order Number: {order.id}</p>
             <OrderTimer order={order}/>
             <button className="complete-open-order" onClick={() => this.closeOrder(order.id, order.CustomerId)}>Complete Order</button>

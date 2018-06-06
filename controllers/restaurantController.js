@@ -290,6 +290,7 @@ const restaurantController = {
       image,
       prepTime,
       rating,
+      description,
       MenuSectionId,
     } = req.body;
 
@@ -309,6 +310,7 @@ const restaurantController = {
       image,
       prepTime,
       rating,
+      description,
       MenuSectionId,
       RestaurantId: restaurant_id,
     })
@@ -383,7 +385,6 @@ const restaurantController = {
     const { restaurant_id } = req.params;
     const updatedValues = req.body.formValues;
     const data = req.body.info
-    console.log('fckkkk thisss', updatedValues, data)
     let { addressOne, city, state, zip } = _.assign({}, data, updatedValues)
     let lat;
     let lng;

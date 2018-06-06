@@ -1,4 +1,4 @@
-.form {
+/* .form {
   margin: 0 auto;
   width: 80%;
   max-width: 800px;
@@ -11,7 +11,7 @@
   text-align: left;
 }
 
-input[type="text"].form-input, input[type="password"].form-input {
+/* input[type="text"].form-input, input[type="password"].form-input {
   -webkit-appearance:none;
   -moz-appearance: none; 
   -ms-appearance: none;
@@ -25,24 +25,88 @@ input[type="text"].form-input, input[type="password"].form-input {
   font-weight: 400;
   font-size: 18px;
   width: 100%;
-}
+} */
 
-.form-group label {
+/* .form-group label {
   font-size: 14px;
   padding: 5px 0px;
   color: darkslategray;
   display: block;
-}
+} */
 
 
-.form-section-header {
+/* .form-section-header {
   color: darkslategray;
   padding: 10px 0px;
   font-weight: 800;
   font-size: 18px;
-}
+} */ 
 
 .error {
   color: maroon;
   padding-bottom: 20px;
+}
+
+.user-input-wrp {
+	position: relative;
+}
+.user-input-wrp .inputText {
+	width: 100%;
+	outline: none;
+	border:none;
+  border-bottom: 3px solid #777;
+  background: transparent;
+}
+.pw-wrp .inputText {
+  height: 4.5em;
+}
+.user-input-wrp .inputText:invalid {
+	box-shadow: none !important;
+}
+.user-input-wrp .inputText:focus{
+	border-color: #2196F3;
+	/* border-width: medium medium 2px; */
+}
+.user-input-wrp .floating-label {
+	position: absolute;
+	pointer-events: none;
+	top: 40px;
+	left: 10px;
+  transition: 0.8s ease all;
+  font-style: italic;
+  color: lightslategrey
+}
+.user-input-wrp input:focus ~ .floating-label,
+.user-input-wrp input:not(:focus):valid ~ .floating-label{
+	top: 10px;
+	left: 10px;
+	font-size: 13px;
+  opacity: 1;
+  font-style: italic;
+}
+
+.restaurant-settings-submit {background-color: #48c74c}
+
+.restaurant-settings-submit:hover:enabled {background-color: #81e384}
+
+.restaurant-settings-submit {
+  /* display: flex; */
+  align-items:center;
+  align-content : center;
+  padding: 10px 18px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+  margin-top: 30px;
+}
+
+.restaurant-settings-submit:active{
+  box-shadow: 0 0px #999;
+  transform: translateY(5px);
 }

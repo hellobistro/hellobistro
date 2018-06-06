@@ -72,7 +72,7 @@ const MenuItem = sequelize.define('MenuItem', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  //description: Sequelize.STRING,
+  description: Sequelize.STRING,
   price: {
     type: Sequelize.FLOAT,
     allowNull: false,
@@ -113,7 +113,7 @@ const Order = sequelize.define('Order', {
 const OrderItem = sequelize.define('OrderItem', {
   special: Sequelize.STRING,
   price: Sequelize.FLOAT,
-  //quantity: Sequelize.INTEGER
+  quantity: Sequelize.INTEGER
 });
 
 const RestaurantUser = sequelize.define('RestaurantUser', {
