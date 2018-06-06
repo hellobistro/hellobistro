@@ -7,11 +7,13 @@ const {
   Restaurant,
   PaymentMethods,
 } = require('../database/index.js');
+const { buildData } = require('./analyticsController');
 const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { stripeKey } = require('../config/config.js');
 const stripe = require('stripe')(stripeKey);
+
 const stripeRegistration = (email, description) => stripe.customers.create({ description, email });
 
 const customerController = {
@@ -216,27 +218,24 @@ const customerController = {
               RestaurantId,
             })
               .then(async (order) => {
+                buildData(RestaurantId);
                 let newOrder = null;
                 async function buildOrderItems() {
-
                   items.forEach((item) => {
-
                     if (item.quantity > 0) {
                       order.addMenuItem(item.id, {
                         through: { special: item.special, price: item.price },
                       });
-    
+
                       CustomerRating.findOrCreate({
                         where: {
                           CustomerId,
                           MenuItemId: item.id,
                         },
                       })
-                        .spread((rating, created) => rating.increment('total'))
                         .catch((err) => {
                           console.log(error);
                         });
-
                     }
                   });
                   newOrder = Order.findById(order.id, {
@@ -244,9 +243,9 @@ const customerController = {
                     required: false,
                   });
                 }
-  
+
                 await buildOrderItems();
-  
+
                 return newOrder;
               })
               .then((order) => {
@@ -262,8 +261,6 @@ const customerController = {
     } else {
       res.send(error);
     }
-
-
   },
 
   incrementRating(req, res) {
