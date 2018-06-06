@@ -70,7 +70,7 @@ class MenuItem extends React.Component {
   inputChange = (e) => {
     let name = e.target.name;
     let value;
-    if (name === "name" || name === "status") {
+    if (name === "name" || name === "status" || name === "description") {
       value = e.target.value
     } else if(typeof JSON.parse(e.target.value) === "number") {
       value = JSON.parse(e.target.value)
@@ -100,6 +100,7 @@ class MenuItem extends React.Component {
           veganEdited: false,
           vegetarianEdited: false,
           glutenFreeEdited: false,
+          descriptionEdited: false,
           spicyEdited: false}, () => {
           if(imageKey) 
           ApiService.deletePhoto(imageKey)
@@ -124,8 +125,8 @@ class MenuItem extends React.Component {
   }
 
   render() {
-    const { id, status, image, price, prepTime, vegan, vegetarian, glutenFree, spicy } = this.state.data;
-    const { selectedOption, veganEdited, vegetarianEdited, glutenFreeEdited, spicyEdited } = this.state;
+    const { id, name, status, image, price, prepTime, vegan, vegetarian, glutenFree, spicy, description } = this.state.data;
+    const { selectedOption, veganEdited, vegetarianEdited, glutenFreeEdited, spicyEdited, descriptionEdited } = this.state;
   	const value = selectedOption && selectedOption.value;
     const img = <div className='image-container'>
                 {
@@ -180,17 +181,17 @@ class MenuItem extends React.Component {
         defaultValue={price}
         onChange={(e) => { this.inputChange(e); }}/>
         </div>,
-      // description: <div className='item-input-div description'><i className='material-icons manager-icons description'>format_align_justify</i><textarea
-      //   className='item-input'
-      //   name='description'
-      //   type='text'
-      //   placeholder='Description about food item'
-      //   defaultValue={description}
-      //   maxLength='255'
-      //   rows='1'
-      //   onChange={(e) => { this.inputChange(e); }}
-      // />
-      // </div>,
+      description: <div className='item-input-div description'><i className='material-icons manager-icons description'>format_align_justify</i><textarea
+        className={'item-input ' + (this.state.descriptionEdited ? 'edited' : null)}
+        name='description'
+        type='text'
+        placeholder='Description about food item'
+        defaultValue={description}
+        maxLength='255'
+        rows='1'
+        onChange={(e) => { this.inputChange(e); }}
+      />
+      </div>,
       prepTime: <div className='item-input-div prep'>
         <i className='material-icons manager-icons'>timer</i><input
         className={'item-input ' + (this.state.prepTimeEdited ? 'edited' : null)}
@@ -230,7 +231,7 @@ class MenuItem extends React.Component {
             {img}
           </div>
           {render.name}
-          {/* {render.description} */}
+          {render.description}
           {render.price}
           {render.prepTime}
           <div className='item-specs'>

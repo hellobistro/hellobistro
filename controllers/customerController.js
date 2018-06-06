@@ -7,6 +7,7 @@ const {
   Restaurant,
   PaymentMethods,
 } = require('../database/index.js');
+const { buildData } = require('./analyticsController');
 const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');

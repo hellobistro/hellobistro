@@ -43,3 +43,12 @@ input[type="text"].form-input, input[type="password"].form-input, textarea.form-
 }
 
 
+.label-description {
+  color: lightslategrey;
+  font-style: italic;
+}
+
+textarea::placeholder {
+  color: lightslategrey; 
+  font-style: italic; 
+}

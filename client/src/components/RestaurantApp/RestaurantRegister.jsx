@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import AuthService from '../../services/AuthService';
 import Mast from "./Mast";
-
+import '../../styles/RestaurantRegister.css';
 import "babel-polyfill";
 
 class RestaurantRegister extends Component {
@@ -54,7 +54,6 @@ class RestaurantRegister extends Component {
           .catch(error => {
             console.log('error registering restaurant', error)
             error.response.json().then((err)=>{
-            console.log('the apple: ', err)
             this.setState({ error: err.error });
           })
         })
@@ -76,176 +75,205 @@ class RestaurantRegister extends Component {
       Register your restaurant (* fields are required)
     </div>
     
-    <div className="form-group">
-              <label htmlFor="email">Email*</label>
+    <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="email"
-                placeholder="Email Address"
+                defaultValue={null}
                 type="text"
-
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Email *</span>
             </div>
 
-
-
-            <div className="form-group">
-              <label htmlFor="username">Password *</label>
+            <div className="user-input-wrp pw-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="password"
-                placeholder="Password"
+                defaultValue={null}
                 type="password"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Password *</span>
             </div>
 
-
-
-
-            <div className="form-group">
-              <label htmlFor="username">Re-enter Password *</label>
+            <div className="user-input-wrp pw-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="confirmpassword"
-                placeholder="Re-enter Password"
+                defaultValue={null}
                 type="password"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Re-enter Password *</span>
             </div>
 
 
-          <div className="form-group">
-              <label htmlFor="username">Phone*</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="phone"
-                placeholder="Phone"
+                defaultValue={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Phone *</span>
             </div>
 
 
-          <div className="form-group">
-              <label htmlFor="name">Name *</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="name"
-                placeholder="Restaurant Name"
+                defaultValue={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Name *</span>
             </div>
 
 
-          <div className="form-group">
-              <label htmlFor="name">Address (1) *</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="addressOne"
-                placeholder="Address (line 1)"
+                defaultValue={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Address (1) *</span>
             </div>
 
-
-
-          <div className="form-group">
-              <label htmlFor="name">Address (2)</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="addressTwo"
-                placeholder="Address (line 2)"
+                defaultValue={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Address (2)</span>
             </div>
 
 
-                      <div className="form-group">
-              <label htmlFor="name">City *</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="addressCity"
-                placeholder="City"
+                defaultValue={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">City *</span>
             </div>
 
-                      <div className="form-group">
-              <label htmlFor="name">State *</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="addressState"
-                placeholder="State"
+                defaultValue={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">State *</span>
             </div>
 
-                      <div className="form-group">
-              <label htmlFor="name">Zip Code *</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="addressZip"
-                placeholder="Zip Code"
+                defaultValue={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Zip Code *</span>
             </div>
 
 
-                      <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <textarea className="form-input" name="description" placeholder="Description" onChange={this.handleChange.bind(this)}/>
-
+            {/* <div className="user-input-wrp">
+              <span className="floating-label">Description</span>
+              <br/>
+              <textarea className="inputText" 
+                name="description" 
+                defaultValue={null} 
+                type="text" 
+                placeholder={null} 
+                onChange={this.handleChange.bind(this)} 
+                required
+              />
+            </div> */}
+            <div className="form-group">
+              <label className="label-description" htmlFor="description">&nbsp; &nbsp; Description</label>
+              <textarea className="form-input" name="description" placeholder="Enter Description Here" onChange={this.handleChange.bind(this)}/>
             </div>
 
 
-                <div className="form-group">
-              <label htmlFor="name">Genre *</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="genre"
-                placeholder="Genre (e.g., Mexican, New American...)"
+                defaultValue={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">"Genre (e.g., Mexican, New American...)"</span>
             </div>
 
 
-                            <div className="form-group">
-              <label htmlFor="name">Type *</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="type"
-                placeholder="Type (e.g., Bar, Restaurant)"
+                defaultValue={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Type (e.g., Bar, Restaurant)</span>
             </div>
-
-          <button onClick={this.registerRestaurantUser.bind(this)}>Register</button>
+            <br/>
           {
             this.state.error
-            ? <div>{this.state.error}</div>
+            ? <div className='error'>{this.state.error}</div>
             : <div></div>
           }
           {
             this.state.passwordMatch === false
-            ? <div>Passwords do not match </div>
+            ? <div className='error'>Passwords do not match </div>
             : <div></div>
           }
           {
             this.state.validEmail === false
-            ? <div>Not a valid email </div>
+            ? <div className='error'>Not a valid email </div>
             : <div></div>
           }
-      </div></div></div>
+          <button className="restaurant-settings-submit" onClick={this.registerRestaurantUser.bind(this)}>Register</button>
+      </div>
+      </div>
+      </div>
     )
   }
 }

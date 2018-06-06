@@ -154,9 +154,11 @@ export function updateAnalyticsData(data) {
   };
 }
 
-export function addRestaurant(obj) {
-  obj.type = 'ADD_RESTAURANT';
-  return obj;
+export function addRestaurant(data) {
+  return {
+    type: 'ADD_RESTAURANT',
+    data
+  }
 }
 
 export function addUser(userId, userName) {

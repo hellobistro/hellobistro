@@ -15,12 +15,12 @@ function restaurant(state = initialState, action) {
       });
     case 'ADD_RESTAURANT':
       return Object.assign({}, state, {
-        restaurantInfo: action,
+        restaurantInfo: action.data
       });
     case 'UPDATE_RESTAURANT_DATA':
       console.log('update rest reducer called with ', action.data);
       return Object.assign({}, state, {
-        restaurantInfo: action.data,
+        restaurantInfo: action.data, 
       });
     case 'UPDATE_ANALYTICS_DATA':
       return Object.assign({}, state, {
