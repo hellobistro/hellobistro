@@ -58,7 +58,6 @@ const customerController = {
         res.status(201).json(customer);
         // Create stripe account for customer.
         stripeRegistration(email, `hbCustomerId: ${customer.id}`).then((stripeCustomer) => {
-          console.log('response from stripe', stripeCustomer);
           // Update customer record with Stripe data.
           Customer.update(
             {
@@ -70,12 +69,9 @@ const customerController = {
               },
             },
           )
-            .then((result) => {
-              console.log('successful update of db with stripe data', result);
-            })
             .catch((err) => {
               console.log(err);
-              // res.send(err);
+              res.send(err);
             });
         });
       })
@@ -182,85 +178,47 @@ const customerController = {
       });
   },
 
-  createOrder(req, res) {
-    const {
-      total,
-      table,
-      CustomerId,
-      StripeId,
-      CardId,
-      RestaurantId,
-      items,
-    } = req.body;
+  createStripeCharge(StripeId, CardId, RestaurantId, CustomerId, items, total) {
+    return stripe.charges.create({
+      amount: Math.round(total * 100),
+      currency: 'usd',
+      customer: StripeId,
+      source: CardId,
+      description: `RestId: ${RestaurantId}, hbCustomerId: ${CustomerId}, items: ${items}`,
+    });
+  },
 
+  buildOrderItems(items, order, CustomerId) {
+    items.forEach((item) => {
+      // make sure item quantity is valid.
+      if (item.quantity > 0) {
+        order.addMenuItem(item.id, {
+          through: { special: item.special, price: item.price },
+        });
+        CustomerRating.findOrCreate({
+          where: {
+            CustomerId,
+            MenuItemId: item.id,
+          },
+        });
+      }
+    });
+  },
+
+  submitOrder(order) {
+    const { total, table, CustomerId, StripeId, CardId, RestaurantId, items } = order;
     // Check to make sure at least one item is included in order
-    // If not, reject the order
-    if (items.length >= 1) {
-      stripe.charges.create(
-        {
-          amount: Math.round(total * 100),
-          currency: 'usd',
-          customer: StripeId,
-          source: CardId,
-          description: `RestId: ${RestaurantId}, hbCustomerId: ${CustomerId}, items: ${items}`,
-        },
-        (err, charge) => {
-          if (err) {
-            console.log('Stripe error', err);
-            res.send(err);
-          } else {
-            Order.create({
-              status: 'queued',
-              total,
-              transactionId: charge.id,
-              table,
-              CustomerId,
-              RestaurantId,
-            })
-              .then(async (order) => {
-                buildData(RestaurantId);
-                let newOrder = null;
-                async function buildOrderItems() {
-                  items.forEach((item) => {
-                    if (item.quantity > 0) {
-                      order.addMenuItem(item.id, {
-                        through: { special: item.special, price: item.price },
-                      });
-
-                      CustomerRating.findOrCreate({
-                        where: {
-                          CustomerId,
-                          MenuItemId: item.id,
-                        },
-                      })
-                        .catch((err) => {
-                          console.log(error);
-                        });
-                    }
-                  });
-                  newOrder = Order.findById(order.id, {
-                    include: [MenuItem],
-                    required: false,
-                  });
-                }
-
-                await buildOrderItems();
-
-                return newOrder;
-              })
-              .then((order) => {
-                res.json(order);
-              })
-              .catch((error) => {
-                res.send(error);
-                console.log(error);
-              });
-          }
-        },
-      );
-    } else {
-      res.send(error);
+    if (items.length < 1) {
+      return Promise.reject(new Error('Error, no items in order.'));
     }
+    // Process stripe charge and create order.
+    return customerController.createStripeCharge(StripeId, CardId, RestaurantId, CustomerId, items, total)
+      .then(charge => Order.create({ status: 'queued', total, transactionId: charge.id, table, CustomerId, RestaurantId }))
+      .then((dbOrder) => {
+        customerController.buildOrderItems(items, dbOrder, CustomerId);
+        return dbOrder.id;
+      })
+      .then(id => Order.findById(id, { include: [MenuItem], required: false }));
   },
 
   incrementRating(req, res) {
@@ -390,6 +348,7 @@ const customerController = {
   getAllOrdersForCustomer(req, res) {
     const { customer_id } = req.params;
     Order.findAll({
+      order: [['createdAt', 'DESC']],
       where: {
         CustomerId: customer_id,
       },
@@ -480,6 +439,7 @@ const customerController = {
     const info = {
       token,
       userId: user.id,
+      userType: 'Customer',
       userName: user.userName,
       firstName: user.firstName,
       lastName: user.lastName,

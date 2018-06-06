@@ -10,7 +10,7 @@ const OrderModal = (props) => {
       <p>${data.price}</p>
       <div>
         <label htmlFor="quantity">Quantity:</label>
-        <input type="number" id="quantity" defaultValue={data.quantity} onBlur={(e) => { props.editCartItem(data.id, 'quantity', e.target.value); }} />
+        <input type="number" min="1" max="20" id="quantity" defaultValue={data.quantity} onBlur={(e) => { props.editCartItem(data.id, 'quantity', e.target.value); }} />
       </div>
       <div>
         <label htmlFor="special">Special requests:  </label>

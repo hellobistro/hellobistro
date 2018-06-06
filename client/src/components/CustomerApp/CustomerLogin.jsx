@@ -33,6 +33,10 @@ class CustomerLogin extends Component {
     }
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
@@ -65,7 +69,7 @@ class CustomerLogin extends Component {
           <span>HelloBistro</span>
         </div>
         <div className="background">
-          <div className="mock-form">
+          <div className="customer-login-form">
             <div className="customer-login-form-section">
               <div className="form-section-header" />
               <div className="form-group">

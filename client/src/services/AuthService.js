@@ -1,5 +1,5 @@
 import decode from 'jwt-decode';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import SocketService from './SocketService';
 
 const AuthService = {
@@ -33,7 +33,7 @@ const AuthService = {
       // Setting the token in localStorage
       AuthService.setToken(res.token);
       // Setting user identification on websocket connection
-      SocketService.setCustomer(res.userId);
+      SocketService.setUser({ userId: res.userId, userType: res.userType });
       return res;
     }),
 
@@ -47,6 +47,7 @@ const AuthService = {
       },
     }).then((res) => {
       AuthService.setToken(res.token); // Setting the token in localStorage
+      SocketService.setUser({ userId: res.userId, userType: res.userType });
       return res;
     }),
 
@@ -77,18 +78,18 @@ const AuthService = {
     // Retrieves the user token from localStorage
     localStorage.getItem('id_token'),
 
-  getIdFromToken: () => {
+  decodeToken: () => {
     return new Promise((resolve) => {
       const token = localStorage.getItem('id_token');
       const decoded = decode(token);
-      resolve(decoded.id);
+      resolve(decoded);
     });
   },
 
   logout: () => {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
-    SocketService.clearCustomer();
+    SocketService.clearUser();
   },
 
   getProfile: () =>

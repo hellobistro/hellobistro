@@ -1,8 +1,9 @@
 const initialState = {
   data: {
     MenuSections: [],
+    openOrders: [],
   },
-  restaurantInfo:{},
+  restaurantInfo: {},
   analytics: {},
 };
 
@@ -25,11 +26,16 @@ function restaurant(state = initialState, action) {
       return Object.assign({}, state, {
         analytics: action.data,
       });
+    case 'REFRESH_OPEN_ORDERS':
+      return Object.assign({}, state, {
+        data: {
+          ...state.data,
+          openOrders: action.data,
+        },
+      });
     default:
       return state;
   }
-  /* * commenting out duplicate 'return state' * */
-  // return state;
 }
 
 export default restaurant;

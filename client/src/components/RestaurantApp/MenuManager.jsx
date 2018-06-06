@@ -12,7 +12,6 @@ class MenuManager extends React.Component {
   componentDidMount() {
     let restaurantId = JSON.parse(window.localStorage.state).restaurant.restaurantInfo.id
     ApiService.getRestaurantData(restaurantId).then((info) => {
-      console.log('the info:   ', {...info})
         info.MenuSections = info.MenuSections.map((sec, i)=>{
           sec.uniqueId = new Date().getTime() + i;
           return sec
@@ -34,7 +33,6 @@ class MenuManager extends React.Component {
   deleteSection = (indx) => {
     let MenuSections = Array.slice(this.state.MenuSections);
     let oldSection = MenuSections.splice(indx, 1);
-    console.log('the oldSection:  ', oldSection)
     this.setState({ MenuSections }, () => {
       if(oldSection[0].hasOwnProperty('id')) {
         ApiService.deleteMenuSection(oldSection[0].id)
@@ -45,7 +43,6 @@ class MenuManager extends React.Component {
   }
 
   render() {
-  console.log('the state inside MenuManager:  ', this.state)
   if(this.state.MenuSections){
     return (
       <div className="MenuManager form">

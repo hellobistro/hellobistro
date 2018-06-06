@@ -1,65 +1,41 @@
 // Import dependencies
 import React from 'react';
 import ApiService from '../../services/ApiService';
+import SocketService from '../../services/SocketService';
 import OrderTimer from './OrderTimer'
 import moment from "moment";
-import '../../styles/OrderManager.css';
+import '../../styles/RestaurantOrderManager.css';
 
 class OrderManager extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   closeOrder = (orderId, customerId) => {
-    console.log('closing order');
-    ApiService.completeOpenOrder(orderId, customerId)
-      .then((res) => {
-        this.getOpenOrders();
-      }).catch(err => {
-        console.log('error completing order', err)
-      })
-  }
-
-  getOpenOrders = () => {
-    let restaurantId = JSON.parse(window.localStorage.state).restaurant.restaurantInfo.id
-    ApiService.getOpenOrdersForRestaurant(restaurantId)
-      .then((openOrders) => {
-        this.setState({ openOrders })
-      })
-      .catch(err => {
-        console.log('error getting orders>>  ', err)
-      })
+    const restaurantId = this.props.state.restaurant.restaurantInfo.id;
+    SocketService.closeOrder(orderId, customerId, restaurantId)
+    .catch((err) => {
+      console.log('Error closing order', err)
+    })
   }
 
   componentDidMount(){
-    this.getOpenOrders();
+    const restaurantId = this.props.state.restaurant.restaurantInfo.id;
+    SocketService.refreshOpenRestaurantOrders(restaurantId);
   }
 
   render() {
+    const orderItem = this.props.state.restaurant.data.openOrders.map((order, i) => <div key={i} className="open-order"><div className="open-order-header"><h3>Order # {order.id}</h3><OrderTimer order={order}/></div>{order.MenuItems.map((item, i) => <div key={i} className="open-order-item"><input type="checkbox" className="order-item-box"/><div className="order-item-name">{item.name}</div>{item.OrderItem.special ? <div><i>Special Request: {item.OrderItem.special}</i></div> : null}</div>)}<button className="complete-open-order" onClick={() => this.closeOrder(order.id, order.CustomerId)}>Complete Order</button></div>);
+
     return (
-      this.state
-      ? (<div className="">
-      <div className="page-header"><strong>Open Orders:</strong></div>
-      {
-        this.state.openOrders.map((order, i) => {
-          return <div key={i} className="order-manager-item item-input">
-            <p>Order Number: {order.id}</p>
-            <OrderTimer order={order}/>
-            <button className="complete-open-order" onClick={() => this.closeOrder(order.id, order.CustomerId)}>Complete Order</button>
-            <p>Quantity: {order.MenuItems.length}</p>
-          {order.MenuItems.map((item, i) => 
-            <div key={i} className="open-order-item">
-            <div>Item name: {item.name}</div>
-            <div>Special Request: <i>{item.OrderItem.special}</i></div>
-            </div>
-          )}
-          </div>
-        })
-      }
-      </div>)
-      : <div className='restaurant-loader'></div>
-    );
-   }
+      <div className="order-manager">
+        <div className="page-header">
+          Manage the orders for <strong>{this.props.state.restaurant.restaurantInfo.name}:</strong>
+        </div>
+        {this.props.state.restaurant.data.openOrders.length > 0 ? orderItem : <div><h3>The queue is empty.</h3><h4>Listening for new orders.</h4><div className='restaurant-loader' /></div>}
+      </div>
+    )
+  }
 }
 
 export default OrderManager;
