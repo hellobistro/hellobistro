@@ -131,3 +131,75 @@ textarea.form-input {
   max-width: 200px;
   /* object-fit: contain; */
 }
+
+.error {
+  color: maroon;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-style: bold;
+}
+
+.user-input-wrp {
+	position: relative;
+}
+.user-input-wrp .inputText {
+	width: 100%;
+	outline: none;
+	border:none;
+  border-bottom: 3px solid #777;
+  background: transparent;
+}
+.pw-wrp .inputText {
+  height: 4.5em;
+}
+.user-input-wrp .inputText:invalid {
+	box-shadow: none !important;
+}
+.user-input-wrp .inputText:focus{
+	border-color: #2196F3;
+}
+.inputText:focus ~ .floating-label{
+	color: #2196F3;
+}
+.user-input-wrp .floating-label {
+	position: absolute;
+	pointer-events: none;
+	top: 40px;
+	left: 10px;
+  transition: 0.8s ease all;
+  font-style: italic;
+  color: lightslategrey
+}
+.user-input-wrp input:focus ~ .floating-label,
+.user-input-wrp input:not(:focus):valid ~ .floating-label{
+	top: 10px;
+	left: 10px;
+	font-size: 13px;
+  opacity: 1;
+  font-style: italic;
+}
+
+.register-submit {background-color: #48c74c}
+
+.register-submit:hover:enabled {background-color: #81e384}
+
+.register-submit {
+  align-items:center;
+  align-content : center;
+  padding: 10px 18px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+  margin-top: 30px;
+}
+
+.register-submit:active{
+  box-shadow: 0 0px #999;
+  transform: translateY(5px);
+}

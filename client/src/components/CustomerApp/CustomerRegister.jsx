@@ -90,112 +90,126 @@ class CustomerRegister extends Component {
             <div className="form-section-header">
               Create an account (* fields are required)
             </div>
-            <div className="form-group">
-              <label htmlFor="username">Username *</label>
+            <div className="user-input-wrp">
+            <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="username"
-                placeholder="Username"
+                placeholder={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Username *</span>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="firstname">First Name *</label>
+            <div className="user-input-wrp">
+            <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="firstname"
-                placeholder="First Name"
+                placeholder={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">First Name *</span>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="lastname">Last Name *</label>
+            <div className="user-input-wrp">
+            <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="lastname"
-                placeholder="Last Name"
+                placeholder={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Last Name *</span>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="username">Password *</label>
+            <div className="user-input-wrp pw-wrp">
+            <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="password"
-                placeholder="Password"
+                placeholder={null}
                 type="password"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Password *</span>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="username">Re-enter Password *</label>
+            <div className="user-input-wrp pw-wrp">
+            <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="verifypassword"
-                placeholder="Re-enter Password"
+                placeholder={null}
                 type="password"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Re-enter Password *</span>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="username">Zip*</label>
+            <div className="user-input-wrp">
+            <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="zip"
-                placeholder="Zip Code"
+                placeholder={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Zip *</span>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="username">Phone*</label>
+            <div className="user-input-wrp">
+            <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="phone"
-                placeholder="Phone"
+                placeholder={null}
                 type="text"
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Phone *</span>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="email">Email*</label>
+            <div className="user-input-wrp">
+            <br/>
               <input
-                className="form-input"
+                className="inputText"
                 name="email"
-                placeholder="Email Address"
+                placeholder={null}
                 type="text"
-
                 onChange={this.handleChange.bind(this)}
+                required
               />
+              <span className="floating-label">Email *</span>
             </div>
-
-            <button onClick={this.registerCustomer.bind(this)}>Register</button>
             {this.state.error ? <div>Email already exists </div> : <div />}
             {this.state.passwordMatch === false ? (
-              <div>Passwords do not match </div>
+              <div className='error'>Passwords do not match </div>
             ) : (
               <div />
             )}
             {this.state.validEmail === false ? (
-              <div>Not a valid email </div>
+              <div className='error'>Not a valid email </div>
             ) : (
               <div />
             )}
             {this.state.validUsername === false ? (
-              <div>Please provide a username </div>
+              <div className='error'>Please provide a username </div>
             ) : (
               <div />
             )}
+            <button className="register-submit" onClick={this.registerCustomer.bind(this)}>Register</button>
           </div>
         </div>
       </div>

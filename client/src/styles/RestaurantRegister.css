@@ -48,7 +48,7 @@ input[type="text"].form-input, input[type="password"].form-input, textarea.form-
   font-style: italic;
 }
 
-textarea::placeholder {
+.form-input-txtarea::placeholder {
   color: lightslategrey; 
   font-style: italic; 
 }
