@@ -34,19 +34,22 @@ class FindRestaurants extends React.Component {
         onClick={() => {
           this.handleClick(biz.id);
         }}
-      >   
-        <h3 >{biz.name}</h3>
-        <div style={{'float': 'right'}}>{biz.distance.toFixed(2)} km away</div>
-        <p>
-          {biz.genre} - {biz.type}
-        </p>
-        <p>
-          Location: {biz.addressOne}, {biz.addressTwo
-            ? `${biz.addressTwo}, `
-            : null}
-          {biz.city}, {biz.state}, {biz.zip}
-        </p>
-        <p>Contact: {biz.phone}</p>
+      > 
+        <div className="restaurant-snippet-header"> 
+          <div> 
+            <h3>{biz.name}</h3>
+            <p>{biz.addressOne}, {biz.addressTwo ? `${biz.addressTwo}, ` : null} {biz.city}, {biz.state}</p>
+            <p>Tel: {biz.phone}</p>
+          </div>
+          <div className="gps">
+            <i className="material-icons icon-gps">gps_fixed</i>
+            {biz.distance.toFixed(2)} km away
+          </div>
+        </div>
+        <div className="restaurant-snippet-body">
+          <p className="restaurant-genre">{biz.genre} - {biz.type}</p>
+          <p className="restaurant-description">{biz.description}</p>
+        </div>
       </div>
     ));
     return restaurantList;
