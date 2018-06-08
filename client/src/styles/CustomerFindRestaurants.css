@@ -29,7 +29,8 @@
   justify-content: space-between;
 }
 
-.restaurant-snippet-header h3, p {
+.restaurant-snippet-header h3, 
+.restaurant-snippet-header p {
   margin: 0 5px 0 0;
   padding: 0;
 }
