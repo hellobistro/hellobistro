@@ -26,7 +26,13 @@
   border-top: 0 !important;
   text-align: left !important;
   margin: auto !important;
-  padding: 30px !important;
+  padding: 10px !important;
+}
+
+.item-expansion-row {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #3333334e;
 }
 
 .order-delay {

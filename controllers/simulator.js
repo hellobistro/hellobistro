@@ -141,7 +141,7 @@ const getRandomTimeInterval = () => {
 const startSimulation = async () => {
   await getUsers();
   await getRestaurants();
-  /** GENERATE MULTIPLE COMPLETED ORDERS (MONTH IS ZERO INDEXED) */
+  /** GENERATE MULTIPLE COMPLETED ORDERS: ARGS (StartMonth (zero indexed), StartYear, OrderQuantity, RestaurantId (optional)) */
   generateMultipleCompletedOrders(5, 2017, 2, 1);
   /** GENERATE A RANDOM ORDER */
   // generateOrder({ RestaurantId: 24 });

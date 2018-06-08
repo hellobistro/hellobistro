@@ -570,7 +570,7 @@ const restaurantController = {
 
     Restaurant.findAll({
       attributes: [[sequelize.literal(`6371 * acos(cos(radians(${lat})) * cos(radians(latitude)) * cos(radians(${lng}) - radians(longitude)) + sin(radians(${lat})) * sin(radians(latitude)))`), 'distance'],
-        'id', 'name', 'genre', 'type', 'addressOne', 'addressTwo', 'city', 'state', 'phone'],
+        'id', 'name', 'genre', 'type', 'addressOne', 'addressTwo', 'city', 'state', 'phone', 'description'],
       order: sequelize.col('distance'),
       limit: 8,
     }).then((result) => {
