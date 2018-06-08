@@ -8,7 +8,7 @@ class OrderHistoryItem extends React.Component {
   }
 
   renderItems = list => {
-    return list.map(item => <p key={item.id}>{item.name}</p>);
+    return list.map(item => <p key={item.id}><strong>{item.name}</strong> | Quantity: {item.OrderItem.quantity} | Unit Price: ${item.price.toFixed(2)}</p>);
   }
 
   clickHandler = () => {
@@ -19,7 +19,7 @@ class OrderHistoryItem extends React.Component {
     const orderPrep = this.props.data.MenuItems.reduce((a, b) => ({prepTime: a.prepTime + b.prepTime}), { prepTime: 0 });
     const currentWait = moment(this.props.data.createdAt).add(orderPrep.prepTime || 0, 'minutes').diff(moment(), 'minutes')
     const delay = currentWait > 0 ? 'Your estimated wait is ' + currentWait + '\u00A0minute(s).' : <div><i className="material-icons order-delay">error</i>Your order is delayed. Check with staff.</div>
-    const expanded = this.state.expand ? <tr className="order-history-expand"><td /><td colSpan="2"><strong>Order {this.props.data.id} includes: </strong>{this.renderItems(this.props.data.MenuItems)}</td><td /></tr> : null;
+    const expanded = this.state.expand ? <tr className="order-history-expand"><td colSpan="4"><div className="item-expansion-row"><i className="material-icons order-delay">check_circle_outline</i><strong>This order includes:</strong>{this.renderItems(this.props.data.MenuItems)}</div></td></tr> : null;
     if (currentWait > 0) {setTimeout(() => {this.forceUpdate()}, 60000)}
     return (
       <tbody onClick={this.clickHandler}>

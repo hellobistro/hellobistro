@@ -45,8 +45,10 @@ class Menu extends React.Component {
     // Regular render
     const listSections = data.MenuSections.map(section =>
       <MenuSection key={section.id} data={section} />);
-
-    const orderStatus = Object.keys(this.props.state.customer.cart.items).length === 0 ? null : <div id="order-status">You have {Object.keys(this.props.state.customer.cart.items).length} item(s) in your cart.</div>
+    const itemsArray = Object.values(this.props.state.customer.cart.items);
+    const itemCount = itemsArray.reduce((a, b) => ({ quantity: Number(a.quantity) + Number(b.quantity) }), { quantity: 0 }).quantity;
+    console.log(itemCount, 'item count', itemsArray);
+    const orderStatus = Object.keys(this.props.state.customer.cart.items).length === 0 ? null : <div id="order-status">You have {itemCount} item(s) in your cart.</div>
     const cartError = !this.props.state.customer.cart.restaurantId || this.props.state.customer.cart.restaurantId === this.props.state.customer.currentRestaurant.id ? null : <div id="existing-cart"><p><strong>You already have an order started at a different restaurant.<br /> Clear your cart to start an order at {this.props.state.customer.currentRestaurant.name}.</strong></p></div>;
  
     return (
