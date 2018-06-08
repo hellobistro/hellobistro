@@ -34,7 +34,7 @@ class OrderManager extends React.Component {
           {order.MenuItems.map((item, i) => (
             <div key={i} className="open-order-item">
               <input type="checkbox" className="order-item-box" />
-              <div className="order-item-name">{item.name} x{item.quantity}</div>
+              <div className="order-item-name">{item.name} {item.OrderItem.quantity > 1 ? <strong> x {item.OrderItem.quantity}</strong> : null}</div>
               {item.OrderItem.special ? (
                 <div>
                   <i>Special Request: {item.OrderItem.special}</i>
