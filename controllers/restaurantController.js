@@ -9,6 +9,7 @@ const AWS = require('aws-sdk');
 const UUID = require('uuid/v4');
 const Busboy = require('busboy');
 const { photos, googleApiKey } = require('../config/config.js');
+const analyticsController = require('../controllers/analyticsController');
 
 AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.secretAccessKey });
 const S3 = new AWS.S3();
@@ -443,6 +444,8 @@ const restaurantController = {
       userName: user.userName,
       restaurantInfo,
     };
+
+    analyticsController.poke();
     res.json(info);
   },
 

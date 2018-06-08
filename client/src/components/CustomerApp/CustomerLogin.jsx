@@ -2,8 +2,6 @@
 import React, { Component } from 'react';
 import AuthService from '../../services/AuthService';
 
-const jwt = require('jsonwebtoken');
-
 import decode from 'jwt-decode';
 
 import '../../styles/CustomerLogin.css';
@@ -11,6 +9,8 @@ import Mast from './Mast';
 
 // import { history } from '../../store';
 import { withRouter, Link } from 'react-router-dom';
+
+const jwt = require('jsonwebtoken');
 // CustomerLogin component
 // Used by Customers to log into app
 class CustomerLogin extends Component {
@@ -22,8 +22,8 @@ class CustomerLogin extends Component {
   }
 
   componentWillMount() {
-    let token = AuthService.getToken();
-    let decoded = jwt.decode(token, { complete: true });
+    const token = AuthService.getToken();
+    const decoded = jwt.decode(token, { complete: true });
     if (token) {
       if (decoded.payload.userType === 'Customer') {
         this.props.history.replace('/customer/home/findRestaurants');
@@ -34,7 +34,7 @@ class CustomerLogin extends Component {
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   handleChange(e) {
@@ -98,8 +98,6 @@ class CustomerLogin extends Component {
             {this.state.error ? <div>Invalid credentials</div> : <div />}
           </div>
         </div>
-
-        {/* <Link to='/developer/login'>HelloBistro for Developers</Link> */}
         <div className="switch-restaurant">
           <Link to="/restaurant/login">
             <i className="material-icons">store</i>HelloBistro for Restaurants

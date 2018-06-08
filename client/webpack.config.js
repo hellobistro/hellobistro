@@ -1,8 +1,7 @@
 // Require dependencies
 const path = require('path');
 const webpack = require('webpack');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { ravenUriReact } = require('../config/config');
 
 const config = {
   mode: 'development',
@@ -12,11 +11,9 @@ const config = {
     path: path.join(__dirname, 'dist'),
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   title: 'HelloBistro',
-    //   template: path.join(__dirname, 'src', 'template.html'),
-    // }),
-    // new BundleAnalyzerPlugin(),
+    new webpack.DefinePlugin({
+      RAVEN_REACT_URI: JSON.stringify(`${ravenUriReact}`),
+    }),
   ],
   module: {
     rules: [

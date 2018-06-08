@@ -1,8 +1,11 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
-import '../jest.config';
-import { CustomerListContainer } from '../../src/components/Containers';
-import { fakeProps } from '../testHelpers';
+import '../../../__test__/jest.config';
+import { CustomerListContainer } from '../Containers';
+import { fakeProps } from '../../../__test__/testHelpers';
+
+const { describe, test, expect } = global;
 
 jest.mock('../../src/services/ApiService.js');
 
