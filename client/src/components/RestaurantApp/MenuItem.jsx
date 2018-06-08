@@ -181,8 +181,9 @@ class MenuItem extends React.Component {
         defaultValue={price}
         onChange={(e) => { this.inputChange(e); }}/>
         </div>,
-      description: <div className='item-input-div description'><i className='material-icons manager-icons description'>format_align_justify</i><textarea
-        className={'item-input ' + (this.state.descriptionEdited ? 'edited' : null)}
+      description: <div className='item-input-div item-description'>
+        <i className='material-icons manager-icons'>format_align_justify</i>
+        <textarea className={'item-input ' + (this.state.descriptionEdited ? 'edited' : null)}
         name='description'
         type='text'
         placeholder='Description about food item'

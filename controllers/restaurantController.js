@@ -13,7 +13,6 @@ const { photos, googleApiKey } = require('../config/config.js');
 AWS.config.update({ accessKeyId: photos.accessKeyId, secretAccessKey: photos.secretAccessKey });
 const S3 = new AWS.S3();
 // sequelize models
-const socket = require('../routes/socket');
 
 const {
   Customer,
@@ -46,7 +45,7 @@ const restaurantController = {
       paymentId,
       password,
     } = req.body;
-    
+
     const possibleUser = await RestaurantUser.findOne({ where: { email } });
 
     if (possibleUser) {
@@ -56,24 +55,24 @@ const restaurantController = {
     const hashedPassword = await bcrypt.hash(password, 10);
     let lat;
     let lng;
-    let addyTwo = addressCity + ' ' + addressState + ' ' + addressZip;
-    let url = 'http://www.yaddress.net/api/Address?AddressLine1=' + addressOne + '&AddressLine2=' + addyTwo + '&UserKey='
-    let apple = await fetch(url,{
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-            }
-          })
-      .then((result) => result.json())
-        .then((data) => {
-          if(data.ErrorCode !== 0){
-            return res.status(400).json({error: data.ErrorMessage})
-          }
-          lat = data.Latitude;
-          lng = data.Longitude;
-        })
+    const addyTwo = `${addressCity} ${addressState} ${addressZip}`;
+    const url = `http://www.yaddress.net/api/Address?AddressLine1=${addressOne}&AddressLine2=${addyTwo}&UserKey=`;
+    const apple = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+      .then(result => result.json())
+      .then((data) => {
+        if (data.ErrorCode !== 0) {
+          return res.status(400).json({ error: data.ErrorMessage });
+        }
+        lat = data.Latitude;
+        lng = data.Longitude;
+      });
 
-    if(apple !== undefined){
+    if (apple !== undefined) {
       return;
     }
 
@@ -179,12 +178,10 @@ const restaurantController = {
       });
   },
 
-  getAllOpenOrdersForRestaurant(req, res) {
-    const { restaurant_id } = req.params;
-
-    Order.findAll({
+  getOpenRestaurantOrders(RestaurantId) {
+    return Order.findAll({
       where: {
-        RestaurantId: restaurant_id,
+        RestaurantId,
         completedAt: null,
       },
       include: [
@@ -193,35 +190,7 @@ const restaurantController = {
           required: false,
         },
       ],
-    })
-      .then((orders) => {
-        res.json(orders);
-      })
-      .catch((err) => {
-        res.send(err);
-      });
-  },
-
-  createNewOrder(req, res) {
-    const { restaurant_id } = req.params;
-    const {
-      status, total, completedAt, transactionId, table,
-    } = req.body;
-
-    Order.create({
-      status,
-      total,
-      completedAt,
-      transactionId,
-      table,
-      RestaurantId: restaurant_id,
-    })
-      .then((order) => {
-        res.json(order);
-      })
-      .catch((err) => {
-        res.send(err);
-      });
+    });
   },
 
   createMenuSection(req, res) {
@@ -386,31 +355,33 @@ const restaurantController = {
   async updateRestaurant(req, res) {
     const { restaurant_id } = req.params;
     const updatedValues = req.body.formValues;
-    const data = req.body.info
-    let { addressOne, city, state, zip } = _.assign({}, data, updatedValues)
+    const data = req.body.info;
+    const {
+      addressOne, city, state, zip,
+    } = _.assign({}, data, updatedValues);
     let lat;
     let lng;
-    let addyTwo = city + ' ' + state + ' ' + zip;
-    let url = 'http://www.yaddress.net/api/Address?AddressLine1=' + addressOne + '&AddressLine2=' + addyTwo + '&UserKey='
-    let apple = await fetch(url,{
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-            }
-          })
-      .then((result) => result.json())
-        .then((data) => {
-          if(data.ErrorCode !== 0){
-            return res.status(400).json({error: data.ErrorMessage})
-          }
-          lat = data.Latitude;
-          lng = data.Longitude;
-        })
+    const addyTwo = `${city} ${state} ${zip}`;
+    const url = `http://www.yaddress.net/api/Address?AddressLine1=${addressOne}&AddressLine2=${addyTwo}&UserKey=`;
+    const apple = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+      .then(result => result.json())
+      .then((data) => {
+        if (data.ErrorCode !== 0) {
+          return res.status(400).json({ error: data.ErrorMessage });
+        }
+        lat = data.Latitude;
+        lng = data.Longitude;
+      });
 
-    if(apple !== undefined){
+    if (apple !== undefined) {
       return;
     }
-    console.log('the new coordinates: ', lat, lng)
+    
     Restaurant.findOne({ where: { id: restaurant_id }, include: [{ model: RestaurantUser, required: false }] })
       .then(async (restaurant) => {
         const user = restaurant.RestaurantUsers[0];
@@ -434,8 +405,8 @@ const restaurantController = {
             email: updatedValues.email,
           });
         }
-        updatedValues.latitude = lat
-        updatedValues.longitude = lng
+        updatedValues.latitude = lat;
+        updatedValues.longitude = lng;
         return restaurant.update(updatedValues);
       })
       .then((updatedRestaurant) => {
@@ -452,24 +423,23 @@ const restaurantController = {
   async loginRestaurant(req, res) {
     const { email, password } = req.body;
     const user = await RestaurantUser.findOne({ where: { email } });
-    const restaurantInfo = await Restaurant.findOne({
-      where: { id: user.RestaurantId },
-    });
     if (!user) {
       res.sendStatus(400);
     }
-
     const authorized = await bcrypt.compare(password, user.password);
     if (!authorized) {
       res.sendStatus(400);
     }
-
-    const token = jwt.sign({ userType: 'Restaurant' }, 'secret', {
+    const restaurantInfo = await Restaurant.findOne({
+      where: { id: user.RestaurantId },
+    });
+    const token = jwt.sign({ userType: 'Restaurant', id: user.RestaurantId }, 'secret', {
       expiresIn: 129600,
     });
     const info = {
       token,
       userId: user.id,
+      userType: 'Restaurant',
       userName: user.userName,
       restaurantInfo,
     };
@@ -515,10 +485,8 @@ const restaurantController = {
       });
   },
 
-  completeOpenOrder(req, res) {
-    const { OrderId, CustomerId } = req.params;
-    console.log('order completing', OrderId, CustomerId);
-    Order.update(
+  closeOrder(OrderId) {
+    return Order.update(
       {
         status: 'completed',
         completedAt: moment(),
@@ -526,18 +494,7 @@ const restaurantController = {
       {
         where: { id: OrderId },
       },
-    ).then((completedOrder) => {
-      console.log('sending web socket notifcation');
-      const notification = socket.get();
-      const connectionId = socket.connections[CustomerId].socket.id;
-      console.log('connection id for notification', connectionId);
-      console.log('all connections: ', socket.connections);
-      notification.to(connectionId).emit('notification', { OrderId, status: 'complete' });
-      console.log('order completed', completedOrder);
-      res.json(completedOrder);
-    }).catch((err) => {
-      res.send(err);
-    });
+    );
   },
 
   fetchUserDataForWidget(req, res) {
@@ -609,7 +566,7 @@ const restaurantController = {
     const { lat, lng } = req.params;
 
     Restaurant.findAll({
-      attributes: [[sequelize.literal(`6371 * acos(cos(radians(${lat })) * cos(radians(latitude)) * cos(radians(${lng}) - radians(longitude)) + sin(radians(${lat })) * sin(radians(latitude)))`), 'distance'],
+      attributes: [[sequelize.literal(`6371 * acos(cos(radians(${lat})) * cos(radians(latitude)) * cos(radians(${lng}) - radians(longitude)) + sin(radians(${lat})) * sin(radians(latitude)))`), 'distance'],
         'id', 'name', 'genre', 'type', 'addressOne', 'addressTwo', 'city', 'state', 'phone'],
       order: sequelize.col('distance'),
       limit: 8,

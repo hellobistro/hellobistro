@@ -109,6 +109,13 @@ export function loadOrders(data) {
   };
 }
 
+export function updateOrder(orderId) {
+  return {
+    type: 'UPDATE_ORDER',
+    orderId,
+  };
+}
+
 export function updatePaymentMethods(data) {
   return {
     type: 'UPDATE_PAYMENT_METHODS',
@@ -198,3 +205,9 @@ export function clearNotification() {
   };
 }
 
+export function refreshOpenOrders(data) {
+  return {
+    type: 'REFRESH_OPEN_ORDERS',
+    data,
+  };
+}

@@ -1,4 +1,5 @@
 const sequelize = require('sequelize');
+const moment = require('moment');
 const {
   Customer,
   CustomerRating,
@@ -46,6 +47,21 @@ const getRandomQuantity = () => {
   const min = 1;
   const max = 5;
   return Math.floor(Math.random() * (max - min)) + min;
+};
+
+const getRandomOrderWait = () => {
+  const min = 1;
+  const max = 15;
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+const getRandomTimestamps = (startMonth, startYear) => {
+  const start = new Date(startYear, startMonth, 1);
+  const end = new Date();
+  const randomDate = moment(new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())));
+  const createdAt = randomDate.format('YYYY-MM-DD hh:mm:ss');
+  const completedAt = randomDate.add(getRandomOrderWait(), 'm').format('YYYY-MM-DD hh:mm:ss');
+  return { createdAt, completedAt };
 };
 
 // SIMULATOR ACTIONS
@@ -104,9 +120,18 @@ const generateOrder = (options) => {
   });
 };
 
+const generateMultipleCompletedOrders = (startMonth, startYear, orderQuantity, restaurantId ) => {
+  for (let i = 1; i <= orderQuantity; i++) {
+    const timeStamps = getRandomTimestamps(startMonth, startYear);
+    const { createdAt, completedAt } = timeStamps; 
+    const RestaurantId = restaurantId || getRandomRestaurantId();
+    generateOrder({ RestaurantId, status: 'completed', createdAt, completedAt });
+  }
+};
+
 // Simulator
 const getRandomTimeInterval = () => {
-  const intervals = [30000, 60000];
+  const intervals = [30000, 15000];
   const min = 0;
   const max = intervals.length;
   const i = Math.floor(Math.random() * (max - min)) + min;
@@ -116,8 +141,10 @@ const getRandomTimeInterval = () => {
 const startSimulation = async () => {
   await getUsers();
   await getRestaurants();
-  /** GENERATE A RANDOM ORDER (COPY FUNCTION TO GENERATE MULTIPLE) */
-  generateOrder({RestaurantId: 24});
+  /** GENERATE MULTIPLE COMPLETED ORDERS (MONTH IS ZERO INDEXED) */
+  generateMultipleCompletedOrders(5, 2017, 2, 1);
+  /** GENERATE A RANDOM ORDER */
+  // generateOrder({ RestaurantId: 24 });
   /** GENERATE ORDERS FOR A SPECIFIED DATE / TIME */
   // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-01-02 07:10:52', completedAt: '2018-01-02 07:20:52' });
   /** GENERATE ONE RANDOM ORDER EVERY 30 SECONDS */
