@@ -17,8 +17,8 @@ const sequelize = new Sequelize(database, username, password, {
   logging: false,
   pool: { maxConnections: 5, maxIdleTime: 15 },
   dialectOptions: {
-    requestTimeout: 5000
-  }
+    requestTimeout: 5000,
+  },
 });
 
 const Restaurant = sequelize.define('Restaurant', {
@@ -61,7 +61,7 @@ const Restaurant = sequelize.define('Restaurant', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  // type: Sequelize.STRING,
+  type: Sequelize.STRING,
   paymentId: Sequelize.STRING,
   latitude: DataTypes.DECIMAL(10, 8),
   longitude: DataTypes.DECIMAL(11, 8),
@@ -72,7 +72,7 @@ const MenuItem = sequelize.define('MenuItem', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  //description: Sequelize.STRING,
+  description: Sequelize.STRING,
   price: {
     type: Sequelize.FLOAT,
     allowNull: false,
@@ -113,6 +113,7 @@ const Order = sequelize.define('Order', {
 const OrderItem = sequelize.define('OrderItem', {
   special: Sequelize.STRING,
   price: Sequelize.FLOAT,
+  quantity: Sequelize.INTEGER,
 });
 
 const RestaurantUser = sequelize.define('RestaurantUser', {

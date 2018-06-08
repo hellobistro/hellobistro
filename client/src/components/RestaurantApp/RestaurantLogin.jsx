@@ -17,6 +17,10 @@ class RestaurantLogin extends Component {
     };
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
@@ -51,7 +55,7 @@ class RestaurantLogin extends Component {
       <div className="RestaurantLogin">
         <Mast primaryText="HelloBistro for Restaurants" />
         <div className="rest-background">
-          <div className="mock-form">
+          <div className="restaurant-login-form">
             <div className="restaurant-login-form-section">
               <div className="form-section-header" />
 
@@ -85,10 +89,7 @@ class RestaurantLogin extends Component {
           <Link to="/customer/login">
             <i className="material-icons">people</i>HelloBistro for Hungry People
           </Link>
-
         </div>
-
-
       </div>
     );
   }

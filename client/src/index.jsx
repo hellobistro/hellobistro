@@ -14,6 +14,8 @@ import store, { history } from './store';
 // (For per-component CSS, css files are imported by component)
 import './styles/master.css';
 
+global.Raven.config(RAVEN_REACT_URI).install();
+
 // Note: Ignoring ESLint suggestions for below React conventions.
 render(
   <Provider store={store}>

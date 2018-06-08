@@ -19,20 +19,20 @@ class RestaurantSettings extends React.Component {
     this.setState({
       formValues: Object.assign(this.state.formValues, {[e.target.name]: e.target.value})
     });
-
     console.log('state', this.state);
   }
 
   handleSubmit = (e) => {
-    console.log('id', this.props.state.restaurant.restaurantInfo.id);
     e.preventDefault();
-    ApiService.updateRestaurant(this.props.state.restaurant.restaurantInfo.id, this.state.formValues).then((data) => {
+    ApiService.updateRestaurant(this.props.state.restaurant.restaurantInfo, this.state.formValues).then((data) => {
       this.props.updateRestaurantData(data);
     }).then(() => {
       this.setState({confirmation: true});
       window.scrollTo(0,0);
     }).catch(err => {
-      // Do nothing with error at this time
+      err.response.json().then((errMsg) => {
+        this.setState({errorMessage: errMsg.error})
+      })
     });
   }
 
@@ -45,12 +45,13 @@ class RestaurantSettings extends React.Component {
   }
 
   render() {
+    let info = this.props.state.restaurant.restaurantInfo;
     return(
       <div className="RestaurantSettings">
         <div className="page-header">
           <p>
             Information/Settings for{' '}
-            <strong>{this.props.state.restaurant.restaurantInfo.name}</strong>
+            <strong>{info.name}</strong>
           </p>
           { this.state.confirmation ? this.renderConfirmation() : <div></div>}
         </div>
@@ -59,105 +60,150 @@ class RestaurantSettings extends React.Component {
           <div className="form-section">
             <div className="form-section-header">Restaurant Information</div>
 
-            <div className="form-group">
-              <label htmlFor="restaurantName">Restaurant Name</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
-                cid="restaurantName"
+                className="inputText"
+                // cid="restaurantName"
                 name="name"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.name}
+                defaultValue={info.name}
                 onChange={this.handleChange}
-
+                required
               />
+              <span className="floating-label">Restaurant Name</span>
             </div>
-            <div className="form-group">
-              <label htmlFor="addressOne">Address</label>
+
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 cid="addressOne"
                 name="addressOne"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.addressOne}
+                defaultValue={info.addressOne}
                 onChange={this.handleChange}
-
+                required
               />
+              <span className="floating-label">Address</span>
             </div>
-            <div className="form-group">
-              <label htmlFor="addressTwo">Address (2)</label>
+
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 cid="addressTwo"
                 name="addressTwo"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.addressTwo}
+                defaultValue={info.addressTwo}
                 onChange={this.handleChange}
-
+                required
               />
+              <span className="floating-label">Address (2)</span>
             </div>
-            <div className="form-group">
-              <label htmlFor="city">City</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 cid="city"
                 name="city"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.city}
+                defaultValue={info.city}
                 onChange={this.handleChange}
-
+                required
               />
+              <span className="floating-label">City</span>
             </div>
-            <div className="form-group">
-              <label htmlFor="state">State</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 cid="state"
                 name="state"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.state}
+                defaultValue={info.state}
                 onChange={this.handleChange}
-
+                required
               />
+              <span className="floating-label">State</span>
             </div>
-            <div className="form-group">
-              <label htmlFor="zip">Zip</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 cid="zip"
                 name="zip"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.zip}
+                defaultValue={info.zip}
                 onChange={this.handleChange}
+                required
               />
+              <span className="floating-label">Zip</span>
+            </div>
+            <div className="user-input-wrp">
+              <br/>
+              <input
+                className="inputText"
+                cid="genre"
+                name="genre"
+                type="text"
+                defaultValue={info.genre}
+                onChange={this.handleChange}
+                required
+              />
+              <span className="floating-label">Genre</span>
+            </div>
+            <div className="user-input-wrp">
+              <br/>
+              <input
+                className="inputText"
+                cid="type"
+                name="type"
+                type="text"
+                defaultValue={info.type}
+                onChange={this.handleChange}
+                required
+              />
+              <span className="floating-label">Type</span>
             </div>
           </div>
 
           <div className="form-section">
             <div className="form-section-header">Account Details</div>
 
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
+            <div className="user-input-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 cid="email"
                 name="email"
                 type="text"
-                defaultValue={this.props.state.restaurant.restaurantInfo.email}
+                defaultValue={info.email}
                 onChange={this.handleChange}
+                required
               />
+              <span className="floating-label">Email</span>
             </div>
-            <div className="form-group">
-              <label htmlFor="password">Change Password</label>
+
+            <div className="user-input-wrp pw-wrp">
+              <br/>
               <input
-                className="form-input"
+                className="inputText"
                 cid="password"
                 name="password"
                 type="password"
                 onChange={this.handleChange}
+                required
               />
+              <span className="floating-label">Change Password</span>
             </div>
           </div>
-          <button onClick={this.handleSubmit}>Submit Changes</button>
+          {
+            this.state.errorMessage
+            ? <div className='error'>{this.state.errorMessage}</div>
+            : <div></div>
+          }
+          <button className="restaurant-settings-submit" onClick={this.handleSubmit}>Submit Changes</button>
         </form>
       </div>
 

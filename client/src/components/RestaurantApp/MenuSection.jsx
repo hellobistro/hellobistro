@@ -75,11 +75,6 @@ class MenuSection extends React.Component {
               onChange={this.inputChange}
             />
           </div>
-          {
-            this.state.hasChanged
-            ? <button className="menu-section-button save" onClick={this.updateMenuSection}> Save Changes </button>
-            : null
-          }
           <textarea
             className="form-input section-description"
             name="description"
@@ -90,6 +85,11 @@ class MenuSection extends React.Component {
             rows="1"
             onChange={this.inputChange}
           />
+           {
+            this.state.hasChanged
+            ? <button className="menu-section-button save" onClick={this.updateMenuSection}> Save Changes </button>
+            : null
+          }
         </div>
         <div className="section-content">
           {items}

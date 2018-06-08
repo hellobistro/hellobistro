@@ -1,12 +1,9 @@
 // Import dependencies
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
-import decode from 'jwt-decode';
+import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 // Import services
 import AuthService from '../services/AuthService';
-import ApiService from '../services/ApiService';
 
 // Import Customer/RestaurantApp component and subcomponents
 import {
@@ -14,7 +11,6 @@ import {
   RestaurantAppContainer,
   RestaurantLoginContainer,
   CustomerLoginContainer,
-  CustomerOrderContainer,
   CustomerSettingsContainer,
   RestaurantRegisterContainer,
   MenuManagerContainer,
@@ -30,7 +26,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: false
     };
+  }
+
+  componentDidCatch(error, info) {
+    this.setState({ error });
+    Raven.captureException(error, { extra: errorInfo });
   }
 
   checkUser = () => {
@@ -46,6 +48,15 @@ class App extends React.Component {
   }
   
   render() {
+
+    if (this.state.error) {
+      //render fallback UI
+      return (
+        <div>
+          <p>We're sorry — something's gone wrong.</p>
+        </div>
+      );
+  } else {
     return (
       <div className="App"> 
         {/* <Switch> */}
@@ -65,6 +76,9 @@ class App extends React.Component {
         {/* </Switch> */}
       </div>
     );
+  }
+
+
   }
 }
 

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import AuthService from '../../services/AuthService';
 import Mast from './Mast';
-
+import '../../styles/RestaurantRegister.css';
 import 'babel-polyfill';
 
 class RestaurantRegister extends Component {
@@ -58,7 +58,6 @@ class RestaurantRegister extends Component {
           .catch((error) => {
             console.log('error registering restaurant', error);
             error.response.json().then((err) => {
-              console.log('the apple: ', err);
               this.setState({ error: err.error });
             });
           });
@@ -78,173 +77,204 @@ class RestaurantRegister extends Component {
           <div className="form-section">
             <div className="form-section-header">
       Register your restaurant (* fields are required)
-            </div>
+    </div>
 
-            <div className="form-group">
-              <label htmlFor="email">Email*</label>
-              <input
-                className="form-input"
-                name="email"
-                placeholder="Email Address"
+            <div className="user-input-wrp">
+      <br />
+      <input
+        className="inputText"
+        name="email"
+        defaultValue={null}
+        type="text"
+        onChange={this.handleChange.bind(this)}
+        required
+      />
+      <span className="floating-label">Email *</span>
+    </div>
+
+            <div className="user-input-wrp pw-wrp">
+      <br />
+      <input
+        className="inputText"
+        name="password"
+        defaultValue={null}
+        type="password"
+        onChange={this.handleChange.bind(this)}
+        required
+      />
+      <span className="floating-label">Password *</span>
+    </div>
+
+            <div className="user-input-wrp pw-wrp">
+      <br />
+      <input
+        className="inputText"
+        name="confirmpassword"
+        defaultValue={null}
+        type="password"
+        onChange={this.handleChange.bind(this)}
+        required
+      />
+      <span className="floating-label">Re-enter Password *</span>
+    </div>
+
+
+            <div className="user-input-wrp">
+      <br />
+      <input
+        className="inputText"
+        name="phone"
+        defaultValue={null}
+        type="text"
+        onChange={this.handleChange.bind(this)}
+        required
+      />
+      <span className="floating-label">Phone *</span>
+    </div>
+
+
+            <div className="user-input-wrp">
+      <br />
+      <input
+        className="inputText"
+        name="name"
+        defaultValue={null}
+        type="text"
+        onChange={this.handleChange.bind(this)}
+        required
+      />
+      <span className="floating-label">Name *</span>
+    </div>
+
+
+            <div className="user-input-wrp">
+      <br />
+      <input
+        className="inputText"
+        name="addressOne"
+        defaultValue={null}
+        type="text"
+        onChange={this.handleChange.bind(this)}
+        required
+      />
+      <span className="floating-label">Address (1) *</span>
+    </div>
+
+            <div className="user-input-wrp">
+      <br />
+      <input
+        className="inputText"
+        name="addressTwo"
+        defaultValue={null}
+        type="text"
+        onChange={this.handleChange.bind(this)}
+        required
+      />
+      <span className="floating-label">Address (2)</span>
+    </div>
+
+
+            <div className="user-input-wrp">
+      <br />
+      <input
+        className="inputText"
+        name="addressCity"
+        defaultValue={null}
+        type="text"
+        onChange={this.handleChange.bind(this)}
+        required
+      />
+      <span className="floating-label">City *</span>
+    </div>
+
+            <div className="user-input-wrp">
+      <br />
+      <input
+        className="inputText"
+        name="addressState"
+        defaultValue={null}
+        type="text"
+        onChange={this.handleChange.bind(this)}
+        required
+      />
+      <span className="floating-label">State *</span>
+    </div>
+
+            <div className="user-input-wrp">
+      <br />
+      <input
+        className="inputText"
+        name="addressZip"
+        defaultValue={null}
+        type="text"
+        onChange={this.handleChange.bind(this)}
+        required
+      />
+      <span className="floating-label">Zip Code *</span>
+    </div>
+
+
+            {/* <div className="user-input-wrp">
+              <span className="floating-label">Description</span>
+              <br/>
+              <textarea className="inputText"
+                name="description"
+                defaultValue={null}
                 type="text"
-
+                placeholder={null}
                 onChange={this.handleChange.bind(this)}
+                required
               />
-            </div>
-
-
+            </div> */}
             <div className="form-group">
-              <label htmlFor="username">Password *</label>
-              <input
-                className="form-input"
-                name="password"
-                placeholder="Password"
-                type="password"
-                onChange={this.handleChange.bind(this)}
-              />
-            </div>
+      <label className="label-description" htmlFor="description">&nbsp; &nbsp; Description</label>
+      <textarea className="form-input" name="description" placeholder="Enter Description Here" onChange={this.handleChange.bind(this)} />
+    </div>
 
 
-            <div className="form-group">
-              <label htmlFor="username">Re-enter Password *</label>
-              <input
-                className="form-input"
-                name="confirmpassword"
-                placeholder="Re-enter Password"
-                type="password"
-                onChange={this.handleChange.bind(this)}
-              />
-            </div>
+            <div className="user-input-wrp">
+      <br />
+      <input
+        className="inputText"
+        name="genre"
+        defaultValue={null}
+        type="text"
+        onChange={this.handleChange.bind(this)}
+        required
+      />
+      <span className="floating-label">"Genre (e.g., Mexican, New American...)"</span>
+    </div>
 
 
-            <div className="form-group">
-              <label htmlFor="username">Phone*</label>
-              <input
-                className="form-input"
-                name="phone"
-                placeholder="Phone"
-                type="text"
-                onChange={this.handleChange.bind(this)}
-              />
-            </div>
-
-
-            <div className="form-group">
-              <label htmlFor="name">Name *</label>
-              <input
-                className="form-input"
-                name="name"
-                placeholder="Restaurant Name"
-                type="text"
-                onChange={this.handleChange.bind(this)}
-              />
-            </div>
-
-
-            <div className="form-group">
-              <label htmlFor="name">Address (1) *</label>
-              <input
-                className="form-input"
-                name="addressOne"
-                placeholder="Address (line 1)"
-                type="text"
-                onChange={this.handleChange.bind(this)}
-              />
-            </div>
-
-
-            <div className="form-group">
-              <label htmlFor="name">Address (2)</label>
-              <input
-                className="form-input"
-                name="addressTwo"
-                placeholder="Address (line 2)"
-                type="text"
-                onChange={this.handleChange.bind(this)}
-              />
-            </div>
-
-
-            <div className="form-group">
-              <label htmlFor="name">City *</label>
-              <input
-                className="form-input"
-                name="addressCity"
-                placeholder="City"
-                type="text"
-                onChange={this.handleChange.bind(this)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="name">State *</label>
-              <input
-                className="form-input"
-                name="addressState"
-                placeholder="State"
-                type="text"
-                onChange={this.handleChange.bind(this)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="name">Zip Code *</label>
-              <input
-                className="form-input"
-                name="addressZip"
-                placeholder="Zip Code"
-                type="text"
-                onChange={this.handleChange.bind(this)}
-              />
-            </div>
-
-
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <textarea className="form-input" name="description" placeholder="Description" onChange={this.handleChange.bind(this)} />
-
-            </div>
-
-
-            <div className="form-group">
-              <label htmlFor="name">Genre *</label>
-              <input
-                className="form-input"
-                name="genre"
-                placeholder="Genre (e.g., Mexican, New American...)"
-                type="text"
-                onChange={this.handleChange.bind(this)}
-              />
-            </div>
-
-
-            <div className="form-group">
-              <label htmlFor="name">Type *</label>
-              <input
-                className="form-input"
-                name="type"
-                placeholder="Type (e.g., Bar, Restaurant)"
-                type="text"
-                onChange={this.handleChange.bind(this)}
-              />
-            </div>
-
-            <button onClick={this.registerRestaurantUser.bind(this)}>Register</button>
+            <div className="user-input-wrp">
+      <br />
+      <input
+        className="inputText"
+        name="type"
+        defaultValue={null}
+        type="text"
+        onChange={this.handleChange.bind(this)}
+        required
+      />
+      <span className="floating-label">Type (e.g., Bar, Restaurant)</span>
+    </div>
+            <br />
             {
             this.state.error
-            ? <div>{this.state.error}</div>
+            ? <div className="error">{this.state.error}</div>
             : <div />
           }
             {
             this.state.passwordMatch === false
-            ? <div>Passwords do not match </div>
+            ? <div className="error">Passwords do not match </div>
             : <div />
           }
             {
             this.state.validEmail === false
-            ? <div>Not a valid email </div>
+            ? <div className="error">Not a valid email </div>
             : <div />
           }
+            <button className="restaurant-settings-submit" onClick={this.registerRestaurantUser.bind(this)}>Register</button>
           </div>
         </div>
       </div>

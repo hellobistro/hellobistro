@@ -137,6 +137,7 @@ textarea {resize: vertical}
   box-shadow: 0 4px 6px rgba(0,0,0,0.24);
   margin-bottom: 20px;
   padding: 20px;
+  transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
 }
 
 .empty-section {
@@ -245,7 +246,7 @@ textarea {resize: vertical}
 }
 
 .menu-section-button {
-  /* display: inline-block; */
+  display: block;
   padding: 8px 15px;
   font-size: 13px;
   text-align: center;
@@ -253,9 +254,9 @@ textarea {resize: vertical}
   outline: none;
   color: #fff;
   border: none;
-  border-radius: 15px;
+  border-radius: 3px;
   box-shadow: 0 4px #999;
-  float: right;
+  margin: 10px auto 10px auto;
 }
 
 .menu-section-button:active {
@@ -411,34 +412,42 @@ select.status {
   line-height: normal;
 }
 
-::-webkit-input-placeholder {
+.section-header textarea::-webkit-input-placeholder {
   font-style: italic;
   color: #333333;
 }
-:-moz-placeholder {
+
+.section-header textarea::-moz-placeholder {
   font-style: italic;
   color: #333333;  
 }
-::-moz-placeholder {
-  font-style: italic;
-  color: #333333;  
-}
-:-ms-input-placeholder {  
+
+.section-header textarea::-ms-input-placeholder {  
   font-style: italic;
   color: #333333; 
 }
 
-.item-input-div.description{
-  position: relative;
-  display: inline-block;
+.item-input-div.item-description textarea {
+  padding: 10px 0px;
+  margin: 10px 10px 10px 0px;
+  border: 0;
+  outline: none;
+  background: #fff;
+  color: darkslategray;
+  font-weight: 400;
+  font-size: 18px;
+  max-width: 100%; 
+  max-height: 100%;
+  overflow: scroll;
+  resize: none;
 }
 
-.material-icons.manager-icons.description {
+/* .material-icons.manager-icons.item-description {
   color: #c75b39;
   font-size: 18px;
   position: absolute;
   display: inline-block;
-}
+} */
 
 .remove-photo-button {
   text-align: center;
