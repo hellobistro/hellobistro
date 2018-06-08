@@ -42,6 +42,10 @@ class MenuManager extends React.Component {
     });
   }
 
+  updateMenuSection = (RestaurantId, info, id) => {
+    return ApiService.updateMenuSection(RestaurantId, info, id)
+  }
+
   render() {
   if(this.state.MenuSections){
     return (
@@ -52,7 +56,7 @@ class MenuManager extends React.Component {
           </p>
         </div>
         {this.state.MenuSections.map((section, i) => {
-        return <MenuSection key={section.uniqueId} indx={i} data={section} deleteSection={this.deleteSection} />})}
+        return <MenuSection key={section.uniqueId} indx={i} data={section} deleteSection={this.deleteSection} updateMenuSection={this.updateMenuSection} />})}
         <button className="section-button" onClick={this.addSection}><i className="material-icons section-button-icon">label_important</i>Create a New Menu Section</button>
       </div>
     );
