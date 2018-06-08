@@ -110,7 +110,7 @@ const ApiService = {
 
   updateMenuItem: (restaurantId, itemId, info) => AuthService.fetch(`/restaurants/${restaurantId}/menu/${itemId}`, { method: 'PATCH', body: info }),
 
-  updateMenuSection: (restaurantId, menuSection, info) => AuthService.fetch(`/restaurants/menusection/${restaurantId}/${menuSection}`, { method: 'PATCH', body: info }),
+  updateMenuSection: (restaurantId, info, menuSection) => AuthService.fetch(`/restaurants/menusection/${restaurantId}/${menuSection}`, { method: 'PATCH', body: info }),
 
   deleteMenuSection: menuSection => AuthService.fetch(`/restaurants/menusection/${menuSection}`, { method: 'DELETE' }),
 

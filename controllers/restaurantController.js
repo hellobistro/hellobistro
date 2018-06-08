@@ -300,15 +300,17 @@ const restaurantController = {
       name,
       description,
     } = req.body;
-
+  
     MenuSection.upsert({
       id: section_id,
       name,
       description,
       RestaurantId: restaurant_id,
     })
-      .then((item) => {
-        res.json(item);
+      .then(() => {
+        MenuSection.findOne({ where: { name } }).then((section) => {
+          res.json({section})
+        });
       })
       .catch((err) => {
         res.send(err);

@@ -6,6 +6,7 @@ class MenuSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      sectionID: null
     }
   }
 
@@ -27,7 +28,7 @@ class MenuSection extends React.Component {
   addItem = () => {
     let {RestaurantId, id} = this.props.data;
     let itemTemplate = {
-      MenuSectionId: id,
+      MenuSectionId: this.state.sectionID || id,
       RestaurantId,
       glutenFree: null,
       id: null,
@@ -48,13 +49,10 @@ class MenuSection extends React.Component {
     this.setState({ [e.target.name]: e.target.value, hasChanged: true })
   }
 
-  updateMenuSection = () => {
+  updateSection = async () => {
     let {RestaurantId, id} = this.props.data;
-    ApiService.updateMenuSection(RestaurantId, id, this.state)
-      .then((res) => {
-        console.log('successfully updated the menuSection ', res)
-        this.setState({hasChanged: false})
-      })
+    let updatedSection = await this.props.updateMenuSection(RestaurantId, this.state, id)
+    this.setState({ sectionID: updatedSection.section.id, hasChanged: false });
   }
 
   render() {
@@ -87,13 +85,17 @@ class MenuSection extends React.Component {
           />
            {
             this.state.hasChanged
-            ? <button className="menu-section-button save" onClick={this.updateMenuSection}> Save Changes </button>
+            ? <button className="menu-section-button save" onClick={this.updateSection}> Save Changes </button>
             : null
           }
         </div>
         <div className="section-content">
           {items}
-          <button className="add-item-button" onClick={this.addItem}><i className="material-icons manager-icons">add_box</i>Add {data.name} item</button>
+          {
+            this.state.name && this.state.hasChanged === false
+          ? <button className="add-item-button" onClick={this.addItem}><i className="material-icons manager-icons">add_box</i>Add {data.name} item</button>
+          : <div/>
+          }
         </div> 
       </div>
     );
