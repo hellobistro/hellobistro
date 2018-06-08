@@ -27,7 +27,7 @@ class WidgetUserModal extends React.Component {
         <div className="widget-modal-content user">
           <h3>{data.userName}'s orders:</h3>
           {table}
-          <button onClick={this.props.modalOff} >Modal off</button>
+          <button onClick={this.props.modalOff} >Close</button>
         </div>
       </div>
     );
