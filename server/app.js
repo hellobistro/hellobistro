@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const jwtDecode = require('jwt-decode');
 const routes = require('../routes/routes');
 const socket = require('../routes/socket');
+const analyticsController = require('../controllers/analyticsController');
 
 const app = express();
 const Raven = require('raven');
@@ -75,6 +76,7 @@ Raven.context(() => {
 
   // Note: the below console.log is intentional, and required for minimal server logging.
   const server = app.listen(port, () => {
+    analyticsController.poke();
     console.log(`Starting the server at port ${port}`);
   });
   const io = require('socket.io').listen(server);

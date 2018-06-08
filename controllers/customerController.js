@@ -193,7 +193,7 @@ const customerController = {
       // make sure item quantity is valid.
       if (item.quantity > 0) {
         order.addMenuItem(item.id, {
-          through: { special: item.special, price: item.price },
+          through: { special: item.special, price: item.price, quantity: item.quantity },
         });
         CustomerRating.findOrCreate({
           where: {
@@ -206,14 +206,18 @@ const customerController = {
   },
 
   submitOrder(order) {
-    const { total, table, CustomerId, StripeId, CardId, RestaurantId, items } = order;
+    const {
+      total, table, CustomerId, StripeId, CardId, RestaurantId, items,
+    } = order;
     // Check to make sure at least one item is included in order
     if (items.length < 1) {
       return Promise.reject(new Error('Error, no items in order.'));
     }
     // Process stripe charge and create order.
     return customerController.createStripeCharge(StripeId, CardId, RestaurantId, CustomerId, items, total)
-      .then(charge => Order.create({ status: 'queued', total, transactionId: charge.id, table, CustomerId, RestaurantId }))
+      .then(charge => Order.create({
+        status: 'queued', total, transactionId: charge.id, table, CustomerId, RestaurantId,
+      }))
       .then((dbOrder) => {
         customerController.buildOrderItems(items, dbOrder, CustomerId);
         return dbOrder.id;
