@@ -1,6 +1,7 @@
 // Import dependencies
 import React from 'react';
 import ApiService from '../../services/ApiService';
+import '../../styles/CustomerSettings.css';
 
 class CustomerSettings extends React.Component {
   constructor(props) {
@@ -72,31 +73,31 @@ class CustomerSettings extends React.Component {
     const { email, userName, firstName, lastName, phone  } = this.state
     if(this.state.originalEmail){
       return(
-        <div>
-          <h2>Customer Settings</h2>
+        <div className="customer-settings">
+          <h2>&nbsp; Customer Settings</h2>
 
           <div className="update-section">
-            <h5>Update Email Address: </h5>
+            <h5>&nbsp; Update Email Address: </h5>
             <input className="update-input" name="email" type="text" defaultValue={email} onChange={this.handleChange}/>
           </div>
 
           <div className="update-section">
-            <h5>Change Username: </h5>
+            <h5>&nbsp; Change Username: </h5>
             <input className="update-input" name="userName" type="text" defaultValue={userName} onChange={this.handleChange}/>
           </div>
 
           <div className="update-section">
-            <h5>Change First Name: </h5>
+            <h5>&nbsp; Change First Name: </h5>
             <input className="update-input" name="firstName" type="text" defaultValue={firstName} onChange={this.handleChange}/>
           </div>
 
           <div className="update-section">
-            <h5>Change Last Name: </h5>
+            <h5>&nbsp; Change Last Name: </h5>
             <input className="update-input" name="lastName" type="text" defaultValue={lastName} onChange={this.handleChange}/>
           </div>
 
           <div className="update-section">
-            <h5>Update Phone Number: </h5>
+            <h5>&nbsp; Update Phone Number: </h5>
             <input className="update-input" name="phone" type="text" defaultValue={phone} onChange={this.handleChange}/>
           </div>
 
@@ -106,40 +107,39 @@ class CustomerSettings extends React.Component {
           </div> */}
         
           <div className="update-section">
-            <h5>New Password: </h5>
+            <h5>&nbsp; New Password: </h5>
             <input className="update-input" name="newPW1" type="text" placeholder="New Password" onChange={this.handleChange}/>
           </div>
 
           <div className="update-section">
-            <h5>Confirm New Password: </h5>
+            <h5>&nbsp; Confirm New Password: </h5>
             <input className="update-input" name="newPW2" type="text" placeholder="Confirm New Password" onChange={this.handleChange}/>
           </div>
-          
-          <button onClick={this.saveChanges}>Save Changes</button>
           {
             this.state.existingEmail
-            ? <div>New email already exists </div>
+            ? <div className="error">&nbsp; New email already exists </div>
             : <div></div>
           }
           {
             this.state.passwordMatch === false
-            ? <div>Passwords do not match </div>
+            ? <div className="error">&nbsp; Passwords do not match </div>
             : <div></div>
           }
           {
             this.state.validEmail === false
-            ? <div>Not a valid email </div>
+            ? <div className="error">&nbsp; Not a valid email </div>
             : <div></div>
           }
           {
             this.state.validUsername === false
-            ? <div>Please provide a username </div>
+            ? <div className="error">&nbsp; Please provide a username </div>
             : <div></div>
           }
+          <button className="save-changes" onClick={this.saveChanges}>Save Changes</button>
         </div>
       )
     } else {
-      return <h2>Loading...</h2>
+      return <h2>&nbsp; Loading...</h2>
     }
   }
 

@@ -1,5 +1,9 @@
-.customer-settings {
-  margin: 10px;
+.update-section {
+  padding-left: 10px;
+}
+
+input.update-input {
+  padding-left: 10px;
 }
 
 .save-changes {

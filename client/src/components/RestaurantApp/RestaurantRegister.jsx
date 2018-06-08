@@ -212,27 +212,11 @@ class RestaurantRegister extends Component {
       />
       <span className="floating-label">Zip Code *</span>
     </div>
-
-
-            {/* <div className="user-input-wrp">
-              <span className="floating-label">Description</span>
-              <br/>
-              <textarea className="inputText"
-                name="description"
-                defaultValue={null}
-                type="text"
-                placeholder={null}
-                onChange={this.handleChange.bind(this)}
-                required
-              />
-            </div> */}
-            <div className="form-group">
-      <label className="label-description" htmlFor="description">&nbsp; &nbsp; Description</label>
-      <textarea className="form-input" name="description" placeholder="Enter Description Here" onChange={this.handleChange.bind(this)} />
-    </div>
-
-
-            <div className="user-input-wrp">
+          <div className="form-group">
+            <label className="label-description" htmlFor="description">&nbsp; &nbsp; Description</label>
+            <textarea className="form-input form-input-txtarea" name="description" placeholder="Enter Description Here" onChange={this.handleChange.bind(this)}/>
+          </div>
+          <div className="user-input-wrp">
       <br />
       <input
         className="inputText"
@@ -244,9 +228,7 @@ class RestaurantRegister extends Component {
       />
       <span className="floating-label">"Genre (e.g., Mexican, New American...)"</span>
     </div>
-
-
-            <div className="user-input-wrp">
+      <div className="user-input-wrp">
       <br />
       <input
         className="inputText"
@@ -274,9 +256,9 @@ class RestaurantRegister extends Component {
             ? <div className="error">Not a valid email </div>
             : <div />
           }
-            <button className="restaurant-settings-submit" onClick={this.registerRestaurantUser.bind(this)}>Register</button>
-          </div>
-        </div>
+          <button className="register-submit" onClick={this.registerRestaurantUser.bind(this)}>Register</button>
+      </div>
+      </div>
       </div>
     );
   }
