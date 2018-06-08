@@ -3,6 +3,14 @@ const { serverSecret, analyticsEndpoint } = require('../config/config.js');
 
 const analyticsController = {
 
+  async poke() {
+    try {
+      await axios.get(`${analyticsEndpoint}/wake/${serverSecret}`);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
   async buildData(id) {
     try {
       await axios.post(`${analyticsEndpoint}/build/${id}/${serverSecret}`);
@@ -14,7 +22,6 @@ const analyticsController = {
     const { id } = req.params;
     try {
       const response = await axios.get(`${analyticsEndpoint}/data/${id}/${serverSecret}`);
-      console.log(response.data);
       res.status(200).send(response.data);
     } catch (error) {
       console.log(error);

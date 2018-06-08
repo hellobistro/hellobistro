@@ -1,6 +1,6 @@
 // Import dependencies
 import React from 'react';
-import ApiService from '../../services/ApiService';
+import SocketService from '../../services/SocketService';
 import '../../styles/CustomerConfirmOrder.css';
 
 // ConfirmOrder component
@@ -9,13 +9,15 @@ const ConfirmOrder = (props) => {
   const items = Object.values(props.state.customer.cart.items);
   const billTotal = items.reduce((a, b) => a + (b.price * b.quantity), 0).toFixed(2);
   const paymentMethods = props.state.user.paymentMethods.length > 0 ? props.state.user.paymentMethods.map(card => (<option key={card.id} value={card.cardId}>{card.brand} -{card.last4}</option>)) : <option>No payment methods on file.</option>;
+
   const handleSubmit = () => {
     const { userId, paymentId } = props.state.user;
     const CardId = props.state.customer.cart.paymentId || props.state.user.paymentMethods[0].cardId;
     const CustomerStripeId = props.state.user.paymentId;
     const RestaurantId = props.state.customer.cart.restaurantId;
     const { table } = props.state.customer.cart;
-    ApiService.submitOrder({ total: billTotal, table, CustomerId: userId, StripeId: CustomerStripeId, CardId, RestaurantId, items })
+    console.log('submitting order');
+    SocketService.submitOrder({ total: billTotal, table, CustomerId: userId, StripeId: CustomerStripeId, CardId, RestaurantId, items })
       .then((res) => {
         console.log('no error from server', res)
         props.clearCart();

@@ -30,7 +30,6 @@ const DashBoard = props => (
     <WidgetItemOrderTotalsContainer />
     <WidgetTotalRevenueByDayContainer />
     <WidgetTimelineChartContainer />
-
   </div>
 );
 

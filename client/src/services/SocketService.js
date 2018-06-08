@@ -1,8 +1,9 @@
 import { dispatch } from 'redux';
 import openSocket from 'socket.io-client';
-import { addNotification } from '../actions/actionCreators';
+import { addNotification, loadOrders, addOpenOrders, refreshOpenOrders, updateOrder } from '../actions/actionCreators';
 import store from '../store';
 import AuthService from './AuthService';
+import ApiService from './ApiService';
 // create socket connection
 const socket = openSocket.connect('http://localhost:3000', {
   reconnection: true,
@@ -10,35 +11,68 @@ const socket = openSocket.connect('http://localhost:3000', {
   reconnectionDelayMax: 5000,
   reconnectionAttempts: Infinity,
 });
-// methods available to socket
+
+// Socket service methods
 const SocketService = {
-  store: null,
-  setCustomer: (userId) => {
-    socket.emit('user', userId);
-  },
-  refreshCustomer: () => {
+  setUser: userInfo => socket.emit('user', userInfo),
+
+  refreshUser: () => {
     if (AuthService.loggedIn) {
-      AuthService.getIdFromToken().then((userId) => {
-        socket.emit('user', userId);
+      AuthService.decodeToken().then((res) => {
+        socket.emit('user', { userId: res.id, userType: res.userType });
       });
     }
   },
-  clearCustomer: () => {
+
+  clearUser: () => {
     socket.disconnect();
     socket.connect();
   },
+
+  refreshOpenRestaurantOrders: (restaurantId) => {
+    socket.emit('refreshOpenOrders', restaurantId);
+  },
+
+  closeOrder: (orderId, customerId, restaurantId) => new Promise((resolve, reject) => {
+    socket.emit('closeOrder', orderId, customerId, restaurantId, (res, err) => {
+      if (err) {
+        reject(err);
+      }
+      store.dispatch(refreshOpenOrders(res));
+      resolve(res);
+    });
+  }),
+
+  submitOrder: order => new Promise((resolve, reject) => {
+    socket.emit('submitOrder', order, (res, err) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(res);
+    });
+  }),
 };
-// socket event listeners
+
+// Socket service event listeners
 socket.on('connect', () => {
-  console.log('socket connected');
-  SocketService.refreshCustomer();
+  SocketService.refreshUser();
 });
+
 socket.on('disconnect', () => {
-  console.log('socket disconnected');
   socket.connect();
 });
-socket.on('notification', (data) => {
-  store.dispatch(addNotification(data));
+
+socket.on('foodReady', (orderId, customerId) => {
+  // store.dispatch(updateOrder(orderId));
+  ApiService.retrieveOrders(customerId)
+    .then((res) => {
+      store.dispatch(loadOrders(res));
+    });
+  store.dispatch(addNotification(orderId));
+});
+
+socket.on('refreshOpenOrders', (data) => {
+  store.dispatch(refreshOpenOrders(data));
 });
 
 export default SocketService;

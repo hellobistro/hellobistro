@@ -17,8 +17,8 @@ const sequelize = new Sequelize(database, username, password, {
   logging: false,
   pool: { maxConnections: 5, maxIdleTime: 15 },
   dialectOptions: {
-    requestTimeout: 5000
-  }
+    requestTimeout: 5000,
+  },
 });
 
 const Restaurant = sequelize.define('Restaurant', {
@@ -113,7 +113,7 @@ const Order = sequelize.define('Order', {
 const OrderItem = sequelize.define('OrderItem', {
   special: Sequelize.STRING,
   price: Sequelize.FLOAT,
-  quantity: Sequelize.INTEGER
+  quantity: Sequelize.INTEGER,
 });
 
 const RestaurantUser = sequelize.define('RestaurantUser', {

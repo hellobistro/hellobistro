@@ -78,8 +78,7 @@ class FindRestaurants extends React.Component {
     return (
       <div className="FindRestaurants">
         <h2 id="header">What restaurant would you like to check in to?</h2>
-        <p id="sub-header">We&#39;ve located the following restaurants in your area:</p>
-        {!this.props.state.customer.closestRestaurants ? <div className="customer-loader" /> : this.renderRestaurantList()}
+        {!this.props.state.customer.closestRestaurants ? <div><p id="sub-header">Searching for restaurants in your area...</p><div className="customer-loader" /></div> : <div><p id="sub-header">We&#39;ve located the following restaurants in your area:</p> {this.renderRestaurantList()}</div>}
       </div>
     );
   }

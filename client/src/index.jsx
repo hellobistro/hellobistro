@@ -1,28 +1,28 @@
 // Import dependencies
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
-// // Import CustomerApp component and subcomponents
-// import CustomerApp from './components/CustomerApp/CustomerApp';
+import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-// // Import RestaurantApp component and subcomponents
-// import RestaurantApp from './components/RestaurantApp/RestaurantApp';
+// Import components/containers
+import { AppContainer } from './components/Containers';
+
+// Import redux store
+import store, { history } from './store';
 
 // Import master CSS
 // (For per-component CSS, css files are imported by component)
 import './styles/master.css';
-import store, { history } from './store';
-import { Provider } from 'react-redux';
-import { AppContainer } from './components/Containers';
-import { ConnectedRouter } from 'react-router-redux';
+
+global.Raven.config(RAVEN_REACT_URI).install();
 
 // Note: Ignoring ESLint suggestions for below React conventions.
-ReactDOM.render(
+render(
   <Provider store={store}>
-    {/* <ConnectedRouter history={history}> */}
-      <BrowserRouter basename="/" history={history} >
-        <AppContainer />
-      </BrowserRouter>
-    {/* </ConnectedRouter> */}
-  </Provider>, document.getElementById('root'));
+    <BrowserRouter basename="/" history={history} >
+      <AppContainer />
+    </BrowserRouter>
+  </Provider>,
+  global.document.getElementById('root'),
+);
 

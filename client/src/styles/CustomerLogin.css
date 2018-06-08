@@ -20,7 +20,7 @@
   overflow: auto;
 }
 
-.mock-form {
+.customer-login-form {
   padding: 20px;
   display: block;
   margin: 50px auto;
@@ -71,7 +71,7 @@ input[type="text"].form-input, input[type="password"].form-input {
 
 
 .switch-restaurant {
-  padding: 8px;
+  padding: 20px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -88,7 +88,6 @@ input[type="text"].form-input, input[type="password"].form-input {
   color: #c75b39;
   display: flex;
   align-items: center;
-  padding: 20px;
 }
 
 .switch-restaurant i {

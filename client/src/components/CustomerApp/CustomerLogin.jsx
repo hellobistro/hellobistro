@@ -2,8 +2,6 @@
 import React, { Component } from 'react';
 import AuthService from '../../services/AuthService';
 
-const jwt = require('jsonwebtoken');
-
 import decode from 'jwt-decode';
 
 import '../../styles/CustomerLogin.css';
@@ -11,6 +9,8 @@ import Mast from './Mast';
 
 // import { history } from '../../store';
 import { withRouter, Link } from 'react-router-dom';
+
+const jwt = require('jsonwebtoken');
 // CustomerLogin component
 // Used by Customers to log into app
 class CustomerLogin extends Component {
@@ -22,8 +22,8 @@ class CustomerLogin extends Component {
   }
 
   componentWillMount() {
-    let token = AuthService.getToken();
-    let decoded = jwt.decode(token, { complete: true });
+    const token = AuthService.getToken();
+    const decoded = jwt.decode(token, { complete: true });
     if (token) {
       if (decoded.payload.userType === 'Customer') {
         this.props.history.replace('/customer/home/findRestaurants');
@@ -31,6 +31,10 @@ class CustomerLogin extends Component {
         this.props.history.replace('/restaurant/home');
       }
     }
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
 
   handleChange(e) {
@@ -65,7 +69,7 @@ class CustomerLogin extends Component {
           <span>HelloBistro</span>
         </div>
         <div className="background">
-          <div className="mock-form">
+          <div className="customer-login-form">
             <div className="customer-login-form-section">
               <div className="form-section-header" />
               <div className="form-group">
@@ -94,8 +98,6 @@ class CustomerLogin extends Component {
             {this.state.error ? <div>Invalid credentials</div> : <div />}
           </div>
         </div>
-
-        {/* <Link to='/developer/login'>HelloBistro for Developers</Link> */}
         <div className="switch-restaurant">
           <Link to="/restaurant/login">
             <i className="material-icons">store</i>HelloBistro for Restaurants
