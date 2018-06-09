@@ -51,6 +51,7 @@ class MenuSection extends React.Component {
 
   updateSection = async () => {
     let {RestaurantId, id} = this.props.data;
+    console.log(id, 'the id')
     let updatedSection = await this.props.updateMenuSection(RestaurantId, this.state, id)
     this.setState({ sectionID: updatedSection.section.id, hasChanged: false });
   }
