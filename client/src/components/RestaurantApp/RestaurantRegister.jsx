@@ -53,7 +53,6 @@ class RestaurantRegister extends Component {
           .then((res) => {
             this.setState({ error: false });
             this.props.history.replace('/restaurant/login');
-            console.log('successfully registered restaurant ~~', res);
           })
           .catch((error) => {
             console.log('error registering restaurant', error);
@@ -66,7 +65,6 @@ class RestaurantRegister extends Component {
   }
 
   render() {
-    console.log('the state inside restaurantRegister', this.state);
     return (
       <div className="RestaurantUserRegister">
 

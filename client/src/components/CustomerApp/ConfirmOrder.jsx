@@ -16,10 +16,8 @@ const ConfirmOrder = (props) => {
     const CustomerStripeId = props.state.user.paymentId;
     const RestaurantId = props.state.customer.cart.restaurantId;
     const { table } = props.state.customer.cart;
-    console.log('submitting order');
     SocketService.submitOrder({ total: billTotal, table, CustomerId: userId, StripeId: CustomerStripeId, CardId, RestaurantId, items })
       .then((res) => {
-        console.log('no error from server', res)
         props.clearCart();
         props.history.push('/customer/home/history');
       })

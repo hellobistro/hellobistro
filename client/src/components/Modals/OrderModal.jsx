@@ -6,8 +6,9 @@ const OrderModal = (props) => {
 
   return (
     <div className="order-modal">
-      <h3>{data.name}</h3>
-      <p>${data.price}</p>
+      <div className="order-modal-header">
+        <h3><strong>{data.name}</strong> | ${data.price}</h3>
+      </div>
       <div>
         <label htmlFor="quantity">Quantity:</label>
         <input type="number" min="1" max="20" id="quantity" defaultValue={data.quantity} onBlur={(e) => { props.editCartItem(data.id, 'quantity', e.target.value); }} />
@@ -16,8 +17,8 @@ const OrderModal = (props) => {
         <label htmlFor="special">Special requests:  </label>
         <textarea id="special" defaultValue={data.special} onBlur={(e) => { props.editCartItem(data.id, 'special', e.target.value); }} />
       </div>
-      <button onClick={props.modalOff} >Add to Order</button>
-      <button onClick={() => { props.deleteCartItem(data.id); props.modalOff(); }} >Cancel Item</button>
+      <button className="modal-button" onClick={props.modalOff} >Add to Order</button>
+      <button className="clear-button" onClick={() => { props.deleteCartItem(data.id); props.modalOff(); }} >Cancel Item</button>
     </div>
   );
 };

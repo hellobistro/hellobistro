@@ -1,7 +1,6 @@
 import React from 'react';
 
 const MenuEditItem = ({ view, toggleEdit, data }) => {
-  console.log(data, view, toggleEdit)
   if (!view) {
     return null;
   }

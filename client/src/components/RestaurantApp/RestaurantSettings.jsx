@@ -15,11 +15,9 @@ class RestaurantSettings extends React.Component {
   }
 
   handleChange = (e) => {
-    console.log(e.target.name, e.target.value);
     this.setState({
       formValues: Object.assign(this.state.formValues, {[e.target.name]: e.target.value})
     });
-    console.log('state', this.state);
   }
 
   handleSubmit = (e) => {

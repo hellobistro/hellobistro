@@ -21,13 +21,10 @@ export default class Favorites extends React.Component {
 
   componentDidMount() {
     ApiService.getUserLikes(this.props.state.user.userId).then((data) => {
-      console.log(data);
       this.setState({
         rated: data.rated,
         unrated: data.unrated,
         userId: data.userId,
-      }, () => {
-        console.log(this.state);
       });
     });
   }

@@ -45,7 +45,6 @@ Raven.context(() => {
           console.log('Error -- attempted to access protected route with token that failed verification');
           res.status(401).send({ message: 'ERROR' });
         } else if (decoded.userType !== type) {
-          console.log('user type: ', decoded.userType, 'expected: ', type);
           console.log('Error -- attempted to access protected route with wrong token userType');
 
           res.status(401).send({ message: 'ERROR' });

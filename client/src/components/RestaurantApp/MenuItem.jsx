@@ -104,9 +104,6 @@ class MenuItem extends React.Component {
           spicyEdited: false}, () => {
           if(imageKey) 
           ApiService.deletePhoto(imageKey)
-            .then(() => { 
-              console.log('delete photo a successs~')
-            });
         })
       )).catch(err => 
         console.log('error updating item', err)
