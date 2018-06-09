@@ -56,7 +56,7 @@ class Menu extends React.Component {
     return (
       <div className="Menu">
         <h2 id="menu-rest-name">The menu at <strong>{data.name}</strong>:</h2>
-        {/* <Link to='../order'>{orderStatus}</Link> */}
+        <Link to='../order'>{orderStatus}</Link>
         {cartError}
         {listSections}
       </div>
