@@ -78,15 +78,12 @@
   margin-top: 10px;
   border-radius: 6px;
   display: inline-block;
+  width: min-content;
 }
 
-/* .customer-menu-item img {
-  float: right;
-} */
-
-/* .customer-menu-item h3 {
-  padding-top: 5px;
-} */
+.customer-menu-item h3 {
+  font-weight: 200;
+}
 
 .modal-button {
   background-color: #4CAF50;
@@ -98,6 +95,19 @@
   padding: 10px 15px;
   border-radius: 3px;
   display: inline-block;
+  cursor: pointer;
+}
+
+.menu-add-button {
+  background-color: #4CAF50;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(54, 244, 162, .4);
+  color: #fff;
+  margin: auto;
+  text-transform: capitalize;
+  font-size: 13px;
+  padding: 10px 15px;
+  border-radius: 3px;
+  display: block;
   cursor: pointer;
 }
 
