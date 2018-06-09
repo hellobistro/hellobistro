@@ -52,9 +52,16 @@ export default class FavoritesIndividualItem extends React.Component {
     if (this.props.unliked) {
       return (
         <div className="FavoritesIndividualItem">
-          <p onMouseOver={() => {
+          <p
+            onMouseOver={() => {
             this.setState({
               showDrool: true,
+            });
+          }}
+
+            onMouseLeave={() => {
+            this.setState({
+              showDrool: false,
             });
           }}
           >
