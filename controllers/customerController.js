@@ -102,6 +102,7 @@ const customerController = {
             {
               model: MenuItem,
               required: false,
+              where: { status: 'published' },
             },
           ],
         },
