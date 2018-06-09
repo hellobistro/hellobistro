@@ -36,9 +36,7 @@ class MenuManager extends React.Component {
     this.setState({ MenuSections }, () => {
       if(oldSection[0].hasOwnProperty('id')) {
         ApiService.deleteMenuSection(oldSection[0].id)
-      } else { 
-        console.log('this menusection is not in the database')
-      }
+      } 
     });
   }
 

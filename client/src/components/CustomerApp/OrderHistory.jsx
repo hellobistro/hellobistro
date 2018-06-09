@@ -12,7 +12,6 @@ class OrderHistory extends React.Component {
   componentDidMount(props) {
     ApiService.retrieveOrders(this.props.state.user.userId)
       .then((res) => {
-        console.log('updated orders', res);
         this.props.loadOrders(res);
       });
   }

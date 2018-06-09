@@ -228,7 +228,6 @@ describe('POST and DELETE to /customers', () => {
     });
   
     it('should return the newly-created customer and save it in the database', (done) => {
-      console.log(responseToPost.body);
       expect(responseToPost.body).to.be.an('object');
       expect(responseToPost.body.userName).to.equal('fluffydawg');
       expect(responseToPost.body.id).to.equal(responseToGet.body.id);
@@ -309,7 +308,6 @@ describe('POST and DELETE to /customers/:id/orders', () => {
     });
   
     it('should return the newly-created customer and save it in the database', (done) => {
-      console.log(responseToPost.body);
       expect(responseToPost.body).to.be.an('object');
       expect(responseToPost.body.userName).to.equal('fluffydawg');
       expect(responseToPost.body.id).to.equal(responseToGet.body.id);

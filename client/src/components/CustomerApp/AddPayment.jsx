@@ -6,6 +6,13 @@ import ApiService from '../../services/ApiService';
 export class AddPayment extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { cardError: false };
+  }
+
+  cancelError = () => {
+    if (this.state.cardError === true) {
+      this.setState({ cardError: false })
+    }
   }
 
   handleSubmit = (ev) => {
@@ -15,10 +22,9 @@ export class AddPayment extends React.Component {
     // tokenize, since there's only one in this group.
     this.props.stripe.createToken().then((response) => {
       if (response.error) {
-        console.log('Stripe error', response)
+        console.log('stripe error', response)
+        this.setState({ cardError: true });
       } else {
-        console.log('Received Stripe token:', response);
-        console.log('props.userId', this.props.userId)
         const stripeId = this.props.stripeId;
         ApiService.addPaymentMethod({
           StripeId: this.props.stripeId,
@@ -31,16 +37,21 @@ export class AddPayment extends React.Component {
             this.props.update(response);
           })
         })
+        .catch((error) => {
+        console.log('stripe error', error)
+        this.setState({ cardError: true });
+        })
       }  
     });
   }
 
   render() {
     return (
-        <form className="AddPayment" onSubmit={this.handleSubmit}>
+        <form className="AddPayment" onSubmit={this.handleSubmit} onClick={this.cancelError}>
         <h3>Add a new payment method:</h3>
           <div className="add-payment">
             <CardSection />
+            {this.state.cardError === true ? <p>Sorry, we were unable to approve this card.</p> : null}
           </div>
           <button className="add-button"><i className="material-icons">add_box</i>Save card.</button>
         </form>

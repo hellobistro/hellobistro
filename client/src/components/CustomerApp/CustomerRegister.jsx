@@ -71,7 +71,6 @@ class CustomerRegister extends Component {
         .then((res) => {
           this.setState({ error: false });
           this.props.history.replace('/');
-          console.log('successfully registered ~~', res);
         })
         .catch((err) => {
           this.setState({ error: true });

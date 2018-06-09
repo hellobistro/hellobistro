@@ -11,7 +11,6 @@ const MenuItem = (props) => {
     }
     // check if cart restaurant is already set.
     if (!props.state.customer.cart.restaurantId) {
-      console.log('no restauarant id! ', props.data.RestaurantId);
       props.setCartRestaurant(props.data.RestaurantId);
     }
     props.modalOn('orderModal', props.state.customer.cart.items[props.data.id]);
