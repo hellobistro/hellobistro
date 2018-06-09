@@ -16,14 +16,14 @@ const MenuItem = (props) => {
     props.modalOn('orderModal', props.state.customer.cart.items[props.data.id]);
   };
   const price = props.data.price.toFixed(2);
-  const description = props.data.description ? <p>Description: {props.data.description}</p> : null;
-  const button = !props.state.customer.cart.restaurantId || props.state.customer.cart.restaurantId === props.state.customer.currentRestaurant.id ? <button className="modal-button" onClick={addToCart}>Add to cart</button> : null;
+  const description = props.data.description ? <p>{props.data.description}</p> : null;
+  const button = !props.state.customer.cart.restaurantId || props.state.customer.cart.restaurantId === props.state.customer.currentRestaurant.id ? <button className="menu-add-button" onClick={addToCart}><i className="material-icons">add</i></button> : null;
 
   return (
     <div className="customer-menu-item">
       <p><img className="item-image" src={props.data.image}/></p>
-      <h3>{props.data.name}</h3>
-      <p>${price}</p>
+      <h3><strong>{props.data.name}</strong> ${price}</h3>
+      <p>{description}</p>
       {button}
     </div>
   );

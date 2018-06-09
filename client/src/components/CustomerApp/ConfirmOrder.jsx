@@ -31,8 +31,8 @@ const ConfirmOrder = (props) => {
     <div className="ConfirmOrder">
       <h2>Finalize Your Order</h2>
       <h3>Bill total: ${billTotal}</h3>
-      <span>Your table number: <input className="table-number" onChange={e => props.updateTable(e.target.value)} type="text" placeholder="#" /></span>
-      <span className="payment"><p>Choose your payment method:</p><select className="select-payment" onChange={e => props.choosePayment(e.target.value)}><option>Select payment method</option>{paymentMethods}</select></span>
+      <input className="table-number" onChange={e => props.updateTable(e.target.value)} type="text" placeholder="Table #" />
+      <div className="payment"><select className="select-payment" onChange={e => props.choosePayment(e.target.value)}><option>💳 Select payment method</option>{paymentMethods}</select></div>
       {button}
     </div>
   );

@@ -2,10 +2,17 @@
   margin: 10px;
 }
 
+.ConfirmOrder h3 {
+  margin: 10px;
+}
+
 .table-number {
   width: 100px !important;
   padding: 10px !important;
-  margin-left: 30px !important;
+  margin-left: 10px !important;
+  border: 1px solid #AAA !important;
+  border-radius: 2px !important;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1) !important;
 }
 
 .payment {
@@ -46,3 +53,20 @@
   display: inline-block;
   cursor: pointer;
 }
+
+.select-payment {
+    background-color: #FFFFFF; /* fallback color if gradients are not supported */
+    border: 1px solid #AAA;
+    border-radius: 2px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    color: #555;
+    font-size: inherit;
+    margin: 0;
+    margin-left: 10px;
+    overflow: hidden;
+    padding: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 40px;
+}
+
