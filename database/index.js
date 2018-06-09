@@ -68,6 +68,11 @@ const Restaurant = sequelize.define('Restaurant', {
 });
 
 const MenuItem = sequelize.define('MenuItem', {
+  // id: {
+  //   type: DataTypes.INTEGER,
+  //   autoIncrement: true,
+  //   primaryKey: true
+  // },
   name: {
     type: Sequelize.STRING,
     allowNull: false,

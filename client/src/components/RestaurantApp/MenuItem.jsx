@@ -93,8 +93,9 @@ class MenuItem extends React.Component {
     const imageKey = this.state.imageKey
     ApiService.updateMenuItem(RestaurantId, id, this.state.data)
       .then((updatedItem) => {
+        console.log('the updated item:  ', updatedItem)
         let data = this.state.data;
-        data.id = updatedItem.item.id
+        data.id = updatedItem[0].id
         this.setState({
           data,
           hasChanged: false, 
@@ -118,9 +119,11 @@ class MenuItem extends React.Component {
   }
 
   deleteItem = () => {
+    //console.log('the state in deleteItem function: ', this.state)
     let data = this.state.data;
     data.status = 'archived'
     const { RestaurantId, id } = this.state.data;
+    //console.log('deleting item id: ', id)
     this.setState({ data }, () => {
         this.props.updateCount(-1);
         ApiService.updateMenuItem(RestaurantId, id, this.state.data)
@@ -129,6 +132,7 @@ class MenuItem extends React.Component {
   }
 
   render() {
+    //console.log('the state in menuItem:  ', this.state)
     const { id, name, status, image, price, prepTime, vegan, vegetarian, glutenFree, spicy, description } = this.state.data;
     const { selectedOption, veganEdited, vegetarianEdited, glutenFreeEdited, spicyEdited, descriptionEdited } = this.state;
   	const value = selectedOption && selectedOption.value;
