@@ -269,31 +269,67 @@ const restaurantController = {
       return res.sendStatus(200);
     }
 
-    MenuItem.upsert({
-      id: item_id,
-      name,
-      status,
-      price,
-      vegan,
-      vegetarian,
-      glutenFree,
-      spicy,
-      image,
-      prepTime,
-      rating,
-      description,
-      MenuSectionId,
-      RestaurantId: restaurant_id,
-    })
-      .then(() => {
-        MenuItem.findOne({ where: { name, MenuSectionId, RestaurantId: restaurant_id } }).then((item) => {
-          console.log('the found item is: ', item)
-          res.json({item})
-        });
-      })
-      .catch((err) => {
-        res.send(err);
+    let options = {
+      where:{ id: item_id },
+        //id: item_id,
+        defaults: {
+        name,
+        status,
+        price,
+        vegan,
+        vegetarian,
+        glutenFree,
+        spicy,
+        image,
+        prepTime,
+        rating,
+        description,
+        MenuSectionId,
+        RestaurantId: restaurant_id,
+      }
+    }
+
+   
+      MenuItem.findOrCreate(options).spread((row, created) => {
+          if (created) {
+            console.log('the created:  ', row)
+              res.json([row, created]);
+          } else {
+              row.updateAttributes(options.defaults).then((updated) => {
+                console.log('the updated:  ', updated)
+                 res.json([updated, created]);
+              });
+          }
       });
+    
+
+
+
+    // MenuItem.upsert({
+    //   id: item_id,
+    //   name,
+    //   status,
+    //   price,
+    //   vegan,
+    //   vegetarian,
+    //   glutenFree,
+    //   spicy,
+    //   image,
+    //   prepTime,
+    //   rating,
+    //   description,
+    //   MenuSectionId,
+    //   RestaurantId: restaurant_id,
+    // })
+    //   .then(() => {
+    //     MenuItem.findOne({ where: { name, MenuSectionId, RestaurantId: restaurant_id } }).then((item) => {
+    //       console.log('the found item is: ', item)
+    //       res.json({item})
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     res.send(err);
+    //   });
   },
 
   updateMenuSection(req, res) {
