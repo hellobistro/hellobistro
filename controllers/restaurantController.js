@@ -265,7 +265,6 @@ const restaurantController = {
       description,
       MenuSectionId,
     } = req.body;
-
     if (status === 'archived' && typeof JSON.parse(item_id) !== 'number') {
       return res.sendStatus(200);
     }
@@ -286,8 +285,11 @@ const restaurantController = {
       MenuSectionId,
       RestaurantId: restaurant_id,
     })
-      .then((item) => {
-        res.json(item);
+      .then(() => {
+        MenuItem.findOne({ where: { name, MenuSectionId, RestaurantId: restaurant_id } }).then((item) => {
+          console.log('the found item is: ', item)
+          res.json({item})
+        });
       })
       .catch((err) => {
         res.send(err);
@@ -308,7 +310,7 @@ const restaurantController = {
       RestaurantId: restaurant_id,
     })
       .then(() => {
-        MenuSection.findOne({ where: { name } }).then((section) => {
+        MenuSection.findOne({ where: { name, RestaurantId: restaurant_id } }).then((section) => {
           res.json({section})
         });
       })

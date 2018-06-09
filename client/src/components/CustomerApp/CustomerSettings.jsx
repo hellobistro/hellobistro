@@ -1,7 +1,6 @@
 // Import dependencies
 import React from 'react';
 import ApiService from '../../services/ApiService';
-import '../../styles/CustomerSettings.css';
 
 class CustomerSettings extends React.Component {
   constructor(props) {
@@ -65,55 +64,53 @@ class CustomerSettings extends React.Component {
     }
   }
 
-  checkCurrentPW(){
-    //return true/false
-  }
-
   render(){
     const { email, userName, firstName, lastName, phone  } = this.state
     if(this.state.originalEmail){
       return(
-        <div className="customer-settings">
+        <div>
           <h2>&nbsp; Customer Settings</h2>
 
-          <div className="update-section">
-            <h5>&nbsp; Update Email Address: </h5>
-            <input className="update-input" name="email" type="text" defaultValue={email} onChange={this.handleChange}/>
+          <div className="user-input-wrp">
+          <br/>
+            <input className="update-input" name="email" type="text" defaultValue={email} onChange={this.handleChange} required/>
+            <span className="floating-label">Update Email Address</span>
           </div>
 
-          <div className="update-section">
-            <h5>&nbsp; Change Username: </h5>
-            <input className="update-input" name="userName" type="text" defaultValue={userName} onChange={this.handleChange}/>
+          <div className="user-input-wrp">
+          <br/>
+            <input className="update-input" name="userName" type="text" defaultValue={userName} onChange={this.handleChange} required/>
+            <span className="floating-label">Change Username</span>
           </div>
 
-          <div className="update-section">
-            <h5>&nbsp; Change First Name: </h5>
-            <input className="update-input" name="firstName" type="text" defaultValue={firstName} onChange={this.handleChange}/>
+          <div className="user-input-wrp">
+          <br/>
+            <input className="update-input" name="firstName" type="text" defaultValue={firstName} onChange={this.handleChange} required/>
+            <span className="floating-label">Change First Name</span>
           </div>
 
-          <div className="update-section">
-            <h5>&nbsp; Change Last Name: </h5>
-            <input className="update-input" name="lastName" type="text" defaultValue={lastName} onChange={this.handleChange}/>
+          <div className="user-input-wrp">
+          <br/>
+            <input className="update-input" name="lastName" type="text" defaultValue={lastName} onChange={this.handleChange} required/>
+            <span className="floating-label">Change Last Name</span>
           </div>
 
-          <div className="update-section">
-            <h5>&nbsp; Update Phone Number: </h5>
-            <input className="update-input" name="phone" type="text" defaultValue={phone} onChange={this.handleChange}/>
+          <div className="user-input-wrp">
+          <br/>
+            <input className="update-input" name="phone" type="text" defaultValue={phone} onChange={this.handleChange} required/>
+            <span className="floating-label">Update Phone Number</span>
           </div>
-
-          {/* <div className="update-section">
-            <h5>Current Password: </h5>
-            <input className="update-input" name="phone" type="text" placeholder="Current Password"/>
-          </div> */}
         
-          <div className="update-section">
-            <h5>&nbsp; New Password: </h5>
-            <input className="update-input" name="newPW1" type="text" placeholder="New Password" onChange={this.handleChange}/>
+          <div className="user-input-wrp pw-wrp">
+          <br/>
+            <input className="update-input" name="newPW1" type="text" onChange={this.handleChange} required/>
+            <span className="floating-label">New Password</span>
           </div>
 
-          <div className="update-section">
-            <h5>&nbsp; Confirm New Password: </h5>
-            <input className="update-input" name="newPW2" type="text" placeholder="Confirm New Password" onChange={this.handleChange}/>
+          <div className="user-input-wrp pw-wrp">
+          <br/>
+            <input className="update-input" name="newPW2" type="text" onChange={this.handleChange} required/>
+            <span className="floating-label">Confirm New Password</span>
           </div>
           {
             this.state.existingEmail
@@ -135,15 +132,15 @@ class CustomerSettings extends React.Component {
             ? <div className="error">&nbsp; Please provide a username </div>
             : <div></div>
           }
-          <button className="save-changes" onClick={this.saveChanges}>Save Changes</button>
+          <div style={{display: 'flex', justifyContent: 'center'}}>
+            <button className="register-submit" onClick={this.saveChanges}>Save Changes</button>
+          </div>
         </div>
       )
     } else {
       return <h2>&nbsp; Loading...</h2>
     }
   }
-
-
 }
 
 

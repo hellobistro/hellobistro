@@ -92,8 +92,12 @@ class MenuItem extends React.Component {
     const { RestaurantId, id } = this.state.data;
     const imageKey = this.state.imageKey
     ApiService.updateMenuItem(RestaurantId, id, this.state.data)
-      .then((updatedItem) => (
-        this.setState({hasChanged: false, 
+      .then((updatedItem) => {
+        let data = this.state.data;
+        data.id = updatedItem.item.id
+        this.setState({
+          data,
+          hasChanged: false, 
           nameEdited: false,
           priceEdited: false,
           prepTimeEdited: false,
@@ -105,7 +109,7 @@ class MenuItem extends React.Component {
           if(imageKey) 
           ApiService.deletePhoto(imageKey)
         })
-      )).catch(err => 
+      }).catch(err => 
         console.log('error updating item', err)
       )
   }

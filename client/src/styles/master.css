@@ -172,7 +172,11 @@ textarea.form-input {
   margin-top: 30px;
 }
 
-.register-submit:active{
+.register-submit:active {
   box-shadow: 0 0px #999;
   transform: translateY(5px);
+}
+
+input.update-input {
+  padding-left: 10px;
 }
