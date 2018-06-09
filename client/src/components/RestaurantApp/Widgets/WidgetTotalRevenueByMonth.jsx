@@ -11,12 +11,21 @@ const WidgetTotalRevenueByMonth = (props) => {
       display: false,
     },
     responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          callback(tick) {
+            return `$${tick.toLocaleString()}`;
+          },
+        },
+      }],
+    },
   };
 
   const renderChart = () => (!props.state.restaurant.analytics.totalRevenueByMonth ? 'loading...'
     : <Bar
       data={props.state.restaurant.analytics.totalRevenueByMonth.widgetData}
-      options={{ responsive: true }}
+      options={myOptions}
       legend={{ display: false }}
     />);
 
