@@ -37,6 +37,10 @@
   font-weight: 200;
 }
 
+.order-modal-buttons {
+  display: flex;
+}
+
 .clear-button {
   background-color: #dbdbdb;
   box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px #bcbcbc;
