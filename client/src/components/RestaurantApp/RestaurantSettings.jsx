@@ -201,7 +201,7 @@ class RestaurantSettings extends React.Component {
             ? <div className='error'>{this.state.errorMessage}</div>
             : <div></div>
           }
-          <button className="restaurant-settings-submit" onClick={this.handleSubmit}>Submit Changes</button>
+          <button className="register-submit" onClick={this.handleSubmit}>Submit Changes</button>
         </form>
       </div>
 
