@@ -23,6 +23,39 @@
   z-index: 3;
 }
 
+.order-modal-header {
+  margin-top: -40px;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(255,152,0,.4);
+  background-image: linear-gradient(60deg, rgb(251, 140, 0), rgb(255, 167, 38));
+  color: #FFFFFF;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.order-modal-header h3 {
+  margin: 0;
+  font-weight: 200;
+}
+
+.clear-button {
+  background-color: #dbdbdb;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px #bcbcbc;
+  color: #848383;
+  margin: auto;
+  text-transform: capitalize;
+  font-size: 13px;
+  padding: 10px 15px;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 5px;
+  float: right;
+}
+
+.clear-button:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.24);
+}
+
 .widget-modal {
   position: relative;
   top: 50%;
@@ -135,8 +168,10 @@ input[type=number] {
   line-height: 30px;
   font-size: 16px;
   padding: 0 8px;
-  margin: 10px 10px 10px 0px;
+  margin: 10px 10px 10px 10px;
+  min-width: 80px;
 }
+
 input[type=number]::-webkit-inner-spin-button { 
   -webkit-appearance: none;
   cursor:pointer;
