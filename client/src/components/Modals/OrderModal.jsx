@@ -17,8 +17,10 @@ const OrderModal = (props) => {
         <label htmlFor="special">Special requests:  </label>
         <textarea id="special" defaultValue={data.special} onBlur={(e) => { props.editCartItem(data.id, 'special', e.target.value); }} />
       </div>
-      <button className="modal-button" onClick={props.modalOff} >Add to Order</button>
-      <button className="clear-button" onClick={() => { props.deleteCartItem(data.id); props.modalOff(); }} >Cancel Item</button>
+      <div className="order-modal-buttons">
+        <button className="modal-button" onClick={props.modalOff} >Add to Order</button>
+        <button className="clear-button" onClick={() => { props.deleteCartItem(data.id); props.modalOff(); }} >Cancel Item</button>
+      </div>
     </div>
   );
 };
