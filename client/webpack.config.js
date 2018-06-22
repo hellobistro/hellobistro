@@ -1,7 +1,6 @@
 // Require dependencies
 const path = require('path');
 const webpack = require('webpack');
-const { ravenUriReact } = require('../config/config');
 
 const config = {
   mode: 'development',
@@ -10,11 +9,6 @@ const config = {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist'),
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      RAVEN_REACT_URI: JSON.stringify(`${ravenUriReact}`),
-    }),
-  ],
   module: {
     rules: [
       {

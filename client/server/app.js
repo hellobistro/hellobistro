@@ -1,8 +1,15 @@
 // Require dependencies
+const fs = require('fs');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const https = require('https');
+
+https.createServer({
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.pem')
+}, app).listen(55555);
 
 const app = express();
 const port = process.env.PORT || 8080;

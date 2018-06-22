@@ -57,7 +57,7 @@ const getRandomOrderWait = () => {
 
 const getRandomTimestamps = (startMonth, startYear) => {
   const start = new Date(startYear, startMonth, 1);
-  const end = new Date();
+  const end = new Date(2018, 4);
   const randomDate = moment(new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())));
   const createdAt = randomDate.format('YYYY-MM-DD hh:mm:ss');
   const completedAt = randomDate.add(getRandomOrderWait(), 'm').format('YYYY-MM-DD hh:mm:ss');
@@ -74,8 +74,8 @@ const toggleOrderStatus = (ordersArray) => {
 
 // Pass in options object in following format --> {restaurantId: 1, customerId: 3, }
 const generateOrder = (options) => {
-  const RestaurantId = options.restaurantId || getRandomRestaurantId();
-  const CustomerId = options.customerId || getRandomUserId();
+  const RestaurantId = options.RestaurantId || getRandomRestaurantId();
+  const CustomerId = options.CustomerId || getRandomUserId();
   const quantity = options.quantity || getRandomQuantity();
   const createdAt = options.createdAt || sequelize.literal('CURRENT_TIMESTAMP');
   const completedAt = options.completedAt || null;
@@ -116,7 +116,7 @@ const generateOrder = (options) => {
   }).then((result) => {
     console.log('Successfully created order');
     order.forEach((item) => {
-      result.addMenuItem(item.id, { through: { special: item.special, price: item.price } }).then((resultitem) => { console.log('Created orderitem', resultitem); });
+      result.addMenuItem(item.id, { through: { special: item.special, price: item.price, quantity: item.quantity } }).then((resultitem) => { console.log('Created orderitem', resultitem); });
     });
   });
 };
@@ -126,7 +126,8 @@ const generateMultipleCompletedOrders = (startMonth, startYear, orderQuantity, r
     const timeStamps = getRandomTimestamps(startMonth, startYear);
     const { createdAt, completedAt } = timeStamps; 
     const RestaurantId = restaurantId || getRandomRestaurantId();
-    generateOrder({ RestaurantId, status: 'completed', createdAt, completedAt });
+    const CustomerId = 25;
+    generateOrder({ RestaurantId, CustomerId, status: 'completed', createdAt, completedAt });
   }
 };
 
@@ -143,13 +144,13 @@ const startSimulation = async () => {
   await getUsers();
   await getRestaurants();
   /** GENERATE MULTIPLE COMPLETED ORDERS: ARGS (StartMonth (zero indexed), StartYear, OrderQuantity, RestaurantId (optional)) */
-  // generateMultipleCompletedOrders(0, 2017, 1000);
+  generateMultipleCompletedOrders(4, 2018, 1, 6);
   /** GENERATE A RANDOM ORDER */
   // generateOrder({ RestaurantId: 24 });
   /** GENERATE ORDERS FOR A SPECIFIED DATE / TIME */
   // generateOrder({restaurantId: 24, status: 'completed', createdAt: '2018-01-02 07:10:52', completedAt: '2018-01-02 07:20:52' });
   /** GENERATE ONE RANDOM ORDER EVERY 30 SECONDS */
-  setInterval(() => { generateOrder({ restaurantId: 6 }); }, 30000);
+  // setInterval(() => { generateOrder({ restaurantId: 6 }); }, 30000);
   /** MODIFY AN ORDER */
   // toggleOrderStatus([{ id: 15, completedAt: '2018-05-02 22:16:42', status: 'completed' }, { id: 17, completedAt: '2018-05-03 05:13:49', status: 'completed' }, { id: 18, completedAt: '2018-05-03 22:43:13', status: 'completed' }, { id: 19, completedAt: '2018-05-03 22:48:05', status: 'completed' }, { id: 20, completedAt: '2018-05-04 01:24:25', status: 'completed' }, { id: 21, completedAt: '2018-05-04 05:35:26', status: 'completed' }, { id: 22, completedAt: '2018-05-04 05:40:32', status: 'completed' }, { id: 23, completedAt: '2018-05-05 04:36:07', status: 'completed' }, { id: 56, completedAt: '2018-05-04 04:59:09', status: 'completed' }]);
 };
